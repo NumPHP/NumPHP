@@ -8,7 +8,8 @@
     "require-dev": {
         "phpunit/PHPUnit": "3.7.*",
         "phpmd/phpmd" : "1.4.*",
-        "squizlabs/php_codesniffer": "1.*"
+        "squizlabs/php_codesniffer": "1.*",
+        "satooshi/php-coveralls": "dev-master"
     },
     "autoload": {
         "psr-0": {

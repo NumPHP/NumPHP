@@ -1,0 +1,20 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+
+install:
+  - composer install --dev --prefer-source
+
+before_script:
+  - mkdir -p build/logs
+
+script:
+  - php vendor/bin/phpcs --standard=psr2 src/ tests/
+  - php vendor/bin/phpmd src/ text codesize,controversial,design,naming,unusedcode
+  - php vendor/bin/phpmd tests/ text codesize,controversial,design,naming,unusedcode
+  - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+  - php vendor/bin/coveralls

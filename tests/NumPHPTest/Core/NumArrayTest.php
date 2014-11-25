@@ -16,16 +16,33 @@ use NumPHP\Core\NumArray;
  */
 class NumArrayTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetShape1()
+    public function testGetShape()
     {
         $numArray = new NumArray(1);
         $this->assertEquals([], $numArray->getShape());
     }
 
-    public function testShape1x1()
+    public function testShape1()
     {
         $numArray = new NumArray([1]);
         $this->assertEquals([1], $numArray->getShape());
+    }
+
+    public function testGetShape2()
+    {
+        $numArray = new NumArray([1, 2]);
+        $this->assertEquals([2], $numArray->getShape());
+    }
+
+    public function testGetShape2x0()
+    {
+        $numArray = new NumArray(
+            [
+                [],
+                [],
+            ]
+        );
+        $this->assertEquals([2, 0], $numArray->getShape());
     }
 
     public function testGetShape2x4()
@@ -65,5 +82,41 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
     public function testGetShape2x2InvalidArgumentException()
     {
         new NumArray([[1], [2, 3]]);
+    }
+
+    public function testGet()
+    {
+        $numArray = new NumArray(1);
+        $this->assertEquals(1, $numArray->get());
+    }
+
+    public function testGet1()
+    {
+        $numArray = new NumArray([1]);
+        $this->assertEquals([1], $numArray->get());
+    }
+
+    public function testGet1Args0()
+    {
+        $numArray = new NumArray([1]);
+        $this->assertEquals(1, $numArray->get(0));
+    }
+
+    public function testGet1x2()
+    {
+        $numArray = new NumArray([1, 2]);
+        $this->assertEquals([1, 2], $numArray->get());
+    }
+
+    public function testGet1x2Args0()
+    {
+        $numArray = new NumArray([1, 2]);
+        $this->assertEquals(1, $numArray->get(0));
+    }
+
+    public function testGet1x2ArgsSlice()
+    {
+        $numArray = new NumArray([1, 2]);
+        $this->assertEquals([1, 2], $numArray->get(':'));
     }
 }

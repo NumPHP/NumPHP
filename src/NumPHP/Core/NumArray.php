@@ -45,6 +45,28 @@ class NumArray
     }
 
     /**
+     * @return array|mixed
+     */
+    public function get()
+    {
+        $args = func_get_args();
+        if (count($args)) {
+            foreach ($args as $index) {
+                $matches = [];
+                if (is_string($index) && preg_match('/^(?P<from>\d*):(?P<to>\d*)$/', $index, $matches)) {
+                    echo $from = $matches['from'];
+                    echo $to = $matches['to'];
+                } else {
+                    return $this->array[$index];
+                }
+
+            }
+        } else {
+            return $this->array;
+        }
+    }
+
+    /**
      * @param $array
      * @param $shape
      * @param int $level
