@@ -17,3 +17,7 @@ NumPHP
 ## System Requirements
 
 * PHP 5.4 or higher
+
+## Documentation
+
+[Documentation](doc/README.md)
