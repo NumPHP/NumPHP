@@ -36,6 +36,11 @@ class NumArray
         $this->shape = self::initRecursive($array, $shape);
     }
 
+    public function __toString()
+    {
+        return self::toStringRecursive($this->array);
+    }
+
     /**
      * @return mixed
      */
@@ -68,6 +73,45 @@ class NumArray
             return new NumArray($array);
         }
         return $array;
+    }
+
+    /**
+     * @param $array
+     * @param $shape
+     * @param int $level
+     * @return mixed
+     */
+    protected static function initRecursive($array, $shape, $level = 0)
+    {
+        if (is_array($array)) {
+            $count = count($array);
+            if (isset($shape[$level]) && $shape[$level] !== $count) {
+                throw new InvalidArgumentException('Dimensions did not match');
+            } else {
+                $shape[$level] = $count;
+            }
+            foreach ($array as $row) {
+                $shape = self::initRecursive($row, $shape, $level+1);
+            }
+        }
+        return $shape;
+    }
+
+    protected static function toStringRecursive($array, $level = 0)
+    {
+        $repeat = str_repeat("  ", $level);
+        if (is_array($array)) {
+            $string = $repeat."(\n";
+            for ($i = 0; $i < count($array)-1; $i++) {
+                $string .= self::toStringRecursive($array[$i], $level+1).",\n";
+            }
+            if (count($array)) {
+                $string .= self::toStringRecursive($array[$i], $level+1);
+            }
+            $string .= "\n".$repeat.")";
+            return $string;
+        }
+        return $repeat.(string) $array;
     }
 
     /**
@@ -110,27 +154,5 @@ class NumArray
             $toValue = count($array);
         }
         return array_slice($array, $fromValue, $toValue-$fromValue);
-    }
-
-    /**
-     * @param $array
-     * @param $shape
-     * @param int $level
-     * @return mixed
-     */
-    protected static function initRecursive($array, $shape, $level = 0)
-    {
-        if (is_array($array)) {
-            $count = count($array);
-            if (isset($shape[$level]) && $shape[$level] !== $count) {
-                throw new InvalidArgumentException('Dimensions did not match');
-            } else {
-                $shape[$level] = $count;
-            }
-            foreach ($array as $row) {
-                $shape = self::initRecursive($row, $shape, $level+1);
-            }
-        }
-        return $shape;
     }
 }
