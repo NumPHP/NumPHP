@@ -1,0 +1,17 @@
+<phpunit bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnError="false"
+         stopOnFailure="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
+         strict="false"
+         verbose="false">
+    <testsuites>
+        <testsuite name="NumPHP">
+            <directory>./tests/NumPHPTest</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

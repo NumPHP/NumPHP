@@ -1,0 +1,23 @@
+{
+    "name": "NumPHP/NumPHP",
+    "description": "NumPHP is the fundamental package for scientific computing with PHP",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "phpunit/PHPUnit": "3.7.*",
+        "phpmd/phpmd" : "1.4.*",
+        "squizlabs/php_codesniffer": "1.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "NumPHP\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "NumPHPTest\\": "tests/"
+        }
+    }
+}
