@@ -13,6 +13,8 @@ use NumPHP\Core\NumArray;
 /**
  * Class NumArrayTest
  * @package NumPHPTest\Core
+ *
+ * @SuppressWarnings(PHPMD.TooManyMethods)
  */
 class NumArrayTest extends \PHPUnit_Framework_TestCase
 {
