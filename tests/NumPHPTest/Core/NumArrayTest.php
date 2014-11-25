@@ -85,40 +85,4 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
     {
         new NumArray([[1], [2, 3]]);
     }
-
-    public function testGet()
-    {
-        $numArray = new NumArray(1);
-        $this->assertEquals(1, $numArray->get());
-    }
-
-    public function testGet1()
-    {
-        $numArray = new NumArray([1]);
-        $this->assertEquals([1], $numArray->get());
-    }
-
-    public function testGet1Args0()
-    {
-        $numArray = new NumArray([1]);
-        $this->assertEquals(1, $numArray->get(0));
-    }
-
-    public function testGet1x2()
-    {
-        $numArray = new NumArray([1, 2]);
-        $this->assertEquals([1, 2], $numArray->get());
-    }
-
-    public function testGet1x2Args0()
-    {
-        $numArray = new NumArray([1, 2]);
-        $this->assertEquals(1, $numArray->get(0));
-    }
-
-    public function testGet1x2ArgsSlice()
-    {
-        $numArray = new NumArray([1, 2]);
-        $this->assertEquals([1, 2], $numArray->get(':'));
-    }
 }
