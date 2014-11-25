@@ -45,6 +45,18 @@ class NumArray
     }
 
     /**
+     * @return int
+     */
+    public function getSize()
+    {
+        $size = 1;
+        foreach ($this->getShape() as $fac) {
+            $size *= $fac;
+        }
+        return $size;
+    }
+
+    /**
      * @return mixed|NumArray
      */
     public function get()
