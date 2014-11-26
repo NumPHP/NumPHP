@@ -7,8 +7,9 @@
  */
 
 namespace NumPHP\Core;
-
-use NumPHP\Core\Exception\InvalidArgumentException;
+use NumPHP\Core\NumArray\Get;
+use NumPHP\Core\NumArray\Shape;
+use NumPHP\Core\NumArray\String;
 
 /**
  * Class NumArray
@@ -31,18 +32,17 @@ class NumArray
      */
     public function __construct($array)
     {
-        $shape = [];
         $this->array = $array;
-        $this->shape = self::initRecursive($array, $shape);
+        $this->shape = Shape::getShape($array);
     }
 
     public function __toString()
     {
-        return self::toStringRecursive($this->array);
+        return String::toString($this->array);
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getShape()
     {
@@ -67,92 +67,6 @@ class NumArray
     public function get()
     {
         $args = func_get_args();
-        $array = self::getRecursive($this->array, $args);
-
-        if (is_array($array)) {
-            return new NumArray($array);
-        }
-        return $array;
-    }
-
-    /**
-     * @param $array
-     * @param $shape
-     * @param int $level
-     * @return mixed
-     */
-    protected static function initRecursive($array, $shape, $level = 0)
-    {
-        if (is_array($array)) {
-            $count = count($array);
-            if (isset($shape[$level]) && $shape[$level] !== $count) {
-                throw new InvalidArgumentException('Dimensions did not match');
-            } else {
-                $shape[$level] = $count;
-            }
-            foreach ($array as $row) {
-                $shape = self::initRecursive($row, $shape, $level+1);
-            }
-        }
-        return $shape;
-    }
-
-    protected static function toStringRecursive($array, $level = 0)
-    {
-        $repeat = str_repeat("  ", $level);
-        if (is_array($array)) {
-            $string = $repeat."(\n";
-            for ($i = 0; $i < count($array)-1; $i++) {
-                $string .= self::toStringRecursive($array[$i], $level+1).",\n";
-            }
-            if (count($array)) {
-                $string .= self::toStringRecursive($array[$i], $level+1);
-            }
-            $string .= "\n".$repeat.")";
-            return $string;
-        }
-        return $repeat.(string) $array;
-    }
-
-    /**
-     * @param $array
-     * @param array $args
-     * @return mixed
-     */
-    protected static function getRecursive($array, array $args)
-    {
-        if (isset($args[0])) {
-            $arg = $args[0];
-            $matches = [];
-            array_shift($args);
-            if (preg_match('/^(?P<from>\d*):(?P<to>\d*)$/', $arg, $matches)) {
-                $fromValue = $matches['from'];
-                $toValue = $matches['to'];
-                $sliced = self::slice($array, $fromValue, $toValue);
-                foreach ($sliced as $index => $row) {
-                    $sliced[$index] = self::getRecursive($row, $args);
-                }
-                return $sliced;
-            }
-            return self::getRecursive($array[$arg], $args);
-        }
-        return $array;
-    }
-
-    /**
-     * @param $array
-     * @param $fromValue
-     * @param $toValue
-     * @return array
-     */
-    protected static function slice(array $array, $fromValue, $toValue)
-    {
-        if (!$fromValue) {
-            $fromValue = 0;
-        }
-        if (!$toValue && $toValue !== 0) {
-            $toValue = count($array);
-        }
-        return array_slice($array, $fromValue, $toValue-$fromValue);
+        return Get::get($this->array, $args);
     }
 }
