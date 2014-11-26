@@ -7,6 +7,7 @@
  */
 
 namespace NumPHP\Core;
+
 use NumPHP\Core\NumArray\Get;
 use NumPHP\Core\NumArray\Shape;
 use NumPHP\Core\NumArray\String;
@@ -67,6 +68,6 @@ class NumArray
     public function get()
     {
         $args = func_get_args();
-        return Get::get($this->array, $args);
+        return Get::getSubArray($this->array, $args);
     }
 }

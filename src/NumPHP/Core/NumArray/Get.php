@@ -21,7 +21,7 @@ class Get
      * @param array $args
      * @return mixed|NumArray
      */
-    public static function get($array, array $args)
+    public static function getSubArray($array, array $args)
     {
         $array = self::getRecursive($array, $args);
 
