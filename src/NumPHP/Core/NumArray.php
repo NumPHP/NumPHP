@@ -24,22 +24,22 @@ class NumArray
     protected $shape;
 
     /**
-     * @var array
+     * @var array|mixed
      */
-    protected $array;
+    protected $data;
 
     /**
-     * @param $array
+     * @param $data
      */
-    public function __construct($array)
+    public function __construct($data)
     {
-        $this->array = $array;
-        $this->shape = Shape::getShape($array);
+        $this->data = $data;
+        $this->shape = Shape::getShape($data);
     }
 
     public function __toString()
     {
-        return String::toString($this->array);
+        return String::toString($this->data);
     }
 
     /**
@@ -68,6 +68,22 @@ class NumArray
     public function get()
     {
         $args = func_get_args();
-        return Get::getSubArray($this->array, $args);
+        return Get::getSubArray($this->data, $args);
+    }
+
+    /**
+     * @return array|mixed
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @return int|void
+     */
+    public function getNDim()
+    {
+        return count($this->shape);
     }
 }

@@ -17,31 +17,31 @@ use NumPHP\Core\Exception\InvalidArgumentException;
 class Shape
 {
     /**
-     * @param $array
+     * @param $data
      * @return array
      */
-    public static function getShape($array)
+    public static function getShape($data)
     {
         $shape = [];
-        return self::getShapeRecursive($array, $shape);
+        return self::getShapeRecursive($data, $shape);
     }
 
     /**
-     * @param $array
+     * @param $data
      * @param $shape
      * @param int $level
      * @return array
      */
-    protected static function getShapeRecursive($array, $shape, $level = 0)
+    protected static function getShapeRecursive($data, $shape, $level = 0)
     {
-        if (is_array($array)) {
-            $count = count($array);
+        if (is_array($data)) {
+            $count = count($data);
             if (isset($shape[$level]) && $shape[$level] !== $count) {
                 throw new InvalidArgumentException('Dimensions did not match');
             } else {
                 $shape[$level] = $count;
             }
-            foreach ($array as $row) {
+            foreach ($data as $row) {
                 $shape = self::getShapeRecursive($row, $shape, $level+1);
             }
         }

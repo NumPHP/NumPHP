@@ -17,26 +17,26 @@ use NumPHP\Core\NumArray;
 class Get
 {
     /**
-     * @param $array
+     * @param $data
      * @param array $args
      * @return mixed|NumArray
      */
-    public static function getSubArray($array, array $args)
+    public static function getSubArray($data, array $args)
     {
-        $array = self::getRecursive($array, $args);
+        $data = self::getRecursive($data, $args);
 
-        if (is_array($array)) {
-            return new NumArray($array);
+        if (is_array($data)) {
+            return new NumArray($data);
         }
-        return $array;
+        return $data;
     }
 
     /**
-     * @param $array
+     * @param $data
      * @param array $args
      * @return mixed
      */
-    protected static function getRecursive($array, array $args)
+    protected static function getRecursive($data, array $args)
     {
         if (isset($args[0])) {
             $arg = $args[0];
@@ -45,34 +45,34 @@ class Get
             if (preg_match('/^(?P<from>([-]{0,1}\d+)*):(?P<to>([-]{0,1}\d+)*)$/', $arg, $matches)) {
                 $fromValue = $matches['from'];
                 $toValue = $matches['to'];
-                $sliced = self::slice($array, $fromValue, $toValue);
+                $sliced = self::slice($data, $fromValue, $toValue);
                 foreach ($sliced as $index => $row) {
                     $sliced[$index] = self::getRecursive($row, $args);
                 }
                 return $sliced;
             }
             if ($arg < 0) {
-                $arg += count($array);
+                $arg += count($data);
             }
-            return self::getRecursive($array[$arg], $args);
+            return self::getRecursive($data[$arg], $args);
         }
-        return $array;
+        return $data;
     }
 
     /**
-     * @param $array
+     * @param $data
      * @param $fromValue
      * @param $toValue
      * @return array
      */
-    protected static function slice(array $array, $fromValue, $toValue)
+    protected static function slice(array $data, $fromValue, $toValue)
     {
         if (!$fromValue) {
             $fromValue = 0;
         }
         if (!$toValue && $toValue !== 0) {
-            $toValue = count($array);
+            $toValue = count($data);
         }
-        return array_slice($array, $fromValue, $toValue-$fromValue);
+        return array_slice($data, $fromValue, $toValue-$fromValue);
     }
 }

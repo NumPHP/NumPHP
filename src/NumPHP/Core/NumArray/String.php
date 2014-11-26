@@ -15,12 +15,12 @@ namespace NumPHP\Core\NumArray;
 class String
 {
     /**
-     * @param $array
+     * @param $data
      * @return string
      */
-    public static function toString($array)
+    public static function toString($data)
     {
-        return self::toStringRecursive($array);
+        return self::toStringRecursive($data);
     }
 
     /**
@@ -28,20 +28,20 @@ class String
      * @param int $level
      * @return string
      */
-    protected static function toStringRecursive($array, $level = 0)
+    protected static function toStringRecursive($data, $level = 0)
     {
         $repeat = str_repeat("  ", $level);
-        if (is_array($array)) {
+        if (is_array($data)) {
             $string = $repeat."(\n";
-            for ($i = 0; $i < count($array)-1; $i++) {
-                $string .= self::toStringRecursive($array[$i], $level+1).",\n";
+            for ($i = 0; $i < count($data)-1; $i++) {
+                $string .= self::toStringRecursive($data[$i], $level+1).",\n";
             }
-            if (count($array)) {
-                $string .= self::toStringRecursive($array[$i], $level+1);
+            if (count($data)) {
+                $string .= self::toStringRecursive($data[$i], $level+1);
             }
             $string .= "\n".$repeat.")";
             return $string;
         }
-        return $repeat.(string) $array;
+        return $repeat.(string) $data;
     }
 }
