@@ -9,6 +9,10 @@
 
 namespace NumPHP\Core\Exception;
 
-class InvalidArgumentException extends \InvalidArgumentException
+/**
+ * Class BadMethodCallException
+ * @package NumPHP\Core\Exception
+ */
+class BadMethodCallException extends \Exception
 {
 }

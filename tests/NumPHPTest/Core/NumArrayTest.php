@@ -1,9 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: gordon
- * Date: 11/25/14
- * Time: 2:08 PM
+ * NumPHP (http://numphp.org/)
+ *
+ * @link https://github.com/GordonLesti/NumPHP for the canonical source repository
+ * @copyright Copyright (c) 2014 Gordon Lesti (https://gordonlesti.com/)
+ * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
 namespace NumPHPTest\Core;
