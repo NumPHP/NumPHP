@@ -42,7 +42,7 @@ class Get
             $arg = $args[0];
             $matches = [];
             array_shift($args);
-            if (preg_match('/^(?P<from>\d*):(?P<to>\d*)$/', $arg, $matches)) {
+            if (preg_match('/^(?P<from>([-]{0,1}\d+)*):(?P<to>([-]{0,1}\d+)*)$/', $arg, $matches)) {
                 $fromValue = $matches['from'];
                 $toValue = $matches['to'];
                 $sliced = self::slice($array, $fromValue, $toValue);
@@ -50,6 +50,9 @@ class Get
                     $sliced[$index] = self::getRecursive($row, $args);
                 }
                 return $sliced;
+            }
+            if ($arg < 0) {
+                $arg += count($array);
             }
             return self::getRecursive($array[$arg], $args);
         }

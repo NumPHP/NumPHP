@@ -137,4 +137,34 @@ class GetTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($expectedNumArray, $numArray->get(':', 2));
     }
+
+    public function testGet3ArgsMinus1()
+    {
+        $numArray = new NumArray(
+            [1, 2, 3, 4]
+        );
+        $this->assertEquals(4, $numArray->get(-1));
+    }
+
+    public function testGet4ArgsMinus1Slice()
+    {
+        $numArray = new NumArray(
+            [1, 2, 3, 4]
+        );
+        $expectedNumArray = new NumArray(
+            [4]
+        );
+        $this->assertEquals($expectedNumArray, $numArray->get('-1:'));
+    }
+
+    public function testGet4ArgsSliceMinus1()
+    {
+        $numArray = new NumArray(
+            [1, 2, 3, 4]
+        );
+        $expectedNumArray = new NumArray(
+            [1, 2, 3]
+        );
+        $this->assertEquals($expectedNumArray, $numArray->get(':-1'));
+    }
 }
