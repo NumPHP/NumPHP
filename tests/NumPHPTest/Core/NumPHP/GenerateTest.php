@@ -20,12 +20,12 @@ class GenerateTest extends \PHPUnit_Framework_TestCase
 {
     public function testOnes()
     {
-        $this->assertEquals(new NumArray(1), NumPHP::ones([]));
+        $this->assertEquals(new NumArray(1), NumPHP::ones());
     }
 
-    public function testRandom3()
+    public function testRand3()
     {
-        $rand = NumPHP::random([3]);
+        $rand = NumPHP::rand(3);
         $this->assertInstanceOf('\NumPHP\Core\NumArray', $rand);
         $this->assertEquals([3], $rand->getShape());
         $randData = $rand->getData();
@@ -44,7 +44,7 @@ class GenerateTest extends \PHPUnit_Framework_TestCase
                 [1, 1],
             ]
         );
-        $this->assertEquals($expectedNumArray, NumPHP::ones([3, 2]));
+        $this->assertEquals($expectedNumArray, NumPHP::ones(3, 2));
     }
 
     public function testZeros2x3x5()
@@ -63,6 +63,6 @@ class GenerateTest extends \PHPUnit_Framework_TestCase
                 ],
             ]
         );
-        $this->assertEquals($expectedNumArray, NumPHP::zeros([2, 3, 5]));
+        $this->assertEquals($expectedNumArray, NumPHP::zeros(2, 3, 5));
     }
 }

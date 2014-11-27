@@ -19,30 +19,30 @@ use NumPHP\Core\NumPHP\Generate;
 abstract class NumPHP
 {
     /**
-     * @param array $shape
-     * @return NumPHP
+     * @return NumArray
      */
-    public static function zeros(array $shape)
+    public static function zeros()
     {
-        return new NumArray(Generate::generateArray($shape, 0));
+        $args = func_get_args();
+        return new NumArray(Generate::generateArray($args, 0));
     }
 
     /**
-     * @param array $shape
      * @return NumArray
      */
-    public static function ones(array $shape)
+    public static function ones()
     {
-        return new NumArray(Generate::generateArray($shape, 1));
+        $args = func_get_args();
+        return new NumArray(Generate::generateArray($args, 1));
     }
 
     /**
-     * @param array $shape
      * @return NumArray
      */
-    public static function random(array $shape)
+    public static function rand()
     {
-        return new NumArray(Generate::generateArray($shape));
+        $args = func_get_args();
+        return new NumArray(Generate::generateArray($args));
     }
 
     /**
