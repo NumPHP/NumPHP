@@ -28,6 +28,22 @@ class Shape
     }
 
     /**
+     * @param array $data
+     * @param $shape
+     * @param $newShape
+     * @return array
+     */
+    public static function reshape(array $data, $shape, $newShape)
+    {
+        $oldSize = Helper::multiply($shape);
+        $newSize = Helper::multiply($newShape);
+        if ($newSize !== $oldSize) {
+            throw new InvalidArgumentException('Total size of new array must be unchanged');
+        }
+        return $data;
+    }
+
+    /**
      * @param $data
      * @param $shape
      * @param int $level
