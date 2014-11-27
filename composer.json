@@ -1,5 +1,5 @@
 {
-    "name": "NumPHP/NumPHP",
+    "name": "gordonlesti/numphp",
     "type": "library",
     "description": "NumPHP is the fundamental package for scientific computing with PHP",
     "keywords": ["numeric"],
