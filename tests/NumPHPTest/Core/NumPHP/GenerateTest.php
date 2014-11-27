@@ -27,7 +27,7 @@ class GenerateTest extends \PHPUnit_Framework_TestCase
     {
         $rand = NumPHP::rand(3);
         $this->assertInstanceOf('\NumPHP\Core\NumArray', $rand);
-        $this->assertEquals([3], $rand->getShape());
+        $this->assertSame([3], $rand->getShape());
         $randData = $rand->getData();
         $this->assertCount(3, $randData);
         foreach ($randData as $entry) {
@@ -96,7 +96,7 @@ class GenerateTest extends \PHPUnit_Framework_TestCase
         $numArray = new NumArray([1, 2, 3]);
         $rand = NumPHP::randLike($numArray);
         $this->assertInstanceOf('\NumPHP\Core\NumArray', $rand);
-        $this->assertEquals([3], $rand->getShape());
+        $this->assertSame([3], $rand->getShape());
         $randData = $rand->getData();
         $this->assertCount(3, $randData);
         foreach ($randData as $entry) {

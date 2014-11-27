@@ -21,36 +21,74 @@ class ShapeTest extends \PHPUnit_Framework_TestCase
     public function testGetShape()
     {
         $numArray = NumPHP::zeros();
-        $this->assertEquals([], $numArray->getShape());
+        $this->assertSame([], $numArray->getShape());
     }
 
     public function testShape1()
     {
         $numArray = NumPHP::zeros(1);
-        $this->assertEquals([1], $numArray->getShape());
+        $this->assertSame([1], $numArray->getShape());
     }
 
     public function testGetShape2()
     {
         $numArray = NumPHP::zeros(2);
-        $this->assertEquals([2], $numArray->getShape());
+        $this->assertSame([2], $numArray->getShape());
     }
 
     public function testGetShape2x0()
     {
         $numArray = NumPHP::zeros(2, 0);
-        $this->assertEquals([2, 0], $numArray->getShape());
+        $this->assertSame([2, 0], $numArray->getShape());
     }
 
     public function testGetShape2x4()
     {
         $numArray = NumPHP::zeros(2, 4);
-        $this->assertEquals([2, 4], $numArray->getShape());
+        $this->assertSame([2, 4], $numArray->getShape());
     }
 
     public function testGetShape2x3x4()
     {
         $numArray = NumPHP::ones(2, 3, 4);
-        $this->assertEquals([2, 3, 4], $numArray->getShape());
+        $this->assertSame([2, 3, 4], $numArray->getShape());
+    }
+
+    /**
+     * @expectedException \NumPHP\Core\Exception\BadMethodCallException
+     * @expectedExceptionMessage NumArray data is no array
+     */
+    public function testReshapeBadMethodCallException()
+    {
+        $numArray = NumPHP::ones();
+        $numArray->reshape();
+    }
+
+    /**
+     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Total size of new array must be unchanged
+     */
+    public function testReshapeInvalidArgumentException()
+    {
+        $numArray = NumPHP::ones(2, 3);
+        $numArray->reshape(2, 2);
+    }
+
+    public function testReshape3x4To2x6()
+    {
+        $numArray = new NumArray(
+            [
+                [1, 2, 3, 4],
+                [5, 6, 7, 8],
+                [9, 10, 11, 12],
+            ]
+        );
+        $expectedNumArray = new NumArray(
+            [
+                [1, 2, 3, 4, 5, 6],
+                [7, 8, 9, 10, 11, 12],
+            ]
+        );
+        $this->assertEquals($expectedNumArray, $numArray->reshape(2, 6));
     }
 }

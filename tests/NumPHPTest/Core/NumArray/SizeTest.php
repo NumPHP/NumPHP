@@ -21,30 +21,30 @@ class SizeTest extends \PHPUnit_Framework_TestCase
     public function testGetSize()
     {
         $numArray = NumPHP::ones();
-        $this->assertEquals(1, $numArray->getSize());
+        $this->assertSame(1, $numArray->getSize());
     }
 
     public function testGetSize1()
     {
         $numArray = NumPHP::zeros(1);
-        $this->assertEquals(1, $numArray->getSize());
+        $this->assertSame(1, $numArray->getSize());
     }
 
     public function testGetSize2()
     {
         $numArray = NumPHP::zeros(2);
-        $this->assertEquals(2, $numArray->getSize());
+        $this->assertSame(2, $numArray->getSize());
     }
 
     public function testGetSize2x3()
     {
         $numArray = NumPHP::zeros(2, 3);
-        $this->assertEquals(6, $numArray->getSize());
+        $this->assertSame(6, $numArray->getSize());
     }
 
     public function getSize2x3x4()
     {
         $numArray = NumPHP::zeros(2, 3, 4);
-        $this->assertEquals(24, $numArray->getSize());
+        $this->assertSame(24, $numArray->getSize());
     }
 }

@@ -32,16 +32,16 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
     {
         $array = [1, 2, 3];
         $numArray = new NumArray($array);
-        $this->assertEquals($array, $numArray->getData());
+        $this->assertSame($array, $numArray->getData());
     }
 
     public function testNDim()
     {
         $numArray = new NumArray(1);
-        $this->assertEquals(0, $numArray->getNDim());
+        $this->assertSame(0, $numArray->getNDim());
 
         $numArray = new NumArray([1, 2]);
-        $this->assertEquals(1, $numArray->getNDim());
+        $this->assertSame(1, $numArray->getNDim());
 
         $numArray = new NumArray(
             [
@@ -49,6 +49,6 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
                 [4, 5, 6],
             ]
         );
-        $this->assertEquals(2, $numArray->getNDim());
+        $this->assertSame(2, $numArray->getNDim());
     }
 }

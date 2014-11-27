@@ -22,7 +22,7 @@ class GetTest extends \PHPUnit_Framework_TestCase
     public function testGet()
     {
         $numArray = new NumArray(1);
-        $this->assertEquals(1, $numArray->get());
+        $this->assertSame(1, $numArray->get());
     }
 
     public function testGet1()
@@ -34,7 +34,7 @@ class GetTest extends \PHPUnit_Framework_TestCase
     public function testGet1Args0()
     {
         $numArray = new NumArray([1]);
-        $this->assertEquals(1, $numArray->get(0));
+        $this->assertSame(1, $numArray->get(0));
     }
 
     public function testGet2()
@@ -46,7 +46,7 @@ class GetTest extends \PHPUnit_Framework_TestCase
     public function testGet2Args1()
     {
         $numArray = new NumArray([1, 2]);
-        $this->assertEquals(2, $numArray->get(1));
+        $this->assertSame(2, $numArray->get(1));
     }
 
     public function testGet4Args1Slice3()
@@ -103,7 +103,7 @@ class GetTest extends \PHPUnit_Framework_TestCase
                 [5, 6, 7, 8],
             ]
         );
-        $this->assertEquals(7, $numArray->get(1, 2));
+        $this->assertSame(7, $numArray->get(1, 2));
     }
 
     public function testGet3x4Args1Slice3()
@@ -144,7 +144,7 @@ class GetTest extends \PHPUnit_Framework_TestCase
         $numArray = new NumArray(
             [1, 2, 3, 4]
         );
-        $this->assertEquals(4, $numArray->get(-1));
+        $this->assertSame(4, $numArray->get(-1));
     }
 
     public function testGet4ArgsMinus1Slice()
