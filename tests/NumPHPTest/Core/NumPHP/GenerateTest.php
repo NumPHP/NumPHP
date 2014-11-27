@@ -65,4 +65,42 @@ class GenerateTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($expectedNumArray, NumPHP::zeros(2, 3, 5));
     }
+
+    public function testZerosLike()
+    {
+        $numArray = new NumArray(
+            [
+                [1, 2, 3],
+                [4, 5, 6],
+            ]
+        );
+        $expectedNumArray = NumPHP::zeros(2, 3);
+        $this->assertEquals($expectedNumArray, NumPHP::zerosLike($numArray));
+    }
+
+    public function testOnesLike()
+    {
+        $numArray = new NumArray(
+            [
+                [1, 1],
+                [1, 1],
+                [1, 1],
+            ]
+        );
+        $expectedNumArray = NumPHP::ones(3, 2);
+        $this->assertEquals($expectedNumArray, NumPHP::onesLike($numArray));
+    }
+
+    public function testRandLike()
+    {
+        $numArray = new NumArray([1, 2, 3]);
+        $rand = NumPHP::randLike($numArray);
+        $this->assertInstanceOf('\NumPHP\Core\NumArray', $rand);
+        $this->assertEquals([3], $rand->getShape());
+        $randData = $rand->getData();
+        $this->assertCount(3, $randData);
+        foreach ($randData as $entry) {
+            $this->assertInternalType('float', $entry);
+        }
+    }
 }

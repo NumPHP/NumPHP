@@ -28,6 +28,15 @@ abstract class NumPHP
     }
 
     /**
+     * @param NumArray $numArray
+     * @return NumArray
+     */
+    public static function zerosLike(NumArray $numArray)
+    {
+        return new NumArray(Generate::generateArray($numArray->getShape(), 0));
+    }
+
+    /**
      * @return NumArray
      */
     public static function ones()
@@ -37,12 +46,30 @@ abstract class NumPHP
     }
 
     /**
+     * @param NumArray $numArray
+     * @return NumArray
+     */
+    public static function onesLike(NumArray $numArray)
+    {
+        return new NumArray(Generate::generateArray($numArray->getShape(), 1));
+    }
+
+    /**
      * @return NumArray
      */
     public static function rand()
     {
         $args = func_get_args();
         return new NumArray(Generate::generateArray($args));
+    }
+
+    /**
+     * @param NumArray $numArray
+     * @return NumArray
+     */
+    public static function randLike(NumArray $numArray)
+    {
+        return new NumArray(Generate::generateArray($numArray->getShape()));
     }
 
     /**
