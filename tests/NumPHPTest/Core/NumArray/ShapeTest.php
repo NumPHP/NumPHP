@@ -56,7 +56,7 @@ class ShapeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \NumPHP\Core\Exception\BadMethodCallException
-     * @expectedExceptionMessage NumArray data is no array
+     * @expectedExceptionMessage NumArray data is not an array
      */
     public function testReshapeBadMethodCallException()
     {
