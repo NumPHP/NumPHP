@@ -9,7 +9,7 @@
 
 namespace NumPHP\Core;
 
-use NumPHP\Core\NumPHP\Zeros;
+use NumPHP\Core\NumPHP\Generate;
 
 /**
  * Class NumPHP
@@ -23,6 +23,24 @@ class NumPHP
      */
     public static function zeros(array $shape)
     {
-        return new NumArray(Zeros::getZeros($shape));
+        return new NumArray(Generate::generateArray($shape, 0));
+    }
+
+    /**
+     * @param array $shape
+     * @return NumArray
+     */
+    public static function ones(array $shape)
+    {
+        return new NumArray(Generate::generateArray($shape, 1));
+    }
+
+    /**
+     * @param array $shape
+     * @return NumArray
+     */
+    public static function random(array $shape)
+    {
+        return new NumArray(Generate::generateArray($shape));
     }
 }

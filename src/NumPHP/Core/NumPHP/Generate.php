@@ -10,34 +10,39 @@
 namespace NumPHP\Core\NumPHP;
 
 /**
- * Class Zeros
+ * Class Generate
  * @package NumPHP\Core\NumPHP
  */
-class Zeros
+class Generate
 {
     /**
-     * @param $shape
-     * @return array|int
+     * @param array $shape
+     * @param null $value
+     * @return mixed
      */
-    public static function getZeros(array $shape)
+    public static function generateArray(array $shape, $value = null)
     {
-        return self::getZeroArrayRecursive($shape);
+        return self::generateArrayRecursive($shape, $value);
     }
 
     /**
      * @param array $shape
-     * @return array|int
+     * @param null $value
+     * @return array|int|null
      */
-    protected static function getZeroArrayRecursive(array $shape)
+    protected static function generateArrayRecursive(array $shape, $value = null)
     {
         if (count($shape)) {
             $zeros = [];
             $dim = array_shift($shape);
             for ($i = 0; $i < $dim; $i++) {
-                $zeros[] = self::getZeroArrayRecursive($shape);
+                $zeros[] = self::generateArrayRecursive($shape, $value);
             }
             return $zeros;
         }
-        return 0;
+        if (is_null($value)) {
+            return mt_rand() + mt_rand() / mt_getrandmax();
+        }
+        return $value;
     }
 }

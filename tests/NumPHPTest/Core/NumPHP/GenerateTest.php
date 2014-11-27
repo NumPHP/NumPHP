@@ -13,31 +13,38 @@ use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
 
 /**
- * Class ZerosTest
+ * Class GenerateTest
  * @package NumPHPTest\Core\NumPHP
  */
-class ZerosTest extends \PHPUnit_Framework_TestCase
+class GenerateTest extends \PHPUnit_Framework_TestCase
 {
-    public function testZeros()
+    public function testOnes()
     {
-        $this->assertEquals(new NumArray(0), NumPHP::zeros([]));
+        $this->assertEquals(new NumArray(1), NumPHP::ones([]));
     }
 
-    public function testZeros3()
+    public function testRandom3()
     {
-        $this->assertEquals(new NumArray([0, 0, 0]), NumPHP::zeros([3]));
+        $rand = NumPHP::random([3]);
+        $this->assertInstanceOf('\NumPHP\Core\NumArray', $rand);
+        $this->assertEquals([3], $rand->getShape());
+        $randData = $rand->getData();
+        $this->assertCount(3, $randData);
+        foreach ($randData as $entry) {
+            $this->assertInternalType('float', $entry);
+        }
     }
 
-    public function testZeros3x2()
+    public function testOnes3x2()
     {
         $expectedNumArray = new NumArray(
             [
-                [0, 0],
-                [0, 0],
-                [0, 0],
+                [1, 1],
+                [1, 1],
+                [1, 1],
             ]
         );
-        $this->assertEquals($expectedNumArray, NumPHP::zeros([3, 2]));
+        $this->assertEquals($expectedNumArray, NumPHP::ones([3, 2]));
     }
 
     public function testZeros2x3x5()
