@@ -2,8 +2,8 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link https://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (https://gordonlesti.com/)
+ * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
+ * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
@@ -12,6 +12,7 @@ namespace NumPHP\Core;
 use NumPHP\Core\NumArray\Get;
 use NumPHP\Core\NumArray\Shape;
 use NumPHP\Core\NumArray\String;
+use NumPHP\Core\NumArray\Transpose;
 
 /**
  * Class NumArray
@@ -86,5 +87,13 @@ class NumArray
     public function getNDim()
     {
         return count($this->shape);
+    }
+
+    /**
+     * @return NumArray
+     */
+    public function getTranspose()
+    {
+        return new NumArray(Transpose::getTranspose($this->data, $this->getShape()));
     }
 }

@@ -1,7 +1,18 @@
 {
     "name": "NumPHP/NumPHP",
+    "type": "library",
     "description": "NumPHP is the fundamental package for scientific computing with PHP",
+    "keywords": ["numeric"],
+    "homepage": "http://numphp.org/",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Gordon Lesti",
+            "email": "info@gordonlesti.com",
+            "homepage": "http://gordonlesti.com/",
+            "role": "developer"
+        }
+    ],
     "require": {
         "php": ">=5.4"
     },

@@ -2,8 +2,8 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link https://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (https://gordonlesti.com/)
+ * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
+ * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
