@@ -8,6 +8,7 @@
  */
 
 namespace NumPHPTest\Core\NumArray;
+
 use NumPHP\Core\NumArray;
 
 /**
