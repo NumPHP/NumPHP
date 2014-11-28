@@ -74,6 +74,17 @@ class ShapeTest extends \PHPUnit_Framework_TestCase
         $numArray->reshape(2, 2);
     }
 
+    public function testReshape2x3To1x6()
+    {
+        $numArray = new NumArray(
+            [
+                [1, 2, 3],
+                [4, 5, 6],
+            ]
+        );
+        $this->assertEquals(NumPHP::arange(1, 6), $numArray->reshape(6));
+    }
+
     public function testReshape3x4To2x6()
     {
         $numArray = new NumArray(

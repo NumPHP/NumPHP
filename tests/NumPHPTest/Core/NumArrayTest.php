@@ -10,6 +10,7 @@
 namespace NumPHPTest\Core;
 
 use NumPHP\Core\NumArray;
+use NumPHP\Core\NumPHP;
 
 /**
  * Class NumArrayTest
@@ -40,15 +41,10 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
         $numArray = new NumArray(1);
         $this->assertSame(0, $numArray->getNDim());
 
-        $numArray = new NumArray([1, 2]);
+        $numArray = NumPHP::arange(1, 2);
         $this->assertSame(1, $numArray->getNDim());
 
-        $numArray = new NumArray(
-            [
-                [1, 2, 3],
-                [4, 5, 6],
-            ]
-        );
+        $numArray = NumPHP::arange(1, 6)->reshape(2, 3);
         $this->assertSame(2, $numArray->getNDim());
     }
 }

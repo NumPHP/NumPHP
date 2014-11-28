@@ -29,18 +29,21 @@ class Shape
 
     /**
      * @param array $data
-     * @param $shape
-     * @param $newShape
+     * @param array $shape
+     * @param array $newShape
      * @return array
      */
-    public static function reshape(array $data, $shape, $newShape)
+    public static function reshape(array $data, array $shape, array $newShape)
     {
         $oldSize = Helper::multiply($shape);
         $newSize = Helper::multiply($newShape);
         if ($newSize !== $oldSize) {
             throw new InvalidArgumentException('Total size of new array must be unchanged');
         }
-        return $data;
+        return self::reshapeRecursive(
+            self::reshapeToVectorRecursive($data),
+            $newShape
+        );
     }
 
     /**
@@ -63,5 +66,41 @@ class Shape
             }
         }
         return $shape;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    protected function reshapeToVectorRecursive(array $data)
+    {
+        $vector = [];
+        foreach ($data as $row) {
+            if (is_array($row)) {
+                $vector = array_merge($vector, self::reshapeToVectorRecursive($row));
+            } else {
+                return $data;
+            }
+        }
+        return $vector;
+    }
+
+    /**
+     * @param array $data
+     * @param $shape
+     * @return array
+     */
+    protected function reshapeRecursive(array $data, $shape)
+    {
+        if (count($shape) > 1) {
+            $reshaped = [];
+            $axis = array_shift($shape);
+            $length = count($data) / $axis;
+            for ($i = 0; $i < $axis; $i++) {
+                $reshaped[] = self::reshapeRecursive(array_slice($data, $i*$length, $length), $shape);
+            }
+            return $reshaped;
+        }
+        return $data;
     }
 }
