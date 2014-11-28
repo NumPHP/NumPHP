@@ -10,7 +10,6 @@
 namespace NumPHP\Core;
 
 use NumPHP\Core\Exception\BadMethodCallException;
-use NumPHP\Core\Exception\InvalidArgumentException;
 use NumPHP\Core\NumArray\Get;
 use NumPHP\Core\NumArray\Helper;
 use NumPHP\Core\NumArray\Shape;
@@ -125,6 +124,8 @@ class NumArray
             throw new BadMethodCallException('NumArray data is not an array');
         }
         $args = func_get_args();
-        return new NumArray(Shape::reshape($this->data, $this->getShape(), $args));
+        $this->data = Shape::reshape($this->data, $this->getShape(), $args);
+        $this->shape = $args;
+        return $this;
     }
 }
