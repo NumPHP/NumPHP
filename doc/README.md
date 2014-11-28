@@ -1,4 +1,4 @@
 # Documentation
 
-* [Installation](install/README.md) Installation, Requirements
+* [Installation](installation.md) Installation, Requirements
 * [Usage](usage/README.md) Getting Started
