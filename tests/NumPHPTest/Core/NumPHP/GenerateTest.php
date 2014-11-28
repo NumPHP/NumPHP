@@ -44,7 +44,6 @@ class GenerateTest extends \PHPUnit_Framework_TestCase
                 [1, 1],
             ]
         );
-        print_r($expectedNumArray->getData());
         $this->assertEquals($expectedNumArray, NumPHP::ones(3, 2));
     }
 
