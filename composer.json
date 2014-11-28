@@ -1,7 +1,7 @@
 {
     "name": "gordonlesti/numphp",
     "type": "library",
-    "description": "NumPHP is the fundamental package for scientific computing with PHP",
+    "description": "PHP library for scientific computing",
     "keywords": ["numeric"],
     "homepage": "http://numphp.org/",
     "license": "MIT",
