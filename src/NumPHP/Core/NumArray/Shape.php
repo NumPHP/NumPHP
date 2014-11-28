@@ -72,7 +72,7 @@ class Shape
      * @param array $data
      * @return array
      */
-    protected function reshapeToVectorRecursive(array $data)
+    protected static function reshapeToVectorRecursive(array $data)
     {
         $vector = [];
         foreach ($data as $row) {
@@ -90,7 +90,7 @@ class Shape
      * @param $shape
      * @return array
      */
-    protected function reshapeRecursive(array $data, $shape)
+    protected static function reshapeRecursive(array $data, $shape)
     {
         if (count($shape) > 1) {
             $reshaped = [];
