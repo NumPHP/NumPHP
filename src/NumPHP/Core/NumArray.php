@@ -12,6 +12,7 @@ namespace NumPHP\Core;
 use NumPHP\Core\Exception\BadMethodCallException;
 use NumPHP\Core\NumArray\Get;
 use NumPHP\Core\NumArray\Helper;
+use NumPHP\Core\NumArray\Set;
 use NumPHP\Core\NumArray\Shape;
 use NumPHP\Core\NumArray\String;
 use NumPHP\Core\NumArray\Transpose;
@@ -50,7 +51,7 @@ class NumArray
      */
     public function __toString()
     {
-        return String::toString($this->data);
+        return 'NumArray('.String::toString($this->data).')';
     }
 
     /**
@@ -82,6 +83,21 @@ class NumArray
     {
         $args = func_get_args();
         return Get::getSubArray($this->data, $args);
+    }
+
+    /**
+     * @param $subArray
+     * @return $this
+     */
+    public function set($subArray)
+    {
+        $args = func_get_args();
+        array_shift($args);
+        if ($subArray instanceof NumArray) {
+            $subArray = $subArray->getData();
+        }
+        $this->data = Set::setSubArray($this->data, $subArray, $args);
+        return $this;
     }
 
     /**
