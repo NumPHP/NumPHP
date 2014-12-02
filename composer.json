@@ -1,5 +1,5 @@
 {
-    "name": "gordonlesti/numphp",
+    "name": "numphp/numphp",
     "type": "library",
     "description": "PHP library for scientific computing",
     "keywords": ["numeric"],

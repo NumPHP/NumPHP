@@ -13,6 +13,18 @@
 
 *NumPHP 0.0.1*
 
-## Documentation
+## Requirements
 
-All information about installation and usgae can be found at the [Documentation](doc/README.md)
+- PHP 5.4 or higher
+
+## Installation
+
+### Composer
+
+Simply add a dependency on `numphp/numphp` to your project's `composer.json` file if you use [Composer](http://getcomposer.org/) to manage the dependencies of your project.
+
+    {
+        "require-dev": {
+            "numphp/numphp": "dev-master"
+        }
+    }
