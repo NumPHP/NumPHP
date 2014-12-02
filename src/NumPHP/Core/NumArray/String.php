@@ -33,14 +33,14 @@ class String
     {
         $repeat = str_repeat("  ", $level);
         if (is_array($data)) {
-            $string = $repeat."(\n";
+            $string = $repeat."[\n";
             for ($i = 0; $i < count($data)-1; $i++) {
                 $string .= self::toStringRecursive($data[$i], $level+1).",\n";
             }
             if (count($data)) {
                 $string .= self::toStringRecursive($data[$i], $level+1);
             }
-            $string .= "\n".$repeat.")";
+            $string .= "\n".$repeat."]";
             return $string;
         }
         return $repeat.(string) $data;
