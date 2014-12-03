@@ -28,3 +28,7 @@ Simply add a dependency on `numphp/numphp` to your project's `composer.json` fil
             "numphp/numphp": "dev-master"
         }
     }
+
+## Documentation
+
+Read the offical [NumPHP documentation](http://numphp.org/docs/)
