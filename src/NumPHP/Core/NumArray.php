@@ -10,6 +10,7 @@
 namespace NumPHP\Core;
 
 use NumPHP\Core\Exception\BadMethodCallException;
+use NumPHP\Core\NumArray\Add;
 use NumPHP\Core\NumArray\Get;
 use NumPHP\Core\NumArray\Helper;
 use NumPHP\Core\NumArray\Set;
@@ -119,6 +120,40 @@ class NumArray
     }
 
     /**
+     * Adds an array, NumArray or numeric value to the existing NumArray
+     *
+     * @param $addend
+     * @return $this
+     */
+    public function add($addend)
+    {
+        if ($addend instanceof NumArray) {
+            $addend = $addend->getData();
+        }
+        $this->data = Add::addArray($this->data, $addend);
+        $this->shape = Shape::getShape($this->data);
+
+        return $this;
+    }
+
+    /**
+     * Subtracts an array, NumArray or numeric value from the existing NumArray
+     *
+     * @param $subtrahend
+     * @return $this
+     */
+    public function minus($subtrahend)
+    {
+        if ($subtrahend instanceof NumArray) {
+            $subtrahend = $subtrahend->getData();
+        }
+        $this->data = Add::addArray($this->data, $subtrahend, Add::OPERATION_MINUS);
+        $this->shape = Shape::getShape($this->data);
+
+        return $this;
+    }
+
+    /**
      * Returns the transposed NumArray
      *
      * @return NumArray
@@ -142,6 +177,7 @@ class NumArray
         $args = func_get_args();
         $this->data = Shape::reshape($this->data, $this->getShape(), $args);
         $this->shape = $args;
+
         return $this;
     }
 }
