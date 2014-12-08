@@ -8,14 +8,15 @@
  */
 
 namespace NumPHP\Core\NumArray;
+
 use NumPHP\Core\Exception\InvalidArgumentException;
 
 /**
  * Class Add
   * @package NumPHP\Core\NumArray
   */
-class Add {
-
+class Add
+{
     const OPERATION_PLUS = 'plus';
     const OPERATION_MINUS = 'minus';
 
@@ -35,6 +36,8 @@ class Add {
      * @param $data2
      * @param $operation
      * @return array|mixed
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     protected static function addRecursive($data1, $data2, $operation)
     {
@@ -56,14 +59,18 @@ class Add {
                 for ($i = 0; $i < count($data2); $i++) {
                     $data2[$i] = self::addRecursive($data1, $data2[$i], $operation);
                 }
+
                 return $data2;
             }
             if ($operation === self::OPERATION_PLUS) {
                 $data1 += $data2;
             } elseif ($operation === self::OPERATION_MINUS) {
                 $data1 -= $data2;
+            } else {
+                throw new InvalidArgumentException('Operation '.$operation.' is not allowed');
             }
         }
+
         return $data1;
     }
 }

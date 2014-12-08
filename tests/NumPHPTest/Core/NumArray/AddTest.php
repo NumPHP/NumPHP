@@ -15,6 +15,8 @@ use NumPHP\Core\NumPHP;
 /**
  * Class AddTest
   * @package NumPHPTest\Core\NumArray
+ *
+ * @SuppressWarnings(PHPMD.TooManyMethods)
   */
 class AddTest extends \PHPUnit_Framework_TestCase
 {
@@ -85,6 +87,27 @@ class AddTest extends \PHPUnit_Framework_TestCase
 
         $expectedNumArray = NumPHP::arange(5, 17, 2);
         $this->assertEquals($expectedNumArray, $numArray->add($array));
+    }
+
+    /**
+     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Shape 5 is different from 4
+     */
+    public function testAddDifferentShape()
+    {
+        $numArray1 = NumPHP::arange(1, 5);
+        $numArray2 = NumPHP::arange(1, 4);
+
+        $numArray1->add($numArray2);
+    }
+
+    /**
+     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Operation numphp is not allowed
+     */
+    public function testAddUnknownOperation()
+    {
+        NumArray\Add::addArray([1], [1], 'numphp');
     }
 
     public function testMinusSingle()
