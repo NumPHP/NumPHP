@@ -14,4 +14,9 @@
             <directory>./tests/NumPHPTest</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src/NumPHP</directory>
+        </whitelist>
+    </filter>
 </phpunit>
