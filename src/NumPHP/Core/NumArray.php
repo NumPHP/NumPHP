@@ -11,6 +11,7 @@ namespace NumPHP\Core;
 
 use NumPHP\Core\Exception\BadMethodCallException;
 use NumPHP\Core\NumArray\Add;
+use NumPHP\Core\NumArray\Dot;
 use NumPHP\Core\NumArray\Get;
 use NumPHP\Core\NumArray\Helper;
 use NumPHP\Core\NumArray\Set;
@@ -149,6 +150,24 @@ class NumArray
         }
         $this->data = Add::addArray($this->data, $subtrahend, Add::OPERATION_MINUS);
         $this->shape = Shape::getShape($this->data);
+
+        return $this;
+    }
+
+    /**
+     * Multiplies an array, NumArray or numeric value to the existing NumArray
+     *
+     * @param $factor
+     * @return $this
+     */
+    public function dot($factor)
+    {
+        if (!($factor instanceof NumArray)) {
+            $factor = new NumArray($factor);
+        }
+        $result = Dot::dotArray($this->data, $this->shape, $factor->getData(), $factor->getShape());
+        $this->data = $result['data'];
+        $this->shape = $result['shape'];
 
         return $this;
     }
