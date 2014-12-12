@@ -28,15 +28,14 @@ class StringTest extends \PHPUnit_Framework_TestCase
     public function testToString2()
     {
         $numArray = NumPHP::arange(1, 2);
-        $this->expectOutputString("NumArray([\n  1,\n  2\n])");
+        $this->expectOutputString("NumArray([1, 2])");
         echo $numArray;
     }
 
     public function testToString3x4()
     {
         $numArray = NumPHP::arange(1, 12)->reshape(3, 4);
-        $expectedOutput = "NumArray([\n  [\n    1,\n    2,\n    3,\n    4\n  ],\n  [\n    5,\n    6,\n    7,\n    8\n ".
-            " ],\n  [\n    9,\n    10,\n    11,\n    12\n  ]\n])";
+        $expectedOutput = "NumArray([\n  [1, 2, 3, 4],\n  [5, 6, 7, 8],\n  [9, 10, 11, 12]\n])";
         $this->expectOutputString($expectedOutput);
         echo $numArray;
     }
