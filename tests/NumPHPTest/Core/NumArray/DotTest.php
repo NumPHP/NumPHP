@@ -77,6 +77,18 @@ class DotTest extends \PHPUnit_Framework_TestCase
         $numArray1->dot($numArray2);
     }
 
+    /**
+     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Matrix with shape (3) and matrix with shape (2, 3, 4) are not align.
+     */
+    public function testDotVector3Matrix3d()
+    {
+        $numArray1 = NumPHP::arange(1, 3);
+        $numArray2 = NumPHP::arange(1, 24)->reshape(2, 3, 4);
+
+        $numArray1->dot($numArray2);
+    }
+
     public function testDotMatrixScalar()
     {
         $numArray = NumPHP::arange(1, 12)->reshape(3, 4);
@@ -130,7 +142,7 @@ class DotTest extends \PHPUnit_Framework_TestCase
         $numArray1->dot($numArray2);
     }
 
-    public function testDot3dVector()
+    public function testDot3dMatrixVector()
     {
         $numArray1 = NumPHP::arange(1, 24)->reshape(2, 3, 4);
         $numArray2 = NumPHP::arange(1, 4);
