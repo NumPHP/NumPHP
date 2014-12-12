@@ -20,16 +20,11 @@ class Get
     /**
      * @param $data
      * @param array $args
-     * @return mixed|NumArray
+     * @return mixed
      */
     public static function getSubArray($data, array $args)
     {
-        $data = self::getRecursive($data, $args);
-
-        if (is_array($data)) {
-            return new NumArray($data);
-        }
-        return $data;
+        return self::getRecursive($data, $args);
     }
 
     /**

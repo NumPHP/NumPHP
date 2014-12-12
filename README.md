@@ -11,7 +11,7 @@
 
 ## Release Information
 
-*NumPHP 0.0.1*
+*NumPHP 1.0.0-dev*
 
 ## Requirements
 

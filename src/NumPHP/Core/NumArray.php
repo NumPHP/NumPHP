@@ -79,12 +79,13 @@ class NumArray
     /**
      * Returns a sliced part the NumArray
      *
-     * @return mixed|NumArray
+     * @return NumArray
      */
     public function get()
     {
         $args = func_get_args();
-        return Get::getSubArray($this->data, $args);
+
+        return new NumArray(Get::getSubArray($this->data, $args));
     }
 
     /**
@@ -99,6 +100,7 @@ class NumArray
             $subArray = $subArray->getData();
         }
         $this->data = Set::setSubArray($this->data, $subArray, $args);
+
         return $this;
     }
 
