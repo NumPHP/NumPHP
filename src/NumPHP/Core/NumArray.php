@@ -159,6 +159,8 @@ class NumArray
     }
 
     /**
+     * Summed all elements of an NumArray for the given axis
+     *
      * @param int $axis
      * @return NumArray
      */

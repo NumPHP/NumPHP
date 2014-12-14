@@ -73,6 +73,24 @@ abstract class NumPHP
     }
 
     /**
+     * @param $mAxis
+     * @param int $nAxis
+     * @return NumArray
+     */
+    public static function eye($mAxis, $nAxis = -1)
+    {
+        if ($nAxis === -1) {
+            $nAxis = $mAxis;
+        }
+        $eye = self::zeros($mAxis, $nAxis);
+        for ($i = 0; $i < min($mAxis, $nAxis); $i++) {
+            $eye->set(1, $i, $i);
+        }
+
+        return $eye;
+    }
+
+    /**
      * @param $low
      * @param $high
      * @param int $step

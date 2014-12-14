@@ -15,6 +15,8 @@ use NumPHP\Core\NumPHP;
 /**
  * Class SumTest
   * @package NumPHPTest\Core\NumArray
+ *
+ * @SuppressWarnings(PHPMD.TooManyMethods)
   */
 class SumTest extends \PHPUnit_Framework_TestCase
 {
