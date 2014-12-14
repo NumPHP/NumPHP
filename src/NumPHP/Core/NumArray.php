@@ -10,6 +10,7 @@
 namespace NumPHP\Core;
 
 use NumPHP\Core\Exception\BadMethodCallException;
+use NumPHP\Core\Exception\InvalidArgumentException;
 use NumPHP\Core\NumArray\Add;
 use NumPHP\Core\NumArray\Dot;
 use NumPHP\Core\NumArray\Get;
@@ -17,6 +18,7 @@ use NumPHP\Core\NumArray\Helper;
 use NumPHP\Core\NumArray\Set;
 use NumPHP\Core\NumArray\Shape;
 use NumPHP\Core\NumArray\String;
+use NumPHP\Core\NumArray\Sum;
 use NumPHP\Core\NumArray\Transpose;
 
 /**
@@ -154,6 +156,18 @@ class NumArray
         $this->shape = Shape::getShape($this->data);
 
         return $this;
+    }
+
+    /**
+     * @param int $axis
+     * @return NumArray
+     */
+    public function sum($axis = null)
+    {
+        if ($axis && $axis >= $this->getNDim()) {
+            throw new InvalidArgumentException('Axis '.$axis.' out of bounds');
+        }
+        return new NumArray(Sum::sumArray($this->data, $axis));
     }
 
     /**
