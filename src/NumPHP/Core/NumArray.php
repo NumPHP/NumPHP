@@ -215,6 +215,19 @@ class NumArray
     }
 
     /**
+     * @param null $axis
+     * @return NumArray
+     */
+    public function mean($axis = null)
+    {
+        $divisor = $this->getSize();
+        if (array_key_exists($axis, $this->shape)) {
+            $divisor = $this->shape[$axis];
+        }
+        return $this->sum($axis)->dot(1/$divisor);
+    }
+
+    /**
      * Multiplies an array, NumArray or numeric value to the existing NumArray
      *
      * @param $factor
