@@ -12,6 +12,7 @@ namespace NumPHP\Core;
 use NumPHP\Core\Exception\BadMethodCallException;
 use NumPHP\Core\Exception\InvalidArgumentException;
 use NumPHP\Core\NumArray\Dot;
+use NumPHP\Core\NumArray\Filter;
 use NumPHP\Core\NumArray\Get;
 use NumPHP\Core\NumArray\Helper;
 use NumPHP\Core\NumArray\Map;
@@ -25,6 +26,8 @@ use NumPHP\Core\NumArray\Transpose;
 /**
  * Class NumArray
  * @package NumPHP\Core
+ *
+ * @SuppressWarnings(PHPMD.TooManyMethods)
  */
 class NumArray
 {
@@ -225,6 +228,21 @@ class NumArray
             $divisor = $this->shape[$axis];
         }
         return $this->sum($axis)->dot(1/$divisor);
+    }
+
+    /**
+     * @return $this
+     */
+    public function abs()
+    {
+        $this->data = Filter::filterArray(
+            $this->data,
+            function ($data) {
+                return abs($data);
+            }
+        );
+
+        return $this;
     }
 
     /**
