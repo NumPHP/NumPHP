@@ -13,6 +13,7 @@ before_script:
 script:
   - php vendor/bin/phpcs --standard=psr2 src/ tests/
   - php vendor/bin/phpmd src/,tests/ text codesize,controversial,design,naming,unusedcode
+  - php vendor/bin/phpcpd src/ tests/
   - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
