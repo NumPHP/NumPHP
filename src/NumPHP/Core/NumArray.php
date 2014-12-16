@@ -181,6 +181,8 @@ class NumArray
     }
 
     /**
+     * Returns the min of the NumArray for the given axis
+     *
      * @param int $axis
      * @return NumArray
      */
@@ -196,6 +198,8 @@ class NumArray
     }
 
     /**
+     * Returns the max of the NumArray for the given axis
+     *
      * @param int $axis
      * @return NumArray
      */

@@ -18,14 +18,14 @@ use NumPHP\Core\Exception\InvalidArgumentException;
 class Map
 {
     /**
-     * @param $addend1
-     * @param $addend2
+     * @param $array1
+     * @param $array2
      * @param callback $callback
      * @return array|mixed
      */
-    public static function mapArray($addend1, $addend2, $callback)
+    public static function mapArray($array1, $array2, $callback)
     {
-        return self::mapRecursive($addend1, $addend2, $callback);
+        return self::mapRecursive($array1, $array2, $callback);
     }
 
     /**
