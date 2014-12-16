@@ -7,7 +7,7 @@
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace NumPHPTest\Core\NumArray;
+namespace NumPHPTest\Core\NumArray\Reduce;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;

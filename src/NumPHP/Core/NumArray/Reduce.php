@@ -9,49 +9,58 @@
 
 namespace NumPHP\Core\NumArray;
 
+use NumPHP\Core\Exception\InvalidArgumentException;
+use NumPHP\Core\NumArray;
+
 /**
- * Class Sum
+ * Class Reduce
   * @package NumPHP\Core\NumArray
   */
-class Sum
+class Reduce
 {
     /**
-     * @param $data
-     * @param int $axis
-     * @return mixed
+     * @param NumArray $numArray
+     * @param $callback
+     * @param $axis
+     * @return NumArray
      */
-    public static function sumArray($data, $axis = null)
+    public static function reduceArray(NumArray $numArray, $callback, $axis)
     {
-        return self::sumRecursive($data, $axis);
+        if ($axis && $axis >= $numArray->getNDim()) {
+            throw new InvalidArgumentException('Axis '.$axis.' out of bounds');
+        }
+
+        return new NumArray(
+            self::reduceRecursive($numArray->getData(), $callback, $axis)
+        );
     }
 
     /**
      * @param $data
+     * @param callback $callback
      * @param int $axis
      * @return mixed
      */
-    protected static function sumRecursive($data, $axis = null)
+    protected static function reduceRecursive($data, $callback, $axis = null)
     {
         if (is_array($data)) {
             if (!is_null($axis) && $axis > 0) {
                 foreach ($data as $key => $value) {
-                    $data[$key] = self::sumRecursive($value, $axis -1);
+                    $data[$key] = self::reduceRecursive($value, $callback, $axis -1);
                 }
 
                 return $data;
             }
             $sum = array_shift($data);
             foreach ($data as $value) {
-                $sum = Map::mapArray($sum, $value, function ($data1, $data2) {
-                    return $data1 + $data2;
-                });
+                $sum = Map::mapArray($sum, $value, $callback);
             }
 
             if ($axis === 0) {
                 return $sum;
             }
 
-            return self::sumRecursive($sum);
+            return self::reduceRecursive($sum, $callback);
         }
 
         return $data;

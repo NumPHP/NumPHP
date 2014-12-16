@@ -7,7 +7,7 @@
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace NumPHPTest\Core\NumArray;
+namespace NumPHPTest\Core\NumArray\Map;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;

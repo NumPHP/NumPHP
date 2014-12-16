@@ -15,6 +15,7 @@ use NumPHP\Core\NumArray\Dot;
 use NumPHP\Core\NumArray\Get;
 use NumPHP\Core\NumArray\Helper;
 use NumPHP\Core\NumArray\Map;
+use NumPHP\Core\NumArray\Reduce;
 use NumPHP\Core\NumArray\Set;
 use NumPHP\Core\NumArray\Shape;
 use NumPHP\Core\NumArray\String;
@@ -170,10 +171,43 @@ class NumArray
      */
     public function sum($axis = null)
     {
-        if ($axis && $axis >= $this->getNDim()) {
-            throw new InvalidArgumentException('Axis '.$axis.' out of bounds');
-        }
-        return new NumArray(Sum::sumArray($this->data, $axis));
+        return Reduce::reduceArray(
+            $this,
+            function ($data1, $data2) {
+                return $data1 + $data2;
+            },
+            $axis
+        );
+    }
+
+    /**
+     * @param int $axis
+     * @return NumArray
+     */
+    public function min($axis = null)
+    {
+        return Reduce::reduceArray(
+            $this,
+            function ($data1, $data2) {
+                return min($data1, $data2);
+            },
+            $axis
+        );
+    }
+
+    /**
+     * @param int $axis
+     * @return NumArray
+     */
+    public function max($axis = null)
+    {
+        return Reduce::reduceArray(
+            $this,
+            function ($data1, $data2) {
+                return max($data1, $data2);
+            },
+            $axis
+        );
     }
 
     /**
