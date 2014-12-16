@@ -91,6 +91,15 @@ abstract class NumPHP
     }
 
     /**
+     * @param $mAxis
+     * @return NumArray
+     */
+    public static function identity($mAxis)
+    {
+        return self::eye($mAxis, $mAxis);
+    }
+
+    /**
      * @param $low
      * @param $high
      * @param int $step

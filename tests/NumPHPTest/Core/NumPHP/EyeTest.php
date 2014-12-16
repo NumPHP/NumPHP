@@ -68,4 +68,12 @@ class EyeTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($expectedNumArray, $numArray);
     }
+
+    public function testIdentity()
+    {
+        $numArray = NumPHP::identity(3);
+
+        $expectedNumArray = NumPHP::eye(3, 3);
+        $this->assertEquals($expectedNumArray, $numArray);
+    }
 }
