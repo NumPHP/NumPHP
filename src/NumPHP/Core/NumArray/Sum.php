@@ -42,7 +42,9 @@ class Sum
             }
             $sum = array_shift($data);
             foreach ($data as $value) {
-                $sum = Add::addArray($sum, $value);
+                $sum = Map::mapArray($sum, $value, function ($data1, $data2) {
+                    return $data1 + $data2;
+                });
             }
 
             if ($axis === 0) {

@@ -12,34 +12,31 @@ namespace NumPHP\Core\NumArray;
 use NumPHP\Core\Exception\InvalidArgumentException;
 
 /**
- * Class Add
+ * Class Map
   * @package NumPHP\Core\NumArray
   */
-class Add
+class Map
 {
-    const OPERATION_PLUS = 'plus';
-    const OPERATION_MINUS = 'minus';
-
     /**
      * @param $addend1
      * @param $addend2
-     * @param string $operation
+     * @param callback $callback
      * @return array|mixed
      */
-    public static function addArray($addend1, $addend2, $operation = self::OPERATION_PLUS)
+    public static function mapArray($addend1, $addend2, $callback)
     {
-        return self::addRecursive($addend1, $addend2, $operation);
+        return self::mapRecursive($addend1, $addend2, $callback);
     }
 
     /**
      * @param $data1
      * @param $data2
-     * @param $operation
+     * @param callback $callback
      * @return array|mixed
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    protected static function addRecursive($data1, $data2, $operation)
+    protected static function mapRecursive($data1, $data2, $callback)
     {
         if (is_array($data1)) {
             if (is_array($data2)) {
@@ -47,28 +44,22 @@ class Add
                     throw new InvalidArgumentException('Shape '.count($data1).' is different from '.count($data2));
                 }
                 for ($i = 0; $i < count($data1); $i++) {
-                    $data1[$i] = self::addRecursive($data1[$i], $data2[$i], $operation);
+                    $data1[$i] = self::mapRecursive($data1[$i], $data2[$i], $callback);
                 }
             } else {
                 for ($i = 0; $i < count($data1); $i++) {
-                    $data1[$i] = self::addRecursive($data1[$i], $data2, $operation);
+                    $data1[$i] = self::mapRecursive($data1[$i], $data2, $callback);
                 }
             }
         } else {
             if (is_array($data2)) {
                 for ($i = 0; $i < count($data2); $i++) {
-                    $data2[$i] = self::addRecursive($data1, $data2[$i], $operation);
+                    $data2[$i] = self::mapRecursive($data1, $data2[$i], $callback);
                 }
 
                 return $data2;
             }
-            if ($operation === self::OPERATION_PLUS) {
-                $data1 += $data2;
-            } elseif ($operation === self::OPERATION_MINUS) {
-                $data1 -= $data2;
-            } else {
-                throw new InvalidArgumentException('Operation '.$operation.' is not allowed');
-            }
+            $data1 = $callback($data1, $data2);
         }
 
         return $data1;

@@ -11,10 +11,10 @@ namespace NumPHP\Core;
 
 use NumPHP\Core\Exception\BadMethodCallException;
 use NumPHP\Core\Exception\InvalidArgumentException;
-use NumPHP\Core\NumArray\Add;
 use NumPHP\Core\NumArray\Dot;
 use NumPHP\Core\NumArray\Get;
 use NumPHP\Core\NumArray\Helper;
+use NumPHP\Core\NumArray\Map;
 use NumPHP\Core\NumArray\Set;
 use NumPHP\Core\NumArray\Shape;
 use NumPHP\Core\NumArray\String;
@@ -135,7 +135,9 @@ class NumArray
         if ($addend instanceof NumArray) {
             $addend = $addend->getData();
         }
-        $this->data = Add::addArray($this->data, $addend);
+        $this->data = Map::mapArray($this->data, $addend, function ($data1, $data2) {
+            return $data1 + $data2;
+        });
         $this->shape = Shape::getShape($this->data);
 
         return $this;
@@ -152,7 +154,9 @@ class NumArray
         if ($subtrahend instanceof NumArray) {
             $subtrahend = $subtrahend->getData();
         }
-        $this->data = Add::addArray($this->data, $subtrahend, Add::OPERATION_MINUS);
+        $this->data = Map::mapArray($this->data, $subtrahend, function ($data1, $data2) {
+            return $data1 - $data2;
+        });
         $this->shape = Shape::getShape($this->data);
 
         return $this;

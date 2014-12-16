@@ -101,15 +101,6 @@ class AddTest extends \PHPUnit_Framework_TestCase
         $numArray1->add($numArray2);
     }
 
-    /**
-     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Operation numphp is not allowed
-     */
-    public function testAddUnknownOperation()
-    {
-        NumArray\Add::addArray([1], [1], 'numphp');
-    }
-
     public function testMinusSingle()
     {
         $numArray1 = new NumArray(-6);
