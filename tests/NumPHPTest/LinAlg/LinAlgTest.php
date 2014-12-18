@@ -32,6 +32,18 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(27.0, LinAlg::det($numArray));
     }
 
+    public function testDet4x4()
+    {
+        $array = [
+            [1,  2,  3,  4],
+            [5,  6,  7,  8],
+            [9, 10, 11, 12],
+            [5,  6,  7,  8],
+        ];
+
+        $this->assertSame(0.0, LinAlg::det($array));
+    }
+
     /**
      * @expectedException \NumPHP\LinAlg\Exception\InvalidArgumentException
      * @expectedExceptionMessage NumArray with shape (2, 3) given, NumArray has to be square
