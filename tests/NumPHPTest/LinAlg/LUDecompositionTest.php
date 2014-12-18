@@ -111,11 +111,25 @@ class LUDecompositionTest extends \PHPUnit_Framework_TestCase
         );
         $expectedL = new NumArray(
             [
-                [1, 0, 0],
-                [1/4, 1, 0],
-                [5/8, -1, 1]
+                [1,        0,     0],
+                [1/4,      1,     0],
+                [5/8, -11/26,     1],
+                [1/2,  -4/13, 47/76],
             ]
         );
+        $expectedU = new NumArray(
+            [
+                [8,    6,     3],
+                [0, 13/2,  17/4],
+                [0,    0, 38/13],
+            ]
+        );
+        $expectedResult = [
+            'P' => $expectedP,
+            'L' => $expectedL,
+            'U' => $expectedU,
+        ];
+        $this->assertEquals($expectedResult, LUDecomposition::lud($array));
     }
 
     /**

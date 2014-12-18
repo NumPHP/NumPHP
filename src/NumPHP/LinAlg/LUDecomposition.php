@@ -42,7 +42,6 @@ class LUDecomposition
         $size = min($mAxis, $nAxis);
         $pArray = range(0, $mAxis-1);
         $lMatrix = NumPHP::zeros($mAxis, $size);
-        $uMatrix = NumPHP::zeros($size, $nAxis);
 
         for ($i = 0; $i < $size; $i++) {
             // pivoting
@@ -59,9 +58,6 @@ class LUDecomposition
                 $temp = $numArray->get($i);
                 $numArray->set($numArray->get($maxIndex), $i);
                 $numArray->set($temp, $maxIndex);
-                $temp = $uMatrix->get($i);
-                $uMatrix->set($uMatrix->get($maxIndex), $i);
-                $uMatrix->set($temp, $maxIndex);
                 $temp = $lMatrix->get($i);
                 $lMatrix->set($lMatrix->get($maxIndex), $i);
                 $lMatrix->set($temp, $maxIndex);
@@ -69,18 +65,13 @@ class LUDecomposition
                 $pArray[$i] = $pArray[$maxIndex];
                 $pArray[$maxIndex] = $temp;
             }
-            if ($i === 0) {
-                $uMatrix->set($numArray->get(0), 0);
-            }
             // elimination
             for ($j = $i+1; $j < $mAxis; $j++) {
                 $fac = $numArray->get($j, $i)->getData()/$numArray->get($i, $i)->getData();
                 $lMatrix->set($fac, $j, $i);
-                $uMatrix->set(0, $j, $i);
                 for ($k = $i+1; $k < $nAxis; $k++) {
                     $value = $numArray->get($j, $k)->minus($numArray->get($i, $k)->dot($fac));
                     $numArray->set($value, $j, $k);
-                    $uMatrix->set($value, $j, $k);
                 }
             }
         }
@@ -88,7 +79,7 @@ class LUDecomposition
         return [
             'P' => self::buildPivotMatrix($pArray),
             'L' => $lMatrix->add(NumPHP::eye($mAxis, $size)),
-            'U' => $uMatrix,
+            'U' => self::buildUMatrix($numArray),
         ];
     }
 
@@ -105,5 +96,26 @@ class LUDecomposition
         }
 
         return $pMatrix;
+    }
+
+    /**
+     * @param NumArray $numArray
+     * @return NumArray
+     */
+    protected static function buildUMatrix(NumArray $numArray)
+    {
+        $shape = $numArray->getShape();
+        $nAxis = $shape[1];
+        $size = min($shape[0], $nAxis);
+
+        $uMatrix = NumPHP::zeros($size, $nAxis);
+        for ($i = 0; $i < $size; $i++) {
+            $uMatrix->set($numArray->get($i), $i);
+            for ($j = 0; $j < $i; $j++) {
+                $uMatrix->set(0, $i, $j);
+            }
+        }
+
+        return $uMatrix;
     }
 }
