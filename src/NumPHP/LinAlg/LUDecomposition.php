@@ -34,46 +34,60 @@ class LUDecomposition
                 'NumArray with dimension '.$array->getNDim().' given, NumArray should have 2 dimensions'
             );
         }
+        $numArray = clone $array;
 
-        $shape = $array->getShape();
-        $size = min($shape[0], $shape[1]);
-        $pArray = range(0, $size-1);
-        $lMatrix = NumPHP::identity($shape[0]);
-        $uMatrix = clone $array;
+        $shape = $numArray->getShape();
+        $mAxis = $shape[0];
+        $nAxis = $shape[1];
+        $size = min($mAxis, $nAxis);
+        $pArray = range(0, $mAxis-1);
+        $lMatrix = NumPHP::zeros($mAxis, $size);
+        $uMatrix = NumPHP::zeros($size, $nAxis);
 
         for ($i = 0; $i < $size; $i++) {
             // pivoting
-            $max = abs($uMatrix->get($i, $i)->getData());
+            $max = abs($numArray->get($i, $i)->getData());
             $maxIndex = $i;
-            for ($j = $i+1; $j < $shape[0]; $j++) {
-                $abs = abs($uMatrix->get($j, $i)->getData());
+            for ($j = $i+1; $j < $mAxis; $j++) {
+                $abs = abs($numArray->get($j, $i)->getData());
                 if ($abs > $max) {
                     $max = $abs;
                     $maxIndex = $j;
                 }
             }
             if ($maxIndex !== $i) {
+                $temp = $numArray->get($i);
+                $numArray->set($numArray->get($maxIndex), $i);
+                $numArray->set($temp, $maxIndex);
                 $temp = $uMatrix->get($i);
                 $uMatrix->set($uMatrix->get($maxIndex), $i);
                 $uMatrix->set($temp, $maxIndex);
+                $temp = $lMatrix->get($i);
+                $lMatrix->set($lMatrix->get($maxIndex), $i);
+                $lMatrix->set($temp, $maxIndex);
                 $temp = $pArray[$i];
                 $pArray[$i] = $pArray[$maxIndex];
                 $pArray[$maxIndex] = $temp;
             }
+            if ($i === 0) {
+                $uMatrix->set($numArray->get(0), 0);
+            }
             // elimination
-            for ($j = $i+1; $j < $shape[0]; $j++) {
-                $fac = $uMatrix->get($j, $i)->getData()/$uMatrix->get($i, $i)->getData();
+            for ($j = $i+1; $j < $mAxis; $j++) {
+                $fac = $numArray->get($j, $i)->getData()/$numArray->get($i, $i)->getData();
                 $lMatrix->set($fac, $j, $i);
                 $uMatrix->set(0, $j, $i);
-                for ($k = $i+1; $k < $shape[1]; $k++) {
-                    $uMatrix->set($uMatrix->get($j, $k)->minus($uMatrix->get($i, $k)->dot($fac)), $j, $k);
+                for ($k = $i+1; $k < $nAxis; $k++) {
+                    $value = $numArray->get($j, $k)->minus($numArray->get($i, $k)->dot($fac));
+                    $numArray->set($value, $j, $k);
+                    $uMatrix->set($value, $j, $k);
                 }
             }
         }
 
         return [
             'P' => self::buildPivotMatrix($pArray),
-            'L' => $lMatrix,
+            'L' => $lMatrix->add(NumPHP::eye($mAxis, $size)),
             'U' => $uMatrix,
         ];
     }

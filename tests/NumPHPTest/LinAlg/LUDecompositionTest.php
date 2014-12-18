@@ -28,6 +28,7 @@ class LUDecompositionTest extends \PHPUnit_Framework_TestCase
                 [4, 2, 1],
             ]
         );
+        $clone = clone $numArray;
 
         $expectedP = new NumArray(
             [
@@ -39,8 +40,8 @@ class LUDecompositionTest extends \PHPUnit_Framework_TestCase
         $expectedL = new NumArray(
             [
                 [  1,    0, 0],
-                [1/2,    1, 0],
-                [1/4, 4/11, 1],
+                [1/4,    1, 0],
+                [1/2, 4/11, 1],
             ]
         );
         $expectedU = new NumArray(
@@ -56,6 +57,7 @@ class LUDecompositionTest extends \PHPUnit_Framework_TestCase
             'U' => $expectedU,
         ];
         $this->assertEquals($expectedResult, LUDecomposition::lud($numArray));
+        $this->assertEquals($clone, $numArray);
     }
 
     public function testLUDecomposition2x4()
@@ -66,6 +68,7 @@ class LUDecompositionTest extends \PHPUnit_Framework_TestCase
                 [2, 3, 5, 1],
             ]
         );
+        $clone = clone $numArray;
 
         $expectedP = NumPHP::identity(2);
         $expectedL = new NumArray(
@@ -86,6 +89,33 @@ class LUDecompositionTest extends \PHPUnit_Framework_TestCase
             'U' => $expectedU,
         ];
         $this->assertEquals($expectedResult, LUDecomposition::lud($numArray));
+        $this->assertEquals($clone, $numArray);
+    }
+
+    public function testLUDecomposition4x3()
+    {
+        $array = [
+            [5, 1, 3],
+            [4, 1, 2],
+            [8, 6, 3],
+            [2, 8, 5],
+        ];
+
+        $expectedP = new NumArray(
+            [
+                [0, 0, 1, 0],
+                [0, 0, 0, 1],
+                [1, 0, 0, 0],
+                [0, 1, 0, 0],
+            ]
+        );
+        $expectedL = new NumArray(
+            [
+                [1, 0, 0],
+                [1/4, 1, 0],
+                [5/8, -1, 1]
+            ]
+        );
     }
 
     /**
