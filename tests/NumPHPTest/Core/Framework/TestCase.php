@@ -8,6 +8,7 @@
  */
 
 namespace NumPHPTest\Core\Framework;
+
 use NumPHP\Core\NumArray;
 use NumPHPTest\Core\Framework\Constraint\NumArrayEqual;
 

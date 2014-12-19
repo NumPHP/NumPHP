@@ -10,8 +10,6 @@
 namespace NumPHPTest\Core\Framework\Constraint;
 
 use NumPHP\Core\NumArray;
-use SebastianBergmann\Comparator\ComparisonFailure;
-use SebastianBergmann\Comparator\ObjectComparator;
 
 /**
  * Class NumArrayEqual
