@@ -11,6 +11,7 @@ namespace NumPHPTest\Core\NumArray\Reduce;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class SumTest
@@ -18,14 +19,14 @@ use NumPHP\Core\NumPHP;
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
   */
-class SumTest extends \PHPUnit_Framework_TestCase
+class SumTest extends TestCase
 {
     public function testSumSingle()
     {
         $numArray = new NumArray(6);
 
         $expectedNumArray = new NumArray(6);
-        $this->assertEquals($expectedNumArray, $numArray->sum());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->sum());
     }
 
     public function testSumVector()
@@ -33,7 +34,7 @@ class SumTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 8);
 
         $expectedNumArray = new NumArray(36);
-        $this->assertEquals($expectedNumArray, $numArray->sum());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->sum());
     }
 
     public function testSumMatrix()
@@ -41,7 +42,7 @@ class SumTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 12)->reshape(3, 4);
 
         $expectedNumArray = new NumArray(78);
-        $this->assertEquals($expectedNumArray, $numArray->sum());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->sum());
     }
 
     public function testSumSingleAxis0()
@@ -49,7 +50,7 @@ class SumTest extends \PHPUnit_Framework_TestCase
         $numArray = new NumArray(6);
 
         $expectedNumArray = new NumArray(6);
-        $this->assertEquals($expectedNumArray, $numArray->sum(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->sum(0));
     }
 
     public function testSumVectorAxis0()
@@ -57,7 +58,7 @@ class SumTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 8);
 
         $expectedNumArray = new NumArray(36);
-        $this->assertEquals($expectedNumArray, $numArray->sum(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->sum(0));
     }
 
     public function testSumMatrixAxis0()
@@ -65,7 +66,7 @@ class SumTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 12)->reshape(3, 4);
 
         $expectedNumArray = NumPHP::arange(15, 24, 3);
-        $this->assertEquals($expectedNumArray, $numArray->sum(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->sum(0));
     }
 
     /**
@@ -95,7 +96,7 @@ class SumTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 12)->reshape(3, 4);
 
         $expectedNumArray = NumPHP::arange(10, 42, 16);
-        $this->assertEquals($expectedNumArray, $numArray->sum(1));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->sum(1));
     }
 
     /**
@@ -114,6 +115,6 @@ class SumTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 24)->reshape(2, 3, 4);
 
         $expectedNumArray = NumPHP::arange(10, 90, 16)->reshape(2, 3);
-        $this->assertEquals($expectedNumArray, $numArray->sum(2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->sum(2));
     }
 }

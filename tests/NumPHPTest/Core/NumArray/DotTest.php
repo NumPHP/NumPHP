@@ -11,6 +11,7 @@ namespace NumPHPTest\Core\NumArray;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class DotTest
@@ -18,14 +19,14 @@ use NumPHP\Core\NumPHP;
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
   */
-class DotTest extends \PHPUnit_Framework_TestCase
+class DotTest extends TestCase
 {
     public function testDotSingleScalar()
     {
         $numArray = new NumArray(-7);
 
         $expectedNumArray = new NumArray(-21);
-        $this->assertEquals($expectedNumArray, $numArray->dot(3));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->dot(3));
     }
 
     public function testDotSingleSingle()
@@ -34,7 +35,7 @@ class DotTest extends \PHPUnit_Framework_TestCase
         $numArray2 = new NumArray(-4);
 
         $expectedNumArray = new NumArray(-32);
-        $this->assertEquals($expectedNumArray, $numArray1->dot($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->dot($numArray2));
     }
 
     public function testDotVectorScalar()
@@ -42,7 +43,7 @@ class DotTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 5);
 
         $expectedNumArray = NumPHP::arange(4, 20, 4);
-        $this->assertEquals($expectedNumArray, $numArray->dot(4));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->dot(4));
     }
 
     public function testDotScalarVector()
@@ -53,7 +54,7 @@ class DotTest extends \PHPUnit_Framework_TestCase
         $expectedNuMArray = new NumArray(
             [-2, -4, -6, -8, -10]
         );
-        $this->assertEquals($expectedNuMArray, $numArray1->dot($numArray2));
+        $this->assertNumArrayEquals($expectedNuMArray, $numArray1->dot($numArray2));
     }
 
     public function testDotVectorVector()
@@ -62,7 +63,7 @@ class DotTest extends \PHPUnit_Framework_TestCase
         $numArray2 = NumPHP::arange(4, 12, 2);
 
         $expectedNumArray = new NumArray(140);
-        $this->assertEquals($expectedNumArray, $numArray1->dot($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->dot($numArray2));
     }
 
     /**
@@ -94,7 +95,7 @@ class DotTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 12)->reshape(3, 4);
 
         $expectedNumArray = NumPHP::arange(5, 60, 5)->reshape(3, 4);
-        $this->assertEquals($expectedNumArray, $numArray->dot(5));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->dot(5));
     }
 
     public function testDotVectorMatrix()
@@ -105,7 +106,7 @@ class DotTest extends \PHPUnit_Framework_TestCase
         $expectedNumArray = new NumArray(
             [20]
         );
-        $this->assertEquals($expectedNumArray, $numArray1->dot($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->dot($numArray2));
     }
 
     /**
@@ -127,7 +128,7 @@ class DotTest extends \PHPUnit_Framework_TestCase
 
         $expectedNumArray = NumPHP::arange(30, 110, 40);
 
-        $this->assertEquals($expectedNumArray, $numArray1->dot($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->dot($numArray2));
     }
 
     /**
@@ -148,7 +149,7 @@ class DotTest extends \PHPUnit_Framework_TestCase
         $numArray2 = NumPHP::arange(1, 4);
 
         $expectedNumArray = NumPHP::arange(30, 230, 40)->reshape(2, 3);
-        $this->assertEquals($expectedNumArray, $numArray1->dot($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->dot($numArray2));
     }
 
     public function testDotMatrixMatrix()
@@ -163,7 +164,7 @@ class DotTest extends \PHPUnit_Framework_TestCase
                 [618, 660, 702, 744, 786, 828],
             ]
         );
-        $this->assertEquals($expectedNumArray, $numArray1->dot($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->dot($numArray2));
     }
 
     /**

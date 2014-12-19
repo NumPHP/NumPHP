@@ -11,19 +11,20 @@ namespace NumPHPTest\Core\Reduce;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class MaxTest
   * @package NumPHPTest\Core\Reduce
   */
-class MaxTest extends \PHPUnit_Framework_TestCase
+class MaxTest extends TestCase
 {
     public function testMaxSingle()
     {
         $numArray = new NumArray(7);
 
         $expectedNumArray = new NumArray(7);
-        $this->assertEquals($expectedNumArray, $numArray->max());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->max());
     }
 
     public function testMaxVector()
@@ -33,7 +34,7 @@ class MaxTest extends \PHPUnit_Framework_TestCase
         );
 
         $expectedNumArray = new NumArray(78);
-        $this->assertEquals($expectedNumArray, $numArray->max());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->max());
     }
 
     public function testMaxMatrix()
@@ -46,7 +47,7 @@ class MaxTest extends \PHPUnit_Framework_TestCase
         );
 
         $expectedNumArray = new NumArray(453);
-        $this->assertEquals($expectedNumArray, $numArray->max());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->max());
     }
 
     public function testMaxSingleAxis0()
@@ -54,7 +55,7 @@ class MaxTest extends \PHPUnit_Framework_TestCase
         $numArray = new NumArray(-6);
 
         $expectedNumArray = new NumArray(-6);
-        $this->assertEquals($expectedNumArray, $numArray->max(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->max(0));
     }
 
     public function testMaxVectorAxis0()
@@ -64,7 +65,7 @@ class MaxTest extends \PHPUnit_Framework_TestCase
         );
 
         $expectedNumArray = new NumArray(34);
-        $this->assertEquals($expectedNumArray, $numArray->max(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->max(0));
     }
 
     public function testMaxMatrixAxis0()
@@ -79,7 +80,7 @@ class MaxTest extends \PHPUnit_Framework_TestCase
         $expectedNumArray = new NumArray(
             [354, 453, 67]
         );
-        $this->assertEquals($expectedNumArray, $numArray->max(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->max(0));
     }
 
     /**
@@ -116,7 +117,7 @@ class MaxTest extends \PHPUnit_Framework_TestCase
         $expectedNumArray = new NumArray(
             [354, 453]
         );
-        $this->assertEquals($expectedNumArray, $numArray->max(1));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->max(1));
     }
 
     /**

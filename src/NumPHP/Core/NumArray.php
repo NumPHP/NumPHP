@@ -10,7 +10,7 @@
 namespace NumPHP\Core;
 
 use NumPHP\Core\Exception\BadMethodCallException;
-use NumPHP\Core\Exception\InvalidArgumentException;
+use NumPHP\Core\NumArray\Cache;
 use NumPHP\Core\NumArray\Dot;
 use NumPHP\Core\NumArray\Filter;
 use NumPHP\Core\NumArray\Get;
@@ -29,7 +29,7 @@ use NumPHP\Core\NumArray\Transpose;
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
  */
-class NumArray
+class NumArray extends Cache
 {
     /**
      * @var array
@@ -106,6 +106,7 @@ class NumArray
             $subArray = $subArray->getData();
         }
         $this->data = Set::setSubArray($this->data, $subArray, $args);
+        $this->flushCache();
 
         return $this;
     }
@@ -143,6 +144,7 @@ class NumArray
             return $data1 + $data2;
         });
         $this->shape = Shape::getShape($this->data);
+        $this->flushCache();
 
         return $this;
     }
@@ -162,6 +164,7 @@ class NumArray
             return $data1 - $data2;
         });
         $this->shape = Shape::getShape($this->data);
+        $this->flushCache();
 
         return $this;
     }
@@ -241,6 +244,7 @@ class NumArray
                 return abs($data);
             }
         );
+        $this->flushCache();
 
         return $this;
     }
@@ -259,6 +263,7 @@ class NumArray
         $result = Dot::dotArray($this->data, $this->shape, $factor->getData(), $factor->getShape());
         $this->data = $result['data'];
         $this->shape = $result['shape'];
+        $this->flushCache();
 
         return $this;
     }
@@ -270,7 +275,13 @@ class NumArray
      */
     public function getTranspose()
     {
-        return new NumArray(Transpose::getTranspose($this->data, $this->getShape()));
+        if ($this->inCache(Transpose::CACHE_KEY_TRANSPOSE)) {
+            return $this->getCache(Transpose::CACHE_KEY_TRANSPOSE);
+        }
+        $transpose = new NumArray(Transpose::getTranspose($this->data, $this->getShape()));
+        $this->setCache(Transpose::CACHE_KEY_TRANSPOSE, $transpose);
+
+        return $transpose;
     }
 
     /**

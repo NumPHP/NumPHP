@@ -12,12 +12,13 @@ namespace NumPHPTest\LinAlg;
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
 use NumPHP\LinAlg\LUDecomposition;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class LUDecompositionTest
   * @package NumPHPTest\LinAlg
   */
-class LUDecompositionTest extends \PHPUnit_Framework_TestCase
+class LUDecompositionTest extends TestCase
 {
     public function testLUDecompositionSquare()
     {
@@ -51,12 +52,11 @@ class LUDecompositionTest extends \PHPUnit_Framework_TestCase
                 [0,    0, 27/22],
             ]
         );
-        $expectedResult = [
-            'P' => $expectedP,
-            'L' => $expectedL,
-            'U' => $expectedU,
-        ];
-        $this->assertEquals($expectedResult, LUDecomposition::lud($numArray));
+        $result = LUDecomposition::lud($numArray);
+        $this->assertCount(3, $result);
+        $this->assertNumArrayEquals($expectedP, $result['P'], 'Matrix P is not equal');
+        $this->assertNumArrayEquals($expectedL, $result['L'], 'Matrix L is not equal');
+        $this->assertNumArrayEquals($expectedU, $result['U'], 'Matrix U is not equal');
         $this->assertEquals($clone, $numArray);
     }
 
@@ -83,12 +83,11 @@ class LUDecompositionTest extends \PHPUnit_Framework_TestCase
                 [0, 2, 9/2, -3],
             ]
         );
-        $expectedResult = [
-            'P' => $expectedP,
-            'L' => $expectedL,
-            'U' => $expectedU,
-        ];
-        $this->assertEquals($expectedResult, LUDecomposition::lud($numArray));
+        $result = LUDecomposition::lud($numArray);
+        $this->assertCount(3, $result);
+        $this->assertNumArrayEquals($expectedP, $result['P'], 'Matrix P is not equal');
+        $this->assertNumArrayEquals($expectedL, $result['L'], 'Matrix L is not equal');
+        $this->assertNumArrayEquals($expectedU, $result['U'], 'Matrix U is not equal');
         $this->assertEquals($clone, $numArray);
     }
 
@@ -124,12 +123,11 @@ class LUDecompositionTest extends \PHPUnit_Framework_TestCase
                 [0,    0, 38/13],
             ]
         );
-        $expectedResult = [
-            'P' => $expectedP,
-            'L' => $expectedL,
-            'U' => $expectedU,
-        ];
-        $this->assertEquals($expectedResult, LUDecomposition::lud($array));
+        $result = LUDecomposition::lud($array);
+        $this->assertCount(3, $result);
+        $this->assertNumArrayEquals($expectedP, $result['P'], 'Matrix P is not equal');
+        $this->assertNumArrayEquals($expectedL, $result['L'], 'Matrix L is not equal');
+        $this->assertNumArrayEquals($expectedU, $result['U'], 'Matrix U is not equal');
     }
 
     /**

@@ -11,19 +11,20 @@ namespace NumPHPTest\Core\NumArray\Filter;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class Abs
   * @package NumPHPTest\Core\NumArray\Filter
   */
-class AbsTest extends \PHPUnit_Framework_TestCase
+class AbsTest extends TestCase
 {
     public function testAbsSingle()
     {
         $numArray = new NumArray(-1);
 
         $expectedNumArray = new NumArray(1);
-        $this->assertEquals($expectedNumArray, $numArray->abs());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->abs());
     }
 
     public function testAbsVector()
@@ -35,7 +36,7 @@ class AbsTest extends \PHPUnit_Framework_TestCase
         $expectedNumArray = new NumArray(
             [4, 6, 89]
         );
-        $this->assertEquals($expectedNumArray, $numArray->abs());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->abs());
     }
 
     public function testAbsMatrix()
@@ -48,6 +49,6 @@ class AbsTest extends \PHPUnit_Framework_TestCase
         );
 
         $expectedNumArray = NumPHP::arange(1, 6)->reshape(2, 3);
-        $this->assertEquals($expectedNumArray, $numArray->abs());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->abs());
     }
 }

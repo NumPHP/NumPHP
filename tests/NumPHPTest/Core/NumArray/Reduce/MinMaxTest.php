@@ -11,19 +11,20 @@ namespace NumPHPTest\Core\NumArray\Reduce;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class MinMaxTest
   * @package NumPHPTest\Core\NumArray\Reduce
   */
-class MinTest extends \PHPUnit_Framework_TestCase
+class MinTest extends TestCase
 {
     public function testMinSingle()
     {
         $numArray = new NumArray(6);
 
         $expectedNumArray = new NumArray(6);
-        $this->assertEquals($expectedNumArray, $numArray->min());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->min());
     }
 
     public function testMinVector()
@@ -33,7 +34,7 @@ class MinTest extends \PHPUnit_Framework_TestCase
         );
 
         $expectedNumArray = new NumArray(-34);
-        $this->assertEquals($expectedNumArray, $numArray->min());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->min());
     }
 
     public function testMinMatrix()
@@ -46,7 +47,7 @@ class MinTest extends \PHPUnit_Framework_TestCase
         );
 
         $expectedNumArray = new NumArray(-1);
-        $this->assertEquals($expectedNumArray, $numArray->min());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->min());
     }
 
     public function testMinSingleAxis0()
@@ -54,7 +55,7 @@ class MinTest extends \PHPUnit_Framework_TestCase
         $numArray = new NumArray(99);
 
         $expectedNumArray = new NumArray(99);
-        $this->assertEquals($expectedNumArray, $numArray->min(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->min(0));
     }
 
     public function testMinVectorAxis0()
@@ -62,7 +63,7 @@ class MinTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 5);
 
         $expectedNumArray = new NumArray(1);
-        $this->assertEquals($expectedNumArray, $numArray->min(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->min(0));
     }
 
     public function testMinMatrixAxis0()
@@ -78,7 +79,7 @@ class MinTest extends \PHPUnit_Framework_TestCase
         $expectedNumArray = new NumArray(
             [34, -78, -12]
         );
-        $this->assertEquals($expectedNumArray, $numArray->min(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->min(0));
     }
 
     /**
@@ -116,7 +117,7 @@ class MinTest extends \PHPUnit_Framework_TestCase
         $expectedNumArray = new NumArray(
             [-12, -78, -6]
         );
-        $this->assertEquals($expectedNumArray, $numArray->min(1));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->min(1));
     }
 
     /**

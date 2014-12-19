@@ -11,16 +11,17 @@ namespace NumPHPTest\Core\NumPHP;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class GenerateTest
  * @package NumPHPTest\Core\NumPHP
  */
-class GenerateTest extends \PHPUnit_Framework_TestCase
+class GenerateTest extends TestCase
 {
     public function testOnes()
     {
-        $this->assertEquals(new NumArray(1), NumPHP::ones());
+        $this->assertNumArrayEquals(new NumArray(1), NumPHP::ones());
     }
 
     public function testRand3()
@@ -44,7 +45,7 @@ class GenerateTest extends \PHPUnit_Framework_TestCase
                 [1, 1],
             ]
         );
-        $this->assertEquals($expectedNumArray, NumPHP::ones(3, 2));
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::ones(3, 2));
     }
 
     public function testZeros2x3x5()
@@ -63,7 +64,7 @@ class GenerateTest extends \PHPUnit_Framework_TestCase
                 ],
             ]
         );
-        $this->assertEquals($expectedNumArray, NumPHP::zeros(2, 3, 5));
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::zeros(2, 3, 5));
     }
 
     public function testZerosLike()
@@ -75,7 +76,7 @@ class GenerateTest extends \PHPUnit_Framework_TestCase
             ]
         );
         $expectedNumArray = NumPHP::zeros(2, 3);
-        $this->assertEquals($expectedNumArray, NumPHP::zerosLike($numArray));
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::zerosLike($numArray));
     }
 
     public function testOnesLike()
@@ -88,7 +89,7 @@ class GenerateTest extends \PHPUnit_Framework_TestCase
             ]
         );
         $expectedNumArray = NumPHP::ones(3, 2);
-        $this->assertEquals($expectedNumArray, NumPHP::onesLike($numArray));
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::onesLike($numArray));
     }
 
     public function testRandLike()

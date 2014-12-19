@@ -11,18 +11,19 @@ namespace NumPHPTest\Core;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class NumPHPTest
  */
-class NumPHPTest extends \PHPUnit_Framework_TestCase
+class NumPHPTest extends TestCase
 {
     public function testArangeIntWithoutStep()
     {
         $expectedNumArray = new NumArray(
             [3, 4, 5, 6, 7]
         );
-        $this->assertEquals($expectedNumArray, NumPHP::arange(3, 7));
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::arange(3, 7));
     }
 
     public function testArangeFloatWithoutStep()
@@ -30,12 +31,12 @@ class NumPHPTest extends \PHPUnit_Framework_TestCase
         $expectedNumArray = new NumArray(
             [3.45, 4.45, 5.45, 6.45]
         );
-        $this->assertEquals($expectedNumArray, NumPHP::arange(3.45, 7));
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::arange(3.45, 7));
 
         $expectedNumArray = new NumArray(
             [3.45, 4.45, 5.45, 6.45, 7.45]
         );
-        $this->assertEquals($expectedNumArray, NumPHP::arange(3.45, 7.45));
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::arange(3.45, 7.45));
     }
 
     public function testArangeIntWithStep()
@@ -43,7 +44,7 @@ class NumPHPTest extends \PHPUnit_Framework_TestCase
         $expectedNumArray = new NumArray(
             [3, 5, 7]
         );
-        $this->assertEquals($expectedNumArray, NumPHP::arange(3, 7, 2));
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::arange(3, 7, 2));
     }
 
     public function testArangeFloatWithStep()
@@ -51,7 +52,7 @@ class NumPHPTest extends \PHPUnit_Framework_TestCase
         $expectedNumArray = new NumArray(
             [3.12, 4.66, 6.2]
         );
-        $this->assertEquals($expectedNumArray, NumPHP::arange(3.12, 7, 1.54));
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::arange(3.12, 7, 1.54));
     }
 
     /**
@@ -65,12 +66,12 @@ class NumPHPTest extends \PHPUnit_Framework_TestCase
 
     public function testLinspace0()
     {
-        $this->assertEquals(new NumArray([]), NumPHP::linspace(1.5, 4.5, 0));
+        $this->assertNumArrayEquals(new NumArray([]), NumPHP::linspace(1.5, 4.5, 0));
     }
 
     public function testLinspace1()
     {
-        $this->assertEquals(new NumArray([1.5]), NumPHP::linspace(1.5, 4.5, 1));
+        $this->assertNumArrayEquals(new NumArray([1.5]), NumPHP::linspace(1.5, 4.5, 1));
     }
 
     public function testLinspace()
@@ -78,7 +79,7 @@ class NumPHPTest extends \PHPUnit_Framework_TestCase
         $expectedNumArray = new NumArray(
             [1.5, 2, 2.5, 3, 3.5, 4, 4.5]
         );
-        $this->assertEquals($expectedNumArray, NumPHP::linspace(1.5, 4.5, 7));
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::linspace(1.5, 4.5, 7));
     }
 
     /**

@@ -15,6 +15,8 @@ namespace NumPHP\Core\NumArray;
  */
 class Transpose
 {
+    const CACHE_KEY_TRANSPOSE = 'transpose';
+
     /**
      * @param $data
      * @param array $shape

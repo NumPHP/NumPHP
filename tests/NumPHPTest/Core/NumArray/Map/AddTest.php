@@ -11,6 +11,7 @@ namespace NumPHPTest\Core\NumArray\Map;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class AddTest
@@ -18,7 +19,7 @@ use NumPHP\Core\NumPHP;
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
   */
-class AddTest extends \PHPUnit_Framework_TestCase
+class AddTest extends TestCase
 {
     public function testAddSingle()
     {
@@ -26,7 +27,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
         $numArray2 = new NumArray(-7);
 
         $expectedNumArray = new NumArray(-4);
-        $this->assertEquals($expectedNumArray, $numArray1->add($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->add($numArray2));
     }
 
     public function testAddSingleVector()
@@ -35,7 +36,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
         $numArray2 = new NumArray(3);
 
         $expectedNumArray = NumPHP::arange(4, 8);
-        $this->assertEquals($expectedNumArray, $numArray1->add($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->add($numArray2));
     }
 
     public function testAddTwoVector()
@@ -44,7 +45,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
         $numArray2 = NumPHP::arange(-19, -10, 3);
 
         $expectedNumArray = NumPHP::arange(-18, -6, 4);
-        $this->assertEquals($expectedNumArray, $numArray1->add($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->add($numArray2));
     }
 
     public function testAddMatrixSingel()
@@ -53,7 +54,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
         $numArray2 = NumPHP::arange(1, 9)->reshape(3, 3);
 
         $expectedNumArray = NumPHP::arange(57, 65)->reshape(3, 3);
-        $this->assertEquals($expectedNumArray, $numArray1->add($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->add($numArray2));
     }
 
     public function testAddVectorMatrix()
@@ -68,7 +69,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
                 [12, 13, 14, 15],
             ]
         );
-        $this->assertEquals($expectedNumArray, $numArray1->add($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->add($numArray2));
     }
 
     public function testAddMatrixMatrix()
@@ -77,7 +78,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
         $numArray2 = NumPHP::arange(-5, 6)->reshape(3, 4);
 
         $expectedNumArray = NumPHP::arange(-4, 18, 2)->reshape(3, 4);
-        $this->assertEquals($expectedNumArray, $numArray1->add($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->add($numArray2));
     }
 
     public function testAddVectorArray()
@@ -86,7 +87,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
         $array = [4, 5, 6, 7, 8, 9, 10];
 
         $expectedNumArray = NumPHP::arange(5, 17, 2);
-        $this->assertEquals($expectedNumArray, $numArray->add($array));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->add($array));
     }
 
     /**
@@ -107,7 +108,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
         $numArray2 = new NumArray(45);
 
         $expectedNumArray = new NumArray(-51);
-        $this->assertEquals($expectedNumArray, $numArray1->minus($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->minus($numArray2));
     }
 
     public function testMinusVectorSingle()
@@ -116,6 +117,6 @@ class AddTest extends \PHPUnit_Framework_TestCase
         $numArray2 = NumPHP::arange(3, 8);
 
         $expectedNumArray = NumPHP::arange(42, 37);
-        $this->assertEquals($expectedNumArray, $numArray1->minus($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->minus($numArray2));
     }
 }

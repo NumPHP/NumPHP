@@ -11,6 +11,7 @@ namespace NumPHPTest\Core\NumArray\Reduce;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class MeanTest
@@ -18,14 +19,14 @@ use NumPHP\Core\NumPHP;
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
   */
-class MeanTest extends \PHPUnit_Framework_TestCase
+class MeanTest extends TestCase
 {
     public function testMeanSingle()
     {
         $numArray = new NumArray(5);
 
         $expectedNumArray = new NumArray(5);
-        $this->assertEquals($expectedNumArray, $numArray);
+        $this->assertNumArrayEquals($expectedNumArray, $numArray);
     }
 
     public function testMeanVector()
@@ -35,7 +36,7 @@ class MeanTest extends \PHPUnit_Framework_TestCase
         );
 
         $expectedNumArray = new NumArray(14);
-        $this->assertEquals($expectedNumArray, $numArray->mean());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->mean());
     }
 
     public function testMeanMatrix()
@@ -43,7 +44,7 @@ class MeanTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 6)->reshape(2, 3);
 
         $expectedNumArray = new NumArray(3.5);
-        $this->assertEquals($expectedNumArray, $numArray->mean());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->mean());
     }
 
     public function testMeanSingleAxis0()
@@ -51,7 +52,7 @@ class MeanTest extends \PHPUnit_Framework_TestCase
         $numArray = new NumArray(-4);
 
         $expectedNumArray = new NumArray(-4);
-        $this->assertEquals($expectedNumArray, $numArray->mean(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->mean(0));
     }
 
     public function testMeanVectorAxis0()
@@ -61,7 +62,7 @@ class MeanTest extends \PHPUnit_Framework_TestCase
         );
 
         $expectedNumArray = new NumArray(14);
-        $this->assertEquals($expectedNumArray, $numArray->mean(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->mean(0));
     }
 
     public function testMeanMatrixAxis0()
@@ -76,7 +77,7 @@ class MeanTest extends \PHPUnit_Framework_TestCase
         $expectedNumArray = new NumArray(
             [4.5, 23, 14.5]
         );
-        $this->assertEquals($expectedNumArray, $numArray->mean(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->mean(0));
     }
 
     /**
@@ -113,7 +114,7 @@ class MeanTest extends \PHPUnit_Framework_TestCase
         $expectedNumArray = new NumArray(
             [-25/3, 109/3]
         );
-        $this->assertEquals($expectedNumArray, $numArray->mean(1));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->mean(1));
     }
 
     /**
@@ -132,6 +133,6 @@ class MeanTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 24)->reshape(2, 3, 4);
 
         $expectedNumArray = NumPHP::arange(7, 18)->reshape(3, 4);
-        $this->assertEquals($expectedNumArray, $numArray->mean(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->mean(0));
     }
 }

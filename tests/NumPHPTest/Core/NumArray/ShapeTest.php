@@ -11,12 +11,13 @@ namespace NumPHPTest\Core\NumArray;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class ShapeTest
  * @package NumPHPTest\Core\NumArray
  */
-class ShapeTest extends \PHPUnit_Framework_TestCase
+class ShapeTest extends TestCase
 {
     public function testGetShape()
     {
@@ -82,7 +83,7 @@ class ShapeTest extends \PHPUnit_Framework_TestCase
                 [4, 5, 6],
             ]
         );
-        $this->assertEquals(NumPHP::arange(1, 6), $numArray->reshape(6));
+        $this->assertNumArrayEquals(NumPHP::arange(1, 6), $numArray->reshape(6));
     }
 
     public function testReshape3x4To2x6()
@@ -100,6 +101,6 @@ class ShapeTest extends \PHPUnit_Framework_TestCase
                 [7, 8, 9, 10, 11, 12],
             ]
         );
-        $this->assertEquals($expectedNumArray, $numArray->reshape(2, 6));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->reshape(2, 6));
     }
 }

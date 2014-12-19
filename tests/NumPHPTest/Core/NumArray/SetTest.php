@@ -11,12 +11,13 @@ namespace NumPHPTest\Core\NumArray;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class SetTest
  * @package NumPHPTest\Core\NumArray
  */
-class SetTest extends \PHPUnit_Framework_TestCase
+class SetTest extends TestCase
 {
     public function testSetSingleEntry()
     {
@@ -29,7 +30,7 @@ class SetTest extends \PHPUnit_Framework_TestCase
                 [16, 17, 18, 19, 20],
             ]
         );
-        $this->assertEquals($expectedNumArray, $numArray->set(9, 2, 3));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->set(9, 2, 3));
     }
 
     public function testSetSingleNumArray()
@@ -41,7 +42,7 @@ class SetTest extends \PHPUnit_Framework_TestCase
                 [4, 5, 6],
             ]
         );
-        $this->assertEquals($expectedNumArray, $numArray->set(new NumArray(-1), 0, 1));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->set(new NumArray(-1), 0, 1));
     }
 
     public function testSetRow()
@@ -55,7 +56,7 @@ class SetTest extends \PHPUnit_Framework_TestCase
                 [16, 17, 18, 19, 20],
             ]
         );
-        $this->assertEquals($expectedNumArray, $numArray->set([-6, -7, -8, -9, -10], 1));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->set([-6, -7, -8, -9, -10], 1));
     }
 
     public function testSetRowNumArray()
@@ -69,6 +70,6 @@ class SetTest extends \PHPUnit_Framework_TestCase
                 [16, 17, 18, 19, 20],
             ]
         );
-        $this->assertEquals($expectedNumArray, $numArray->set(new NumArray([-6, -7, -8, -9, -10]), 1));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->set(new NumArray([-6, -7, -8, -9, -10]), 1));
     }
 }

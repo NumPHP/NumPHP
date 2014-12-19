@@ -11,6 +11,7 @@ namespace NumPHPTest\Core\NumArray;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class GetTest
@@ -18,14 +19,14 @@ use NumPHP\Core\NumPHP;
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
  */
-class GetTest extends \PHPUnit_Framework_TestCase
+class GetTest extends TestCase
 {
     public function testGet()
     {
         $numArray = new NumArray(1);
 
         $expectedNumArray = new NumArray(1);
-        $this->assertEquals($expectedNumArray, $numArray->get());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get());
     }
 
     public function testGet1()
@@ -33,7 +34,7 @@ class GetTest extends \PHPUnit_Framework_TestCase
         $numArray = new NumArray([1]);
 
         $expectedNumArray = new NumArray([1]);
-        $this->assertEquals($expectedNumArray, $numArray->get());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get());
     }
 
     public function testGet1Args0()
@@ -41,13 +42,13 @@ class GetTest extends \PHPUnit_Framework_TestCase
         $numArray = new NumArray([1]);
 
         $expectedNumArray = new NumArray(1);
-        $this->assertEquals($expectedNumArray, $numArray->get(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get(0));
     }
 
     public function testGet2()
     {
         $numArray = NumPHP::arange(1, 2);
-        $this->assertEquals($numArray, $numArray->get());
+        $this->assertNumArrayEquals($numArray, $numArray->get());
     }
 
     public function testGet2Args1()
@@ -55,41 +56,41 @@ class GetTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 2);
 
         $expectedNumArray = new NumArray(2);
-        $this->assertEquals($expectedNumArray, $numArray->get(1));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get(1));
     }
 
     public function testGet4Args1Slice3()
     {
         $numArray = NumPHP::arange(1, 4);
         $expectedNumArray = NumPHP::arange(2, 3);
-        $this->assertEquals($expectedNumArray, $numArray->get('1:3'));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get('1:3'));
     }
 
     public function testGet3Args1Slice()
     {
         $numArray = NumPHP::arange(1, 3);
         $expectedNumArray = NumPHP::arange(2, 3);
-        $this->assertEquals($expectedNumArray, $numArray->get('1:'));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get('1:'));
     }
 
     public function testGet3ArgsSlice2()
     {
         $numArray = NumPHP::arange(1, 3);
         $expectedNumArray = NumPHP::arange(1, 2);
-        $this->assertEquals($expectedNumArray, $numArray->get(':2'));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get(':2'));
     }
 
     public function testGet2x4()
     {
         $numArray = NumPHP::arange(1, 8)->reshape(2, 4);
-        $this->assertEquals($numArray, $numArray->get());
+        $this->assertNumArrayEquals($numArray, $numArray->get());
     }
 
     public function testGet2x4Args0()
     {
         $numArray = NumPHP::arange(1, 8)->reshape(2, 4);
         $expectedNumArray = NumPHP::arange(1, 4);
-        $this->assertEquals($expectedNumArray, $numArray->get(0));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get(0));
     }
 
     public function testGet2x4Args1x2()
@@ -97,7 +98,7 @@ class GetTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 8)->reshape(2, 4);
 
         $expectedNumArray = new NumArray(7);
-        $this->assertEquals($expectedNumArray, $numArray->get(1, 2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get(1, 2));
     }
 
     public function testGet3x4Args1Slice3()
@@ -109,7 +110,7 @@ class GetTest extends \PHPUnit_Framework_TestCase
                 [11, 12]
             ]
         );
-        $this->assertEquals($expectedNumArray, $numArray->get('1:3', '2:4'));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get('1:3', '2:4'));
     }
 
     public function testGet3x4ArgsSlicex3()
@@ -118,7 +119,7 @@ class GetTest extends \PHPUnit_Framework_TestCase
         $expectedNumArray = new NumArray(
             [3, 7, 11]
         );
-        $this->assertEquals($expectedNumArray, $numArray->get(':', 2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get(':', 2));
     }
 
     public function testGet3ArgsMinus1()
@@ -126,20 +127,20 @@ class GetTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 4);
 
         $expectedNumArray = new NumArray(4);
-        $this->assertEquals($expectedNumArray, $numArray->get(-1));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get(-1));
     }
 
     public function testGet4ArgsMinus1Slice()
     {
         $numArray = NumPHP::arange(1, 4);
         $expectedNumArray = new NumArray([4]);
-        $this->assertEquals($expectedNumArray, $numArray->get('-1:'));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get('-1:'));
     }
 
     public function testGet4ArgsSliceMinus1()
     {
         $numArray = NumPHP::arange(1, 4);
         $expectedNumArray = NumPHP::arange(1, 3);
-        $this->assertEquals($expectedNumArray, $numArray->get(':-1'));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get(':-1'));
     }
 }

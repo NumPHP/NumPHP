@@ -11,23 +11,24 @@ namespace NumPHPTest\Core\NumArray;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class TransposeTest
  * @package NumPHPTest\Core\NumArray
  */
-class TransposeTest extends \PHPUnit_Framework_TestCase
+class TransposeTest extends TestCase
 {
     public function testTranspose()
     {
         $numArray = new NumArray(1);
-        $this->assertEquals($numArray, $numArray->getTranspose());
+        $this->assertNumArrayEquals($numArray, $numArray->getTranspose());
     }
 
     public function testTranspose3()
     {
         $numArray = NumPHP::arange(1, 3);
-        $this->assertEquals($numArray, $numArray->getTranspose());
+        $this->assertNumArrayEquals($numArray, $numArray->getTranspose());
     }
 
     public function testTranspose2x3()
@@ -40,7 +41,7 @@ class TransposeTest extends \PHPUnit_Framework_TestCase
                 [3, 6],
             ]
         );
-        $this->assertEquals($expectedNumArray, $numArray->getTranspose());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->getTranspose());
     }
 
     public function testTranspose2x3x4()
@@ -70,6 +71,6 @@ class TransposeTest extends \PHPUnit_Framework_TestCase
                 ]
             ]
         );
-        $this->assertEquals($expectedNumArray, $numArray->getTranspose());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->getTranspose());
     }
 }

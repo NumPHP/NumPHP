@@ -11,19 +11,20 @@ namespace NumPHPTest\Core\NumPHP;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class EyeTest
   * @package NumPHPTest\Core\NumPHP
   */
-class EyeTest extends \PHPUnit_Framework_TestCase
+class EyeTest extends TestCase
 {
     public function testEye1()
     {
         $numArray = NumPHP::eye(1);
 
         $expectedNumArray = NumPHP::ones(1, 1);
-        $this->assertEquals($expectedNumArray, $numArray);
+        $this->assertNumArrayEquals($expectedNumArray, $numArray);
     }
 
     public function testEye4()
@@ -38,7 +39,7 @@ class EyeTest extends \PHPUnit_Framework_TestCase
                 [0, 0, 0, 1],
             ]
         );
-        $this->assertEquals($expectedNumArray, $numArray);
+        $this->assertNumArrayEquals($expectedNumArray, $numArray);
     }
 
     public function testEye2x3()
@@ -51,7 +52,7 @@ class EyeTest extends \PHPUnit_Framework_TestCase
                 [0, 1, 0],
             ]
         );
-        $this->assertEquals($expectedNumArray, $numArray);
+        $this->assertNumArrayEquals($expectedNumArray, $numArray);
     }
 
     public function testEye4x3()
@@ -66,7 +67,7 @@ class EyeTest extends \PHPUnit_Framework_TestCase
                 [0, 0, 0],
             ]
         );
-        $this->assertEquals($expectedNumArray, $numArray);
+        $this->assertNumArrayEquals($expectedNumArray, $numArray);
     }
 
     public function testIdentity()
@@ -74,6 +75,6 @@ class EyeTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::identity(3);
 
         $expectedNumArray = NumPHP::eye(3, 3);
-        $this->assertEquals($expectedNumArray, $numArray);
+        $this->assertNumArrayEquals($expectedNumArray, $numArray);
     }
 }
