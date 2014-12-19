@@ -51,4 +51,13 @@ class AbsTest extends TestCase
         $expectedNumArray = NumPHP::arange(1, 6)->reshape(2, 3);
         $this->assertNumArrayEquals($expectedNumArray, $numArray->abs());
     }
+
+    public function testAbsCache()
+    {
+        $numArray = new NumArray(5);
+        $numArray->setCache('key', 6);
+
+        $numArray->abs();
+        $this->assertFalse($numArray->inCache('key'));
+    }
 }

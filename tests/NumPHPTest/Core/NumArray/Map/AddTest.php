@@ -16,8 +16,6 @@ use NumPHPTest\Core\Framework\TestCase;
 /**
  * Class AddTest
   * @package NumPHPTest\Core\NumArray
- *
- * @SuppressWarnings(PHPMD.TooManyMethods)
   */
 class AddTest extends TestCase
 {
@@ -102,21 +100,12 @@ class AddTest extends TestCase
         $numArray1->add($numArray2);
     }
 
-    public function testMinusSingle()
+    public function testAddCache()
     {
-        $numArray1 = new NumArray(-6);
-        $numArray2 = new NumArray(45);
+        $numArray = new NumArray(5);
+        $numArray->setCache('key', 6);
 
-        $expectedNumArray = new NumArray(-51);
-        $this->assertNumArrayEquals($expectedNumArray, $numArray1->minus($numArray2));
-    }
-
-    public function testMinusVectorSingle()
-    {
-        $numArray1 = new NumArray(45);
-        $numArray2 = NumPHP::arange(3, 8);
-
-        $expectedNumArray = NumPHP::arange(42, 37);
-        $this->assertNumArrayEquals($expectedNumArray, $numArray1->minus($numArray2));
+        $numArray->add(4);
+        $this->assertFalse($numArray->inCache('key'));
     }
 }

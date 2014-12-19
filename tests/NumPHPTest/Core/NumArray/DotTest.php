@@ -178,4 +178,13 @@ class DotTest extends TestCase
 
         $numArray1->dot($numArray2);
     }
+
+    public function testDotCache()
+    {
+        $numArray = new NumArray(5);
+        $numArray->setCache('key', 7);
+
+        $numArray->dot(5);
+        $this->assertFalse($numArray->inCache('key'));
+    }
 }

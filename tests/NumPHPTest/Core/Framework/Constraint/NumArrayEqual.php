@@ -50,12 +50,12 @@ class NumArrayEqual extends \PHPUnit_Framework_Constraint
         $comparatorFactory = new Factory();
 
         try {
-            $compoarator = $comparatorFactory->getComparatorFor(
+            $comparator = $comparatorFactory->getComparatorFor(
                 $this->value,
                 $otherClone
             );
 
-            $compoarator->assertEquals(
+            $comparator->assertEquals(
                 $this->value,
                 $otherClone
             );

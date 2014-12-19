@@ -15,5 +15,5 @@ namespace NumPHP\Core;
   */
 class Version
 {
-    const VERSION = '1.0.0-dev2';
+    const VERSION = '1.0.0-dev3';
 }

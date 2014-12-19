@@ -19,6 +19,8 @@ use NumPHP\LinAlg\Exception\InvalidArgumentException;
   */
 class LUDecomposition
 {
+    const CACHE_KEY_LU_DECOMPOSITION = 'lu-decomposition';
+
     /**
      * @param $array
      * @return array
@@ -28,6 +30,9 @@ class LUDecomposition
     {
         if (!$array instanceof NumArray) {
             $array = new NumArray($array);
+        } elseif ($array->inCache(self::CACHE_KEY_LU_DECOMPOSITION)) {
+            // check if result is in array cache
+            return $array->getCache(self::CACHE_KEY_LU_DECOMPOSITION);
         }
         if ($array->getNDim() !== 2) {
             throw new InvalidArgumentException(
@@ -45,15 +50,7 @@ class LUDecomposition
 
         for ($i = 0; $i < $size; $i++) {
             // pivoting
-            $max = abs($numArray->get($i, $i)->getData());
-            $maxIndex = $i;
-            for ($j = $i+1; $j < $mAxis; $j++) {
-                $abs = abs($numArray->get($j, $i)->getData());
-                if ($abs > $max) {
-                    $max = $abs;
-                    $maxIndex = $j;
-                }
-            }
+            $maxIndex = self::getPivotIndex($numArray, $i);
             if ($maxIndex !== $i) {
                 $temp = $numArray->get($i);
                 $numArray->set($numArray->get($maxIndex), $i);
@@ -75,12 +72,15 @@ class LUDecomposition
                 }
             }
         }
-
-        return [
+        $result = [
             'P' => self::buildPivotMatrix($pArray),
             'L' => $lMatrix->add(NumPHP::eye($mAxis, $size)),
             'U' => self::buildUMatrix($numArray),
         ];
+        // write result into array cache
+        $array->setCache(self::CACHE_KEY_LU_DECOMPOSITION, $result);
+
+        return $result;
     }
 
     /**
@@ -117,5 +117,28 @@ class LUDecomposition
         }
 
         return $uMatrix;
+    }
+
+    /**
+     * @param NumArray $numArray
+     * @param $iIndex
+     * @return int
+     */
+    protected static function getPivotIndex(NumArray $numArray, $iIndex)
+    {
+        $shape = $numArray->getShape();
+        $mAxis = $shape[0];
+
+        $max = abs($numArray->get($iIndex, $iIndex)->getData());
+        $maxIndex = $iIndex;
+        for ($j = $iIndex+1; $j < $mAxis; $j++) {
+            $abs = abs($numArray->get($j, $iIndex)->getData());
+            if ($abs > $max) {
+                $max = $abs;
+                $maxIndex = $j;
+            }
+        }
+
+        return $maxIndex;
     }
 }

@@ -29,7 +29,6 @@ class LUDecompositionTest extends TestCase
                 [4, 2, 1],
             ]
         );
-        $clone = clone $numArray;
 
         $expectedP = new NumArray(
             [
@@ -57,7 +56,6 @@ class LUDecompositionTest extends TestCase
         $this->assertNumArrayEquals($expectedP, $result['P'], 'Matrix P is not equal');
         $this->assertNumArrayEquals($expectedL, $result['L'], 'Matrix L is not equal');
         $this->assertNumArrayEquals($expectedU, $result['U'], 'Matrix U is not equal');
-        $this->assertEquals($clone, $numArray);
     }
 
     public function testLUDecomposition2x4()
@@ -68,7 +66,6 @@ class LUDecompositionTest extends TestCase
                 [2, 3, 5, 1],
             ]
         );
-        $clone = clone $numArray;
 
         $expectedP = NumPHP::identity(2);
         $expectedL = new NumArray(
@@ -88,7 +85,6 @@ class LUDecompositionTest extends TestCase
         $this->assertNumArrayEquals($expectedP, $result['P'], 'Matrix P is not equal');
         $this->assertNumArrayEquals($expectedL, $result['L'], 'Matrix L is not equal');
         $this->assertNumArrayEquals($expectedU, $result['U'], 'Matrix U is not equal');
-        $this->assertEquals($clone, $numArray);
     }
 
     public function testLUDecomposition4x3()
@@ -139,5 +135,14 @@ class LUDecompositionTest extends TestCase
         $numArray = NumPHP::arange(1, 2);
 
         LUDecomposition::lud($numArray);
+    }
+
+    public function testLUDecompositionCache()
+    {
+        $numArray = NumPHP::arange(1, 4)->reshape(2, 2);
+
+        LUDecomposition::lud($numArray);
+        $expectedResult = $numArray->getCache(LUDecomposition::CACHE_KEY_LU_DECOMPOSITION);
+        $this->assertSame($expectedResult, LUDecomposition::lud($numArray));
     }
 }

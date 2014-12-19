@@ -72,4 +72,13 @@ class SetTest extends TestCase
         );
         $this->assertNumArrayEquals($expectedNumArray, $numArray->set(new NumArray([-6, -7, -8, -9, -10]), 1));
     }
+
+    public function testSetCache()
+    {
+        $numArray = new NumArray(5);
+        $numArray->setCache('key', 6);
+
+        $numArray->set(6);
+        $this->assertFalse($numArray->inCache('key'));
+    }
 }
