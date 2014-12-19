@@ -10,21 +10,29 @@
 namespace NumPHPTest\Core\Framework\Constraint;
 
 use NumPHP\Core\NumArray;
+use SebastianBergmann\Comparator\ComparisonFailure;
+use SebastianBergmann\Comparator\Factory;
 
 /**
  * Class NumArrayEqual
   * @package NumPHPTest\Core\Framework\Constraint
   */
-class NumArrayEqual extends \PHPUnit_Framework_Constraint_IsEqual
+class NumArrayEqual extends \PHPUnit_Framework_Constraint
 {
+    /**
+     * @var NumArray
+     */
+    protected $value;
+
     /**
      * @param \NumPHP\Core\NumArray $value
      */
     public function __construct(NumArray $value)
     {
-        $valueClone = clone $value;
-        $valueClone->flushCache();
-        parent::__construct($valueClone);
+        parent::__construct();
+
+        $this->value = clone $value;
+        $this->value->flushCache();
     }
 
     /**
@@ -39,6 +47,39 @@ class NumArrayEqual extends \PHPUnit_Framework_Constraint_IsEqual
         // flush the cache
         $otherClone->flushCache();
 
-        return parent::evaluate($otherClone, $description, $returnResult);
+        $comparatorFactory = new Factory();
+
+        try {
+            $compoarator = $comparatorFactory->getComparatorFor(
+                $this->value,
+                $otherClone
+            );
+
+            $compoarator->assertEquals(
+                $this->value,
+                $otherClone
+            );
+        } catch (ComparisonFailure $f) {
+            if ($returnResult) {
+                return false;
+            }
+
+            throw new \PHPUnit_Framework_ExpectationFailedException(
+                trim($description . "\n" .$f->getMessage()),
+                $f
+            );
+        }
+
+        return true;
+    }
+
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return string
+     */
+    public function toString()
+    {
+        return sprintf('is equal to %s', $this->exporter->export($this->value));
     }
 }

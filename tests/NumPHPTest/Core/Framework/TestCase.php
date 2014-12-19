@@ -15,6 +15,8 @@ use NumPHPTest\Core\Framework\Constraint\NumArrayEqual;
 /**
  * Class TestCase
   * @package NumPHPTest\Core\Framework
+ *
+ * @SuppressWarnings(PHPMD.NumberOfChildren)
   */
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
