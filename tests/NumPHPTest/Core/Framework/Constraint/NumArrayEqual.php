@@ -32,20 +32,23 @@ class NumArrayEqual extends \PHPUnit_Framework_Constraint
         parent::__construct();
 
         $this->value = clone $value;
+        // flush the cache
         $this->value->flushCache();
     }
 
     /**
-     * @param NumArray $other
+     * @param $other
      * @param string $description
      * @param bool $returnResult
      * @return mixed
      */
-    public function evaluate(NumArray $other, $description = '', $returnResult = false)
+    public function evaluate($other, $description = '', $returnResult = false)
     {
         $otherClone = clone $other;
-        // flush the cache
-        $otherClone->flushCache();
+        if ($otherClone instanceof NumArray) {
+            // flush the cache
+            $otherClone->flushCache();
+        }
 
         $comparatorFactory = new Factory();
 
