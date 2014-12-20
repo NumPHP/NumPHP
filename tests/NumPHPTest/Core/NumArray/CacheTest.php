@@ -26,7 +26,41 @@ class CacheTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\CacheMissException
+     * @expectedException \NumPHP\Core\Exception\CacheKeyException
+     * @expectedExceptionMessage Key has to be a string
+     */
+    public function testSetCacheForbiddenKey()
+    {
+        $numArray = new NumArray(5);
+
+        $numArray->setCache(5, 6);
+    }
+
+    /**
+     * @expectedException \NumPHP\Core\Exception\CacheException
+     * @expectedExceptionMessage Key "key" already exists
+     */
+    public function testSetCacheDouble()
+    {
+        $numArray = new NumArray(5);
+
+        $numArray->setCache('key', 5);
+        $numArray->setCache('key', 7);
+    }
+
+    /**
+     * @expectedException \NumPHP\Core\Exception\CacheKeyException
+     * @expectedExceptionMessage Key has to be a string
+     */
+    public function testGetCacheForbiddenKey()
+    {
+        $numArray = new NumArray(5);
+
+        $numArray->getCache(5);
+    }
+
+    /**
+     * @expectedException \NumPHP\Core\Exception\CacheException
      * @expectedExceptionMessage Key "key" does not exist
      */
     public function testGetMissCache()
@@ -34,6 +68,17 @@ class CacheTest extends \PHPUnit_Framework_TestCase
         $numArray = new NumArray(5);
 
         $numArray->getCache('key');
+    }
+
+    /**
+     * @expectedException \NumPHP\Core\Exception\CacheKeyException
+     * @expectedExceptionMessage Key has to be a string
+     */
+    public function testInCacheForbiddenKey()
+    {
+        $numArray = new NumArray(5);
+
+        $numArray->inCache(5);
     }
 
     public function testFlushCache()
@@ -54,5 +99,16 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(7, $numArray->getCache('key1'));
         $this->assertFalse($numArray->inCache('key2'));
+    }
+
+    /**
+     * @expectedException \NumPHP\Core\Exception\CacheKeyException
+     * @expectedExceptionMessage Key has to be a string
+     */
+    public function testFlushCacheForbiddenKey()
+    {
+        $numArray = new NumArray(6);
+
+        $numArray->flushCache(6);
     }
 }

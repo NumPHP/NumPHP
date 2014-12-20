@@ -10,9 +10,9 @@
 namespace NumPHP\Core\Exception;
 
 /**
- * Class CacheMissException
+ * Class CacheException
   * @package NumPHP\Core\Exception
   */
-class CacheMissException extends \Exception
+class CacheException extends \Exception
 {
 }
