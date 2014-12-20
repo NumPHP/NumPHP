@@ -14,7 +14,8 @@
     }
   ],
   "require": {
-    "php": ">=5.4"
+    "php": ">=5.4",
+    "numphp/core": "self.version"
   },
   "autoload": {
     "psr-0": {
