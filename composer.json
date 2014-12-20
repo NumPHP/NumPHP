@@ -32,5 +32,9 @@
         "psr-0": {
             "NumPHPTest\\": "tests/"
         }
+    },
+    "replace": {
+        "numphp/core": "self.version",
+        "numphp/linalg": "self.version"
     }
 }
