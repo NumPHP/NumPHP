@@ -36,5 +36,11 @@
     "replace": {
         "numphp/core": "self.version",
         "numphp/linalg": "self.version"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.0-dev3",
+            "dev-develop": "1.0.0-dev4"
+        }
     }
 }
