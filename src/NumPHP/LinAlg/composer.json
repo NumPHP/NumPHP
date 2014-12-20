@@ -22,11 +22,5 @@
       "NumPHP\\LinAlg\\": ""
     }
   },
-  "target-dir": "NumPHP/LinAlg",
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.0.0-dev3",
-      "dev-develop": "1.0.0-dev4"
-    }
-  }
+  "target-dir": "NumPHP/LinAlg"
 }

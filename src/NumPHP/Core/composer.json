@@ -21,11 +21,5 @@
       "NumPHP\\Core\\": ""
     }
   },
-  "target-dir": "NumPHP/Core",
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.0.0-dev3",
-      "dev-develop": "1.0.0-dev4"
-    }
-  }
+  "target-dir": "NumPHP/Core"
 }
