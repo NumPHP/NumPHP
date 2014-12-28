@@ -67,7 +67,7 @@ class LUDecomposition
                 $fac = $numArray->get($j, $i)->getData()/$numArray->get($i, $i)->getData();
                 $lMatrix->set($fac, $j, $i);
                 for ($k = $i+1; $k < $nAxis; $k++) {
-                    $value = $numArray->get($j, $k)->minus($numArray->get($i, $k)->dot($fac));
+                    $value = $numArray->get($j, $k)->sub($numArray->get($i, $k)->dot($fac));
                     $numArray->set($value, $j, $k);
                 }
             }

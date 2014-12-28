@@ -14,10 +14,10 @@ use NumPHPTest\Core\Framework\TestCase;
 use NumPHP\Core\NumArray;
 
 /**
- * Class MinusTest
+ * Class SubTest
   * @package NumPHPTest\Core\NumArray\Map
   */
-class MinusTest extends TestCase
+class SubTest extends TestCase
 {
     public function testMinusSingle()
     {
@@ -25,7 +25,7 @@ class MinusTest extends TestCase
         $numArray2 = new NumArray(45);
 
         $expectedNumArray = new NumArray(-51);
-        $this->assertNumArrayEquals($expectedNumArray, $numArray1->minus($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->sub($numArray2));
     }
 
     public function testMinusVectorSingle()
@@ -34,7 +34,7 @@ class MinusTest extends TestCase
         $numArray2 = NumPHP::arange(3, 8);
 
         $expectedNumArray = NumPHP::arange(42, 37);
-        $this->assertNumArrayEquals($expectedNumArray, $numArray1->minus($numArray2));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->sub($numArray2));
     }
 
     public function testMinusCache()
@@ -42,7 +42,7 @@ class MinusTest extends TestCase
         $numArray = new NumArray(5);
         $numArray->setCache('key', 7);
 
-        $numArray->minus(3);
+        $numArray->sub(3);
         $this->assertFalse($numArray->inCache('key'));
     }
 }

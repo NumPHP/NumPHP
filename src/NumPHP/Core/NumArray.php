@@ -155,7 +155,7 @@ class NumArray extends Cache
      * @param $subtrahend
      * @return $this
      */
-    public function minus($subtrahend)
+    public function sub($subtrahend)
     {
         if ($subtrahend instanceof NumArray) {
             $subtrahend = $subtrahend->getData();
