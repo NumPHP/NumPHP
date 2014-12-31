@@ -7,16 +7,17 @@
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace NumPHPTest\LinAlg;
+namespace NumPHPTest\LinAlg\LinAlg;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
-use NumPHP\LinAlg\LUDecomposition;
+use NumPHP\LinAlg\LinAlg;
+use NumPHP\LinAlg\LinAlg\LUDecomposition;
 use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class LUDecompositionTest
-  * @package NumPHPTest\LinAlg
+  * @package NumPHPTest\LinAlg\LinAlg
   */
 class LUDecompositionTest extends TestCase
 {
@@ -51,7 +52,7 @@ class LUDecompositionTest extends TestCase
                 [0,    0, 27/22],
             ]
         );
-        $result = LUDecomposition::lud($numArray);
+        $result = LinAlg::lud($numArray);
         $this->assertCount(3, $result);
         $this->assertNumArrayEquals($expectedP, $result['P'], 'Matrix P is not equal');
         $this->assertNumArrayEquals($expectedL, $result['L'], 'Matrix L is not equal');
@@ -80,7 +81,7 @@ class LUDecompositionTest extends TestCase
                 [0, 2, 9/2, -3],
             ]
         );
-        $result = LUDecomposition::lud($numArray);
+        $result = LinAlg::lud($numArray);
         $this->assertCount(3, $result);
         $this->assertNumArrayEquals($expectedP, $result['P'], 'Matrix P is not equal');
         $this->assertNumArrayEquals($expectedL, $result['L'], 'Matrix L is not equal');
@@ -119,7 +120,7 @@ class LUDecompositionTest extends TestCase
                 [0,    0, 38/13],
             ]
         );
-        $result = LUDecomposition::lud($array);
+        $result = LinAlg::lud($array);
         $this->assertCount(3, $result);
         $this->assertNumArrayEquals($expectedP, $result['P'], 'Matrix P is not equal');
         $this->assertNumArrayEquals($expectedL, $result['L'], 'Matrix L is not equal');
@@ -134,15 +135,15 @@ class LUDecompositionTest extends TestCase
     {
         $numArray = NumPHP::arange(1, 2);
 
-        LUDecomposition::lud($numArray);
+        LinAlg::lud($numArray);
     }
 
     public function testLUDecompositionCache()
     {
         $numArray = NumPHP::arange(1, 4)->reshape(2, 2);
 
-        LUDecomposition::lud($numArray);
+        LinAlg::lud($numArray);
         $expectedResult = $numArray->getCache(LUDecomposition::CACHE_KEY_LU_DECOMPOSITION);
-        $this->assertSame($expectedResult, LUDecomposition::lud($numArray));
+        $this->assertSame($expectedResult, LinAlg::lud($numArray));
     }
 }

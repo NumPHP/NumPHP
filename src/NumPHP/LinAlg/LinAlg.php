@@ -11,6 +11,7 @@ namespace NumPHP\LinAlg;
 
 use NumPHP\Core\NumArray;
 use NumPHP\LinAlg\Exception\InvalidArgumentException;
+use NumPHP\LinAlg\LinAlg\LUDecomposition;
 
 /**
  * Class LinAlg
@@ -18,6 +19,8 @@ use NumPHP\LinAlg\Exception\InvalidArgumentException;
   */
 class LinAlg
 {
+    const VERSION = '1.0.0-dev4';
+
     /**
      * @param $array
      * @return int
@@ -49,5 +52,24 @@ class LinAlg
         }
 
         return $det;
+    }
+
+    /**
+     * @param $array
+     * @return array|mixed
+     * @throws InvalidArgumentException
+     */
+    public static function lud($array)
+    {
+        if (!$array instanceof NumArray) {
+            $array = new NumArray($array);
+        } elseif ($array->inCache(LUDecomposition::CACHE_KEY_LU_DECOMPOSITION)) {
+            return $array->getCache(LUDecomposition::CACHE_KEY_LU_DECOMPOSITION);
+        }
+
+        $result = LUDecomposition::lud($array);
+        $array->setCache(LUDecomposition::CACHE_KEY_LU_DECOMPOSITION, $result);
+
+        return $result;
     }
 }

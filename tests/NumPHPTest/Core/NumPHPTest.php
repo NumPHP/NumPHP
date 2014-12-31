@@ -18,6 +18,15 @@ use NumPHPTest\Core\Framework\TestCase;
  */
 class NumPHPTest extends TestCase
 {
+    public function testREADMEVersion()
+    {
+        $readmeContent = file_get_contents(realpath(__DIR__.'/../../../README.md'));
+        $this->assertNotFalse(
+            strpos($readmeContent, '*NumPHP '.NumPHP::VERSION.'*'),
+            'Version in README.md is not updated'
+        );
+    }
+
     public function testArangeIntWithoutStep()
     {
         $expectedNumArray = new NumArray(

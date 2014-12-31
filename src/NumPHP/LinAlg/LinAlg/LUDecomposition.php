@@ -7,7 +7,7 @@
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace NumPHP\LinAlg;
+namespace NumPHP\LinAlg\LinAlg;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
@@ -15,25 +15,19 @@ use NumPHP\LinAlg\Exception\InvalidArgumentException;
 
 /**
  * Class LUDecomposition
-  * @package NumPHP\LinAlg
+  * @package NumPHP\LinAlg\LinAlg
   */
 class LUDecomposition
 {
     const CACHE_KEY_LU_DECOMPOSITION = 'lu-decomposition';
 
     /**
-     * @param $array
+     * @param NumArray $array
      * @return array
      * @throws InvalidArgumentException
      */
-    public static function lud($array)
+    public static function lud(NumArray $array)
     {
-        if (!$array instanceof NumArray) {
-            $array = new NumArray($array);
-        } elseif ($array->inCache(self::CACHE_KEY_LU_DECOMPOSITION)) {
-            // check if result is in array cache
-            return $array->getCache(self::CACHE_KEY_LU_DECOMPOSITION);
-        }
         if ($array->getNDim() !== 2) {
             throw new InvalidArgumentException(
                 'NumArray with dimension '.$array->getNDim().' given, NumArray should have 2 dimensions'
@@ -72,15 +66,12 @@ class LUDecomposition
                 }
             }
         }
-        $result = [
+
+        return [
             'P' => self::buildPivotMatrix($pArray),
             'L' => $lMatrix->add(NumPHP::eye($mAxis, $size)),
             'U' => self::buildUMatrix($numArray),
         ];
-        // write result into array cache
-        $array->setCache(self::CACHE_KEY_LU_DECOMPOSITION, $result);
-
-        return $result;
     }
 
     /**

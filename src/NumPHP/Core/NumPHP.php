@@ -18,6 +18,8 @@ use NumPHP\Core\NumPHP\Generate;
  */
 abstract class NumPHP
 {
+    const VERSION = '1.0.0-dev4';
+
     /**
      * @return NumArray
      */

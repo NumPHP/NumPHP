@@ -19,6 +19,15 @@ use NumPHP\LinAlg\LinAlg;
   */
 class LinAlgTest extends \PHPUnit_Framework_TestCase
 {
+    public function testREADMEVersion()
+    {
+        $readmeContent = file_get_contents(realpath(__DIR__.'/../../../README.md'));
+        $this->assertNotFalse(
+            strpos($readmeContent, '*NumPHP '.LinAlg::VERSION.'*'),
+            'Version in README.md is not updated'
+        );
+    }
+
     public function testDet3x3()
     {
         $numArray = new NumArray(
