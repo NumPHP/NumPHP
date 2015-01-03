@@ -59,7 +59,7 @@ class NumArray extends Cache
      */
     public function __toString()
     {
-        return 'NumArray('.String::toString($this->data).')';
+        return "NumArray(".String::toString($this->data).")\n";
     }
 
     /**
