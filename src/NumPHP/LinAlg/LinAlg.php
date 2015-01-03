@@ -43,7 +43,7 @@ class LinAlg
             );
         }
 
-        $lud = LUDecomposition::lud($array);
+        $lud = self::lud($array);
         /** @var NumArray $uMatrix */
         $uMatrix = $lud['U'];
         $det = 1;
