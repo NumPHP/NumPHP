@@ -31,7 +31,7 @@ Simply add a dependency on `numphp/numphp` to your project's `composer.json` fil
 
 ## Documentation
 
-Read the offical [NumPHP documentation](http://numphp.org/docs/)
+The [documentation](https://github.com/NumPHP/NumPHP-docs) is rendered at [readthedocs.org](http://numphp.readthedocs.org)
 
 ## Examples
 
