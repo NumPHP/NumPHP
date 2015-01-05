@@ -1,5 +1,8 @@
 # NumPHP
 
+NumPHP is a PHP library for scientific computing. The main object is the `NumArray`, it can represent a scalar, a vector
+or a matrix. Simple matrix arithmetic for PHP. This project is inspired by [NumPy](http://www.numpy.org/).
+
 ## Build Status
 
 * Master
