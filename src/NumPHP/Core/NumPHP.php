@@ -18,7 +18,7 @@ use NumPHP\Core\NumPHP\Generate;
  */
 abstract class NumPHP
 {
-    const VERSION = '1.0.0-dev4';
+    const VERSION = '1.0.0-dev5';
 
     /**
      * @return NumArray
@@ -85,7 +85,8 @@ abstract class NumPHP
             $nAxis = $mAxis;
         }
         $eye = self::zeros($mAxis, $nAxis);
-        for ($i = 0; $i < min($mAxis, $nAxis); $i++) {
+        $min = min($mAxis, $nAxis);
+        for ($i = 0; $i < $min; $i++) {
             $eye->set(1, $i, $i);
         }
 

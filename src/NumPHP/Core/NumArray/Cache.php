@@ -11,7 +11,6 @@ namespace NumPHP\Core\NumArray;
 
 use NumPHP\Core\Exception\CacheException;
 use NumPHP\Core\Exception\CacheKeyException;
-use NumPHP\Core\Exception\CacheMissException;
 
 /**
  * Class Cache

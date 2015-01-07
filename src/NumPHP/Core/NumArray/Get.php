@@ -9,8 +9,6 @@
 
 namespace NumPHP\Core\NumArray;
 
-use NumPHP\Core\NumArray;
-
 /**
  * Class Get
  * @package NumPHP\Core\NumArray

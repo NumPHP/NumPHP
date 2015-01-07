@@ -161,9 +161,10 @@ class Dot
     protected static function dotMatrixMatrix(array $data1, array $data2)
     {
         $product = [];
+        $size2 = count($data2[0]);
         foreach ($data1 as $i => $rowI) {
             $row = [];
-            for ($j = 0; $j < count($data2[0]); $j++) {
+            for ($j = 0; $j < $size2; $j++) {
                 $sum = 0;
                 foreach ($rowI as $key => $value1) {
                     $sum += $value1 * $data2[$key][$j];

@@ -1,7 +1,7 @@
 {
     "name": "numphp/numphp",
     "type": "library",
-    "description": "PHP library for scientific computing",
+    "description": "Mathematical PHP library for scientific computing",
     "keywords": ["numeric"],
     "homepage": "http://numphp.org/",
     "license": "MIT",

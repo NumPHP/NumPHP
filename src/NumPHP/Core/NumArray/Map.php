@@ -39,21 +39,23 @@ class Map
     protected static function mapRecursive($data1, $data2, $callback)
     {
         if (is_array($data1)) {
+            $size1 = count($data1);
             if (is_array($data2)) {
                 if (count($data1) !== count($data2)) {
                     throw new InvalidArgumentException('Shape '.count($data1).' is different from '.count($data2));
                 }
-                for ($i = 0; $i < count($data1); $i++) {
+                for ($i = 0; $i < $size1; $i++) {
                     $data1[$i] = self::mapRecursive($data1[$i], $data2[$i], $callback);
                 }
             } else {
-                for ($i = 0; $i < count($data1); $i++) {
+                for ($i = 0; $i < $size1; $i++) {
                     $data1[$i] = self::mapRecursive($data1[$i], $data2, $callback);
                 }
             }
         } else {
             if (is_array($data2)) {
-                for ($i = 0; $i < count($data2); $i++) {
+                $size2 = count($data2);
+                for ($i = 0; $i < $size2; $i++) {
                     $data2[$i] = self::mapRecursive($data1, $data2[$i], $callback);
                 }
 

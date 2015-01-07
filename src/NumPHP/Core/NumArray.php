@@ -20,7 +20,6 @@ use NumPHP\Core\NumArray\Reduce;
 use NumPHP\Core\NumArray\Set;
 use NumPHP\Core\NumArray\Shape;
 use NumPHP\Core\NumArray\String;
-use NumPHP\Core\NumArray\Sum;
 use NumPHP\Core\NumArray\Transpose;
 
 /**
