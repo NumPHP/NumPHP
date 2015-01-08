@@ -155,7 +155,7 @@ abstract class NumPHP
     public static function arange($low, $high, $step = 1.0)
     {
         if ($step < 0) {
-            throw new InvalidArgumentException('Step has to be a positiv value');
+            throw new InvalidArgumentException('Step has to be a positive value');
         }
         return new NumArray(range($low, $high, $step));
     }
@@ -173,7 +173,7 @@ abstract class NumPHP
     public static function linspace($low, $high, $number)
     {
         if ($number < 0) {
-            throw new InvalidArgumentException('Number has to be a positiv value');
+            throw new InvalidArgumentException('Number has to be a positive value');
         }
         $data = [];
         switch ($number) {

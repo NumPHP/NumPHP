@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHP\Core\NumArray
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHP\Core\NumArray;
@@ -13,15 +18,26 @@ use NumPHP\Core\Exception\InvalidArgumentException;
 
 /**
  * Class Dot
-  * @package NumPHP\Core\NumArray
-  */
+ *
+ * @category Core
+ * @package  NumPHP\Core\NumArray
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
+ */
 class Dot
 {
     /**
-     * @param $data1
-     * @param array $shape1
-     * @param $data2
-     * @param array $shape2
+     * Multiplies two int, float or arrays
+     *
+     * @param mixed $data1  data of the first factor
+     * @param array $shape1 shape of the first factor
+     * @param mixed $data2  data of the second factor
+     * @param array $shape2 shape of the second factor
+     *
+     * @return array
+     * @throws InvalidArgumentException wil be thrown of the two factors can not be
+     * multiplied
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
@@ -70,15 +86,21 @@ class Dot
         }
 
         throw new InvalidArgumentException(
-            'Matrix with shape ('.implode(', ', $shape1).') and matrix with shape ('.implode(', ', $shape2).
-            ') are not align.'
+            sprintf(
+                "Matrix with shape (%s) and matrix with shape (%s) are not align.",
+                implode(', ', $shape1),
+                implode(', ', $shape2)
+            )
         );
     }
 
     /**
-     * @param $data
-     * @param $scalar
-     * @return array|mixed
+     * Multiplies the data with a scalar recursive
+     *
+     * @param mixed $data   given data
+     * @param float $scalar given scalar
+     *
+     * @return mixed
      */
     protected static function dotScalarRecursive($data, $scalar)
     {
@@ -94,15 +116,23 @@ class Dot
     }
 
     /**
-     * @param array $data1
-     * @param array $data2
+     * Multiplies two vectors
+     *
+     * @param array $data1 first vector
+     * @param array $data2 second vector
+     *
      * @return mixed
+     * @throws InvalidArgumentException will be thrown if the vector sizes differ
      */
     protected static function dotVectorVector(array $data1, array $data2)
     {
         if (count($data1) !== count($data2)) {
             throw new InvalidArgumentException(
-                'Vector size '.count($data1). ' is different to vector size '.count($data2)
+                sprintf(
+                    "Vector size %d is different to vector size %d",
+                    count($data1),
+                    count($data2)
+                )
             );
         }
 
@@ -115,15 +145,24 @@ class Dot
     }
 
     /**
-     * @param array $data1
-     * @param array $data2
+     * Multiplies a vector with a matrix
+     *
+     * @param array $data1 vector
+     * @param array $data2 matrix
+     *
      * @return array
+     * @throws InvalidArgumentException will be thrown if the vector and matrix size
+     * differ
      */
     protected static function dotVectorMatrix(array $data1, array $data2)
     {
         if (count($data1) !== count($data2)) {
             throw new InvalidArgumentException(
-                'Vector size '.count($data1). ' is different to matrix size '.count($data2)
+                sprintf(
+                    "Vector size %d is different to matrix size %d",
+                    count($data1),
+                    count($data2)
+                )
             );
         }
 
@@ -136,9 +175,14 @@ class Dot
     }
 
     /**
-     * @param array $data1
-     * @param array $data2
+     * Multiplies a matrix with a vector
+     *
+     * @param array $data1 matrix
+     * @param array $data2 vector
+     *
      * @return array|mixed
+     * @throws InvalidArgumentException will be thrown if the vector and matrix size
+     * differ
      */
     protected static function dotMatrixVector(array $data1, array $data2)
     {
@@ -154,9 +198,13 @@ class Dot
     }
 
     /**
-     * @param array $data1
-     * @param array $data2
+     * Multiplies two matrices
+     *
+     * @param array $data1 matrix1
+     * @param array $data2 matrix2
+     *
      * @return array
+     * @throws InvalidArgumentException will be thrown if the matrix sizes differ
      */
     protected static function dotMatrixMatrix(array $data1, array $data2)
     {

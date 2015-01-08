@@ -66,7 +66,7 @@ class NumPHPTest extends TestCase
 
     /**
      * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Step has to be a positiv value
+     * @expectedExceptionMessage Step has to be a positive value
      */
     public function testArangeInvalidArgumentException()
     {
@@ -93,7 +93,7 @@ class NumPHPTest extends TestCase
 
     /**
      * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Number has to be a positiv value
+     * @expectedExceptionMessage Number has to be a positive value
      */
     public function testLinspaceInvalidArgumentException()
     {

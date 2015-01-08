@@ -51,7 +51,7 @@ abstract class Cache
             throw new CacheKeyException('Key has to be a string');
         }
         if ($this->inCache($key)) {
-            throw new CacheException('Key "'.$key.'" already exists');
+            throw new CacheException(sprintf('Key "%s" already exists', $key));
         }
         $this->cache[$key] = $value;
 
@@ -76,7 +76,7 @@ abstract class Cache
             return $this->cache[$key];
         }
 
-        throw new CacheException('Key "'.$key.'" does not exist');
+        throw new CacheException(sprintf('Key "%s" does not exist', $key));
     }
 
     /**
