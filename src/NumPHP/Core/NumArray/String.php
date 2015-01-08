@@ -2,21 +2,34 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHP\Core\NumArray
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHP\Core\NumArray;
 
 /**
  * Class String
- * @package NumPHP\Core\NumArray
+ *
+ * @category Core
+ * @package  NumPHP\Core\NumArray
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
  */
 class String
 {
     /**
-     * @param $data
+     * Returns a string representing an array
+     *
+     * @param mixed $data given data
+     *
      * @return string
      */
     public static function toString($data)
@@ -25,8 +38,11 @@ class String
     }
 
     /**
-     * @param $array
-     * @param int $level
+     * Returns a string representing an array recursive
+     *
+     * @param mixed $data  given data
+     * @param int   $level current level
+     *
      * @return string
      */
     protected static function toStringRecursive($data, $level = 0)
