@@ -33,8 +33,8 @@ abstract class Helper
      * @param array $array given array of floats or integers
      *
      * @return float
-     * @throws InvalidArgumentException will be thrown, if a value in the array is not
-     * numeric
+     * @throws InvalidArgumentException will be thrown, if a value in the array is
+     * not numeric
      */
     public static function multiply(array $array)
     {
