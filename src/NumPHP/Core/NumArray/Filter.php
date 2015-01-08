@@ -2,22 +2,35 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHP\Core\NumArray
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHP\Core\NumArray;
 
 /**
  * Class Filter
-  * @package NumPHP\Core\NumArray
-  */
+ *
+ * @category Core
+ * @package  NumPHP\Core\NumArray
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
+ */
 class Filter
 {
     /**
-     * @param $data
-     * @param callback $callback
+     * Applies `$callback` on every element in `$data`
+     *
+     * @param mixed    $data     given data
+     * @param callback $callback callback function
+     *
      * @return mixed
      */
     public static function filterArray($data, $callback)
@@ -26,8 +39,11 @@ class Filter
     }
 
     /**
-     * @param $data
-     * @param callback $callback
+     * Applies `$callback` on every element in `$data` recursive
+     *
+     * @param mixed    $data     given data
+     * @param callback $callback callback fucntion
+     *
      * @return mixed
      */
     protected static function filterRecursive($data, $callback)
