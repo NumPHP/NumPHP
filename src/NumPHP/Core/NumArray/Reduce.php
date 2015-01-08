@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHP\Core\NumArray
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHP\Core\NumArray;
@@ -14,15 +19,25 @@ use NumPHP\Core\NumArray;
 
 /**
  * Class Reduce
-  * @package NumPHP\Core\NumArray
-  */
+ *
+ * @category Core
+ * @package  NumPHP\Core\NumArray
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
+ */
 class Reduce
 {
     /**
-     * @param NumArray $numArray
-     * @param $callback
-     * @param $axis
+     * Combines all elements of an NumArray at a given axis with the `$callback`
+     * function
+     *
+     * @param NumArray $numArray given NumArray
+     * @param callback $callback callback function
+     * @param int      $axis     given axis
+     *
      * @return NumArray
+     * @throws InvalidArgumentException will be thrown, if axis is out of bounds
      */
     public static function reduceArray(NumArray $numArray, $callback, $axis)
     {
@@ -36,9 +51,13 @@ class Reduce
     }
 
     /**
-     * @param $data
-     * @param callback $callback
-     * @param int $axis
+     * Combines all elements of an NumArray at a given axis with the `$callback`
+     * function recursive
+     *
+     * @param mixed    $data     given data
+     * @param callback $callback callback fucntion
+     * @param int      $axis     given axis
+     *
      * @return mixed
      */
     protected static function reduceRecursive($data, $callback, $axis = null)
