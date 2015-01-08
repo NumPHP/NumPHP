@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHP\Core\NumArray
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHP\Core\NumArray;
@@ -13,13 +18,21 @@ use NumPHP\Core\Exception\InvalidArgumentException;
 
 /**
  * Class Helper
- * @package NumPHP\Core\NumArray
+ *
+ * @category Core
+ * @package  NumPHP\Core\NumArray
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
  */
 abstract class Helper
 {
     /**
-     * @param array $array
-     * @return int
+     * Multiplies all entries of an array
+     *
+     * @param array $array given array of floats or integers
+     *
+     * @return float
      */
     public static function multiply(array $array)
     {
@@ -27,7 +40,9 @@ abstract class Helper
             $array,
             function ($prod, $item) {
                 if (!is_numeric($item)) {
-                    throw new InvalidArgumentException('Array contains non numeric values');
+                    throw new InvalidArgumentException(
+                        'Array contains non numeric values'
+                    );
                 }
                 return $prod * $item;
             },
