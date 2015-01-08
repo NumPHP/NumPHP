@@ -2,22 +2,35 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHP\Core\NumArray
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHP\Core\NumArray;
 
 /**
  * Class Get
- * @package NumPHP\Core\NumArray
+ *
+ * @category Core
+ * @package  NumPHP\Core\NumArray
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
  */
 class Get
 {
     /**
-     * @param $data
-     * @param array $args
+     * Returns a sliced sub array
+     *
+     * @param mixed $data given data
+     * @param array $args array of indices or slices like `:`, `3:`, `1:6`
+     *
      * @return mixed
      */
     public static function getSubArray($data, array $args)
@@ -26,8 +39,11 @@ class Get
     }
 
     /**
-     * @param $data
-     * @param array $args
+     * Returns a sliced sub array recursive
+     *
+     * @param mixed $data given data
+     * @param array $args array of indices or slices like `:`, `3:`, `1:6`
+     *
      * @return mixed
      */
     protected static function getRecursive($data, array $args)
@@ -36,7 +52,12 @@ class Get
             $arg = $args[0];
             $matches = [];
             array_shift($args);
-            if (preg_match('/^(?P<from>([-]{0,1}\d+)*):(?P<to>([-]{0,1}\d+)*)$/', $arg, $matches)) {
+            $pregMatch = preg_match(
+                '/^(?P<from>([-]{0,1}\d+)*):(?P<to>([-]{0,1}\d+)*)$/',
+                $arg,
+                $matches
+            );
+            if ($pregMatch) {
                 $fromValue = $matches['from'];
                 $toValue = $matches['to'];
                 $sliced = self::slice($data, $fromValue, $toValue);
@@ -54,9 +75,12 @@ class Get
     }
 
     /**
-     * @param $data
-     * @param $fromValue
-     * @param $toValue
+     * Slices a array and returns a sub array from `$fromValue` to `$toValue`
+     *
+     * @param array $data      given array
+     * @param int   $fromValue start of slicing
+     * @param int   $toValue   end of slicing
+     *
      * @return array
      */
     protected static function slice(array $data, $fromValue, $toValue)
