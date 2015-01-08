@@ -54,7 +54,7 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \NumPHP\LinAlg\Exception\InvalidArgumentException
+     * @expectedException \NumPHP\LinAlg\Exception\NoSquareMatrixException
      * @expectedExceptionMessage NumArray with shape (2, 3) given, NumArray has to be square
      */
     public function testDet2x3()
@@ -65,7 +65,7 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \NumPHP\LinAlg\Exception\InvalidArgumentException
+     * @expectedException \NumPHP\LinAlg\Exception\NoMatrixException
      * @expectedExceptionMessage NumArray with dimension 3 given, NumArray should have 2 dimensions
      */
     public function testDet2x2x2()

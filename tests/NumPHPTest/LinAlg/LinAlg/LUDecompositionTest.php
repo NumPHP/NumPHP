@@ -128,7 +128,7 @@ class LUDecompositionTest extends TestCase
     }
 
     /**
-     * @expectedException \NumPHP\LinAlg\Exception\InvalidArgumentException
+     * @expectedException \NumPHP\LinAlg\Exception\NoMatrixException
      * @expectedExceptionMessage NumArray with dimension 1 given, NumArray should have 2 dimensions
      */
     public function testLUDecompositionVector()

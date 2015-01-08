@@ -2,29 +2,45 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  LinAlg
+ * @package   NumPHP\LinAlg
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHP\LinAlg;
 
 use NumPHP\Core\NumArray;
-use NumPHP\LinAlg\Exception\InvalidArgumentException;
+use NumPHP\LinAlg\Exception\NoMatrixException;
+use NumPHP\LinAlg\Exception\NoSquareMatrixException;
 use NumPHP\LinAlg\LinAlg\LUDecomposition;
 
 /**
  * Class LinAlg
-  * @package NumPHP\LinAlg
-  */
+ *
+ * @category LinAlg
+ * @package  NumPHP\LinAlg
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
+ */
 class LinAlg
 {
     const VERSION = '1.0.0-dev5';
 
     /**
-     * @param $array
+     * Calculates the determinant of a matrix
+     *
+     * @param mixed $array matrix
+     *
      * @return int
-     * @throws InvalidArgumentException
+     * @throws NoMatrixException will be thrown, if given array is no matrix
+     * @throws NoSquareMatrixException will be thrown, if given array is no square
+     * matrix
      */
     public static function det($array)
     {
@@ -32,19 +48,30 @@ class LinAlg
             $array = new NumArray($array);
         }
         if ($array->getNDim() !== 2) {
-            throw new InvalidArgumentException(
-                'NumArray with dimension '.$array->getNDim().' given, NumArray should have 2 dimensions'
+            throw new NoMatrixException(
+                sprintf(
+                    "NumArray with dimension %d given, NumArray should have 2 ".
+                    "dimensions",
+                    $array->getNDim()
+                )
             );
         }
         $shape = $array->getShape();
         if ($shape[0] !== $shape[1]) {
-            throw new InvalidArgumentException(
-                'NumArray with shape ('.implode(', ', $shape).') given, NumArray has to be square'
+            throw new NoSquareMatrixException(
+                sprintf(
+                    "NumArray with shape (%s) given, NumArray has to be square",
+                    implode(', ', $shape)
+                )
             );
         }
 
         $lud = self::lud($array);
-        /** @var NumArray $uMatrix */
+        /**
+         * Upper triangular matrix
+         *
+         * @var NumArray $uMatrix
+         */
         $uMatrix = $lud['U'];
         $det = 1;
         for ($i = 0; $i < $shape[0]; $i++) {
@@ -55,9 +82,12 @@ class LinAlg
     }
 
     /**
-     * @param $array
-     * @return array|mixed
-     * @throws InvalidArgumentException
+     * Factors a matrix into a pivot matrix, a lower and upper triangular matrix
+     *
+     * @param mixed $array matrix
+     *
+     * @return array
+     * @throws NoMatrixException will be thrown, if `$array` is no matrix
      */
     public static function lud($array)
     {

@@ -2,35 +2,52 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  LinAlg
+ * @package   NumPHP\LinAlg\LinAlg
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHP\LinAlg\LinAlg;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
-use NumPHP\LinAlg\Exception\InvalidArgumentException;
+use NumPHP\LinAlg\Exception\NoMatrixException;
 
 /**
  * Class LUDecomposition
-  * @package NumPHP\LinAlg\LinAlg
-  */
+ *
+ * @category LinAlg
+ * @package  NumPHP\LinAlg\LinAlg
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
+ */
 class LUDecomposition
 {
     const CACHE_KEY_LU_DECOMPOSITION = 'lu-decomposition';
 
     /**
-     * @param NumArray $array
+     * Factors a matrix into a pivot matrix, a lower and upper triangular matrix
+     *
+     * @param NumArray $array matrix
+     *
      * @return array
-     * @throws InvalidArgumentException
+     * @throws NoMatrixException will be thrown, if `array` is no matrix
      */
     public static function lud(NumArray $array)
     {
         if ($array->getNDim() !== 2) {
-            throw new InvalidArgumentException(
-                'NumArray with dimension '.$array->getNDim().' given, NumArray should have 2 dimensions'
+            throw new NoMatrixException(
+                sprintf(
+                    "NumArray with dimension %d given, NumArray should have 2 ".
+                    "dimensions",
+                    $array->getNDim()
+                )
             );
         }
         $numArray = clone $array;
@@ -58,10 +75,12 @@ class LUDecomposition
             }
             // elimination
             for ($j = $i+1; $j < $mAxis; $j++) {
-                $fac = $numArray->get($j, $i)->getData()/$numArray->get($i, $i)->getData();
+                $fac = $numArray->get($j, $i)->getData()/
+                    $numArray->get($i, $i)->getData();
                 $lMatrix->set($fac, $j, $i);
                 for ($k = $i+1; $k < $nAxis; $k++) {
-                    $value = $numArray->get($j, $k)->sub($numArray->get($i, $k)->dot($fac));
+                    $value = $numArray->get($j, $k)
+                        ->sub($numArray->get($i, $k)->dot($fac));
                     $numArray->set($value, $j, $k);
                 }
             }
@@ -75,7 +94,10 @@ class LUDecomposition
     }
 
     /**
-     * @param array $pArray
+     * Builds pivot matrix out of an pivot vector
+     *
+     * @param array $pArray pivot vector
+     *
      * @return NumArray
      */
     protected static function buildPivotMatrix(array $pArray)
@@ -90,7 +112,10 @@ class LUDecomposition
     }
 
     /**
-     * @param NumArray $numArray
+     * Build the upper triangular matrix from given matrix
+     *
+     * @param NumArray $numArray given matrix
+     *
      * @return NumArray
      */
     protected static function buildUMatrix(NumArray $numArray)
@@ -111,8 +136,11 @@ class LUDecomposition
     }
 
     /**
-     * @param NumArray $numArray
-     * @param $iIndex
+     * Searches the pivot index in an array
+     *
+     * @param NumArray $numArray given array
+     * @param int      $iIndex   index
+     *
      * @return int
      */
     protected static function getPivotIndex(NumArray $numArray, $iIndex)
