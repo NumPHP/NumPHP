@@ -16,7 +16,7 @@ namespace NumPHP\Core\Exception;
 
 /**
  * Class InvalidArgumentException
- * 
+ *
  * @category Core
  * @package  NumPHP\Core\Exception
  * @author   Gordon Lesti <info@gordonlesti.com>

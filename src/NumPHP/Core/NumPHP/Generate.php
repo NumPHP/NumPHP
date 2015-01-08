@@ -2,22 +2,35 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHP\Core\NumPHP
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHP\Core\NumPHP;
 
 /**
  * Class Generate
- * @package NumPHP\Core\NumPHP
+ *
+ * @category Core
+ * @package  NumPHP\Core\NumPHP
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
  */
 class Generate
 {
     /**
-     * @param array $shape
-     * @param null $value
+     * Generates an array with the given shape and value
+     *
+     * @param array $shape shape of the array
+     * @param null  $value value of the array, if not given `$value` will be random
+     *
      * @return mixed
      */
     public static function generateArray(array $shape, $value = null)
@@ -26,19 +39,22 @@ class Generate
     }
 
     /**
-     * @param array $shape
-     * @param null $value
-     * @return array|int|null
+     * Generates an array with the given shape and value recursive
+     *
+     * @param array $shape shape of the array
+     * @param mixed $value value of the array, if not given `$value` will be random
+     *
+     * @return mixed
      */
     protected static function generateArrayRecursive(array $shape, $value = null)
     {
         if (count($shape)) {
-            $zeros = [];
+            $array = [];
             $dim = array_shift($shape);
             for ($i = 0; $i < $dim; $i++) {
-                $zeros[] = self::generateArrayRecursive($shape, $value);
+                $array[] = self::generateArrayRecursive($shape, $value);
             }
-            return $zeros;
+            return $array;
         }
         if (is_null($value)) {
             return mt_rand() + mt_rand() / mt_getrandmax();
