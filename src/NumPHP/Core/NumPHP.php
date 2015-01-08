@@ -2,9 +2,13 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category Core
+ * @package  NumPHP\Core
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     https://github.com/NumPHP/NumPHP for the canonical source repository
  */
 
 namespace NumPHP\Core;
@@ -14,13 +18,20 @@ use NumPHP\Core\NumPHP\Generate;
 
 /**
  * Class NumPHP
- * @package NumPHP\Core
+ *
+ * @category Core
+ * @package  NumPHP\Core
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     https://github.com/NumPHP/NumPHP for the canonical source repository
  */
 abstract class NumPHP
 {
     const VERSION = '1.0.0-dev5';
 
     /**
+     * Returns a NumArray filled with `0`
+     *
      * @return NumArray
      */
     public static function zeros()
@@ -30,7 +41,10 @@ abstract class NumPHP
     }
 
     /**
-     * @param NumArray $numArray
+     * Returns a NumArray with the same size, but filled with `0`
+     *
+     * @param NumArray $numArray given NumArray
+     *
      * @return NumArray
      */
     public static function zerosLike(NumArray $numArray)
@@ -39,6 +53,8 @@ abstract class NumPHP
     }
 
     /**
+     * Returns a NumArray filled with `1`
+     *
      * @return NumArray
      */
     public static function ones()
@@ -48,7 +64,10 @@ abstract class NumPHP
     }
 
     /**
-     * @param NumArray $numArray
+     * Returns a NumArray with the same size, but filled with `1`
+     *
+     * @param NumArray $numArray given NumArray
+     *
      * @return NumArray
      */
     public static function onesLike(NumArray $numArray)
@@ -57,6 +76,8 @@ abstract class NumPHP
     }
 
     /**
+     * Returns a NumArray filled with random values
+     *
      * @return NumArray
      */
     public static function rand()
@@ -66,7 +87,10 @@ abstract class NumPHP
     }
 
     /**
-     * @param NumArray $numArray
+     * Returns a NumArray with the same size, but filled with random values
+     *
+     * @param NumArray $numArray given NumArray
+     *
      * @return NumArray
      */
     public static function randLike(NumArray $numArray)
@@ -75,13 +99,18 @@ abstract class NumPHP
     }
 
     /**
-     * @param $mAxis
-     * @param int $nAxis
+     * Returns a matrix (NumArray) filled with `0` and `1` on the main diagonal
+     *
+     * @param int $mAxis size of the m axis
+     * @param int $nAxis size of the n axis, if not given `$nAxis` = `$mAxis`
+     *
      * @return NumArray
      */
     public static function eye($mAxis, $nAxis = -1)
     {
-        if ($nAxis === -1) {
+        $mAxis = (int) $mAxis;
+        $nAxis = (int) $nAxis;
+        if ($nAxis < 0) {
             $nAxis = $mAxis;
         }
         $eye = self::zeros($mAxis, $nAxis);
@@ -94,7 +123,11 @@ abstract class NumPHP
     }
 
     /**
-     * @param $mAxis
+     * Returns a identity matrix (NumArray) filled with `0` and `1` on the main
+     * diagonal
+     *
+     * @param int $mAxis size of the m axis and n axis
+     *
      * @return NumArray
      */
     public static function identity($mAxis)
@@ -103,12 +136,17 @@ abstract class NumPHP
     }
 
     /**
-     * @param $low
-     * @param $high
-     * @param int $step
+     * Creates a vector (NumArray) from `$low` to `$high` with `$step` steps
+     *
+     * @param float $low  beginning of the vector
+     * @param float $high end of the vector
+     * @param float $step steps, if not given `$step` = `1.0`
+     *
      * @return NumArray
+     *
+     * @throws InvalidArgumentException
      */
-    public static function arange($low, $high, $step = 1)
+    public static function arange($low, $high, $step = 1.0)
     {
         if ($step < 0) {
             throw new InvalidArgumentException('Step has to be a positiv value');
@@ -117,10 +155,15 @@ abstract class NumPHP
     }
 
     /**
-     * @param $low
-     * @param $high
-     * @param $number
+     * Creates a vector (NumArray) from `$low` to `$high` with the size of `$number`
+     *
+     * @param float $low    beginning of the vector
+     * @param float $high   end of the vector
+     * @param int   $number size of the vector
+     *
      * @return NumArray
+     *
+     * @throws InvalidArgumentException
      */
     public static function linspace($low, $high, $number)
     {
@@ -129,19 +172,19 @@ abstract class NumPHP
         }
         $data = [];
         switch ($number) {
-            case 0:
-                break;
-            case 1:
-                $data = [$low];
-                break;
-            default:
-                $step = ($high - $low) / ($number - 1);
-                $sum = $low;
-                for ($i = 0; $i < $number; $i++) {
-                    $data[] = $sum;
-                    $sum += $step;
-                }
-                break;
+        case 0:
+            break;
+        case 1:
+            $data = [$low];
+            break;
+        default:
+            $step = ($high - $low) / ($number - 1);
+            $sum = $low;
+            for ($i = 0; $i < $number; $i++) {
+                $data[] = $sum;
+                $sum += $step;
+            }
+            break;
         }
         return new NumArray($data);
     }
