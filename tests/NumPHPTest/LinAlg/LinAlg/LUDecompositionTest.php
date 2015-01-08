@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  LinAlg
+ * @package   NumPHPTest\LinAlg\LinAlg
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHPTest\LinAlg\LinAlg;
@@ -17,10 +22,20 @@ use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class LUDecompositionTest
-  * @package NumPHPTest\LinAlg\LinAlg
-  */
+ *
+ * @category LinAlg
+ * @package  NumPHPTest\LinAlg\LinAlg
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
+ */
 class LUDecompositionTest extends TestCase
 {
+    /**
+     * Tests LinAlg::lud with 3x3 matrix
+     *
+     * @return void
+     */
     public function testLUDecompositionSquare()
     {
         $numArray = new NumArray(
@@ -54,11 +69,28 @@ class LUDecompositionTest extends TestCase
         );
         $result = LinAlg::lud($numArray);
         $this->assertCount(3, $result);
-        $this->assertNumArrayEquals($expectedP, $result['P'], 'Matrix P is not equal');
-        $this->assertNumArrayEquals($expectedL, $result['L'], 'Matrix L is not equal');
-        $this->assertNumArrayEquals($expectedU, $result['U'], 'Matrix U is not equal');
+        $this->assertNumArrayEquals(
+            $expectedP,
+            $result['P'],
+            'Matrix P is not equal'
+        );
+        $this->assertNumArrayEquals(
+            $expectedL,
+            $result['L'],
+            'Matrix L is not equal'
+        );
+        $this->assertNumArrayEquals(
+            $expectedU,
+            $result['U'],
+            'Matrix U is not equal'
+        );
     }
 
+    /**
+     * Tests LinAlg::lud with 2x4 matrix
+     *
+     * @return void
+     */
     public function testLUDecomposition2x4()
     {
         $numArray = new NumArray(
@@ -83,11 +115,28 @@ class LUDecompositionTest extends TestCase
         );
         $result = LinAlg::lud($numArray);
         $this->assertCount(3, $result);
-        $this->assertNumArrayEquals($expectedP, $result['P'], 'Matrix P is not equal');
-        $this->assertNumArrayEquals($expectedL, $result['L'], 'Matrix L is not equal');
-        $this->assertNumArrayEquals($expectedU, $result['U'], 'Matrix U is not equal');
+        $this->assertNumArrayEquals(
+            $expectedP,
+            $result['P'],
+            'Matrix P is not equal'
+        );
+        $this->assertNumArrayEquals(
+            $expectedL,
+            $result['L'],
+            'Matrix L is not equal'
+        );
+        $this->assertNumArrayEquals(
+            $expectedU,
+            $result['U'],
+            'Matrix U is not equal'
+        );
     }
 
+    /**
+     * Tests LiNAlg::lud with 4x3 matrix
+     *
+     * @return void
+     */
     public function testLUDecomposition4x3()
     {
         $array = [
@@ -122,14 +171,31 @@ class LUDecompositionTest extends TestCase
         );
         $result = LinAlg::lud($array);
         $this->assertCount(3, $result);
-        $this->assertNumArrayEquals($expectedP, $result['P'], 'Matrix P is not equal');
-        $this->assertNumArrayEquals($expectedL, $result['L'], 'Matrix L is not equal');
-        $this->assertNumArrayEquals($expectedU, $result['U'], 'Matrix U is not equal');
+        $this->assertNumArrayEquals(
+            $expectedP,
+            $result['P'],
+            'Matrix P is not equal'
+        );
+        $this->assertNumArrayEquals(
+            $expectedL,
+            $result['L'],
+            'Matrix L is not equal'
+        );
+        $this->assertNumArrayEquals(
+            $expectedU,
+            $result['U'],
+            'Matrix U is not equal'
+        );
     }
 
     /**
-     * @expectedException \NumPHP\LinAlg\Exception\NoMatrixException
-     * @expectedExceptionMessage NumArray with dimension 1 given, NumArray should have 2 dimensions
+     * Tests if NoMatrixException will be thrown, when using LinAlg::lud a vector
+     *
+     * @expectedException        \NumPHP\LinAlg\Exception\NoMatrixException
+     * @expectedExceptionMessage NumArray with dimension 1 given, NumArray should
+     * have 2 dimensions
+     *
+     * @return void
      */
     public function testLUDecompositionVector()
     {
@@ -138,12 +204,19 @@ class LUDecompositionTest extends TestCase
         LinAlg::lud($numArray);
     }
 
+    /**
+     * Tests cache of LinAlg::lud
+     *
+     * @return void
+     */
     public function testLUDecompositionCache()
     {
         $numArray = NumPHP::arange(1, 4)->reshape(2, 2);
 
         LinAlg::lud($numArray);
-        $expectedResult = $numArray->getCache(LUDecomposition::CACHE_KEY_LU_DECOMPOSITION);
+        $expectedResult = $numArray->getCache(
+            LUDecomposition::CACHE_KEY_LU_DECOMPOSITION
+        );
         $this->assertSame($expectedResult, LinAlg::lud($numArray));
     }
 }

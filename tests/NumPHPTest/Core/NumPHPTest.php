@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHPTest\Core
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHPTest\Core;
@@ -15,9 +20,20 @@ use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class NumPHPTest
+ *
+ * @category Core
+ * @package  NumPHPTest\Core
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
  */
 class NumPHPTest extends TestCase
 {
+    /**
+     * Compares the version in README.md with NumPHP::VERSION
+     *
+     * @return void
+     */
     public function testREADMEVersion()
     {
         $readmeContent = file_get_contents(realpath(__DIR__.'/../../../README.md'));
@@ -27,6 +43,11 @@ class NumPHPTest extends TestCase
         );
     }
 
+    /**
+     * Tests NumPHP::arange without step
+     *
+     * @return void
+     */
     public function testArangeIntWithoutStep()
     {
         $expectedNumArray = new NumArray(
@@ -35,6 +56,11 @@ class NumPHPTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, NumPHP::arange(3, 7));
     }
 
+    /**
+     * Tests NumPHP::arange with float values and step
+     *
+     * @return void
+     */
     public function testArangeFloatWithoutStep()
     {
         $expectedNumArray = new NumArray(
@@ -48,6 +74,11 @@ class NumPHPTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, NumPHP::arange(3.45, 7.45));
     }
 
+    /**
+     * Tests NumPHP::arange with integer step
+     *
+     * @return void
+     */
     public function testArangeIntWithStep()
     {
         $expectedNumArray = new NumArray(
@@ -56,44 +87,88 @@ class NumPHPTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, NumPHP::arange(3, 7, 2));
     }
 
+    /**
+     * Tests NumPHP::arange with float step
+     *
+     * @return void
+     */
     public function testArangeFloatWithStep()
     {
         $expectedNumArray = new NumArray(
             [3.12, 4.66, 6.2]
         );
-        $this->assertNumArrayEquals($expectedNumArray, NumPHP::arange(3.12, 7, 1.54));
+        $this->assertNumArrayEquals(
+            $expectedNumArray,
+            NumPHP::arange(3.12, 7, 1.54)
+        );
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * Tests if InvalidArgumentException will be thrown, when using NumPHP::arange
+     * with negative step
+     *
+     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Step has to be a positive value
+     *
+     * @return void
      */
     public function testArangeInvalidArgumentException()
     {
         NumPHP::arange(1, 2, -1);
     }
 
+    /**
+     * Tests NumPHP::linspace with size 0
+     *
+     * @return void
+     */
     public function testLinspace0()
     {
-        $this->assertNumArrayEquals(new NumArray([]), NumPHP::linspace(1.5, 4.5, 0));
+        $expectedNumArray = new NumArray([]);
+        $this->assertNumArrayEquals(
+            $expectedNumArray,
+            NumPHP::linspace(1.5, 4.5, 0)
+        );
     }
 
+    /**
+     * Tests NumPHP::linspace with size 1
+     *
+     * @return void
+     */
     public function testLinspace1()
     {
-        $this->assertNumArrayEquals(new NumArray([1.5]), NumPHP::linspace(1.5, 4.5, 1));
+        $expectedNumArray = new NumArray([1.5]);
+        $this->assertNumArrayEquals(
+            $expectedNumArray,
+            NumPHP::linspace(1.5, 4.5, 1)
+        );
     }
 
+    /**
+     * Tests NumPHP::linspace with size 7
+     *
+     * @return void
+     */
     public function testLinspace()
     {
         $expectedNumArray = new NumArray(
             [1.5, 2, 2.5, 3, 3.5, 4, 4.5]
         );
-        $this->assertNumArrayEquals($expectedNumArray, NumPHP::linspace(1.5, 4.5, 7));
+        $this->assertNumArrayEquals(
+            $expectedNumArray,
+            NumPHP::linspace(1.5, 4.5, 7)
+        );
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * Test if InvalidArgumentException will be thrown, when using NumPHP::linspace
+     * with negative `$number`
+     *
+     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Number has to be a positive value
+     *
+     * @return void
      */
     public function testLinspaceInvalidArgumentException()
     {

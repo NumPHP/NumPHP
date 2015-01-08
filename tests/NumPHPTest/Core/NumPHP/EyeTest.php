@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHPTest\Core\NumPHP
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHPTest\Core\NumPHP;
@@ -15,10 +20,20 @@ use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class EyeTest
-  * @package NumPHPTest\Core\NumPHP
-  */
+ *
+ * @category Core
+ * @package  NumPHPTest\Core\NumPHP
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
+ */
 class EyeTest extends TestCase
 {
+    /**
+     * Tests NumPHP::eye with argument 1
+     *
+     * @return void
+     */
     public function testEye1()
     {
         $numArray = NumPHP::eye(1);
@@ -27,6 +42,11 @@ class EyeTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray);
     }
 
+    /**
+     * Tests NumPHP::eye with argument 4
+     *
+     * @return void
+     */
     public function testEye4()
     {
         $numArray = NumPHP::eye(4);
@@ -42,6 +62,11 @@ class EyeTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray);
     }
 
+    /**
+     * Tests NumPHP::eye with arguments 2, 3
+     *
+     * @return void
+     */
     public function testEye2x3()
     {
         $numArray = NumPHP::eye(2, 3);
@@ -55,6 +80,11 @@ class EyeTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray);
     }
 
+    /**
+     * Tests NumPHP::eye with arguments 4, 3
+     *
+     * @return void
+     */
     public function testEye4x3()
     {
         $numArray = NumPHP::eye(4, 3);
@@ -70,6 +100,11 @@ class EyeTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray);
     }
 
+    /**
+     * Tests NumPHP::identity with argument 3
+     *
+     * @return void
+     */
     public function testIdentity()
     {
         $numArray = NumPHP::identity(3);

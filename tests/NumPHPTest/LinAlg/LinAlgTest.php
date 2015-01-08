@@ -2,12 +2,17 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  LinAlg
+ * @package   NumPHPTest\LinAlg
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
-namespace NumPHPTest\LinAlg\LinAlgTest;
+namespace NumPHPTest\LinAlg;
 
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
@@ -15,10 +20,20 @@ use NumPHP\LinAlg\LinAlg;
 
 /**
  * Class LinAlgTest
-  * @package NumPHPTest\LinAlg\LinAlgTest
-  */
+ *
+ * @category LinAlg
+ * @package  NumPHPTest\LinAlg
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
+ */
 class LinAlgTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Compares the version in README.md with LinAlg::VERSION
+     *
+     * @return void
+     */
     public function testREADMEVersion()
     {
         $readmeContent = file_get_contents(realpath(__DIR__.'/../../../README.md'));
@@ -28,6 +43,11 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Tests LinAlg::det with 3x3 matrix
+     *
+     * @return void
+     */
     public function testDet3x3()
     {
         $numArray = new NumArray(
@@ -41,6 +61,11 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(27.0, LinAlg::det($numArray));
     }
 
+    /**
+     * Tests LinAlg::det with 4x4 matrix
+     *
+     * @return void
+     */
     public function testDet4x4()
     {
         $array = [
@@ -54,8 +79,14 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \NumPHP\LinAlg\Exception\NoSquareMatrixException
-     * @expectedExceptionMessage NumArray with shape (2, 3) given, NumArray has to be square
+     * Tests if NoSquareMatrixException will be thrown, when using LinAlg::det with
+     * 2x3 matrix
+     *
+     * @expectedException        \NumPHP\LinAlg\Exception\NoSquareMatrixException
+     * @expectedExceptionMessage NumArray with shape (2, 3) given, NumArray has to
+     * be square
+     *
+     * @return void
      */
     public function testDet2x3()
     {
@@ -65,8 +96,14 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \NumPHP\LinAlg\Exception\NoMatrixException
-     * @expectedExceptionMessage NumArray with dimension 3 given, NumArray should have 2 dimensions
+     * Tests if NoMatrixException will be thrown, when using LinAlg::det with 2x2x2
+     * matrix
+     *
+     * @expectedException        \NumPHP\LinAlg\Exception\NoMatrixException
+     * @expectedExceptionMessage NumArray with dimension 3 given, NumArray should
+     * have 2 dimensions
+     *
+     * @return void
      */
     public function testDet2x2x2()
     {
