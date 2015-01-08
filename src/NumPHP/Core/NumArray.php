@@ -15,7 +15,6 @@
 namespace NumPHP\Core;
 
 use NumPHP\Core\Exception\BadMethodCallException;
-use NumPHP\Core\NumArray\Cache;
 use NumPHP\Core\NumArray\Dot;
 use NumPHP\Core\NumArray\Filter;
 use NumPHP\Core\NumArray\Get;
