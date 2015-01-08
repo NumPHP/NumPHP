@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHP\Core\NumArray
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHP\Core\NumArray;
@@ -14,21 +19,31 @@ use NumPHP\Core\Exception\CacheKeyException;
 
 /**
  * Class Cache
-  * @package NumPHP\Core\NumArray
-  */
+ *
+ * @category Core
+ * @package  NumPHP\Core\NumArray
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
+ */
 abstract class Cache
 {
     /**
+     * Cache
+     *
      * @var array
      */
     protected $cache = [];
 
     /**
-     * @param $key
-     * @param $value
+     * Saves `$value` under the key `$key` in the cache
+     *
+     * @param string $key   the key
+     * @param mixed  $value the value
+     *
      * @return $this
-     * @throws CacheException
-     * @throws CacheKeyException
+     * @throws CacheKeyException will be thrown if `$key` is no string
+     * @throws CacheException will be thrown, if `$key` is already in use
      */
     public function setCache($key, $value)
     {
@@ -44,10 +59,13 @@ abstract class Cache
     }
 
     /**
-     * @param $key
+     * Returns the value of the key `$key`
+     *
+     * @param string $key the key
+     *
      * @return mixed
-     * @throws CacheKeyException
-     * @throws CacheException
+     * @throws CacheKeyException will be thrown if `$key` is no string
+     * @throws CacheException will be thrown `$key` does not exist
      */
     public function getCache($key)
     {
@@ -62,9 +80,12 @@ abstract class Cache
     }
 
     /**
-     * @param $key
+     * Checks if the key `$key` is used in the cache
+     *
+     * @param string $key the key
+     *
      * @return bool
-     * @throws CacheKeyException
+     * @throws CacheKeyException will be thrown if `$key` is no string
      */
     public function inCache($key)
     {
@@ -75,9 +96,12 @@ abstract class Cache
     }
 
     /**
-     * @param null $key
+     * Flushes the hole cache or just the key `$key`
+     *
+     * @param string $key the key
+     *
      * @return $this
-     * @throws CacheKeyException
+     * @throws CacheKeyException will be thrown if `$key` is no string
      */
     public function flushCache($key = null)
     {

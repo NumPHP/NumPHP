@@ -150,7 +150,7 @@ abstract class NumPHP
      * @param float $step steps, if not given `$step` = `1.0`
      *
      * @return NumArray
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException will be thrown if `$step` is negative
      */
     public static function arange($low, $high, $step = 1.0)
     {
@@ -168,7 +168,7 @@ abstract class NumPHP
      * @param int   $number size of the vector
      *
      * @return NumArray
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException will be thrown if `$number` is negative
      */
     public static function linspace($low, $high, $number)
     {
