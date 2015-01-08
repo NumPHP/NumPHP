@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHP\Core\NumArray
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHP\Core\NumArray;
@@ -13,13 +18,23 @@ use NumPHP\Core\Exception\InvalidArgumentException;
 
 /**
  * Class Shape
- * @package NumPHP\Core\NumArray
+ *
+ * @category Core
+ * @package  NumPHP\Core\NumArray
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
  */
 class Shape
 {
     /**
-     * @param $data
+     * Returns the shape of an value or array
+     *
+     * @param mixed $data given data
+     *
      * @return array
+     * @throws InvalidArgumentException will be thrown, if the dimensions did not
+     * match
      */
     public static function getShape($data)
     {
@@ -28,17 +43,24 @@ class Shape
     }
 
     /**
-     * @param array $data
-     * @param array $shape
-     * @param array $newShape
+     * Gives a multidimensional array a new shape
+     *
+     * @param array $data     given data
+     * @param array $shape    old shape
+     * @param array $newShape new shape
+     *
      * @return array
+     * @throws InvalidArgumentException will be thrown, if the new shape has other
+     * size than the old one
      */
     public static function reshape(array $data, array $shape, array $newShape)
     {
         $oldSize = Helper::multiply($shape);
         $newSize = Helper::multiply($newShape);
         if ($newSize !== $oldSize) {
-            throw new InvalidArgumentException('Total size of new array must be unchanged');
+            throw new InvalidArgumentException(
+                'Total size of new array must be unchanged'
+            );
         }
         return self::reshapeRecursive(
             self::reshapeToVectorRecursive($data),
@@ -47,12 +69,17 @@ class Shape
     }
 
     /**
-     * @param $data
-     * @param $shape
-     * @param int $level
+     * Returns the shape of an value or array recursive
+     *
+     * @param mixed $data  given data
+     * @param array $shape the current shape
+     * @param int   $level the current level of the data
+     *
      * @return array
+     * @throws InvalidArgumentException will be thrown, if the dimensions did not
+     * match
      */
-    protected static function getShapeRecursive($data, $shape, $level = 0)
+    protected static function getShapeRecursive($data, array $shape, $level = 0)
     {
         if (is_array($data)) {
             $count = count($data);
@@ -69,7 +96,10 @@ class Shape
     }
 
     /**
-     * @param array $data
+     * Reshapes an multidimensional array to an simple array
+     *
+     * @param array $data given data
+     *
      * @return array
      */
     protected static function reshapeToVectorRecursive(array $data)
@@ -86,18 +116,24 @@ class Shape
     }
 
     /**
-     * @param array $data
-     * @param $shape
+     * Reshapes an multidimensional array to a new shape recursive
+     *
+     * @param array $data  given data
+     * @param array $shape new shape
+     *
      * @return array
      */
-    protected static function reshapeRecursive(array $data, $shape)
+    protected static function reshapeRecursive(array $data, array $shape)
     {
         if (count($shape) > 1) {
             $reshaped = [];
             $axis = array_shift($shape);
             $length = count($data) / $axis;
             for ($i = 0; $i < $axis; $i++) {
-                $reshaped[] = self::reshapeRecursive(array_slice($data, $i*$length, $length), $shape);
+                $reshaped[] = self::reshapeRecursive(
+                    array_slice($data, $i*$length, $length),
+                    $shape
+                );
             }
             return $reshaped;
         }

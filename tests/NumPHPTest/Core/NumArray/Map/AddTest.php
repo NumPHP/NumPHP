@@ -90,7 +90,7 @@ class AddTest extends TestCase
 
     /**
      * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Shape 5 is different from 4
+     * @expectedExceptionMessage Size 5 is different from size 4
      */
     public function testAddDifferentShape()
     {
