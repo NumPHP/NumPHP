@@ -4,11 +4,12 @@
  *
  * PHP version 5
  *
- * @category Core
- * @package  NumPHP\Core
- * @author   Gordon Lesti <info@gordonlesti.com>
- * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
- * @link     https://github.com/NumPHP/NumPHP for the canonical source repository
+ * @category  Core
+ * @package   NumPHP\Core
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHP\Core;
@@ -23,7 +24,7 @@ use NumPHP\Core\NumPHP\Generate;
  * @package  NumPHP\Core
  * @author   Gordon Lesti <info@gordonlesti.com>
  * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
- * @link     https://github.com/NumPHP/NumPHP for the canonical source repository
+ * @link     http://numphp.org/
  */
 abstract class NumPHP
 {
