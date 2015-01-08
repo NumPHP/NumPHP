@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHPTest\Core
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHPTest\Core;
@@ -14,21 +19,34 @@ use NumPHP\Core\NumPHP;
 
 /**
  * Class NumArrayTest
- * @package NumPHPTest\Core
  *
- * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @category Core
+ * @package  NumPHPTest\Core
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
  */
 class NumArrayTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * Tests if InvalidArgumentException will be thrown, when creating a NumArray
+     * with wrong input
+     *
+     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Dimensions did not match
+     *
+     * @return void
      */
     public function testConstructInvalidArgumentException()
     {
         new NumArray([[1], [2, 3]]);
     }
 
+    /**
+     * Tests NumArray::getData
+     *
+     * @return void
+     */
     public function testGetData()
     {
         $array = [1, 2, 3];
@@ -36,6 +54,11 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($array, $numArray->getData());
     }
 
+    /**
+     * Tests NumArray::getNDim
+     *
+     * @return void
+     */
     public function testNDim()
     {
         $numArray = new NumArray(1);

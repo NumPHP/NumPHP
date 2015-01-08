@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHPTest\Core\Framework\Constraint
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHPTest\Core\Framework\Constraint;
@@ -15,17 +20,26 @@ use SebastianBergmann\Comparator\Factory;
 
 /**
  * Class NumArrayEqual
-  * @package NumPHPTest\Core\Framework\Constraint
-  */
+ *
+ * @category Core
+ * @package  NumPHPTest\Core\Framework\Constraint
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
+ */
 class NumArrayEqual extends \PHPUnit_Framework_Constraint
 {
     /**
-     * @var NumArray
+     * Expected NumArray
+     *
+     * @var mixed NumArray
      */
     protected $value;
 
     /**
-     * @param \NumPHP\Core\NumArray $value
+     * Creates NumArrayEqual
+     *
+     * @param \NumPHP\Core\NumArray $value expected NumArray
      */
     public function __construct(NumArray $value)
     {
@@ -37,10 +51,16 @@ class NumArrayEqual extends \PHPUnit_Framework_Constraint
     }
 
     /**
-     * @param $other
-     * @param string $description
-     * @param bool $returnResult
-     * @return mixed
+     * Evaluates the constraint for parameter $other
+     *
+     * @param mixed  $other        Value or object to evaluate.
+     * @param string $description  Additional information about the test
+     * @param bool   $returnResult Whether to return a result or throw an exception
+     *
+     * @see \PHPUnit_Framework_Constraint::evaluate
+     *
+     * @return bool
+     * @throws \NumPHP\Core\Exception\CacheKeyException
      */
     public function evaluate($other, $description = '', $returnResult = false)
     {
