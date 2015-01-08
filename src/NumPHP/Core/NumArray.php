@@ -2,9 +2,13 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category Core
+ * @package  NumPHP\Core
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     https://github.com/NumPHP/NumPHP for the canonical source repository
  */
 
 namespace NumPHP\Core;
@@ -24,18 +28,27 @@ use NumPHP\Core\NumArray\Transpose;
 
 /**
  * Class NumArray
- * @package NumPHP\Core
+ *
+ * @category Core
+ * @package  NumPHP\Core
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     https://github.com/NumPHP/NumPHP for the canonical source repository
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
  */
 class NumArray extends Cache
 {
     /**
+     * The shape of the NumArray
+     *
      * @var array
      */
     protected $shape;
 
     /**
+     * The data of the NumArray
+     *
      * @var array|mixed
      */
     protected $data;
@@ -43,7 +56,7 @@ class NumArray extends Cache
     /**
      * Creates an new NumArray
      *
-     * @param $data
+     * @param mixed $data given data
      */
     public function __construct($data)
     {
@@ -62,7 +75,7 @@ class NumArray extends Cache
     }
 
     /**
-     * Returns the dimensions othe NumArray
+     * Returns the dimensions of the NumArray
      *
      * @return array
      */
@@ -94,7 +107,11 @@ class NumArray extends Cache
     }
 
     /**
-     * @param $subArray
+     * Replaces a value or complete parts in the NumArray
+     *
+     * @param mixed      $subArray  given value or NumArray
+     * @param string|int $slice,... exact indices or slices like `:`, `1:8`, `3:`
+     *
      * @return $this
      */
     public function set($subArray)
@@ -111,7 +128,9 @@ class NumArray extends Cache
     }
 
     /**
-     * @return array|mixed
+     * Returns the data of the NumArray
+     *
+     * @return mixed
      */
     public function getData()
     {
@@ -121,7 +140,7 @@ class NumArray extends Cache
     /**
      * Returns the number of axis (dimensions) the NumArray
      *
-     * @return int|void
+     * @return int
      */
     public function getNDim()
     {
@@ -131,7 +150,8 @@ class NumArray extends Cache
     /**
      * Adds an array, NumArray or numeric value to the existing NumArray
      *
-     * @param $addend
+     * @param mixed $addend an other int, float, array or NumArray
+     *
      * @return $this
      */
     public function add($addend)
@@ -139,9 +159,13 @@ class NumArray extends Cache
         if ($addend instanceof NumArray) {
             $addend = $addend->getData();
         }
-        $this->data = Map::mapArray($this->data, $addend, function ($data1, $data2) {
-            return $data1 + $data2;
-        });
+        $this->data = Map::mapArray(
+            $this->data,
+            $addend,
+            function ($data1, $data2) {
+                return $data1 + $data2;
+            }
+        );
         $this->shape = Shape::getShape($this->data);
         $this->flushCache();
 
@@ -151,7 +175,8 @@ class NumArray extends Cache
     /**
      * Subtracts an array, NumArray or numeric value from the existing NumArray
      *
-     * @param $subtrahend
+     * @param mixed $subtrahend an other int, float, array or NumArray
+     *
      * @return $this
      */
     public function sub($subtrahend)
@@ -159,9 +184,13 @@ class NumArray extends Cache
         if ($subtrahend instanceof NumArray) {
             $subtrahend = $subtrahend->getData();
         }
-        $this->data = Map::mapArray($this->data, $subtrahend, function ($data1, $data2) {
-            return $data1 - $data2;
-        });
+        $this->data = Map::mapArray(
+            $this->data,
+            $subtrahend,
+            function ($data1, $data2) {
+                return $data1 - $data2;
+            }
+        );
         $this->shape = Shape::getShape($this->data);
         $this->flushCache();
 
@@ -171,7 +200,8 @@ class NumArray extends Cache
     /**
      * Summed all elements of an NumArray for the given axis
      *
-     * @param int $axis
+     * @param int $axis given axis of sum
+     *
      * @return NumArray
      */
     public function sum($axis = null)
@@ -188,7 +218,8 @@ class NumArray extends Cache
     /**
      * Returns the min of the NumArray for the given axis
      *
-     * @param int $axis
+     * @param int $axis given axis of min
+     *
      * @return NumArray
      */
     public function min($axis = null)
@@ -205,7 +236,8 @@ class NumArray extends Cache
     /**
      * Returns the max of the NumArray for the given axis
      *
-     * @param int $axis
+     * @param int $axis given axis of max
+     *
      * @return NumArray
      */
     public function max($axis = null)
@@ -220,7 +252,10 @@ class NumArray extends Cache
     }
 
     /**
-     * @param null $axis
+     * Returns the mean of the NumArray for the given axis
+     *
+     * @param int $axis given axis of mean
+     *
      * @return NumArray
      */
     public function mean($axis = null)
@@ -233,6 +268,8 @@ class NumArray extends Cache
     }
 
     /**
+     * Applies `abs` on every value of the NumArray
+     *
      * @return $this
      */
     public function abs()
@@ -251,7 +288,8 @@ class NumArray extends Cache
     /**
      * Multiplies an array, NumArray or numeric value to the existing NumArray
      *
-     * @param $factor
+     * @param mixed $factor an other int, float, array or NumArray
+     *
      * @return $this
      */
     public function dot($factor)
@@ -259,7 +297,12 @@ class NumArray extends Cache
         if (!($factor instanceof NumArray)) {
             $factor = new NumArray($factor);
         }
-        $result = Dot::dotArray($this->data, $this->shape, $factor->getData(), $factor->getShape());
+        $result = Dot::dotArray(
+            $this->data,
+            $this->shape,
+            $factor->getData(),
+            $factor->getShape()
+        );
         $this->data = $result['data'];
         $this->shape = $result['shape'];
         $this->flushCache();
@@ -277,7 +320,9 @@ class NumArray extends Cache
         if ($this->inCache(Transpose::CACHE_KEY_TRANSPOSE)) {
             return $this->getCache(Transpose::CACHE_KEY_TRANSPOSE);
         }
-        $transpose = new NumArray(Transpose::getTranspose($this->data, $this->getShape()));
+        $transpose = new NumArray(
+            Transpose::getTranspose($this->data, $this->getShape())
+        );
         $this->setCache(Transpose::CACHE_KEY_TRANSPOSE, $transpose);
 
         return $transpose;

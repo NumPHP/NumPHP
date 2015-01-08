@@ -32,6 +32,8 @@ abstract class NumPHP
     /**
      * Returns a NumArray filled with `0`
      *
+     * @param int $axis,... given axis
+     *
      * @return NumArray
      */
     public static function zeros()
@@ -55,6 +57,8 @@ abstract class NumPHP
     /**
      * Returns a NumArray filled with `1`
      *
+     * @param int $axis,... given axis
+     *
      * @return NumArray
      */
     public static function ones()
@@ -77,6 +81,8 @@ abstract class NumPHP
 
     /**
      * Returns a NumArray filled with random values
+     *
+     * @param int $axis,... given axis
      *
      * @return NumArray
      */
@@ -143,7 +149,6 @@ abstract class NumPHP
      * @param float $step steps, if not given `$step` = `1.0`
      *
      * @return NumArray
-     *
      * @throws InvalidArgumentException
      */
     public static function arange($low, $high, $step = 1.0)
@@ -162,7 +167,6 @@ abstract class NumPHP
      * @param int   $number size of the vector
      *
      * @return NumArray
-     *
      * @throws InvalidArgumentException
      */
     public static function linspace($low, $high, $number)
