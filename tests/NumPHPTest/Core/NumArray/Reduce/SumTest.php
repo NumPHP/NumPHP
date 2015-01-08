@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHPTest\Core\NumArray\Reduce
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHPTest\Core\NumArray\Reduce;
@@ -15,12 +20,22 @@ use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class SumTest
-  * @package NumPHPTest\Core\NumArray
+ *
+ * @category Core
+ * @package  NumPHPTest\Core\NumArray\Reduce
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
   */
 class SumTest extends TestCase
 {
+    /**
+     * Tests NumArray::sum with scalar value without arguments
+     *
+     * @return void
+     */
     public function testSumSingle()
     {
         $numArray = new NumArray(6);
@@ -29,6 +44,11 @@ class SumTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->sum());
     }
 
+    /**
+     * Tests NumArray::sum with a vector without arguments
+     *
+     * @return void
+     */
     public function testSumVector()
     {
         $numArray = NumPHP::arange(1, 8);
@@ -37,6 +57,11 @@ class SumTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->sum());
     }
 
+    /**
+     * Tests NumArray::sum with a matrix without arguments
+     *
+     * @return void
+     */
     public function testSumMatrix()
     {
         $numArray = NumPHP::arange(1, 12)->reshape(3, 4);
@@ -45,6 +70,11 @@ class SumTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->sum());
     }
 
+    /**
+     * Tests NumArray::sum with scalar value with argument 0
+     *
+     * @return void
+     */
     public function testSumSingleAxis0()
     {
         $numArray = new NumArray(6);
@@ -53,6 +83,11 @@ class SumTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->sum(0));
     }
 
+    /**
+     * Tests NumArray::sum with a vector and argument 0
+     *
+     * @return void
+     */
     public function testSumVectorAxis0()
     {
         $numArray = NumPHP::arange(1, 8);
@@ -61,6 +96,11 @@ class SumTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->sum(0));
     }
 
+    /**
+     * Tests NumArray::sum with a matrix and argument 0
+     *
+     * @return void
+     */
     public function testSumMatrixAxis0()
     {
         $numArray = NumPHP::arange(1, 12)->reshape(3, 4);
@@ -70,8 +110,13 @@ class SumTest extends TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * Tests if InvalidArgumentException will be thrown by using NumArray::sum and a
+     * wrong axis on a scalar value
+     *
+     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 1 out of bounds
+     *
+     * @return void
      */
     public function testSumSingleAxis1()
     {
@@ -81,8 +126,13 @@ class SumTest extends TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * Tests if InvalidArgumentException will be thrown by using NumArray::sum and a
+     * wrong axis on a vector
+     *
+     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 1 out of bounds
+     *
+     * @return void
      */
     public function testSumVectorAxis1()
     {
@@ -91,6 +141,11 @@ class SumTest extends TestCase
         $numArray->sum(1);
     }
 
+    /**
+     * Tests NumArray::sum with a matrix and argument 1
+     *
+     * @return void
+     */
     public function testSumMatrixAxis1()
     {
         $numArray = NumPHP::arange(1, 12)->reshape(3, 4);
@@ -100,8 +155,13 @@ class SumTest extends TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * Tests if InvalidArgumentException will be thrown by using NumArray::sum and a
+     * wrong axis on a matrix
+     *
+     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 2 out of bounds
+     *
+     * @return void
      */
     public function testSumMatrixAxis2()
     {
@@ -110,6 +170,11 @@ class SumTest extends TestCase
         $numArray->sum(2);
     }
 
+    /**
+     * Tests NumArray::sum with a 2x3x4 matrix and argument 2
+     *
+     * @return void
+     */
     public function testSumMatrix2x3x4Axis2()
     {
         $numArray = NumPHP::arange(1, 24)->reshape(2, 3, 4);

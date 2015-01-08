@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHPTest\Core\NumArray\Filter
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHPTest\Core\NumArray\Filter;
@@ -15,10 +20,20 @@ use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class Abs
-  * @package NumPHPTest\Core\NumArray\Filter
-  */
+ *
+ * @category Core
+ * @package  NumPHPTest\Core\NumArray\Filter
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
+ */
 class AbsTest extends TestCase
 {
+    /**
+     * Tests NumArray::abs with scalar value
+     *
+     * @return void
+     */
     public function testAbsSingle()
     {
         $numArray = new NumArray(-1);
@@ -27,6 +42,11 @@ class AbsTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->abs());
     }
 
+    /**
+     * Tests NumArray::abs with a vector
+     *
+     * @return void
+     */
     public function testAbsVector()
     {
         $numArray = new NumArray(
@@ -39,6 +59,11 @@ class AbsTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->abs());
     }
 
+    /**
+     * Tests NumArray::abs with a matrix
+     *
+     * @return void
+     */
     public function testAbsMatrix()
     {
         $numArray = new NumArray(
@@ -52,6 +77,11 @@ class AbsTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->abs());
     }
 
+    /**
+     * Tests if cache will be flushed after using NumArray::abs
+     *
+     * @return void
+     */
     public function testAbsCache()
     {
         $numArray = new NumArray(5);

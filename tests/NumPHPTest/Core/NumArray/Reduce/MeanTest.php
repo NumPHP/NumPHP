@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHPTest\Core\NumArray\Reduce
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHPTest\Core\NumArray\Reduce;
@@ -15,12 +20,22 @@ use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class MeanTest
-  * @package NumPHPTest\Core\NumArray\Reduce
+ *
+ * @category Core
+ * @package  NumPHPTest\Core\NumArray\Reduce
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
   */
 class MeanTest extends TestCase
 {
+    /**
+     * Tests NumArray::mean with scalar value without arguments
+     *
+     * @return void
+     */
     public function testMeanSingle()
     {
         $numArray = new NumArray(5);
@@ -29,6 +44,11 @@ class MeanTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray);
     }
 
+    /**
+     * Tests NumArray::mean with a vector and without arguments
+     *
+     * @return void
+     */
     public function testMeanVector()
     {
         $numArray = new NumArray(
@@ -39,6 +59,11 @@ class MeanTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->mean());
     }
 
+    /**
+     * Tests NumArray::mean with a matrix and without arguments
+     *
+     * @return void
+     */
     public function testMeanMatrix()
     {
         $numArray = NumPHP::arange(1, 6)->reshape(2, 3);
@@ -47,6 +72,11 @@ class MeanTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->mean());
     }
 
+    /**
+     * Tests NumArray::mean with scalar value with argument 0
+     *
+     * @return void
+     */
     public function testMeanSingleAxis0()
     {
         $numArray = new NumArray(-4);
@@ -55,6 +85,11 @@ class MeanTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->mean(0));
     }
 
+    /**
+     * Tests NumArray::mean with a vector and with argument 0
+     *
+     * @return void
+     */
     public function testMeanVectorAxis0()
     {
         $numArray = new NumArray(
@@ -65,6 +100,11 @@ class MeanTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->mean(0));
     }
 
+    /**
+     * Tests NumArray::mean with a matrix and with argument 0
+     *
+     * @return void
+     */
     public function testMeanMatrixAxis0()
     {
         $numArray = new NumArray(
@@ -81,8 +121,13 @@ class MeanTest extends TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * Tests if InvalidArgumentException will be thrown by using NumArray::mean and a
+     * wrong axis on a scalar value
+     *
+     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 1 out of bounds
+     *
+     * @return void
      */
     public function testMeanSingleAxis1()
     {
@@ -92,8 +137,13 @@ class MeanTest extends TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * Tests if InvalidArgumentException will be thrown by using NumArray::mean and a
+     * wrong axis on a vector
+     *
+     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 1 out of bounds
+     *
+     * @return void
      */
     public function testMeanVectorAxis1()
     {
@@ -102,6 +152,11 @@ class MeanTest extends TestCase
         $numArray->mean(1);
     }
 
+    /**
+     * Tests NumArray::mean with a matrix and argument 1
+     *
+     * @return void
+     */
     public function testMeanMatrixAxis1()
     {
         $numArray = new NumArray(
@@ -118,8 +173,13 @@ class MeanTest extends TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * Tests if InvalidArgumentException will be thrown by using NumArray::mean and a
+     * wrong axis on a matrix
+     *
+     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 2 out of bounds
+     *
+     * @return void
      */
     public function testMeanMatrixAxis2()
     {
@@ -128,6 +188,11 @@ class MeanTest extends TestCase
         $numArray->mean(2);
     }
 
+    /**
+     * Tests NumArray::sum with a 2x3x4 matrix and argument 0
+     *
+     * @return void
+     */
     public function testMeanMatrix2x3x4Axis0()
     {
         $numArray = NumPHP::arange(1, 24)->reshape(2, 3, 4);

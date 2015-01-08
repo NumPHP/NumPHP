@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHPTest\Core\NumArray
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHPTest\Core\NumArray;
@@ -15,12 +20,22 @@ use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class GetTest
- * @package NumPHPTest\Core\NumArray
+ *
+ * @category Core
+ * @package  NumPHPTest\Core\NumArray
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
  */
 class GetTest extends TestCase
 {
+    /**
+     * Tests NumArray::get without arguments on scalar value
+     *
+     * @return void
+     */
     public function testGet()
     {
         $numArray = new NumArray(1);
@@ -29,6 +44,11 @@ class GetTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->get());
     }
 
+    /**
+     * Tests NumArray::get without arguments on scalar value
+     *
+     * @return void
+     */
     public function testGet1()
     {
         $numArray = new NumArray([1]);
@@ -37,6 +57,11 @@ class GetTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->get());
     }
 
+    /**
+     * Tests NumArray::get with argument 0 on vector with size 1
+     *
+     * @return void
+     */
     public function testGet1Args0()
     {
         $numArray = new NumArray([1]);
@@ -45,12 +70,23 @@ class GetTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->get(0));
     }
 
+    /**
+     * Tests NumArray::get without argument on vector
+     *
+     * @return void
+     */
     public function testGet2()
     {
         $numArray = NumPHP::arange(1, 2);
-        $this->assertNumArrayEquals($numArray, $numArray->get());
+        $expectedNumArray = NumPHP::arange(1, 2);
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get());
     }
 
+    /**
+     * Tests NumArray::get with argument 1 on vector
+     *
+     * @return void
+     */
     public function testGet2Args1()
     {
         $numArray = NumPHP::arange(1, 2);
@@ -59,6 +95,11 @@ class GetTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->get(1));
     }
 
+    /**
+     * Tests NumArray::get with slicing argument `1:3` on vector
+     *
+     * @return void
+     */
     public function testGet4Args1Slice3()
     {
         $numArray = NumPHP::arange(1, 4);
@@ -66,6 +107,11 @@ class GetTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->get('1:3'));
     }
 
+    /**
+     * Tests NumArray::get with slicing argument `1:` on vector
+     *
+     * @return void
+     */
     public function testGet3Args1Slice()
     {
         $numArray = NumPHP::arange(1, 3);
@@ -73,6 +119,11 @@ class GetTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->get('1:'));
     }
 
+    /**
+     * Tests NumArray::get with slicing argument `:2` on vector
+     *
+     * @return void
+     */
     public function testGet3ArgsSlice2()
     {
         $numArray = NumPHP::arange(1, 3);
@@ -80,12 +131,22 @@ class GetTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->get(':2'));
     }
 
+    /**
+     * Tests NumArray::get without argument on matrix
+     *
+     * @return void
+     */
     public function testGet2x4()
     {
         $numArray = NumPHP::arange(1, 8)->reshape(2, 4);
         $this->assertNumArrayEquals($numArray, $numArray->get());
     }
 
+    /**
+     * Tests NumArray::get with argument 0 on matrix
+     *
+     * @return void
+     */
     public function testGet2x4Args0()
     {
         $numArray = NumPHP::arange(1, 8)->reshape(2, 4);
@@ -93,6 +154,11 @@ class GetTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->get(0));
     }
 
+    /**
+     * Tests NumArray::get with argument 1, 2 on matrix
+     *
+     * @return void
+     */
     public function testGet2x4Args1x2()
     {
         $numArray = NumPHP::arange(1, 8)->reshape(2, 4);
@@ -101,6 +167,11 @@ class GetTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->get(1, 2));
     }
 
+    /**
+     * Tests NumArray::get with slicing argument `1:3`, `2:4` on matrix
+     *
+     * @return void
+     */
     public function testGet3x4Args1Slice3()
     {
         $numArray = NumPHP::arange(1, 12)->reshape(3, 4);
@@ -113,6 +184,11 @@ class GetTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->get('1:3', '2:4'));
     }
 
+    /**
+     * Tests NumArray::get with slicing argument `:`, 2 on matrix
+     *
+     * @return void
+     */
     public function testGet3x4ArgsSlicex3()
     {
         $numArray = NumPHP::arange(1, 12)->reshape(3, 4);
@@ -122,6 +198,11 @@ class GetTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->get(':', 2));
     }
 
+    /**
+     * Tests NumArray::get with negative argument on vector
+     *
+     * @return void
+     */
     public function testGet3ArgsMinus1()
     {
         $numArray = NumPHP::arange(1, 4);
@@ -130,6 +211,11 @@ class GetTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->get(-1));
     }
 
+    /**
+     * Tests NumArray::get with negative slicing argument `-1:` on vector
+     *
+     * @return void
+     */
     public function testGet4ArgsMinus1Slice()
     {
         $numArray = NumPHP::arange(1, 4);
@@ -137,6 +223,11 @@ class GetTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->get('-1:'));
     }
 
+    /**
+     * Tests NumArray::get with negative slicing argument `:-1` on vector
+     *
+     * @return void
+     */
     public function testGet4ArgsSliceMinus1()
     {
         $numArray = NumPHP::arange(1, 4);

@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHPTest\Core\NumArray
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHPTest\Core\NumArray;
@@ -13,10 +18,20 @@ use NumPHP\Core\NumArray;
 
 /**
  * Class CacheTest
-  * @package NumPHPTest\Core\NumArray
-  */
+ *
+ * @category Core
+ * @package  NumPHPTest\Core\NumArray
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
+ */
 class CacheTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Tests Cache::setCache
+     *
+     * @return void
+     */
     public function testSetCache()
     {
         $numArray = new NumArray(5);
@@ -26,8 +41,13 @@ class CacheTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\CacheKeyException
+     * Tests if CacheKeyException will be thrown, when using Cache::setCache and key
+     * is not a string
+     *
+     * @expectedException        \NumPHP\Core\Exception\CacheKeyException
      * @expectedExceptionMessage Key has to be a string
+     *
+     * @return void
      */
     public function testSetCacheForbiddenKey()
     {
@@ -37,8 +57,13 @@ class CacheTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\CacheException
+     * Tests if CacheException will be thrown, when using Cache::setCache and key is
+     * already used
+     *
+     * @expectedException        \NumPHP\Core\Exception\CacheException
      * @expectedExceptionMessage Key "key" already exists
+     *
+     * @return void
      */
     public function testSetCacheDouble()
     {
@@ -49,8 +74,13 @@ class CacheTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\CacheKeyException
+     * Tests if CacheKeyException will be thrown, when using Cache::getCache and key
+     * is not a string
+     *
+     * @expectedException        \NumPHP\Core\Exception\CacheKeyException
      * @expectedExceptionMessage Key has to be a string
+     *
+     * @return void
      */
     public function testGetCacheForbiddenKey()
     {
@@ -60,8 +90,13 @@ class CacheTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\CacheException
+     * Tests if CacheException will be thrown, when using Cache::getCache and the
+     * key does not exist
+     *
+     * @expectedException        \NumPHP\Core\Exception\CacheException
      * @expectedExceptionMessage Key "key" does not exist
+     *
+     * @return void
      */
     public function testGetMissCache()
     {
@@ -71,8 +106,13 @@ class CacheTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\CacheKeyException
+     * Tests if CacheKeyException will be thrown, when using Cache::inCache and key
+     * is not a string
+     *
+     * @expectedException        \NumPHP\Core\Exception\CacheKeyException
      * @expectedExceptionMessage Key has to be a string
+     *
+     * @return void
      */
     public function testInCacheForbiddenKey()
     {
@@ -81,6 +121,11 @@ class CacheTest extends \PHPUnit_Framework_TestCase
         $numArray->inCache(5);
     }
 
+    /**
+     * Tests Cache::inCache
+     *
+     * @return void
+     */
     public function testFlushCache()
     {
         $numArray = new NumArray(5);
@@ -90,6 +135,11 @@ class CacheTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($numArray->inCache('key'));
     }
 
+    /**
+     * Tests Cache::flushCache
+     *
+     * @return void
+     */
     public function testFlushCacheKey()
     {
         $numArray = new NumArray(5);
@@ -102,8 +152,13 @@ class CacheTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\CacheKeyException
+     * Tests if CacheKeyException will be thrown, when using Cache::flushCache and
+     * key is not a string
+     *
+     * @expectedException        \NumPHP\Core\Exception\CacheKeyException
      * @expectedExceptionMessage Key has to be a string
+     *
+     * @return void
      */
     public function testFlushCacheForbiddenKey()
     {

@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHPTest\Core\NumArray\Reduce
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHPTest\Core\NumArray\Reduce;
@@ -14,11 +19,21 @@ use NumPHP\Core\NumPHP;
 use NumPHPTest\Core\Framework\TestCase;
 
 /**
- * Class MinMaxTest
-  * @package NumPHPTest\Core\NumArray\Reduce
-  */
+ * Class MinTest
+ *
+ * @category Core
+ * @package  NumPHPTest\Core\NumArray\Reduce
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
+ */
 class MinTest extends TestCase
 {
+    /**
+     * Tests NumArray::min with scalar value without arguments
+     *
+     * @return void
+     */
     public function testMinSingle()
     {
         $numArray = new NumArray(6);
@@ -27,6 +42,11 @@ class MinTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->min());
     }
 
+    /**
+     * Tests NumArray::min with a vector without arguments
+     *
+     * @return void
+     */
     public function testMinVector()
     {
         $numArray = new NumArray(
@@ -37,6 +57,11 @@ class MinTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->min());
     }
 
+    /**
+     * Tests NumArray::min with a matrix without arguments
+     *
+     * @return void
+     */
     public function testMinMatrix()
     {
         $numArray = new NumArray(
@@ -50,6 +75,11 @@ class MinTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->min());
     }
 
+    /**
+     * Tests NumArray::min with scalar value with argument 0
+     *
+     * @return void
+     */
     public function testMinSingleAxis0()
     {
         $numArray = new NumArray(99);
@@ -58,6 +88,11 @@ class MinTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->min(0));
     }
 
+    /**
+     * Tests NumArray::min with a vector and argument 0
+     *
+     * @return void
+     */
     public function testMinVectorAxis0()
     {
         $numArray = NumPHP::arange(1, 5);
@@ -66,6 +101,11 @@ class MinTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray->min(0));
     }
 
+    /**
+     * Tests NumArray::min with a matrix and argument 0
+     *
+     * @return void
+     */
     public function testMinMatrixAxis0()
     {
         $numArray = new NumArray(
@@ -83,8 +123,13 @@ class MinTest extends TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * Tests if InvalidArgumentException will be thrown by using NumArray::min and a
+     * wrong axis on a scalar value
+     *
+     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 1 out of bounds
+     *
+     * @return void
      */
     public function testMinSingleAxis1()
     {
@@ -94,8 +139,13 @@ class MinTest extends TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * Tests if InvalidArgumentException will be thrown by using NumArray::min and a
+     * wrong axis on a vector
+     *
+     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 1 out of bounds
+     *
+     * @return void
      */
     public function testMinVectorAxis1()
     {
@@ -104,6 +154,11 @@ class MinTest extends TestCase
         $numArray->min(1);
     }
 
+    /**
+     * Tests NumArray::min with a matrix and argument 1
+     *
+     * @return void
+     */
     public function testMinMatrixAxis1()
     {
         $numArray = new NumArray(
@@ -121,8 +176,13 @@ class MinTest extends TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * Tests if InvalidArgumentException will be thrown by using NumArray::min and a
+     * wrong axis on a matrix
+     *
+     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 2 out of bounds
+     *
+     * @return void
      */
     public function testNimMatrixAxis2()
     {

@@ -2,9 +2,14 @@
 /**
  * NumPHP (http://numphp.org/)
  *
- * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
- * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
- * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ * PHP version 5
+ *
+ * @category  Core
+ * @package   NumPHPTest\Core\NumArray\Map
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
  */
 
 namespace NumPHPTest\Core\NumArray\Map;
@@ -15,10 +20,20 @@ use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class AddTest
-  * @package NumPHPTest\Core\NumArray
-  */
+ *
+ * @category Core
+ * @package  NumPHPTest\Core\NumArray\Map
+ * @author   Gordon Lesti <info@gordonlesti.com>
+ * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link     http://numphp.org/
+ */
 class AddTest extends TestCase
 {
+    /**
+     * Tests NumArray::add with scalar values
+     *
+     * @return void
+     */
     public function testAddSingle()
     {
         $numArray1 = new NumArray(3);
@@ -28,6 +43,11 @@ class AddTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray1->add($numArray2));
     }
 
+    /**
+     * Tests NumArray::add with scalar value and vector
+     *
+     * @return void
+     */
     public function testAddSingleVector()
     {
         $numArray1 = NumPHP::arange(1, 5);
@@ -37,6 +57,11 @@ class AddTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray1->add($numArray2));
     }
 
+    /**
+     * Tests NumArray::add with two vectors
+     *
+     * @return void
+     */
     public function testAddTwoVector()
     {
         $numArray1 = NumPHP::arange(1, 4);
@@ -46,7 +71,12 @@ class AddTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray1->add($numArray2));
     }
 
-    public function testAddMatrixSingel()
+    /**
+     * Tests NumArray::add with scalar value and matrix
+     *
+     * @return void
+     */
+    public function testAddMatrixSingle()
     {
         $numArray1 = new NumArray(56);
         $numArray2 = NumPHP::arange(1, 9)->reshape(3, 3);
@@ -55,6 +85,11 @@ class AddTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray1->add($numArray2));
     }
 
+    /**
+     * Tests NumArray::add with vector and matrix
+     *
+     * @return void
+     */
     public function testAddVectorMatrix()
     {
         $numArray1 = NumPHP::arange(1, 12)->reshape(3, 4);
@@ -70,6 +105,11 @@ class AddTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray1->add($numArray2));
     }
 
+    /**
+     * Tests NumArray::add with two matrices
+     *
+     * @return void
+     */
     public function testAddMatrixMatrix()
     {
         $numArray1 = NumPHP::arange(1, 12)->reshape(3, 4);
@@ -79,6 +119,11 @@ class AddTest extends TestCase
         $this->assertNumArrayEquals($expectedNumArray, $numArray1->add($numArray2));
     }
 
+    /**
+     * Tests NumArray::add with vector and array
+     *
+     * @return void
+     */
     public function testAddVectorArray()
     {
         $numArray = NumPHP::arange(1, 7);
@@ -89,8 +134,13 @@ class AddTest extends TestCase
     }
 
     /**
-     * @expectedException \NumPHP\Core\Exception\InvalidArgumentException
+     * Tests if InvalidArgumentException will be thrown, when using NumArray::add
+     * with vectors of different size
+     *
+     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Size 5 is different from size 4
+     *
+     * @return void
      */
     public function testAddDifferentShape()
     {
@@ -100,6 +150,11 @@ class AddTest extends TestCase
         $numArray1->add($numArray2);
     }
 
+    /**
+     * Tests if cache will be flushed after use of NumArray::add
+     *
+     * @return void
+     */
     public function testAddCache()
     {
         $numArray = new NumArray(5);
