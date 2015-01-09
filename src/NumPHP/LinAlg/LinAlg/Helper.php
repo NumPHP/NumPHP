@@ -18,6 +18,8 @@ use NumPHP\Core\NumArray;
 use NumPHP\LinAlg\Exception\NoMatrixException;
 use NumPHP\LinAlg\Exception\NoSquareMatrixException;
 use NumPHP\LinAlg\Exception\NoVectorException;
+use NumPHP\LinAlg\Exception\SingularMatrixException;
+use NumPHP\LinAlg\LinAlg;
 
 /**
  * Class Helper
@@ -88,10 +90,29 @@ abstract class Helper
         if ($shape[0] !== $shape[1]) {
             throw new NoSquareMatrixException(
                 sprintf(
-                    "NumArray with shape (%s) given, NumArray has to be square",
+                    "Matrix with shape (%s) given, matrix has to be square",
                     implode(', ', $shape)
                 )
             );
+        }
+    }
+
+    /**
+     * Tests if a matrix is not singular
+     *
+     * @param NumArray $numArray given NumArray
+     *
+     * @return void
+     * @throws NoMatrixException
+     * @throws NoSquareMatrixException
+     * @throws SingularMatrixException
+     */
+    public static function checkNotSingularMatrix(NumArray $numArray)
+    {
+        self::checkSquareMatrix($numArray);
+        $det = LinAlg::det($numArray);
+        if ($det == 0) {
+            throw new SingularMatrixException("Matrix is singular");
         }
     }
 }

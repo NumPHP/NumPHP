@@ -83,7 +83,7 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
      * 2x3 matrix
      *
      * @expectedException        \NumPHP\LinAlg\Exception\NoSquareMatrixException
-     * @expectedExceptionMessage NumArray with shape (2, 3) given, NumArray has to
+     * @expectedExceptionMessage Matrix with shape (2, 3) given, matrix has to
      * be square
      *
      * @return void
@@ -91,23 +91,6 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
     public function testDet2x3()
     {
         $numArray = NumPHP::arange(1, 6)->reshape(2, 3);
-
-        LinAlg::det($numArray);
-    }
-
-    /**
-     * Tests if NoMatrixException will be thrown, when using LinAlg::det with 2x2x2
-     * matrix
-     *
-     * @expectedException        \NumPHP\LinAlg\Exception\NoMatrixException
-     * @expectedExceptionMessage NumArray with dimension 3 given, NumArray should
-     * have 2 dimensions
-     *
-     * @return void
-     */
-    public function testDet2x2x2()
-    {
-        $numArray = NumPHP::arange(1, 8)->reshape(2, 2, 2);
 
         LinAlg::det($numArray);
     }

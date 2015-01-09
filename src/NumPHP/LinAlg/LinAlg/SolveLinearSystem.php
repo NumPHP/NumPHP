@@ -46,7 +46,7 @@ abstract class SolveLinearSystem
      */
     public static function solve(NumArray $squareMatrix, NumArray $vector)
     {
-        Helper::checkSquareMatrix($squareMatrix);
+        Helper::checkNotSingularMatrix($squareMatrix);
         $matrixShape = $squareMatrix->getShape();
         $vectorShape = $vector->getShape();
         if ($matrixShape[0] !== $vectorShape[0]) {

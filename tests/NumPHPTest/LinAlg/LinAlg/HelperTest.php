@@ -94,34 +94,45 @@ class HelperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests if Helper::checkSquareMatrix throws NoMatrixException, when argument
-     * is a vector
-     *
-     * @expectedException        \NumPHP\LinAlg\Exception\NoMatrixException
-     * @expectedExceptionMessage NumArray with dimension 1 given, NumArray should
-     * have 2 dimensions
-     *
-     * @return void
-     */
-    public function testCheckSquareMatrixInvalidVector()
-    {
-        $numArray = NumPHP::ones(3);
-        Helper::checkSquareMatrix($numArray);
-    }
-
-    /**
      * Tests if Helper::checkSquareMatrix throws NoSquareMatrixException, when
      * argument is a vector
      *
      * @expectedException        \NumPHP\LinAlg\Exception\NoSquareMatrixException
-     * @expectedExceptionMessage NumArray with shape (2, 3) given, NumArray has to
+     * @expectedExceptionMessage Matrix with shape (2, 3) given, matrix has to
      * be square
      *
      * @return void
      */
-    public function testCheckSquareMatrixInvalidMatrix()
+    public function testCheckSquareMatrixInvalid()
     {
         $numArray = NumPHP::ones(2, 3);
         Helper::checkSquareMatrix($numArray);
+    }
+
+    /**
+     * Tests if Helper::checkNotSingular works with valid not singular matrix
+     *
+     * @return void
+     */
+    public function testCheckNotSingularMatrixValid()
+    {
+        $numArray = NumPHP::identity(4);
+        Helper::checkNotSingularMatrix($numArray);
+    }
+
+    /**
+     * Tests if SingularMatrixException will be thrown, when using
+     * Helper::checkNotSingularMatrix with singular matrix
+     *
+     * @expectedException        \NumPHP\LinAlg\Exception\SingularMatrixException
+     * @expectedExceptionMessage jo
+     *
+     * @return void
+     */
+    public function testCheckNotSingularMatrixInvalid()
+    {
+        $numArray = NumPHP::identity(4);
+        $numArray->set(0, 2, 2);
+        Helper::checkNotSingularMatrix($numArray);
     }
 }
