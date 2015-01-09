@@ -25,7 +25,7 @@ use NumPHP\Core\Exception\InvalidArgumentException;
  * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link     http://numphp.org/
  */
-class Map
+abstract class Map
 {
     /**
      * Combines two int, float or arrays with the `$callback` function

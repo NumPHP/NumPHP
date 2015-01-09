@@ -23,7 +23,7 @@ namespace NumPHP\Core\NumArray;
  * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link     http://numphp.org/
  */
-class String
+abstract class String
 {
     /**
      * Returns a string representing an array

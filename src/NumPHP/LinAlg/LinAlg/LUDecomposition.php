@@ -27,7 +27,7 @@ use NumPHP\LinAlg\Exception\NoMatrixException;
  * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link     http://numphp.org/
  */
-class LUDecomposition
+abstract class LUDecomposition
 {
     const CACHE_KEY_LU_DECOMPOSITION = 'lu-decomposition';
 

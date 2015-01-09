@@ -23,7 +23,7 @@ namespace NumPHP\Core\NumArray;
  * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link     http://numphp.org/
  */
-class Set
+abstract class Set
 {
     /**
      * Replaces a value or sub array at the given position

@@ -25,7 +25,7 @@ use NumPHP\Core\Exception\InvalidArgumentException;
  * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link     http://numphp.org/
  */
-class Shape
+abstract class Shape
 {
     /**
      * Returns the shape of an value or array

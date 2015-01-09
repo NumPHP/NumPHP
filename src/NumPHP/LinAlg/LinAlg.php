@@ -28,7 +28,7 @@ use NumPHP\LinAlg\LinAlg\LUDecomposition;
  * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link     http://numphp.org/
  */
-class LinAlg
+abstract class LinAlg
 {
     const VERSION = '1.0.0-dev5';
 

@@ -25,7 +25,7 @@ use NumPHP\Core\Exception\InvalidArgumentException;
  * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link     http://numphp.org/
  */
-class Dot
+abstract class Dot
 {
     /**
      * Multiplies two int, float or arrays

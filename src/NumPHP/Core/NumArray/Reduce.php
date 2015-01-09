@@ -26,7 +26,7 @@ use NumPHP\Core\NumArray;
  * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link     http://numphp.org/
  */
-class Reduce
+abstract class Reduce
 {
     /**
      * Combines all elements of an NumArray at a given axis with the `$callback`

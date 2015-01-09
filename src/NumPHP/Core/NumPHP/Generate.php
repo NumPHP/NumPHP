@@ -23,7 +23,7 @@ namespace NumPHP\Core\NumPHP;
  * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link     http://numphp.org/
  */
-class Generate
+abstract class Generate
 {
     /**
      * Generates an array with the given shape and value
