@@ -41,15 +41,7 @@ abstract class LUDecomposition
      */
     public static function lud(NumArray $array)
     {
-        if ($array->getNDim() !== 2) {
-            throw new NoMatrixException(
-                sprintf(
-                    "NumArray with dimension %d given, NumArray should have 2 ".
-                    "dimensions",
-                    $array->getNDim()
-                )
-            );
-        }
+        Helper::checkMatrix($array);
         $numArray = clone $array;
 
         $shape = $numArray->getShape();

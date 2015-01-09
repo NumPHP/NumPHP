@@ -17,7 +17,9 @@ namespace NumPHP\LinAlg;
 use NumPHP\Core\NumArray;
 use NumPHP\LinAlg\Exception\NoMatrixException;
 use NumPHP\LinAlg\Exception\NoSquareMatrixException;
+use NumPHP\LinAlg\LinAlg\Helper;
 use NumPHP\LinAlg\LinAlg\LUDecomposition;
+use NumPHP\LinAlg\LinAlg\SolveLinearSystem;
 
 /**
  * Class LinAlg
@@ -47,24 +49,8 @@ abstract class LinAlg
         if (!$array instanceof NumArray) {
             $array = new NumArray($array);
         }
-        if ($array->getNDim() !== 2) {
-            throw new NoMatrixException(
-                sprintf(
-                    "NumArray with dimension %d given, NumArray should have 2 ".
-                    "dimensions",
-                    $array->getNDim()
-                )
-            );
-        }
+        Helper::checkSquareMatrix($array);
         $shape = $array->getShape();
-        if ($shape[0] !== $shape[1]) {
-            throw new NoSquareMatrixException(
-                sprintf(
-                    "NumArray with shape (%s) given, NumArray has to be square",
-                    implode(', ', $shape)
-                )
-            );
-        }
 
         $lud = self::lud($array);
         /**
@@ -101,5 +87,25 @@ abstract class LinAlg
         $array->setCache(LUDecomposition::CACHE_KEY_LU_DECOMPOSITION, $result);
 
         return $result;
+    }
+
+    /**
+     * Solves a linear system of a n*n matrix and a vector of size n
+     *
+     * @param mixed $squareMatrix matrix of size n*n
+     * @param mixed $vector       vector of size n
+     *
+     * @return NumArray
+     */
+    public static function solve($squareMatrix, $vector)
+    {
+        if (!$squareMatrix instanceof NumArray) {
+            $squareMatrix = new NumArray($squareMatrix);
+        }
+        if (!$vector instanceof NumArray) {
+            $vector = new NumArray($vector);
+        }
+
+        return SolveLinearSystem::solve($squareMatrix, $vector);
     }
 }
