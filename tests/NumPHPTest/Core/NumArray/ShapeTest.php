@@ -41,17 +41,6 @@ class ShapeTest extends TestCase
     }
 
     /**
-     * Tests NumArray::getShape on vector size 1
-     *
-     * @return void
-     */
-    public function testShape1()
-    {
-        $numArray = NumPHP::zeros(1);
-        $this->assertSame([1], $numArray->getShape());
-    }
-
-    /**
      * Tests NumArray::getShape on vector size 2
      *
      * @return void
@@ -162,5 +151,19 @@ class ShapeTest extends TestCase
             ]
         );
         $this->assertNumArrayEquals($expectedNumArray, $numArray->reshape(2, 6));
+    }
+
+    /**
+     * Tests if cache will be flushed after NumArray::reshape
+     *
+     * @return void
+     */
+    public function testReshapeCache()
+    {
+        $numArray = NumPHP::arange(1, 4);
+        $numArray->setCache('key', 6);
+
+        $numArray->reshape(2, 2);
+        $this->assertFalse($numArray->inCache('key'));
     }
 }

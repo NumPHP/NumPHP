@@ -342,6 +342,7 @@ class NumArray extends Cache
         $args = func_get_args();
         $this->data = Shape::reshape($this->data, $this->getShape(), $args);
         $this->shape = $args;
+        $this->flushCache();
 
         return $this;
     }
