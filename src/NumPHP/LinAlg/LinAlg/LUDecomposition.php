@@ -67,8 +67,12 @@ abstract class LUDecomposition
             }
             // elimination
             for ($j = $i+1; $j < $mAxis; $j++) {
-                $fac = $numArray->get($j, $i)->getData()/
-                    $numArray->get($i, $i)->getData();
+                $fac = 0;
+                $facNumerator = $numArray->get($j, $i)->getData();
+                $facDenominator = $numArray->get($i, $i)->getData();
+                if ($facDenominator) {
+                    $fac = $facNumerator/$facDenominator;
+                }
                 $lMatrix->set($fac, $j, $i);
                 for ($k = $i+1; $k < $nAxis; $k++) {
                     $value = $numArray->get($j, $k)

@@ -133,7 +133,7 @@ class LUDecompositionTest extends TestCase
     }
 
     /**
-     * Tests LiNAlg::lud with 4x3 matrix
+     * Tests LinAlg::lud with 4x3 matrix
      *
      * @return void
      */
@@ -143,7 +143,7 @@ class LUDecompositionTest extends TestCase
             [5, 1, 3],
             [4, 1, 2],
             [8, 6, 3],
-            [2, 8, 5],
+            [2, 8, 5]
         ];
 
         $expectedP = new NumArray(
@@ -151,7 +151,7 @@ class LUDecompositionTest extends TestCase
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
                 [1, 0, 0, 0],
-                [0, 1, 0, 0],
+                [0, 1, 0, 0]
             ]
         );
         $expectedL = new NumArray(
@@ -159,17 +159,51 @@ class LUDecompositionTest extends TestCase
                 [1,        0,     0],
                 [1/4,      1,     0],
                 [5/8, -11/26,     1],
-                [1/2,  -4/13, 47/76],
+                [1/2,  -4/13, 47/76]
             ]
         );
         $expectedU = new NumArray(
             [
                 [8,    6,     3],
                 [0, 13/2,  17/4],
-                [0,    0, 38/13],
+                [0,    0, 38/13]
             ]
         );
         $result = LinAlg::lud($array);
+        $this->assertCount(3, $result);
+        $this->assertNumArrayEquals(
+            $expectedP,
+            $result['P'],
+            'Matrix P is not equal'
+        );
+        $this->assertNumArrayEquals(
+            $expectedL,
+            $result['L'],
+            'Matrix L is not equal'
+        );
+        $this->assertNumArrayEquals(
+            $expectedU,
+            $result['U'],
+            'Matrix U is not equal'
+        );
+    }
+
+    /**
+     * Tests LinAlg::lud with singular 4x4 matrix
+     *
+     * @return void
+     */
+    public function testLUDecompositionSingularMatrix()
+    {
+        $matrix = NumPHP::identity(4);
+        $matrix->set(0, 2, 2);
+
+        $expectedP = NumPHP::identity(4);
+        $expectedL = NumPHP::identity(4);
+        $expectedU = NumPHP::identity(4);
+        $expectedU->set(0, 2, 2);
+
+        $result = LinAlg::lud($matrix);
         $this->assertCount(3, $result);
         $this->assertNumArrayEquals(
             $expectedP,

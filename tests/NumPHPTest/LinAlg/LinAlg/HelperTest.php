@@ -125,7 +125,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase
      * Helper::checkNotSingularMatrix with singular matrix
      *
      * @expectedException        \NumPHP\LinAlg\Exception\SingularMatrixException
-     * @expectedExceptionMessage jo
+     * @expectedExceptionMessage Matrix is singular
      *
      * @return void
      */
