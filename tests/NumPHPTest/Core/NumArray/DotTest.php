@@ -102,6 +102,20 @@ class DotTest extends TestCase
     }
 
     /**
+     * Tests NumArray::dot with empty vectors
+     *
+     * @return void
+     */
+    public function testDotEmptyVectorVector()
+    {
+        $vector1 = NumPHP::zeros(0);
+        $vector2 = NumPHP::zeros(0);
+
+        $expectedNumArray = new NumArray(0);
+        $this->assertNumArrayEquals($expectedNumArray, $vector1->dot($vector2));
+    }
+
+    /**
      * Tests if InvalidArgumentException will be thrown, when using NumArray::dot
      * with two vectors of different size
      *
