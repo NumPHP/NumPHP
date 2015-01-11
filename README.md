@@ -15,7 +15,7 @@ or a matrix. Advanced matrix arithmetic for PHP. This project is inspired by the
 
 ## Release Information
 
-*NumPHP 1.0.0-dev5*
+*NumPHP 1.0.0-dev6*
 
 ## Requirements
 

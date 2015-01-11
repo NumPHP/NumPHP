@@ -32,7 +32,7 @@ use NumPHP\LinAlg\LinAlg\SolveLinearSystem;
  */
 abstract class LinAlg
 {
-    const VERSION = '1.0.0-dev5';
+    const VERSION = '1.0.0-dev6';
 
     /**
      * Calculates the determinant of a matrix
