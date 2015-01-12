@@ -7,11 +7,11 @@ or a matrix. Advanced matrix arithmetic for PHP. This project is inspired by the
 ## Build Status
 
 * Master
-[![Build Status](https://travis-ci.org/NumPHP/NumPHP.svg?branch=master)](https://travis-ci.org/NumPHP/NumPHP)
-[![Coverage Status](https://coveralls.io/repos/NumPHP/NumPHP/badge.png?branch=master)](https://coveralls.io/r/NumPHP/NumPHP?branch=master)
+[![Build Status](https://img.shields.io/travis/NumPHP/NumPHP/master.svg?style=flat-square)](https://travis-ci.org/NumPHP/NumPHP)
+[![Coverage Status](https://img.shields.io/coveralls/NumPHP/NumPHP/master.svg?style=flat-square)](https://coveralls.io/r/NumPHP/NumPHP?branch=master)
 * Develop:
-[![Build Status](https://travis-ci.org/NumPHP/NumPHP.svg?branch=develop)](https://travis-ci.org/NumPHP/NumPHP)
-[![Coverage Status](https://coveralls.io/repos/NumPHP/NumPHP/badge.png?branch=develop)](https://coveralls.io/r/NumPHP/NumPHP?branch=develop)
+[![Build Status](https://img.shields.io/travis/NumPHP/NumPHP/develop.svg?style=flat-square)](https://travis-ci.org/NumPHP/NumPHP)
+[![Coverage Status](https://img.shields.io/coveralls/NumPHP/NumPHP/develop.svg?style=flat-square)](https://coveralls.io/r/NumPHP/NumPHP?branch=develop)
 
 ## Release Information
 
