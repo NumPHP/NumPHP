@@ -177,20 +177,21 @@ abstract class NumPHP
         }
         $data = [];
         switch ($number) {
-        case 0:
-            break;
-        case 1:
-            $data = [$low];
-            break;
-        default:
-            $step = ($high - $low) / ($number - 1);
-            $sum = $low;
-            for ($i = 0; $i < $number; $i++) {
-                $data[] = $sum;
-                $sum += $step;
-            }
-            break;
+            case 0:
+                break;
+            case 1:
+                $data = [$low];
+                break;
+            default:
+                $step = ($high - $low) / ($number - 1);
+                $sum = $low;
+                for ($i = 0; $i < $number; $i++) {
+                    $data[] = $sum;
+                    $sum += $step;
+                }
+                break;
         }
+        
         return new NumArray($data);
     }
 }
