@@ -6,6 +6,8 @@ or a matrix. Advanced matrix arithmetic for PHP. This project is inspired by the
 
 ## Build Status
 
+Branch | Build Status | Coverage
+--- | --- | ---
 Master | [![Build Status](https://img.shields.io/travis/NumPHP/NumPHP/master.svg?style=flat-square)](https://travis-ci.org/NumPHP/NumPHP) | [![Coverage Status](https://img.shields.io/coveralls/NumPHP/NumPHP/master.svg?style=flat-square)](https://coveralls.io/r/NumPHP/NumPHP?branch=master)
 Develop | [![Build Status](https://img.shields.io/travis/NumPHP/NumPHP/develop.svg?style=flat-square)](https://travis-ci.org/NumPHP/NumPHP) | [![Coverage Status](https://img.shields.io/coveralls/NumPHP/NumPHP/develop.svg?style=flat-square)](https://coveralls.io/r/NumPHP/NumPHP?branch=develop)
 
