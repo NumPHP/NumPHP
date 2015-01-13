@@ -90,10 +90,8 @@ abstract class SolveLinearSystem
         $xVector = NumPHP::zerosLike($vector);
 
         for ($i = 0; $i < $vectorShape[0]; $i++) {
-            $sum = new NumArray(0);
-            for ($j = 0; $j < $i; $j++) {
-                $sum->add($lMatrix->get($i, $j)->dot($xVector->get($j)));
-            }
+            $slice = sprintf('0:%d', $i);
+            $sum = $lMatrix->get($i, $slice)->dot($xVector->get($slice));
             $xVector->set(
                 $vector->get($i)->sub($sum)->getData()/
                 $lMatrix->get($i, $i)->getData(),
@@ -119,10 +117,8 @@ abstract class SolveLinearSystem
         $xVector = NumPHP::zerosLike($vector);
 
         for ($i = $vectorShape[0]-1; $i >= 0; $i--) {
-            $sum = new NumArray(0);
-            for ($j = $i+1; $j < $vectorShape[0]; $j++) {
-                $sum->add($uMatrix->get($i, $j)->dot($xVector->get($j)));
-            }
+            $slice = sprintf("%d:%d", $i+1, $vectorShape[0]);
+            $sum = $uMatrix->get($i, $slice)->dot($xVector->get($slice));
             $xVector->set(
                 $vector->get($i)->sub($sum)->getData()/
                 $uMatrix->get($i, $i)->getData(),
