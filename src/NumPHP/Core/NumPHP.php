@@ -1,15 +1,8 @@
 <?php
 /**
- * NumPHP (http://numphp.org/)
+ * NumPHP - Mathematical PHP library for scientific computing
  *
- * PHP version 5
- *
- * @category  Core
- * @package   NumPHP\Core
- * @author    Gordon Lesti <info@gordonlesti.com>
- * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
- * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
- * @link      http://numphp.org/
+ * Copyright (c) Gordon Lesti <info@gordonlesti.com>
  */
 
 namespace NumPHP\Core;
@@ -20,11 +13,12 @@ use NumPHP\Core\NumPHP\Generate;
 /**
  * Class NumPHP
  *
- * @category Core
- * @package  NumPHP\Core
- * @author   Gordon Lesti <info@gordonlesti.com>
- * @license  http://opensource.org/licenses/MIT The MIT License (MIT)
- * @link     http://numphp.org/
+ * @package   NumPHP\Core
+ * @author    Gordon Lesti <info@gordonlesti.com>
+ * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ * @link      http://numphp.org/
+ * @since     1.0.0
  */
 abstract class NumPHP
 {
