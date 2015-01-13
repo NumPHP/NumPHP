@@ -31,8 +31,6 @@ class MaxTest extends TestCase
 {
     /**
      * Tests NumArray::max with scalar value without arguments
-     *
-     * @return void
      */
     public function testMaxSingle()
     {
@@ -44,8 +42,6 @@ class MaxTest extends TestCase
 
     /**
      * Tests NumArray::max with a vector without arguments
-     *
-     * @return void
      */
     public function testMaxVector()
     {
@@ -59,8 +55,6 @@ class MaxTest extends TestCase
 
     /**
      * Tests NumArray::max with a matrix without arguments
-     *
-     * @return void
      */
     public function testMaxMatrix()
     {
@@ -77,8 +71,6 @@ class MaxTest extends TestCase
 
     /**
      * Tests NumArray::max with scalar value with argument 0
-     *
-     * @return void
      */
     public function testMaxSingleAxis0()
     {
@@ -90,8 +82,6 @@ class MaxTest extends TestCase
 
     /**
      * Tests NumArray::max with a vector and argument 0
-     *
-     * @return void
      */
     public function testMaxVectorAxis0()
     {
@@ -105,8 +95,6 @@ class MaxTest extends TestCase
 
     /**
      * Tests NumArray::max with a matrix and argument 0
-     *
-     * @return void
      */
     public function testMaxMatrixAxis0()
     {
@@ -129,8 +117,6 @@ class MaxTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 1 out of bounds
-     *
-     * @return void
      */
     public function testMaxSingleAxis1()
     {
@@ -145,8 +131,6 @@ class MaxTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 1 out of bounds
-     *
-     * @return void
      */
     public function testMaxVectorAxis1()
     {
@@ -157,8 +141,6 @@ class MaxTest extends TestCase
 
     /**
      * Tests NumArray::max with a matrix and argument 1
-     *
-     * @return void
      */
     public function testMaxMatrixAxis1()
     {
@@ -181,8 +163,6 @@ class MaxTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 2 out of bounds
-     *
-     * @return void
      */
     public function testMaxMatrixAxis2()
     {

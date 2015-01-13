@@ -36,8 +36,6 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      * @param NumArray $expected expected NumArray
      * @param NumArray $actual   actual NumArray
      * @param string   $message  message when failing
-     *
-     * @return void
      */
     public static function assertNumArrayEquals(
         NumArray $expected,

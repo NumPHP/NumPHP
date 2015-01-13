@@ -29,8 +29,6 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Tests Cache::setCache
-     *
-     * @return void
      */
     public function testSetCache()
     {
@@ -46,8 +44,6 @@ class CacheTest extends \PHPUnit_Framework_TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\CacheKeyException
      * @expectedExceptionMessage Key has to be a string
-     *
-     * @return void
      */
     public function testSetCacheForbiddenKey()
     {
@@ -62,8 +58,6 @@ class CacheTest extends \PHPUnit_Framework_TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\CacheException
      * @expectedExceptionMessage Key "key" already exists
-     *
-     * @return void
      */
     public function testSetCacheDouble()
     {
@@ -79,8 +73,6 @@ class CacheTest extends \PHPUnit_Framework_TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\CacheKeyException
      * @expectedExceptionMessage Key has to be a string
-     *
-     * @return void
      */
     public function testGetCacheForbiddenKey()
     {
@@ -95,8 +87,6 @@ class CacheTest extends \PHPUnit_Framework_TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\CacheException
      * @expectedExceptionMessage Key "key" does not exist
-     *
-     * @return void
      */
     public function testGetMissCache()
     {
@@ -111,8 +101,6 @@ class CacheTest extends \PHPUnit_Framework_TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\CacheKeyException
      * @expectedExceptionMessage Key has to be a string
-     *
-     * @return void
      */
     public function testInCacheForbiddenKey()
     {
@@ -123,8 +111,6 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests Cache::inCache
-     *
-     * @return void
      */
     public function testFlushCache()
     {
@@ -137,8 +123,6 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests Cache::flushCache
-     *
-     * @return void
      */
     public function testFlushCacheKey()
     {
@@ -157,8 +141,6 @@ class CacheTest extends \PHPUnit_Framework_TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\CacheKeyException
      * @expectedExceptionMessage Key has to be a string
-     *
-     * @return void
      */
     public function testFlushCacheForbiddenKey()
     {

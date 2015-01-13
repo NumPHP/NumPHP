@@ -30,8 +30,6 @@ class SizeTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Tests NumArray::getSize on scalar
-     *
-     * @return void
      */
     public function testGetSize()
     {
@@ -41,8 +39,6 @@ class SizeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests NumArray::getSize on scalar
-     *
-     * @return void
      */
     public function testGetSize1()
     {
@@ -52,8 +48,6 @@ class SizeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests NumArray::getSize on a vector
-     *
-     * @return void
      */
     public function testGetSize2()
     {
@@ -63,8 +57,6 @@ class SizeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests NumArray::getSize on a matrix
-     *
-     * @return void
      */
     public function testGetSize2x3()
     {
@@ -74,8 +66,6 @@ class SizeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests NumArray::getSize on a 2x3x4 matrix
-     *
-     * @return void
      */
     public function getSize2x3x4()
     {

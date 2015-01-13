@@ -31,8 +31,6 @@ class NumPHPTest extends TestCase
 {
     /**
      * Compares the version in README.md with NumPHP::VERSION
-     *
-     * @return void
      */
     public function testREADMEVersion()
     {
@@ -45,8 +43,6 @@ class NumPHPTest extends TestCase
 
     /**
      * Tests NumPHP::arange without step
-     *
-     * @return void
      */
     public function testArangeIntWithoutStep()
     {
@@ -58,8 +54,6 @@ class NumPHPTest extends TestCase
 
     /**
      * Tests NumPHP::arange with float values and step
-     *
-     * @return void
      */
     public function testArangeFloatWithoutStep()
     {
@@ -76,8 +70,6 @@ class NumPHPTest extends TestCase
 
     /**
      * Tests NumPHP::arange with integer step
-     *
-     * @return void
      */
     public function testArangeIntWithStep()
     {
@@ -89,8 +81,6 @@ class NumPHPTest extends TestCase
 
     /**
      * Tests NumPHP::arange with float step
-     *
-     * @return void
      */
     public function testArangeFloatWithStep()
     {
@@ -109,8 +99,6 @@ class NumPHPTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Step has to be a positive value
-     *
-     * @return void
      */
     public function testArangeInvalidArgumentException()
     {
@@ -119,8 +107,6 @@ class NumPHPTest extends TestCase
 
     /**
      * Tests NumPHP::linspace with size 0
-     *
-     * @return void
      */
     public function testLinspace0()
     {
@@ -133,8 +119,6 @@ class NumPHPTest extends TestCase
 
     /**
      * Tests NumPHP::linspace with size 1
-     *
-     * @return void
      */
     public function testLinspace1()
     {
@@ -147,8 +131,6 @@ class NumPHPTest extends TestCase
 
     /**
      * Tests NumPHP::linspace with size 7
-     *
-     * @return void
      */
     public function testLinspace()
     {
@@ -167,8 +149,6 @@ class NumPHPTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Number has to be a positive value
-     *
-     * @return void
      */
     public function testLinspaceInvalidArgumentException()
     {

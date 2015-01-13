@@ -37,7 +37,6 @@ abstract class Helper
      *
      * @param NumArray $numArray given NumArray
      *
-     * @return void
      * @throws NoMatrixException
      */
     public static function checkMatrix(NumArray $numArray)
@@ -58,7 +57,6 @@ abstract class Helper
      *
      * @param NumArray $numArray given NumArray
      *
-     * @return void
      * @throws NoVectorException
      */
     public static function checkVector(NumArray $numArray)
@@ -79,7 +77,6 @@ abstract class Helper
      *
      * @param NumArray $numArray given NumArray
      *
-     * @return void
      * @throws NoMatrixException
      * @throws NoSquareMatrixException
      */
@@ -102,7 +99,6 @@ abstract class Helper
      *
      * @param NumArray $numArray given NumArray
      *
-     * @return void
      * @throws NoMatrixException
      * @throws NoSquareMatrixException
      * @throws SingularMatrixException

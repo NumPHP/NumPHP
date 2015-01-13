@@ -31,8 +31,6 @@ class TransposeTest extends TestCase
 {
     /**
      * Tests NumArray::getTranspose on scalar value
-     *
-     * @return void
      */
     public function testTranspose()
     {
@@ -42,8 +40,6 @@ class TransposeTest extends TestCase
 
     /**
      * Tests NumArray::getTranspose on a vector
-     *
-     * @return void
      */
     public function testTranspose3()
     {
@@ -53,8 +49,6 @@ class TransposeTest extends TestCase
 
     /**
      * Tests NumArray::getTranspose on a matrix
-     *
-     * @return void
      */
     public function testTranspose2x3()
     {
@@ -71,8 +65,6 @@ class TransposeTest extends TestCase
 
     /**
      * Tests NumArray::getTranspose on a 2x3x4 matrix
-     *
-     * @return void
      */
     public function testTranspose2x3x4()
     {
@@ -106,8 +98,6 @@ class TransposeTest extends TestCase
 
     /**
      * Tests caching of NumArray::getTranspose
-     *
-     * @return void
      */
     public function testTransposeCache()
     {

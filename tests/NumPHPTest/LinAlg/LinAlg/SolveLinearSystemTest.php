@@ -32,8 +32,6 @@ class SolveLinearSystemTest extends TestCase
 {
     /**
      * Tests LinAlg::solve with 3x3 matrix
-     *
-     * @return void
      */
     public function testSolve()
     {
@@ -57,8 +55,6 @@ class SolveLinearSystemTest extends TestCase
 
     /**
      * Tests LinAlg::solve with identity matrix and ones vector as arrays
-     *
-     * @return void
      */
     public function testSolveArray()
     {
@@ -79,8 +75,6 @@ class SolveLinearSystemTest extends TestCase
      * @expectedException        \NumPHP\LinAlg\Exception\InvalidArgumentException
      * @expectedExceptionMessage Can not solve a linear system with matrix (4, 4)
      * and vector (3)
-     *
-     * @return void
      */
     public function testSolveNotAlign()
     {

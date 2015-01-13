@@ -33,8 +33,6 @@ class LUDecompositionTest extends TestCase
 {
     /**
      * Tests LinAlg::lud with 3x3 matrix
-     *
-     * @return void
      */
     public function testLUDecompositionSquare()
     {
@@ -88,8 +86,6 @@ class LUDecompositionTest extends TestCase
 
     /**
      * Tests LinAlg::lud with 2x4 matrix
-     *
-     * @return void
      */
     public function testLUDecomposition2x4()
     {
@@ -134,8 +130,6 @@ class LUDecompositionTest extends TestCase
 
     /**
      * Tests LinAlg::lud with 4x3 matrix
-     *
-     * @return void
      */
     public function testLUDecomposition4x3()
     {
@@ -190,8 +184,6 @@ class LUDecompositionTest extends TestCase
 
     /**
      * Tests LinAlg::lud with singular 4x4 matrix
-     *
-     * @return void
      */
     public function testLUDecompositionSingularMatrix()
     {
@@ -228,8 +220,6 @@ class LUDecompositionTest extends TestCase
      * @expectedException        \NumPHP\LinAlg\Exception\NoMatrixException
      * @expectedExceptionMessage NumArray with dimension 1 given, NumArray should
      * have 2 dimensions
-     *
-     * @return void
      */
     public function testLUDecompositionVector()
     {
@@ -240,8 +230,6 @@ class LUDecompositionTest extends TestCase
 
     /**
      * Tests cache of LinAlg::lud
-     *
-     * @return void
      */
     public function testLUDecompositionCache()
     {

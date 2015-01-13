@@ -31,8 +31,6 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Compares the version in README.md with LinAlg::VERSION
-     *
-     * @return void
      */
     public function testREADMEVersion()
     {
@@ -45,8 +43,6 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests LinAlg::det with 3x3 matrix
-     *
-     * @return void
      */
     public function testDet3x3()
     {
@@ -63,8 +59,6 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests LinAlg::det with 4x4 matrix
-     *
-     * @return void
      */
     public function testDet4x4()
     {
@@ -85,8 +79,6 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
      * @expectedException        \NumPHP\LinAlg\Exception\NoSquareMatrixException
      * @expectedExceptionMessage Matrix with shape (2, 3) given, matrix has to
      * be square
-     *
-     * @return void
      */
     public function testDet2x3()
     {

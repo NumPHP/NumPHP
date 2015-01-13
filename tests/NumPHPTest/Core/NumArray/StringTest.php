@@ -30,8 +30,6 @@ class StringTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Tests NumArray::__toString with scalar value
-     *
-     * @return void
      */
     public function testToString()
     {
@@ -42,8 +40,6 @@ class StringTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests NumArray::__toString with vector
-     *
-     * @return void
      */
     public function testToString2()
     {
@@ -54,8 +50,6 @@ class StringTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests NumArray::__toString with matrix
-     *
-     * @return void
      */
     public function testToString3x4()
     {

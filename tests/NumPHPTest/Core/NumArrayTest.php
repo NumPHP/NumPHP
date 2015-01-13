@@ -34,8 +34,6 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Dimensions did not match
-     *
-     * @return void
      */
     public function testConstructInvalidArgumentException()
     {
@@ -44,8 +42,6 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests NumArray::getData
-     *
-     * @return void
      */
     public function testGetData()
     {
@@ -56,8 +52,6 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests NumArray::getNDim
-     *
-     * @return void
      */
     public function testNDim()
     {

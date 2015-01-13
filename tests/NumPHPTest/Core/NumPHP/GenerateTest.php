@@ -31,8 +31,6 @@ class GenerateTest extends TestCase
 {
     /**
      * Tests NumPHP::ones without arguments
-     *
-     * @return void
      */
     public function testOnes()
     {
@@ -41,8 +39,6 @@ class GenerateTest extends TestCase
 
     /**
      * Tests NumPHP::rand
-     *
-     * @return void
      */
     public function testRand3()
     {
@@ -58,8 +54,6 @@ class GenerateTest extends TestCase
 
     /**
      * Tests NumPHP::ones with arguments 3, 2
-     *
-     * @return void
      */
     public function testOnes3x2()
     {
@@ -75,8 +69,6 @@ class GenerateTest extends TestCase
 
     /**
      * Tests NumPHP::zeros with arguments 2, 3, 5
-     *
-     * @return void
      */
     public function testZeros2x3x5()
     {
@@ -99,8 +91,6 @@ class GenerateTest extends TestCase
 
     /**
      * Tests NumPHP::zerosLike with 2x3 matrix
-     *
-     * @return void
      */
     public function testZerosLike()
     {
@@ -116,8 +106,6 @@ class GenerateTest extends TestCase
 
     /**
      * Tests NumPHP::onesLike with 3x2 matrix
-     *
-     * @return void
      */
     public function testOnesLike()
     {
@@ -134,8 +122,6 @@ class GenerateTest extends TestCase
 
     /**
      * Tests NumPHP::randLike with vector
-     *
-     * @return void
      */
     public function testRandLike()
     {

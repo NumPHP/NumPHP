@@ -33,8 +33,6 @@ class MeanTest extends TestCase
 {
     /**
      * Tests NumArray::mean with scalar value without arguments
-     *
-     * @return void
      */
     public function testMeanSingle()
     {
@@ -46,8 +44,6 @@ class MeanTest extends TestCase
 
     /**
      * Tests NumArray::mean with a vector and without arguments
-     *
-     * @return void
      */
     public function testMeanVector()
     {
@@ -61,8 +57,6 @@ class MeanTest extends TestCase
 
     /**
      * Tests NumArray::mean with a matrix and without arguments
-     *
-     * @return void
      */
     public function testMeanMatrix()
     {
@@ -74,8 +68,6 @@ class MeanTest extends TestCase
 
     /**
      * Tests NumArray::mean with scalar value with argument 0
-     *
-     * @return void
      */
     public function testMeanSingleAxis0()
     {
@@ -87,8 +79,6 @@ class MeanTest extends TestCase
 
     /**
      * Tests NumArray::mean with a vector and with argument 0
-     *
-     * @return void
      */
     public function testMeanVectorAxis0()
     {
@@ -102,8 +92,6 @@ class MeanTest extends TestCase
 
     /**
      * Tests NumArray::mean with a matrix and with argument 0
-     *
-     * @return void
      */
     public function testMeanMatrixAxis0()
     {
@@ -126,8 +114,6 @@ class MeanTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 1 out of bounds
-     *
-     * @return void
      */
     public function testMeanSingleAxis1()
     {
@@ -142,8 +128,6 @@ class MeanTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 1 out of bounds
-     *
-     * @return void
      */
     public function testMeanVectorAxis1()
     {
@@ -154,8 +138,6 @@ class MeanTest extends TestCase
 
     /**
      * Tests NumArray::mean with a matrix and argument 1
-     *
-     * @return void
      */
     public function testMeanMatrixAxis1()
     {
@@ -178,8 +160,6 @@ class MeanTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 2 out of bounds
-     *
-     * @return void
      */
     public function testMeanMatrixAxis2()
     {
@@ -190,8 +170,6 @@ class MeanTest extends TestCase
 
     /**
      * Tests NumArray::sum with a 2x3x4 matrix and argument 0
-     *
-     * @return void
      */
     public function testMeanMatrix2x3x4Axis0()
     {

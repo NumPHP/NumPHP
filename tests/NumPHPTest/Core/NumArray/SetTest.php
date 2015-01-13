@@ -31,8 +31,6 @@ class SetTest extends TestCase
 {
     /**
      * Tests NumArray::set with single value
-     *
-     * @return void
      */
     public function testSetSingleEntry()
     {
@@ -50,8 +48,6 @@ class SetTest extends TestCase
 
     /**
      * Tests NumArray::set with single value
-     *
-     * @return void
      */
     public function testSetSingleNumArray()
     {
@@ -70,8 +66,6 @@ class SetTest extends TestCase
 
     /**
      * Tests NumArray::set with a row
-     *
-     * @return void
      */
     public function testSetRow()
     {
@@ -92,8 +86,6 @@ class SetTest extends TestCase
 
     /**
      * Tests NumArray::set with a row
-     *
-     * @return void
      */
     public function testSetRowNumArray()
     {
@@ -114,8 +106,6 @@ class SetTest extends TestCase
 
     /**
      * Tests if cache will be flushed after NumArray::set
-     *
-     * @return void
      */
     public function testSetCache()
     {

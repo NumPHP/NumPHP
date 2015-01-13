@@ -33,8 +33,6 @@ class HelperTest extends \PHPUnit_Framework_TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Array contains non numeric values
-     *
-     * @return void
      */
     public function testMultiplyInvalidArgumentException()
     {
@@ -43,8 +41,6 @@ class HelperTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests Helper::multiply with filled array
-     *
-     * @return void
      */
     public function testMultiply()
     {
@@ -53,8 +49,6 @@ class HelperTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests Helper::multiply with empty array
-     *
-     * @return void
      */
     public function testMultiplyEmpty()
     {

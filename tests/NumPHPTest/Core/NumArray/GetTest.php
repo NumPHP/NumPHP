@@ -33,8 +33,6 @@ class GetTest extends TestCase
 {
     /**
      * Tests NumArray::get without arguments on scalar value
-     *
-     * @return void
      */
     public function testGet()
     {
@@ -46,8 +44,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get without arguments on scalar value
-     *
-     * @return void
      */
     public function testGet1()
     {
@@ -59,8 +55,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get with argument 0 on vector with size 1
-     *
-     * @return void
      */
     public function testGet1Args0()
     {
@@ -72,8 +66,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get without argument on vector
-     *
-     * @return void
      */
     public function testGet2()
     {
@@ -84,8 +76,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get with argument 1 on vector
-     *
-     * @return void
      */
     public function testGet2Args1()
     {
@@ -97,8 +87,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get with slicing argument `1:3` on vector
-     *
-     * @return void
      */
     public function testGet4Args1Slice3()
     {
@@ -109,8 +97,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get with slicing argument `1:` on vector
-     *
-     * @return void
      */
     public function testGet3Args1Slice()
     {
@@ -121,8 +107,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get with slicing argument `:2` on vector
-     *
-     * @return void
      */
     public function testGet3ArgsSlice2()
     {
@@ -133,8 +117,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get without argument on matrix
-     *
-     * @return void
      */
     public function testGet2x4()
     {
@@ -144,8 +126,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get with argument 0 on matrix
-     *
-     * @return void
      */
     public function testGet2x4Args0()
     {
@@ -156,8 +136,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get with argument 1, 2 on matrix
-     *
-     * @return void
      */
     public function testGet2x4Args1x2()
     {
@@ -169,8 +147,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get with slicing argument `1:3`, `2:4` on matrix
-     *
-     * @return void
      */
     public function testGet3x4Args1Slice3()
     {
@@ -186,8 +162,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get with slicing argument `:`, 2 on matrix
-     *
-     * @return void
      */
     public function testGet3x4ArgsSlicex3()
     {
@@ -200,8 +174,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get with negative argument on vector
-     *
-     * @return void
      */
     public function testGet3ArgsMinus1()
     {
@@ -213,8 +185,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get with negative slicing argument `-1:` on vector
-     *
-     * @return void
      */
     public function testGet4ArgsMinus1Slice()
     {
@@ -225,8 +195,6 @@ class GetTest extends TestCase
 
     /**
      * Tests NumArray::get with negative slicing argument `:-1` on vector
-     *
-     * @return void
      */
     public function testGet4ArgsSliceMinus1()
     {

@@ -31,8 +31,6 @@ class ShapeTest extends TestCase
 {
     /**
      * Tests NumArray::getShape on scalar
-     *
-     * @return void
      */
     public function testGetShape()
     {
@@ -42,8 +40,6 @@ class ShapeTest extends TestCase
 
     /**
      * Tests NumArray::getShape on vector size 2
-     *
-     * @return void
      */
     public function testGetShape2()
     {
@@ -53,8 +49,6 @@ class ShapeTest extends TestCase
 
     /**
      * Tests NumArray::getShape on matrix size 2x0
-     *
-     * @return void
      */
     public function testGetShape2x0()
     {
@@ -64,8 +58,6 @@ class ShapeTest extends TestCase
 
     /**
      * Tests NumArray::getShape on matrix size 2x4
-     *
-     * @return void
      */
     public function testGetShape2x4()
     {
@@ -75,8 +67,6 @@ class ShapeTest extends TestCase
 
     /**
      * Tests NumArray::getShape on matrix size 2x3x4
-     *
-     * @return void
      */
     public function testGetShape2x3x4()
     {
@@ -90,8 +80,6 @@ class ShapeTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\BadMethodCallException
      * @expectedExceptionMessage NumArray data is not an array
-     *
-     * @return void
      */
     public function testReshapeBadMethodCallException()
     {
@@ -105,8 +93,6 @@ class ShapeTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Total size of new array must be unchanged
-     *
-     * @return void
      */
     public function testReshapeInvalidArgumentException()
     {
@@ -116,8 +102,6 @@ class ShapeTest extends TestCase
 
     /**
      * Tests NumArray::reshape with matrix 2x3 to vector 6
-     *
-     * @return void
      */
     public function testReshape2x3To1x6()
     {
@@ -132,8 +116,6 @@ class ShapeTest extends TestCase
 
     /**
      * Tests NumArray::reshape with matrix 3x4 to matrix 2x6
-     *
-     * @return void
      */
     public function testReshape3x4To2x6()
     {
@@ -155,8 +137,6 @@ class ShapeTest extends TestCase
 
     /**
      * Tests if cache will be flushed after NumArray::reshape
-     *
-     * @return void
      */
     public function testReshapeCache()
     {

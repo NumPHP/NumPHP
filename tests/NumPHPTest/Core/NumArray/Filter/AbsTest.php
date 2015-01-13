@@ -31,8 +31,6 @@ class AbsTest extends TestCase
 {
     /**
      * Tests NumArray::abs with scalar value
-     *
-     * @return void
      */
     public function testAbsSingle()
     {
@@ -44,8 +42,6 @@ class AbsTest extends TestCase
 
     /**
      * Tests NumArray::abs with a vector
-     *
-     * @return void
      */
     public function testAbsVector()
     {
@@ -61,8 +57,6 @@ class AbsTest extends TestCase
 
     /**
      * Tests NumArray::abs with a matrix
-     *
-     * @return void
      */
     public function testAbsMatrix()
     {
@@ -79,8 +73,6 @@ class AbsTest extends TestCase
 
     /**
      * Tests if cache will be flushed after using NumArray::abs
-     *
-     * @return void
      */
     public function testAbsCache()
     {

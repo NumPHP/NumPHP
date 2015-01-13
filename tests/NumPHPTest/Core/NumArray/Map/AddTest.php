@@ -31,8 +31,6 @@ class AddTest extends TestCase
 {
     /**
      * Tests NumArray::add with scalar values
-     *
-     * @return void
      */
     public function testAddSingle()
     {
@@ -45,8 +43,6 @@ class AddTest extends TestCase
 
     /**
      * Tests NumArray::add with scalar value and vector
-     *
-     * @return void
      */
     public function testAddSingleVector()
     {
@@ -59,8 +55,6 @@ class AddTest extends TestCase
 
     /**
      * Tests NumArray::add with two vectors
-     *
-     * @return void
      */
     public function testAddTwoVector()
     {
@@ -73,8 +67,6 @@ class AddTest extends TestCase
 
     /**
      * Tests NumArray::add with scalar value and matrix
-     *
-     * @return void
      */
     public function testAddMatrixSingle()
     {
@@ -87,8 +79,6 @@ class AddTest extends TestCase
 
     /**
      * Tests NumArray::add with vector and matrix
-     *
-     * @return void
      */
     public function testAddVectorMatrix()
     {
@@ -107,8 +97,6 @@ class AddTest extends TestCase
 
     /**
      * Tests NumArray::add with two matrices
-     *
-     * @return void
      */
     public function testAddMatrixMatrix()
     {
@@ -121,8 +109,6 @@ class AddTest extends TestCase
 
     /**
      * Tests NumArray::add with vector and array
-     *
-     * @return void
      */
     public function testAddVectorArray()
     {
@@ -139,8 +125,6 @@ class AddTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Size 5 is different from size 4
-     *
-     * @return void
      */
     public function testAddDifferentShape()
     {
@@ -152,8 +136,6 @@ class AddTest extends TestCase
 
     /**
      * Tests if cache will be flushed after use of NumArray::add
-     *
-     * @return void
      */
     public function testAddCache()
     {

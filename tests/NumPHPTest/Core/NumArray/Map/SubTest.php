@@ -31,8 +31,6 @@ class SubTest extends TestCase
 {
     /**
      * Tests NumArray::sub with scalar values
-     *
-     * @return void
      */
     public function testSubSingle()
     {
@@ -45,8 +43,6 @@ class SubTest extends TestCase
 
     /**
      * Tests NumArray::sub with scalar and vector
-     *
-     * @return void
      */
     public function testSubVectorSingle()
     {
@@ -59,8 +55,6 @@ class SubTest extends TestCase
 
     /**
      * Tests if cache will be flushed after use of NumArray::sub
-     *
-     * @return void
      */
     public function testSubCache()
     {

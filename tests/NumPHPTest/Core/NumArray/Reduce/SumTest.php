@@ -33,8 +33,6 @@ class SumTest extends TestCase
 {
     /**
      * Tests NumArray::sum with scalar value without arguments
-     *
-     * @return void
      */
     public function testSumSingle()
     {
@@ -46,8 +44,6 @@ class SumTest extends TestCase
 
     /**
      * Tests NumArray::sum with a vector without arguments
-     *
-     * @return void
      */
     public function testSumVector()
     {
@@ -59,8 +55,6 @@ class SumTest extends TestCase
 
     /**
      * Tests NumArray::sum with a matrix without arguments
-     *
-     * @return void
      */
     public function testSumMatrix()
     {
@@ -72,8 +66,6 @@ class SumTest extends TestCase
 
     /**
      * Tests NumArray::sum with scalar value with argument 0
-     *
-     * @return void
      */
     public function testSumSingleAxis0()
     {
@@ -85,8 +77,6 @@ class SumTest extends TestCase
 
     /**
      * Tests NumArray::sum with a vector and argument 0
-     *
-     * @return void
      */
     public function testSumVectorAxis0()
     {
@@ -98,8 +88,6 @@ class SumTest extends TestCase
 
     /**
      * Tests NumArray::sum with a matrix and argument 0
-     *
-     * @return void
      */
     public function testSumMatrixAxis0()
     {
@@ -115,8 +103,6 @@ class SumTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 1 out of bounds
-     *
-     * @return void
      */
     public function testSumSingleAxis1()
     {
@@ -131,8 +117,6 @@ class SumTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 1 out of bounds
-     *
-     * @return void
      */
     public function testSumVectorAxis1()
     {
@@ -143,8 +127,6 @@ class SumTest extends TestCase
 
     /**
      * Tests NumArray::sum with a matrix and argument 1
-     *
-     * @return void
      */
     public function testSumMatrixAxis1()
     {
@@ -160,8 +142,6 @@ class SumTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 2 out of bounds
-     *
-     * @return void
      */
     public function testSumMatrixAxis2()
     {
@@ -172,8 +152,6 @@ class SumTest extends TestCase
 
     /**
      * Tests NumArray::sum with a 2x3x4 matrix and argument 2
-     *
-     * @return void
      */
     public function testSumMatrix2x3x4Axis2()
     {

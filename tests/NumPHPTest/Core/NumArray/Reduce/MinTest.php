@@ -31,8 +31,6 @@ class MinTest extends TestCase
 {
     /**
      * Tests NumArray::min with scalar value without arguments
-     *
-     * @return void
      */
     public function testMinSingle()
     {
@@ -44,8 +42,6 @@ class MinTest extends TestCase
 
     /**
      * Tests NumArray::min with a vector without arguments
-     *
-     * @return void
      */
     public function testMinVector()
     {
@@ -59,8 +55,6 @@ class MinTest extends TestCase
 
     /**
      * Tests NumArray::min with a matrix without arguments
-     *
-     * @return void
      */
     public function testMinMatrix()
     {
@@ -77,8 +71,6 @@ class MinTest extends TestCase
 
     /**
      * Tests NumArray::min with scalar value with argument 0
-     *
-     * @return void
      */
     public function testMinSingleAxis0()
     {
@@ -90,8 +82,6 @@ class MinTest extends TestCase
 
     /**
      * Tests NumArray::min with a vector and argument 0
-     *
-     * @return void
      */
     public function testMinVectorAxis0()
     {
@@ -103,8 +93,6 @@ class MinTest extends TestCase
 
     /**
      * Tests NumArray::min with a matrix and argument 0
-     *
-     * @return void
      */
     public function testMinMatrixAxis0()
     {
@@ -128,8 +116,6 @@ class MinTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 1 out of bounds
-     *
-     * @return void
      */
     public function testMinSingleAxis1()
     {
@@ -144,8 +130,6 @@ class MinTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 1 out of bounds
-     *
-     * @return void
      */
     public function testMinVectorAxis1()
     {
@@ -156,8 +140,6 @@ class MinTest extends TestCase
 
     /**
      * Tests NumArray::min with a matrix and argument 1
-     *
-     * @return void
      */
     public function testMinMatrixAxis1()
     {
@@ -181,8 +163,6 @@ class MinTest extends TestCase
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Axis 2 out of bounds
-     *
-     * @return void
      */
     public function testNimMatrixAxis2()
     {

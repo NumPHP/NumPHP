@@ -30,8 +30,6 @@ class HelperTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Tests if Helper::checkMatrix works with valid matrix
-     *
-     * @return void
      */
     public function testCheckMatrixValid()
     {
@@ -46,8 +44,6 @@ class HelperTest extends \PHPUnit_Framework_TestCase
      * @expectedException        \NumPHP\LinAlg\Exception\NoMatrixException
      * @expectedExceptionMessage NumArray with dimension 1 given, NumArray should
      * have 2 dimensions
-     *
-     * @return void
      */
     public function testCheckMatrixInvalid()
     {
@@ -57,8 +53,6 @@ class HelperTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests if Helper::checkVector works with valid vector
-     *
-     * @return void
      */
     public function testCheckVectorValid()
     {
@@ -73,8 +67,6 @@ class HelperTest extends \PHPUnit_Framework_TestCase
      * @expectedException        \NumPHP\LinAlg\Exception\NoVectorException
      * @expectedExceptionMessage NumArray with dimension 2 given, NumArray should
      * have 1 dimension
-     *
-     * @return void
      */
     public function testCheckVectorInvalid()
     {
@@ -84,8 +76,6 @@ class HelperTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests if Helper::checkSquareMatrix works with valid square matrix
-     *
-     * @return void
      */
     public function testCheckSquareMatrixValid()
     {
@@ -100,8 +90,6 @@ class HelperTest extends \PHPUnit_Framework_TestCase
      * @expectedException        \NumPHP\LinAlg\Exception\NoSquareMatrixException
      * @expectedExceptionMessage Matrix with shape (2, 3) given, matrix has to
      * be square
-     *
-     * @return void
      */
     public function testCheckSquareMatrixInvalid()
     {
@@ -111,8 +99,6 @@ class HelperTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests if Helper::checkNotSingular works with valid not singular matrix
-     *
-     * @return void
      */
     public function testCheckNotSingularMatrixValid()
     {
@@ -126,8 +112,6 @@ class HelperTest extends \PHPUnit_Framework_TestCase
      *
      * @expectedException        \NumPHP\LinAlg\Exception\SingularMatrixException
      * @expectedExceptionMessage Matrix is singular
-     *
-     * @return void
      */
     public function testCheckNotSingularMatrixInvalid()
     {

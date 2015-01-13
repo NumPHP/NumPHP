@@ -31,8 +31,6 @@ class EyeTest extends TestCase
 {
     /**
      * Tests NumPHP::eye with argument 1
-     *
-     * @return void
      */
     public function testEye1()
     {
@@ -44,8 +42,6 @@ class EyeTest extends TestCase
 
     /**
      * Tests NumPHP::eye with argument 4
-     *
-     * @return void
      */
     public function testEye4()
     {
@@ -64,8 +60,6 @@ class EyeTest extends TestCase
 
     /**
      * Tests NumPHP::eye with arguments 2, 3
-     *
-     * @return void
      */
     public function testEye2x3()
     {
@@ -82,8 +76,6 @@ class EyeTest extends TestCase
 
     /**
      * Tests NumPHP::eye with arguments 4, 3
-     *
-     * @return void
      */
     public function testEye4x3()
     {
@@ -102,8 +94,6 @@ class EyeTest extends TestCase
 
     /**
      * Tests NumPHP::identity with argument 3
-     *
-     * @return void
      */
     public function testIdentity()
     {
