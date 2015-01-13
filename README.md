@@ -4,8 +4,6 @@ NumPHP is a mathematical PHP library for scientific computing. The main object i
 or a matrix. Advanced matrix arithmetic for PHP. This project is inspired by the simplicity of
 [NumPy](http://www.numpy.org/).
 
-## Build Status
-
 Branch | Build Status | Coverage
 --- | --- | ---
 Master | [![Build Status](https://img.shields.io/travis/NumPHP/NumPHP/master.svg?style=flat-square)](https://travis-ci.org/NumPHP/NumPHP) | [![Coverage Status](https://img.shields.io/coveralls/NumPHP/NumPHP/master.svg?style=flat-square)](https://coveralls.io/r/NumPHP/NumPHP?branch=master)
