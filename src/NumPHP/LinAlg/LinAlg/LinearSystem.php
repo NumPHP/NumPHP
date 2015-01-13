@@ -82,10 +82,7 @@ abstract class LinearSystem
      *
      * @return NumArray
      */
-    protected static function forwardSubstitution(
-        NumArray $lMatrix,
-        NumArray $vector
-    ) {
+    protected static function forwardSubstitutionVector(NumArray $lMatrix, NumArray $vector) {
         $vectorShape = $vector->getShape();
         $xVector = NumPHP::zerosLike($vector);
 
@@ -93,8 +90,7 @@ abstract class LinearSystem
             $slice = sprintf('0:%d', $i);
             $sum = $lMatrix->get($i, $slice)->dot($xVector->get($slice));
             $xVector->set(
-                $vector->get($i)->sub($sum)->getData()/
-                $lMatrix->get($i, $i)->getData(),
+                $vector->get($i)->sub($sum)->getData()/$lMatrix->get($i, $i)->getData(),
                 $i
             );
         }
@@ -111,7 +107,7 @@ abstract class LinearSystem
      *
      * @return NumArray
      */
-    protected static function backSubstitution(NumArray $uMatrix, NumArray $vector)
+    protected static function backSubstitutionMatrix(NumArray $uMatrix, NumArray $vector)
     {
         $vectorShape = $vector->getShape();
         $xVector = NumPHP::zerosLike($vector);
@@ -120,8 +116,7 @@ abstract class LinearSystem
             $slice = sprintf("%d:%d", $i+1, $vectorShape[0]);
             $sum = $uMatrix->get($i, $slice)->dot($xVector->get($slice));
             $xVector->set(
-                $vector->get($i)->sub($sum)->getData()/
-                $uMatrix->get($i, $i)->getData(),
+                $vector->get($i)->sub($sum)->getData()/$uMatrix->get($i, $i)->getData(),
                 $i
             );
         }
