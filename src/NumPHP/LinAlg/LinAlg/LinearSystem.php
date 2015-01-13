@@ -67,8 +67,8 @@ abstract class LinearSystem
         $uMatrix = clone $lud['U'];
 
         $pMatrix->dot($numArray);
-        $yVector = self::forwardSubstitution($lMatrix, $pMatrix);
-        $zVector = self::backSubstitution($uMatrix, $yVector);
+        $yVector = self::forwardSubstitutionVector($lMatrix, $pMatrix);
+        $zVector = self::backSubstitutionMatrix($uMatrix, $yVector);
 
         return $zVector;
     }
@@ -82,7 +82,8 @@ abstract class LinearSystem
      *
      * @return NumArray
      */
-    protected static function forwardSubstitutionVector(NumArray $lMatrix, NumArray $vector) {
+    protected static function forwardSubstitutionVector(NumArray $lMatrix, NumArray $vector)
+    {
         $vectorShape = $vector->getShape();
         $xVector = NumPHP::zerosLike($vector);
 
