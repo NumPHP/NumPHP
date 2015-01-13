@@ -8,7 +8,6 @@
 namespace NumPHP\LinAlg;
 
 use NumPHP\Core\NumArray;
-use NumPHP\LinAlg\Exception\NoMatrixException;
 use NumPHP\LinAlg\Exception\NoSquareMatrixException;
 use NumPHP\LinAlg\LinAlg\Helper;
 use NumPHP\LinAlg\LinAlg\LUDecomposition;
@@ -33,17 +32,20 @@ abstract class LinAlg
      *
      * @param mixed $array matrix
      *
+     * @throws NoSquareMatrixException will be thrown, if given array is no square matrix
+     *
      * @return int
-     * @throws NoMatrixException will be thrown, if given array is no matrix
-     * @throws NoSquareMatrixException will be thrown, if given array is no square
-     * matrix
      */
     public static function det($array)
     {
         if (!$array instanceof NumArray) {
             $array = new NumArray($array);
         }
-        Helper::checkSquareMatrix($array);
+        if (!Helper::isSquareMatrix($array)) {
+            throw new NoSquareMatrixException(
+                sprintf("Matrix with shape (%s) given, matrix has to be square", implode(', ', $array->getShape()))
+            );
+        }
         $shape = $array->getShape();
 
         $lud = self::lud($array);
@@ -66,8 +68,9 @@ abstract class LinAlg
      *
      * @param mixed $array matrix
      *
+     * @throws \NumPHP\LinAlg\Exception\NoMatrixException will be thrown, if `$array` is no matrix
+     *
      * @return array
-     * @throws NoMatrixException will be thrown, if `$array` is no matrix
      */
     public static function lud($array)
     {
@@ -88,6 +91,8 @@ abstract class LinAlg
      *
      * @param mixed $squareMatrix matrix of size n*n
      * @param mixed $vector       vector of size n
+     *
+     * @throws \NumPHP\LinAlg\Exception\SingularMatrixException will be thrown, if `$squareMatrix` is singular
      *
      * @return NumArray
      */

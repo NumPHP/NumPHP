@@ -30,12 +30,17 @@ abstract class LUDecomposition
      *
      * @param NumArray $array matrix
      *
-     * @return array
      * @throws NoMatrixException will be thrown, if `array` is no matrix
+     *
+     * @return array
      */
     public static function lud(NumArray $array)
     {
-        Helper::checkMatrix($array);
+        if (!Helper::isMatrix($array)) {
+            throw new NoMatrixException(
+                sprintf("NumArray with dimension %d given, NumArray should have 2 dimensions", $array->getNDim())
+            );
+        }
         $numArray = clone $array;
 
         $shape = $numArray->getShape();
@@ -78,7 +83,7 @@ abstract class LUDecomposition
 
         return [
             'P' => self::buildPivotMatrix($pArray),
-            'L' => $lMatrix->add(NumPHP::eye($mAxis, $size)),
+            'L' => self::buildLMatrix($lMatrix),
             'U' => self::buildUMatrix($numArray),
         ];
     }
@@ -123,6 +128,21 @@ abstract class LUDecomposition
         }
 
         return $uMatrix;
+    }
+
+    /**
+     * Build the lower triangular matrix from given matrix
+     *
+     * @param NumArray $numArray given matrix
+     *
+     * @return NumArray
+     */
+    protected static function buildLMatrix(NumArray $numArray)
+    {
+        $shape = $numArray->getShape();
+        $numArray->add(NumPHP::eye($shape[0], $shape[1]));
+
+        return $numArray;
     }
 
     /**

@@ -212,8 +212,7 @@ class LUDecompositionTest extends TestCase
      * Tests if NoMatrixException will be thrown, when using LinAlg::lud a vector
      *
      * @expectedException        \NumPHP\LinAlg\Exception\NoMatrixException
-     * @expectedExceptionMessage NumArray with dimension 1 given, NumArray should
-     * have 2 dimensions
+     * @expectedExceptionMessage NumArray with dimension 1 given, NumArray should have 2 dimensions
      */
     public function testLUDecompositionVector()
     {

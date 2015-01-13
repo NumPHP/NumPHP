@@ -71,8 +71,7 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
      * 2x3 matrix
      *
      * @expectedException        \NumPHP\LinAlg\Exception\NoSquareMatrixException
-     * @expectedExceptionMessage Matrix with shape (2, 3) given, matrix has to
-     * be square
+     * @expectedExceptionMessage Matrix with shape (2, 3) given, matrix has to be square
      */
     public function testDet2x3()
     {

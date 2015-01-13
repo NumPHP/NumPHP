@@ -63,12 +63,25 @@ class SolveLinearSystemTest extends TestCase
     }
 
     /**
-     * Tests if InvalidArgumentException will be thrown, when using LinAlg::solve
-     * with not align matrix and vector
+     * Tests if SingularMatrixException will be thrown, when using LinAlg::solve with singular matrix
+     *
+     * @expectedException        \NumPHP\LinAlg\Exception\SingularMatrixException
+     * @expectedExceptionMessage jo
+     */
+    public function testSolveSingular()
+    {
+        $matrix = NumPHP::identity(4);
+        $matrix->set(0, 1, 1);
+        $vector = NumPHP::arange(1, 4);
+
+        LinAlg::solve($matrix, $vector);
+    }
+
+    /**
+     * Tests if InvalidArgumentException will be thrown, when using LinAlg::solve with not align matrix and vector
      *
      * @expectedException        \NumPHP\LinAlg\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Can not solve a linear system with matrix (4, 4)
-     * and vector (3)
+     * @expectedExceptionMessage Can not solve a linear system with matrix (4, 4) and matrix (3)
      */
     public function testSolveNotAlign()
     {

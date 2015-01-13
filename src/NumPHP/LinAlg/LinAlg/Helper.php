@@ -8,10 +8,6 @@
 namespace NumPHP\LinAlg\LinAlg;
 
 use NumPHP\Core\NumArray;
-use NumPHP\LinAlg\Exception\NoMatrixException;
-use NumPHP\LinAlg\Exception\NoSquareMatrixException;
-use NumPHP\LinAlg\Exception\NoVectorException;
-use NumPHP\LinAlg\Exception\SingularMatrixException;
 use NumPHP\LinAlg\LinAlg;
 
 /**
@@ -31,19 +27,11 @@ abstract class Helper
      *
      * @param NumArray $numArray given NumArray
      *
-     * @throws NoMatrixException
+     * @return bool
      */
-    public static function checkMatrix(NumArray $numArray)
+    public static function isMatrix(NumArray $numArray)
     {
-        if ($numArray->getNDim() !== 2) {
-            throw new NoMatrixException(
-                sprintf(
-                    "NumArray with dimension %d given, NumArray should have 2 ".
-                    "dimensions",
-                    $numArray->getNDim()
-                )
-            );
-        }
+        return $numArray->getNDim() === 2;
     }
 
     /**
@@ -51,19 +39,11 @@ abstract class Helper
      *
      * @param NumArray $numArray given NumArray
      *
-     * @throws NoVectorException
+     * @return bool
      */
-    public static function checkVector(NumArray $numArray)
+    public static function isVector(NumArray $numArray)
     {
-        if ($numArray->getNDim() !== 1) {
-            throw new NoVectorException(
-                sprintf(
-                    "NumArray with dimension %d given, NumArray should have 1 ".
-                    "dimension",
-                    $numArray->getNDim()
-                )
-            );
-        }
+        return $numArray->getNDim() === 1;
     }
 
     /**
@@ -71,21 +51,12 @@ abstract class Helper
      *
      * @param NumArray $numArray given NumArray
      *
-     * @throws NoMatrixException
-     * @throws NoSquareMatrixException
+     * @return bool
      */
-    public static function checkSquareMatrix(NumArray $numArray)
+    public static function isSquareMatrix(NumArray $numArray)
     {
-        self::checkMatrix($numArray);
         $shape = $numArray->getShape();
-        if ($shape[0] !== $shape[1]) {
-            throw new NoSquareMatrixException(
-                sprintf(
-                    "Matrix with shape (%s) given, matrix has to be square",
-                    implode(', ', $shape)
-                )
-            );
-        }
+        return self::isMatrix($numArray) && $shape[0] === $shape[1];
     }
 
     /**
@@ -93,16 +64,12 @@ abstract class Helper
      *
      * @param NumArray $numArray given NumArray
      *
-     * @throws NoMatrixException
-     * @throws NoSquareMatrixException
-     * @throws SingularMatrixException
+     * @todo better use matrix_rank to check if a matrix is singular
+     *
+     * @return bool
      */
-    public static function checkNotSingularMatrix(NumArray $numArray)
+    public static function isNotSingularMatrix(NumArray $numArray)
     {
-        self::checkSquareMatrix($numArray);
-        $det = LinAlg::det($numArray);
-        if ($det == 0) {
-            throw new SingularMatrixException("Matrix is singular");
-        }
+        return self::isSquareMatrix($numArray) && LinAlg::det($numArray) != 0;
     }
 }

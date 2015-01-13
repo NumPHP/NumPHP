@@ -10,6 +10,7 @@ namespace NumPHP\LinAlg\LinAlg;
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
 use NumPHP\LinAlg\Exception\InvalidArgumentException;
+use NumPHP\LinAlg\Exception\SingularMatrixException;
 use NumPHP\LinAlg\LinAlg;
 
 /**
@@ -28,32 +29,27 @@ abstract class SolveLinearSystem
      * Solves a linear system
      *
      * @param NumArray $squareMatrix matrix of size n*n
-     * @param NumArray $vector       vector of size n
+     * @param NumArray $numArray     vector of size n or matrix of size n*
      *
      * @return NumArray
-     * @throws \NumPHP\LinAlg\Exception\NoMatrixException will be thrown, if
-     * `$squareMatrix` is not a matrix
-     * @throws \NumPHP\LinAlg\Exception\NoSquareMatrixException will be thrown, if
-     * `$squareMatrix` is not square
      * @throws \NumPHP\LinAlg\Exception\SingularMatrixException will be thrown, if
      * `$squareMatrix` is singular
-     * @throws \NumPHP\LinAlg\Exception\NoVectorException will be thrown, if
-     * `$vector` is no vector
      * @throws \NumPHP\LinAlg\Exception\InvalidArgumentException will be thrown, if
-     * linear system of `$squareMatrix` and `$vector` can not be solved
+     * linear system of `$squareMatrix` and `$numArray` can not be solved
      */
-    public static function solve(NumArray $squareMatrix, NumArray $vector)
+    public static function solve(NumArray $squareMatrix, NumArray $numArray)
     {
-        Helper::checkNotSingularMatrix($squareMatrix);
-        $matrixShape = $squareMatrix->getShape();
-        $vectorShape = $vector->getShape();
-        if ($matrixShape[0] !== $vectorShape[0]) {
+        if (!Helper::isNotSingularMatrix($squareMatrix)) {
+            throw new SingularMatrixException('jo');
+        }
+        $shape1 = $squareMatrix->getShape();
+        $shape2 = $numArray->getShape();
+        if ($shape1[0] !== $shape2[0]) {
             throw new InvalidArgumentException(
                 sprintf(
-                    "Can not solve a linear system with matrix (%s) and vector ".
-                    "(%s)",
-                    implode(', ', $matrixShape),
-                    implode(', ', $vectorShape)
+                    "Can not solve a linear system with matrix (%s) and matrix (%s)",
+                    implode(', ', $shape1),
+                    implode(', ', $shape2)
                 )
             );
         }
@@ -70,7 +66,7 @@ abstract class SolveLinearSystem
         $lMatrix = clone $lud['L'];
         $uMatrix = clone $lud['U'];
 
-        $pMatrix->dot($vector);
+        $pMatrix->dot($numArray);
         $yVector = self::forwardSubstitution($lMatrix, $pMatrix);
         $zVector = self::backSubstitution($uMatrix, $yVector);
 

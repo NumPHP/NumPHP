@@ -117,8 +117,7 @@ class DotTest extends TestCase
      * with a vector and a 2x3x4 matrix that are not align
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Matrix with shape (3) and matrix with shape
-     * (2, 3, 4) are not align.
+     * @expectedExceptionMessage Matrix with shape (3) and matrix with shape (2, 3, 4) are not align.
      */
     public function testDotVector3Matrix3d()
     {
@@ -186,8 +185,7 @@ class DotTest extends TestCase
      * with a matrix and a vector that are not align
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Matrix with shape (3, 3) and matrix with shape (4)
-     * are not align.
+     * @expectedExceptionMessage Matrix with shape (3, 3) and matrix with shape (4) are not align.
      */
     public function testDotMatrix3x3Vector4()
     {
@@ -232,8 +230,7 @@ class DotTest extends TestCase
      * with two matrices that are not align
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Matrix with shape (3, 4) and matrix with shape
-     * (3, 3) are not align.
+     * @expectedExceptionMessage Matrix with shape (3, 4) and matrix with shape (3, 3) are not align.
      */
     public function testDotMatrix3x4Matrix3x3()
     {

@@ -23,94 +23,75 @@ use NumPHP\LinAlg\LinAlg\Helper;
 class HelperTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Tests if Helper::checkMatrix works with valid matrix
+     * Tests if Helper::isMatrix works with valid matrix
      */
     public function testCheckMatrixValid()
     {
         $numArray = NumPHP::ones(2, 3);
-        Helper::checkMatrix($numArray);
+        $this->assertTrue(Helper::isMatrix($numArray));
     }
 
     /**
-     * Tests if Helper::checkMatrix throws NoMatrixException, when argument is a
-     * vector
-     *
-     * @expectedException        \NumPHP\LinAlg\Exception\NoMatrixException
-     * @expectedExceptionMessage NumArray with dimension 1 given, NumArray should
-     * have 2 dimensions
+     * Tests if Helper::isMatrix works with invalid matrix
      */
     public function testCheckMatrixInvalid()
     {
         $numArray = NumPHP::ones(3);
-        Helper::checkMatrix($numArray);
+        $this->assertFalse(Helper::isMatrix($numArray));
     }
 
     /**
-     * Tests if Helper::checkVector works with valid vector
+     * Tests if Helper::isVector works with valid vector
      */
     public function testCheckVectorValid()
     {
         $numArray = NumPHP::ones(3);
-        Helper::checkVector($numArray);
+        $this->assertTrue(Helper::isVector($numArray));
     }
 
     /**
-     * Tests if Helper::checkVector throws NoVectorException, when argument is a
-     * matrix
-     *
-     * @expectedException        \NumPHP\LinAlg\Exception\NoVectorException
-     * @expectedExceptionMessage NumArray with dimension 2 given, NumArray should
-     * have 1 dimension
+     * Tests if Helper::isVector works with invalid vector
      */
     public function testCheckVectorInvalid()
     {
         $numArray = NumPHP::ones(3, 2);
-        Helper::checkVector($numArray);
+        $this->assertFalse(Helper::isVector($numArray));
     }
 
     /**
-     * Tests if Helper::checkSquareMatrix works with valid square matrix
+     * Tests if Helper::isSquareMatrix works with valid square matrix
      */
     public function testCheckSquareMatrixValid()
     {
         $numArray = NumPHP::eye(3);
-        Helper::checkSquareMatrix($numArray);
+        $this->assertTrue(Helper::isSquareMatrix($numArray));
     }
 
     /**
-     * Tests if Helper::checkSquareMatrix throws NoSquareMatrixException, when
-     * argument is a vector
-     *
-     * @expectedException        \NumPHP\LinAlg\Exception\NoSquareMatrixException
-     * @expectedExceptionMessage Matrix with shape (2, 3) given, matrix has to
-     * be square
+     * Tests if Helper::isSquareMatrix works with invalid square matrix
      */
     public function testCheckSquareMatrixInvalid()
     {
         $numArray = NumPHP::ones(2, 3);
-        Helper::checkSquareMatrix($numArray);
+        $this->assertFalse(Helper::isSquareMatrix($numArray));
     }
 
     /**
-     * Tests if Helper::checkNotSingular works with valid not singular matrix
+     * Tests if Helper::isNotSingularMatrix works with valid not singular matrix
      */
     public function testCheckNotSingularMatrixValid()
     {
         $numArray = NumPHP::identity(4);
-        Helper::checkNotSingularMatrix($numArray);
+        $this->assertTrue(Helper::isNotSingularMatrix($numArray));
     }
 
     /**
-     * Tests if SingularMatrixException will be thrown, when using
-     * Helper::checkNotSingularMatrix with singular matrix
-     *
-     * @expectedException        \NumPHP\LinAlg\Exception\SingularMatrixException
-     * @expectedExceptionMessage Matrix is singular
+     * Tests if Helper::isNotSingularMatrix works with invalid not singular matrix
      */
     public function testCheckNotSingularMatrixInvalid()
     {
         $numArray = NumPHP::identity(4);
         $numArray->set(0, 2, 2);
-        Helper::checkNotSingularMatrix($numArray);
+        $this->assertFalse(Helper::isNotSingularMatrix($numArray));
     }
 }
