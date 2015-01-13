@@ -90,21 +90,21 @@ abstract class LinAlg
      * Solves a linear system of a n*n matrix and a vector of size n
      *
      * @param mixed $squareMatrix matrix of size n*n
-     * @param mixed $vector       vector of size n
+     * @param mixed $matrix       vector of size n or matrix of size n*m
      *
      * @throws \NumPHP\LinAlg\Exception\SingularMatrixException will be thrown, if `$squareMatrix` is singular
      *
      * @return NumArray
      */
-    public static function solve($squareMatrix, $vector)
+    public static function solve($squareMatrix, $matrix)
     {
         if (!$squareMatrix instanceof NumArray) {
             $squareMatrix = new NumArray($squareMatrix);
         }
-        if (!$vector instanceof NumArray) {
-            $vector = new NumArray($vector);
+        if (!$matrix instanceof NumArray) {
+            $matrix = new NumArray($matrix);
         }
 
-        return SolveLinearSystem::solve($squareMatrix, $vector);
+        return SolveLinearSystem::solve($squareMatrix, $matrix);
     }
 }

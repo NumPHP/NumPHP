@@ -66,7 +66,7 @@ class SolveLinearSystemTest extends TestCase
      * Tests if SingularMatrixException will be thrown, when using LinAlg::solve with singular matrix
      *
      * @expectedException        \NumPHP\LinAlg\Exception\SingularMatrixException
-     * @expectedExceptionMessage jo
+     * @expectedExceptionMessage First Argument has to be a not singular square matrix
      */
     public function testSolveSingular()
     {

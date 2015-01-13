@@ -29,7 +29,7 @@ abstract class SolveLinearSystem
      * Solves a linear system
      *
      * @param NumArray $squareMatrix matrix of size n*n
-     * @param NumArray $numArray     vector of size n or matrix of size n*
+     * @param NumArray $numArray     vector of size n or matrix of size n*m
      *
      * @return NumArray
      * @throws \NumPHP\LinAlg\Exception\SingularMatrixException will be thrown, if
@@ -40,7 +40,7 @@ abstract class SolveLinearSystem
     public static function solve(NumArray $squareMatrix, NumArray $numArray)
     {
         if (!Helper::isNotSingularMatrix($squareMatrix)) {
-            throw new SingularMatrixException('jo');
+            throw new SingularMatrixException(sprintf("First Argument has to be a not singular square matrix"));
         }
         $shape1 = $squareMatrix->getShape();
         $shape2 = $numArray->getShape();
