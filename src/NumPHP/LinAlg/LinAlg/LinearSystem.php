@@ -31,11 +31,12 @@ abstract class LinearSystem
      * @param NumArray $squareMatrix matrix of size n*n
      * @param NumArray $numArray     vector of size n or matrix of size n*m
      *
-     * @return NumArray
      * @throws \NumPHP\LinAlg\Exception\SingularMatrixException will be thrown, if
      * `$squareMatrix` is singular
      * @throws \NumPHP\LinAlg\Exception\InvalidArgumentException will be thrown, if
      * linear system of `$squareMatrix` and `$numArray` can not be solved
+     *
+     * @return NumArray
      */
     public static function solve(NumArray $squareMatrix, NumArray $numArray)
     {
@@ -66,8 +67,7 @@ abstract class LinearSystem
         $lMatrix = clone $lud['L'];
         $uMatrix = clone $lud['U'];
 
-        $pMatrix->dot($numArray);
-        $yVector = self::forwardSubstitutionVector($lMatrix, $pMatrix);
+        $yVector = self::forwardSubstitutionVector($lMatrix, $pMatrix->dot($numArray));
         $zVector = self::backSubstitutionMatrix($uMatrix, $yVector);
 
         return $zVector;
