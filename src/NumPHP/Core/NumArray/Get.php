@@ -71,9 +71,9 @@ abstract class Get
     /**
      * Slices a array and returns a sub array from `$fromValue` to `$toValue`
      *
-     * @param array $data      given array
-     * @param int   $fromValue start of slicing
-     * @param int   $toValue   end of slicing
+     * @param array  $data      given array
+     * @param string $fromValue start of slicing
+     * @param string $toValue   end of slicing
      *
      * @return array
      */
@@ -82,7 +82,7 @@ abstract class Get
         if (!$fromValue) {
             $fromValue = 0;
         }
-        if (!$toValue && $toValue !== 0) {
+        if (!$toValue && trim($toValue) !== "0") {
             $toValue = count($data);
         }
         return array_slice($data, $fromValue, $toValue-$fromValue);

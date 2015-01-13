@@ -110,6 +110,16 @@ class GetTest extends TestCase
     }
 
     /**
+     * Tests NumArray::get with slicing argument `0:0` on vector
+     */
+    public function testGet3Args0Slice0()
+    {
+        $numArray = NumPHP::arange(1, 3);
+        $expectedNumArray = new NumArray([]);
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->get('0:0'));
+    }
+
+    /**
      * Tests NumArray::get without argument on matrix
      */
     public function testGet2x4()
