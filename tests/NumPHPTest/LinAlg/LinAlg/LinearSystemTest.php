@@ -27,7 +27,7 @@ class LinearSystemTest extends TestCase
     /**
      * Tests LinAlg::solve with 3x3 matrix
      */
-    public function testSolve()
+    public function testSolveVector()
     {
         $matrix = new NumArray(
             [
@@ -50,7 +50,7 @@ class LinearSystemTest extends TestCase
     /**
      * Tests LinAlg::solve with identity matrix and ones vector as arrays
      */
-    public function testSolveArray()
+    public function testSolveVectorArray()
     {
         $matrix = NumPHP::identity(5)->getData();
         $vector = NumPHP::ones(5)->getData();
@@ -60,6 +60,30 @@ class LinearSystemTest extends TestCase
             $expectedNumArray,
             LinAlg::solve($matrix, $vector)
         );
+    }
+
+    /**
+     * Tests LinAlg::solve with a matrix
+     */
+    public function testSolveMatrix()
+    {
+        $squareMatrix = new NumArray(
+            [
+                [1, 2, 3],
+                [2, 3, 1],
+                [3, 1, 2]
+            ]
+        );
+        $matrix = new NumArray(
+            [
+                [38, 44, 50, 56],
+                [26, 32, 38, 44],
+                [26, 32, 38, 44]
+            ]
+        );
+
+        $expectedNumArray = NumPHP::arange(1, 12)->reshape(3, 4);
+        $this->assertNumArrayEquals($expectedNumArray, LinAlg::solve($squareMatrix, $matrix));
     }
 
     /**
@@ -75,6 +99,20 @@ class LinearSystemTest extends TestCase
         $vector = NumPHP::arange(1, 4);
 
         LinAlg::solve($matrix, $vector);
+    }
+
+    /**
+     * Tests if InvalidArgumentException will be thrown, when using LinAlg::solve with 2x3x4 matrix
+     *
+     * @expectedException        \NumPHP\LinAlg\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Second argument has to be a vector or a matrix, NumArray with dimension 3 given
+     */
+    public function testSolve2x3x4Matrix()
+    {
+        $identity = NumPHP::identity(2);
+        $matrix = NumPHP::arange(1, 24)->reshape(2, 3, 4);
+
+        LinAlg::solve($identity, $matrix);
     }
 
     /**

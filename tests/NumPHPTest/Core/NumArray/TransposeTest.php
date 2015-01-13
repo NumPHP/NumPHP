@@ -101,6 +101,6 @@ class TransposeTest extends TestCase
         $expectedNumArray = $numArray->getCache(
             NumArray\Transpose::CACHE_KEY_TRANSPOSE
         );
-        $this->assertSame($expectedNumArray, $numArray->getTranspose());
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->getTranspose());
     }
 }

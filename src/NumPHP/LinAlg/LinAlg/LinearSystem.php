@@ -43,6 +43,14 @@ abstract class LinearSystem
         if (!Helper::isNotSingularMatrix($squareMatrix)) {
             throw new SingularMatrixException(sprintf("First Argument has to be a not singular square matrix"));
         }
+        if (!Helper::isVector($numArray) && !Helper::isMatrix($numArray)) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    "Second argument has to be a vector or a matrix, NumArray with dimension %d given",
+                    $numArray->getNDim()
+                )
+            );
+        }
         $shape1 = $squareMatrix->getShape();
         $shape2 = $numArray->getShape();
         if ($shape1[0] !== $shape2[0]) {
@@ -67,61 +75,81 @@ abstract class LinearSystem
         $lMatrix = clone $lud['L'];
         $uMatrix = clone $lud['U'];
 
-        $yVector = self::forwardSubstitutionVector($lMatrix, $pMatrix->dot($numArray));
-        $zVector = self::backSubstitutionMatrix($uMatrix, $yVector);
+        $yNumArray = self::forwardSubstitution($lMatrix, $pMatrix->dot($numArray));
+        $zNumArray = self::backSubstitution($uMatrix, $yNumArray);
 
-        return $zVector;
+        return $zNumArray;
     }
 
     /**
      * Forward Substitution solves a linear system with a lower triangular matrix of
-     * size n*n and a vector of size n
+     * size n*n and a vector of size n or matrix of size n*m
      *
-     * @param NumArray $lMatrix lower triangular matrix of size n*n
-     * @param NumArray $vector  vector of size n
+     * @param NumArray $lMatrix   lower triangular matrix of size n*n
+     * @param NumArray $numArray  vector of size n or matrix of size n*m
      *
      * @return NumArray
      */
-    protected static function forwardSubstitutionVector(NumArray $lMatrix, NumArray $vector)
+    protected static function forwardSubstitution(NumArray $lMatrix, NumArray $numArray)
     {
-        $vectorShape = $vector->getShape();
-        $xVector = NumPHP::zerosLike($vector);
+        $shape = $numArray->getShape();
+        if (Helper::isVector($numArray)) {
+            $xVector = NumPHP::zerosLike($numArray);
 
-        for ($i = 0; $i < $vectorShape[0]; $i++) {
-            $slice = sprintf('0:%d', $i);
-            $sum = $lMatrix->get($i, $slice)->dot($xVector->get($slice));
-            $xVector->set(
-                $vector->get($i)->sub($sum)->getData()/$lMatrix->get($i, $i)->getData(),
-                $i
-            );
+            for ($i = 0; $i < $shape[0]; $i++) {
+                $slice = sprintf('0:%d', $i);
+                $sum = $lMatrix->get($i, $slice)->dot($xVector->get($slice));
+                $xVector->set(
+                    $numArray->get($i)->sub($sum)->getData()/$lMatrix->get($i, $i)->getData(),
+                    $i
+                );
+            }
+
+            return $xVector;
+        }
+        // $numArray is a matrix
+        $transpose = $numArray->getTranspose();
+
+        for ($i = 0; $i < $shape[1]; $i++) {
+            $transpose->set(self::forwardSubstitution($lMatrix, $transpose->get($i)), $i);
         }
 
-        return $xVector;
+        return $transpose->getTranspose();
     }
 
     /**
      * Back Substitution solves a linear system with a upper triangular matrix of
-     * size n*n and a vector of size n
+     * size n*n and a vector of size n or a matrix of size n*m
      *
-     * @param NumArray $uMatrix upper triangular matrix of size n*n
-     * @param NumArray $vector  vector of size n
+     * @param NumArray $uMatrix   upper triangular matrix of size n*n
+     * @param NumArray $numArray  vector of size n or matrix of size n*m
      *
      * @return NumArray
      */
-    protected static function backSubstitutionMatrix(NumArray $uMatrix, NumArray $vector)
+    protected static function backSubstitution(NumArray $uMatrix, NumArray $numArray)
     {
-        $vectorShape = $vector->getShape();
-        $xVector = NumPHP::zerosLike($vector);
+        $shape = $numArray->getShape();
+        if (Helper::isVector($numArray)) {
+            $xVector = NumPHP::zerosLike($numArray);
 
-        for ($i = $vectorShape[0]-1; $i >= 0; $i--) {
-            $slice = sprintf("%d:%d", $i+1, $vectorShape[0]);
-            $sum = $uMatrix->get($i, $slice)->dot($xVector->get($slice));
-            $xVector->set(
-                $vector->get($i)->sub($sum)->getData()/$uMatrix->get($i, $i)->getData(),
-                $i
-            );
+            for ($i = $shape[0]-1; $i >= 0; $i--) {
+                $slice = sprintf("%d:%d", $i+1, $shape[0]);
+                $sum = $uMatrix->get($i, $slice)->dot($xVector->get($slice));
+                $xVector->set(
+                    $numArray->get($i)->sub($sum)->getData()/$uMatrix->get($i, $i)->getData(),
+                    $i
+                );
+            }
+
+            return $xVector;
+        }
+        // $numArray is a matrix
+        $transpose = $numArray->getTranspose();
+
+        for ($i = 0; $i < $shape[1]; $i++) {
+            $transpose->set(self::backSubstitution($uMatrix, $transpose->get($i)), $i);
         }
 
-        return $xVector;
+        return $transpose->getTranspose();
     }
 }
