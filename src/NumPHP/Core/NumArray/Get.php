@@ -44,47 +44,17 @@ abstract class Get
     {
         if (isset($args[0])) {
             $arg = $args[0];
-            $matches = [];
             array_shift($args);
-            $pregMatch = preg_match(
-                '/^(?P<from>([-]{0,1}\d+)*):(?P<to>([-]{0,1}\d+)*)$/',
-                $arg,
-                $matches
-            );
-            if ($pregMatch) {
-                $fromValue = $matches['from'];
-                $toValue = $matches['to'];
-                $sliced = self::slice($data, $fromValue, $toValue);
+            $indexArg = Helper::prepareIndexArgument($arg, $data);
+            if (is_array($indexArg)) {
+                $sliced = array_slice($data, $indexArg['from'], $indexArg['length']);
                 foreach ($sliced as $index => $row) {
                     $sliced[$index] = self::getRecursive($row, $args);
                 }
                 return $sliced;
             }
-            if ($arg < 0) {
-                $arg += count($data);
-            }
-            return self::getRecursive($data[$arg], $args);
+            return self::getRecursive($data[$indexArg], $args);
         }
         return $data;
-    }
-
-    /**
-     * Slices a array and returns a sub array from `$fromValue` to `$toValue`
-     *
-     * @param array  $data      given array
-     * @param string $fromValue start of slicing
-     * @param string $toValue   end of slicing
-     *
-     * @return array
-     */
-    protected static function slice(array $data, $fromValue, $toValue)
-    {
-        if (!$fromValue) {
-            $fromValue = 0;
-        }
-        if (!$toValue && trim($toValue) !== "0") {
-            $toValue = count($data);
-        }
-        return array_slice($data, $fromValue, $toValue-$fromValue);
     }
 }
