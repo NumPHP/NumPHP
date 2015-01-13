@@ -99,6 +99,36 @@ class SetTest extends TestCase
     }
 
     /**
+     * Tests NumArray::set with slice `3:7`
+     */
+    public function testSetVector3Slice7()
+    {
+        $vector = NumPHP::arange(1, 10);
+        $subVector = NumPHP::arange(-4, -1);
+
+        $expectedNumArray = new NumArray(
+            [1, 2, 3, -4, -3, -2, -1, 8, 9, 10]
+        );
+        $this->assertNumArrayEquals($expectedNumArray, $vector->set($subVector, '3:7'));
+    }
+
+    public function testSetMatrixSlice()
+    {
+        $matrix = NumPHP::arange(-20, -1)->reshape(4, 5);
+        $subMatrix = NumPHP::arange(1, 6)->reshape(2, 3);
+
+        $expectedNumArray = new NumArray(
+            [
+                [-20, -19, -18, -17, -16],
+                [-15, -14,   1,   2,   3],
+                [-10,  -9,   4,   5,   6],
+                [ -5,  -4,  -3,  -2,  -1]
+            ]
+        );
+        $this->assertNumArrayEquals($expectedNumArray, $matrix->set($subMatrix, '1:3', '2:5'));
+    }
+
+    /**
      * Tests if cache will be flushed after NumArray::set
      */
     public function testSetCache()

@@ -48,7 +48,7 @@ abstract class Helper
 
     /**
      * Prepares the argument of an index. If `$index` is an integer it will returned and if `$index` is a string like
-     * `1:5`, `:8` or `-4:` it will return an array with the keys `from` and `length`
+     * `1:5`, `:8` or `-4:` it will return an array with the keys `from` and `to`
      *
      * @param mixed $index given index argument
      * @param array $data  the given data where the indexes work on
@@ -71,8 +71,8 @@ abstract class Helper
             }
 
             return [
-                'from'   => (int) $fromValue,
-                'length' => (int) ($toValue - $fromValue)
+                'from' => (int) $fromValue,
+                'to'   => (int) $toValue
             ];
         }
 

@@ -38,21 +38,33 @@ abstract class Set
      *
      * @param mixed $origData given data
      * @param mixed $subData  replacing data
-     * @param array $indexes  array of indices
+     * @param array $args  array of indices
      *
      * @return mixed
      */
-    protected static function setRecursive($origData, $subData, array $indexes)
+    protected static function setRecursive($origData, $subData, array $args)
     {
-        if (count($indexes)) {
-            $index = array_shift($indexes);
-            $origData[$index] = self::setRecursive(
-                $origData[$index],
+        if (isset($args[0])) {
+            $arg = array_shift($args);
+            $indexArg = Helper::prepareIndexArgument($arg, $origData);
+            if (is_array($indexArg)) {
+                $counter = 0;
+                for ($i = $indexArg['from']; $i < $indexArg['to']; $i++) {
+                    $origData[$i] = self::setRecursive($origData[$i], $subData[$counter], $args);
+                    $counter++;
+                }
+
+                return $origData;
+            }
+            $origData[$indexArg] = self::setRecursive(
+                $origData[$indexArg],
                 $subData,
-                $indexes
+                $args
             );
+
             return $origData;
         }
+
         return $subData;
     }
 }

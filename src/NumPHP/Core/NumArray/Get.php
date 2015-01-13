@@ -43,11 +43,10 @@ abstract class Get
     protected static function getRecursive($data, array $args)
     {
         if (isset($args[0])) {
-            $arg = $args[0];
-            array_shift($args);
+            $arg = array_shift($args);
             $indexArg = Helper::prepareIndexArgument($arg, $data);
             if (is_array($indexArg)) {
-                $sliced = array_slice($data, $indexArg['from'], $indexArg['length']);
+                $sliced = array_slice($data, $indexArg['from'], $indexArg['to'] - $indexArg['from']);
                 foreach ($sliced as $index => $row) {
                     $sliced[$index] = self::getRecursive($row, $args);
                 }
