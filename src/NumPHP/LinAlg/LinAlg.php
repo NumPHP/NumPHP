@@ -8,7 +8,9 @@
 namespace NumPHP\LinAlg;
 
 use NumPHP\Core\NumArray;
+use NumPHP\Core\NumPHP;
 use NumPHP\LinAlg\Exception\NoSquareMatrixException;
+use NumPHP\LinAlg\Exception\SingularMatrixException;
 use NumPHP\LinAlg\LinAlg\Helper;
 use NumPHP\LinAlg\LinAlg\LUDecomposition;
 use NumPHP\LinAlg\LinAlg\LinearSystem;
@@ -28,6 +30,7 @@ abstract class LinAlg
     const VERSION = '1.0.0-dev6';
 
     const CACHE_KEY_DETERMINANT = 'determinant';
+    const CACHE_KEY_INVERSE     = 'inverse';
 
     /**
      * Calculates the determinant of a matrix
@@ -112,5 +115,32 @@ abstract class LinAlg
         }
 
         return LinearSystem::solve($squareMatrix, $matrix);
+    }
+
+    /**
+     * Calculates the inverse of a not singular square matrix
+     *
+     * @param mixed $squareMatrix not singular matrix
+     *
+     * @throws SingularMatrixException will be thrown, when `$squareMatrix` is singular
+     *
+     * @return NumArray
+     */
+    public static function inv($squareMatrix)
+    {
+        if (!$squareMatrix instanceof NumArray) {
+            $squareMatrix = new NumArray($squareMatrix);
+        } elseif ($squareMatrix->inCache(self::CACHE_KEY_INVERSE)) {
+            return clone $squareMatrix->getCache(self::CACHE_KEY_INVERSE);
+        }
+        if (!Helper::isNotSingularMatrix($squareMatrix)) {
+            throw new SingularMatrixException("Matrix is singular");
+        }
+
+        $shape = $squareMatrix->getShape();
+        $inv = self::solve($squareMatrix, NumPHP::identity($shape[0]));
+        $squareMatrix->setCache(self::CACHE_KEY_INVERSE, $inv);
+
+        return self::inv($squareMatrix);
     }
 }

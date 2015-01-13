@@ -10,6 +10,7 @@ namespace NumPHPTest\LinAlg;
 use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
 use NumPHP\LinAlg\LinAlg;
+use NumPHPTest\Core\Framework\TestCase;
 
 /**
  * Class LinAlgTest
@@ -21,7 +22,7 @@ use NumPHP\LinAlg\LinAlg;
  * @link      http://numphp.org/
  * @since     1.0.0
  */
-class LinAlgTest extends \PHPUnit_Framework_TestCase
+class LinAlgTest extends TestCase
 {
     /**
      * Compares the version in README.md with LinAlg::VERSION
@@ -88,5 +89,26 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
         $expectedResult = $matrix->getCache(LinAlg::CACHE_KEY_DETERMINANT);
 
         $this->assertSame($expectedResult, LinAlg::det($matrix));
+    }
+
+    /**
+     * Tests LinAlg::inv with a 2*2 matrix
+     */
+    public function testInv()
+    {
+        $matrix = new NumArray(
+            [
+                [ 4, 7],
+                [ 2, 6]
+            ]
+        );
+
+        $expectedNumArray = new NumArray(
+            [
+                [ 0.6, -0.7],
+                [-0.2,  0.4]
+            ]
+        );
+        $this->assertNumArrayEquals($expectedNumArray, LinAlg::inv($matrix));
     }
 }
