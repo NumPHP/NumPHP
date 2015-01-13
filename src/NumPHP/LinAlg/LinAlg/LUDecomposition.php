@@ -73,11 +73,8 @@ abstract class LUDecomposition
                     $fac = $facNumerator/$facDenominator;
                 }
                 $lMatrix->set($fac, $j, $i);
-                for ($k = $i+1; $k < $nAxis; $k++) {
-                    $value = $numArray->get($j, $k)
-                        ->sub($numArray->get($i, $k)->dot($fac));
-                    $numArray->set($value, $j, $k);
-                }
+                $slice = sprintf("%d:", $i+1);
+                $numArray->set($numArray->get($j, $slice)->sub($numArray->get($i, $slice)->dot($fac)), $j, $slice);
             }
         }
 
@@ -121,10 +118,8 @@ abstract class LUDecomposition
 
         $uMatrix = NumPHP::zeros($size, $nAxis);
         for ($i = 0; $i < $size; $i++) {
-            $uMatrix->set($numArray->get($i), $i);
-            for ($j = 0; $j < $i; $j++) {
-                $uMatrix->set(0, $i, $j);
-            }
+            $slice = sprintf("%d:", $i);
+            $uMatrix->set($numArray->get($i, $slice), $i, $slice);
         }
 
         return $uMatrix;
