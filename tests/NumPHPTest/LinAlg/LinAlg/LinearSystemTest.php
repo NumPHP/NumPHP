@@ -13,7 +13,7 @@ use NumPHP\LinAlg\LinAlg;
 use NumPHPTest\Core\Framework\TestCase;
 
 /**
- * Class SolveLinearSystemTest
+ * Class LinearSystemTest
  *
  * @package   NumPHPTest\LinAlg\LinAlg
  * @author    Gordon Lesti <info@gordonlesti.com>
@@ -22,7 +22,7 @@ use NumPHPTest\Core\Framework\TestCase;
  * @link      http://numphp.org/
  * @since     1.0.0
  */
-class SolveLinearSystemTest extends TestCase
+class LinearSystemTest extends TestCase
 {
     /**
      * Tests LinAlg::solve with 3x3 matrix

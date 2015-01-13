@@ -79,4 +79,14 @@ class LinAlgTest extends \PHPUnit_Framework_TestCase
 
         LinAlg::det($numArray);
     }
+
+    public function testDetCache()
+    {
+        $matrix = NumPHP::identity(5)->dot(3);
+
+        LinAlg::det($matrix);
+        $expectedResult = $matrix->getCache(LinAlg::CACHE_KEY_DETERMINANT);
+
+        $this->assertSame($expectedResult, LinAlg::det($matrix));
+    }
 }

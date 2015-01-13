@@ -11,7 +11,7 @@ use NumPHP\Core\NumArray;
 use NumPHP\LinAlg\Exception\NoSquareMatrixException;
 use NumPHP\LinAlg\LinAlg\Helper;
 use NumPHP\LinAlg\LinAlg\LUDecomposition;
-use NumPHP\LinAlg\LinAlg\SolveLinearSystem;
+use NumPHP\LinAlg\LinAlg\LinearSystem;
 
 /**
  * Class LinAlg
@@ -27,6 +27,8 @@ abstract class LinAlg
 {
     const VERSION = '1.0.0-dev6';
 
+    const CACHE_KEY_DETERMINANT = 'determinant';
+
     /**
      * Calculates the determinant of a matrix
      *
@@ -40,6 +42,8 @@ abstract class LinAlg
     {
         if (!$array instanceof NumArray) {
             $array = new NumArray($array);
+        } elseif ($array->inCache(self::CACHE_KEY_DETERMINANT)) {
+            return $array->getCache(self::CACHE_KEY_DETERMINANT);
         }
         if (!Helper::isSquareMatrix($array)) {
             throw new NoSquareMatrixException(
@@ -59,6 +63,8 @@ abstract class LinAlg
         for ($i = 0; $i < $shape[0]; $i++) {
             $det *= $uMatrix->get($i, $i)->getData();
         }
+
+        $array->setCache(self::CACHE_KEY_DETERMINANT, $det);
 
         return $det;
     }
@@ -105,6 +111,6 @@ abstract class LinAlg
             $matrix = new NumArray($matrix);
         }
 
-        return SolveLinearSystem::solve($squareMatrix, $matrix);
+        return LinearSystem::solve($squareMatrix, $matrix);
     }
 }

@@ -14,7 +14,7 @@ use NumPHP\LinAlg\Exception\SingularMatrixException;
 use NumPHP\LinAlg\LinAlg;
 
 /**
- * Class SolveLinearSystem
+ * Class LinearSystem
  *
  * @package   NumPHP\LinAlg\LinAlg
  * @author    Gordon Lesti <info@gordonlesti.com>
@@ -23,7 +23,7 @@ use NumPHP\LinAlg\LinAlg;
  * @link      http://numphp.org/
  * @since     1.0.0
  */
-abstract class SolveLinearSystem
+abstract class LinearSystem
 {
     /**
      * Solves a linear system
