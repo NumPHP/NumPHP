@@ -35,27 +35,27 @@ abstract class LinAlg
     /**
      * Calculates the determinant of a matrix
      *
-     * @param mixed $array matrix
+     * @param mixed $matrix matrix
      *
      * @throws NoSquareMatrixException will be thrown, if given array is no square matrix
      *
-     * @return int
+     * @return float
      */
-    public static function det($array)
+    public static function det($matrix)
     {
-        if (!$array instanceof NumArray) {
-            $array = new NumArray($array);
-        } elseif ($array->inCache(self::CACHE_KEY_DETERMINANT)) {
-            return $array->getCache(self::CACHE_KEY_DETERMINANT);
+        if (!$matrix instanceof NumArray) {
+            $matrix = new NumArray($matrix);
+        } elseif ($matrix->inCache(self::CACHE_KEY_DETERMINANT)) {
+            return $matrix->getCache(self::CACHE_KEY_DETERMINANT);
         }
-        if (!Helper::isSquareMatrix($array)) {
+        if (!Helper::isSquareMatrix($matrix)) {
             throw new NoSquareMatrixException(
-                sprintf("Matrix with shape (%s) given, matrix has to be square", implode(', ', $array->getShape()))
+                sprintf("Matrix with shape (%s) given, matrix has to be square", implode(', ', $matrix->getShape()))
             );
         }
-        $shape = $array->getShape();
+        $shape = $matrix->getShape();
 
-        $lud = self::lud($array);
+        $lud = self::lud($matrix);
         /**
          * Upper triangular matrix
          *
@@ -67,7 +67,7 @@ abstract class LinAlg
             $det *= $uMatrix->get($i, $i)->getData();
         }
 
-        $array->setCache(self::CACHE_KEY_DETERMINANT, $det);
+        $matrix->setCache(self::CACHE_KEY_DETERMINANT, $det);
 
         return $det;
     }
@@ -75,24 +75,24 @@ abstract class LinAlg
     /**
      * Factors a matrix into a pivot matrix, a lower and upper triangular matrix
      *
-     * @param mixed $array matrix
+     * @param mixed $matrix matrix
      *
      * @throws \NumPHP\LinAlg\Exception\NoMatrixException will be thrown, if `$array` is no matrix
      *
      * @return array
      */
-    public static function lud($array)
+    public static function lud($matrix)
     {
-        if (!$array instanceof NumArray) {
-            $array = new NumArray($array);
-        } elseif ($array->inCache(LUDecomposition::CACHE_KEY_LU_DECOMPOSITION)) {
-            return $array->getCache(LUDecomposition::CACHE_KEY_LU_DECOMPOSITION);
+        if (!$matrix instanceof NumArray) {
+            $matrix = new NumArray($matrix);
+        } elseif ($matrix->inCache(LUDecomposition::CACHE_KEY_LU_DECOMPOSITION)) {
+            return $matrix->getCache(LUDecomposition::CACHE_KEY_LU_DECOMPOSITION);
         }
 
-        $result = LUDecomposition::lud($array);
-        $array->setCache(LUDecomposition::CACHE_KEY_LU_DECOMPOSITION, $result);
+        $lud = LUDecomposition::lud($matrix);
+        $matrix->setCache(LUDecomposition::CACHE_KEY_LU_DECOMPOSITION, $lud);
 
-        return $result;
+        return self::lud($matrix);
     }
 
     /**
@@ -131,7 +131,7 @@ abstract class LinAlg
         if (!$squareMatrix instanceof NumArray) {
             $squareMatrix = new NumArray($squareMatrix);
         } elseif ($squareMatrix->inCache(self::CACHE_KEY_INVERSE)) {
-            return clone $squareMatrix->getCache(self::CACHE_KEY_INVERSE);
+            return $squareMatrix->getCache(self::CACHE_KEY_INVERSE);
         }
         if (!Helper::isNotSingularMatrix($squareMatrix)) {
             throw new SingularMatrixException("Matrix is singular");

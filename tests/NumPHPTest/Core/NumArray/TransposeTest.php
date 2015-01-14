@@ -95,12 +95,9 @@ class TransposeTest extends TestCase
      */
     public function testTransposeCache()
     {
-        $numArray = NumPHP::arange(1, 2)->reshape(1, 2);
+        $numArray = new NumArray(5);
+        $numArray->setCache(NumArray\Transpose::CACHE_KEY_TRANSPOSE, 8);
 
-        $numArray->getTranspose();
-        $expectedNumArray = $numArray->getCache(
-            NumArray\Transpose::CACHE_KEY_TRANSPOSE
-        );
-        $this->assertNumArrayEquals($expectedNumArray, $numArray->getTranspose());
+        $this->assertSame(8, $numArray->getTranspose());
     }
 }

@@ -71,9 +71,10 @@ abstract class LinearSystem
          * @var NumArray $lMatrix
          * @var NumArray $uMatrix
          */
-        $pMatrix = clone $lud['P'];
-        $lMatrix = clone $lud['L'];
-        $uMatrix = clone $lud['U'];
+        $pMatrix = $lud['P'];
+        $pMatrix = $pMatrix->getTranspose();
+        $lMatrix = $lud['L'];
+        $uMatrix = $lud['U'];
 
         $yNumArray = self::forwardSubstitution($lMatrix, $pMatrix->dot($numArray));
         $zNumArray = self::backSubstitution($uMatrix, $yNumArray);
@@ -108,13 +109,13 @@ abstract class LinearSystem
             return $xVector;
         }
         // $numArray is a matrix
-        $transpose = $numArray->getTranspose();
+        $copy = clone $numArray;
 
         for ($i = 0; $i < $shape[1]; $i++) {
-            $transpose->set(self::forwardSubstitution($lMatrix, $transpose->get($i)), $i);
+            $copy->set(self::forwardSubstitution($lMatrix, $copy->get(':', $i)), ':', $i);
         }
 
-        return $transpose->getTranspose();
+        return $copy;
     }
 
     /**
@@ -144,12 +145,12 @@ abstract class LinearSystem
             return $xVector;
         }
         // $numArray is a matrix
-        $transpose = $numArray->getTranspose();
+        $copy = clone $numArray;
 
         for ($i = 0; $i < $shape[1]; $i++) {
-            $transpose->set(self::backSubstitution($uMatrix, $transpose->get($i)), $i);
+            $copy->set(self::backSubstitution($uMatrix, $copy->get(':', $i)), ':', $i);
         }
 
-        return $transpose->getTranspose();
+        return $copy;
     }
 }

@@ -83,12 +83,10 @@ class LinAlgTest extends TestCase
 
     public function testDetCache()
     {
-        $matrix = NumPHP::identity(5)->dot(3);
+        $numArray = new NumArray(5);
+        $numArray->setCache(LinAlg::CACHE_KEY_DETERMINANT, 8);
 
-        LinAlg::det($matrix);
-        $expectedResult = $matrix->getCache(LinAlg::CACHE_KEY_DETERMINANT);
-
-        $this->assertSame($expectedResult, LinAlg::det($matrix));
+        $this->assertSame(8, LinAlg::det($numArray));
     }
 
     /**
@@ -110,5 +108,50 @@ class LinAlgTest extends TestCase
             ]
         );
         $this->assertNumArrayEquals($expectedNumArray, LinAlg::inv($matrix));
+    }
+
+    /**
+     * Tests LinAlg::inv with a 3*3 array
+     */
+    public function testInvArray()
+    {
+        $matrix = [
+            [ 1,  0, 4],
+            [-9,  0, 5],
+            [ 1, -3, 0]
+        ];
+
+        $expectedNumArray = new NumArray(
+            [
+                [ 5/41,  -4/41,    0],
+                [5/123, -4/123, -1/3],
+                [ 9/41,   1/41,    0]
+            ]
+        );
+        $this->assertNumArrayEquals($expectedNumArray, LinAlg::inv($matrix));
+    }
+
+    /**
+     * Tests LinAlg::inv cache
+     */
+    public function testInvCache()
+    {
+        $numArray = new NumArray(5);
+        $numArray->setCache(LinAlg::CACHE_KEY_INVERSE, 8);
+
+        $this->assertSame(8, LinAlg::inv($numArray));
+    }
+
+    /**
+     * Tests if SingularMatrixException will be thrown, when using LinAlg::inv with singular matrix
+     *
+     * @expectedException        \NumPHP\LinAlg\Exception\SingularMatrixException
+     * @expectedExceptionMessage Matrix is singular
+     */
+    public function testInvSingular()
+    {
+        $matrix = new NumArray([[0]]);
+
+        LinAlg::inv($matrix);
     }
 }

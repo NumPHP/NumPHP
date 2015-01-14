@@ -226,12 +226,9 @@ class LUDecompositionTest extends TestCase
      */
     public function testLUDecompositionCache()
     {
-        $numArray = NumPHP::arange(1, 4)->reshape(2, 2);
+        $numArray = new NumArray(5);
+        $numArray->setCache(LUDecomposition::CACHE_KEY_LU_DECOMPOSITION, 8);
 
-        LinAlg::lud($numArray);
-        $expectedResult = $numArray->getCache(
-            LUDecomposition::CACHE_KEY_LU_DECOMPOSITION
-        );
-        $this->assertSame($expectedResult, LinAlg::lud($numArray));
+        $this->assertSame(8, LinAlg::lud($numArray));
     }
 }

@@ -312,7 +312,7 @@ class NumArray extends Cache
     public function getTranspose()
     {
         if ($this->inCache(Transpose::CACHE_KEY_TRANSPOSE)) {
-            return clone $this->getCache(Transpose::CACHE_KEY_TRANSPOSE);
+            return $this->getCache(Transpose::CACHE_KEY_TRANSPOSE);
         }
         $transpose = new NumArray(
             Transpose::getTranspose($this->data, $this->getShape())

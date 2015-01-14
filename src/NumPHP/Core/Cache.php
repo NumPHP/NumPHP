@@ -67,7 +67,7 @@ abstract class Cache
             throw new CacheKeyException('Key has to be a string');
         }
         if ($this->inCache($key)) {
-            return $this->cache[$key];
+            return self::cloneCacheEntryRecursive($this->cache[$key]);
         }
 
         throw new CacheException(sprintf('Key "%s" does not exist', $key));
@@ -109,5 +109,28 @@ abstract class Cache
         }
 
         return $this;
+    }
+
+    /**
+     * Clone every cache entry recursive
+     *
+     * @param mixed $entry given cache entry
+     *
+     * @return array
+     */
+    protected static function cloneCacheEntryRecursive($entry)
+    {
+        if (is_object($entry)) {
+            return clone $entry;
+        } elseif (is_array($entry)) {
+            $clone = [];
+            foreach ($entry as $key => $value) {
+                $clone[$key] = self::cloneCacheEntryRecursive($value);
+            }
+
+            return $clone;
+        }
+
+        return $entry;
     }
 }
