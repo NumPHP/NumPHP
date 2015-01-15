@@ -11,7 +11,7 @@ Develop | [![Build Status](https://img.shields.io/travis/NumPHP/NumPHP/develop.s
 
 ## Release Information
 
-*NumPHP 1.0.0*
+*NumPHP 1.0.1*
 
 ## Requirements
 
@@ -28,6 +28,10 @@ Simply add a dependency on `numphp/numphp` to your project's `composer.json` fil
             "numphp/numphp": "dev-master"
         }
     }
+    
+### Manual
+
+Download the latest [package](https://github.com/NumPHP/NumPHP/releases) manually. Extract it and include the file `vendor/autoload.php` in your project.
 
 ## Documentation
 

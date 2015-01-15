@@ -27,7 +27,7 @@ use NumPHP\LinAlg\LinAlg\LinearSystem;
  */
 abstract class LinAlg
 {
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
 
     const CACHE_KEY_DETERMINANT = 'determinant';
     const CACHE_KEY_INVERSE     = 'inverse';

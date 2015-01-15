@@ -2,7 +2,7 @@
     "name": "numphp/numphp",
     "type": "library",
     "description": "Mathematical PHP library for scientific computing",
-    "keywords": ["numeric"],
+    "keywords": ["numeric", "matrix", "linalg"],
     "homepage": "http://numphp.org/",
     "license": "MIT",
     "authors": [
@@ -32,9 +32,5 @@
         "psr-0": {
             "NumPHPTest\\": "tests/"
         }
-    },
-    "replace": {
-        "numphp/core": "self.version",
-        "numphp/linalg": "self.version"
     }
 }
