@@ -34,7 +34,7 @@ Download the latest [package](https://github.com/NumPHP/NumPHP/releases) manuall
 
 ## Documentation
 
-The [documentation](https://github.com/NumPHP/NumPHP-docs) is rendered at [readthedocs.org](http://numphp.readthedocs.org)
+The [documentation](https://github.com/NumPHP/NumPHP-docs) is rendered at [numphp.readthedocs.org](http://numphp.readthedocs.org)
 
 ## Examples
 
