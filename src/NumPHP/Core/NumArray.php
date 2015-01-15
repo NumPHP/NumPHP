@@ -8,6 +8,7 @@
 namespace NumPHP\Core;
 
 use NumPHP\Core\Exception\BadMethodCallException;
+use NumPHP\Core\Exception\MissingArgumentException;
 use NumPHP\Core\NumArray\Dot;
 use NumPHP\Core\NumArray\Filter;
 use NumPHP\Core\NumArray\Get;
@@ -30,6 +31,7 @@ use NumPHP\Core\NumArray\Transpose;
  * @since     1.0.0
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class NumArray extends Cache
 {
@@ -91,6 +93,8 @@ class NumArray extends Cache
     /**
      * Returns a sliced part the NumArray
      *
+     * @param string|int|float $slice,... exact indices or slices like `:`, `1:8`, `3:`
+     *
      * @return NumArray
      */
     public function get()
@@ -101,17 +105,20 @@ class NumArray extends Cache
     }
 
     /**
-     * Replaces a value or complete parts in the NumArray
+     * Replaces a value or complete parts in the NumArray. The new value is always the last argument
      *
-     * @param mixed      $subArray  given value or NumArray
-     * @param string|int $slice,... exact indices or slices like `:`, `1:8`, `3:`
+     * @param string|int|float $slice,... exact indices or slices like `:`, `1:8`, `3:`
+     * @param mixed            $subArray  given value or NumArray
      *
      * @return $this
      */
-    public function set($subArray)
+    public function set()
     {
         $args = func_get_args();
-        array_shift($args);
+        if (!count($args)) {
+            throw new MissingArgumentException("No arguments given");
+        }
+        $subArray = array_pop($args);
         if ($subArray instanceof NumArray) {
             $subArray = $subArray->getData();
         }

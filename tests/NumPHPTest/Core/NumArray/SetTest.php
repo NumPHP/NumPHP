@@ -37,7 +37,7 @@ class SetTest extends TestCase
                 [16, 17, 18, 19, 20],
             ]
         );
-        $this->assertNumArrayEquals($expectedNumArray, $numArray->set(9, 2, 3));
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->set(2, 3, 9));
     }
 
     /**
@@ -52,10 +52,7 @@ class SetTest extends TestCase
                 [4, 5, 6],
             ]
         );
-        $this->assertNumArrayEquals(
-            $expectedNumArray,
-            $numArray->set(new NumArray(-1), 0, 1)
-        );
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->set(0, 1, new NumArray(-1)));
     }
 
     /**
@@ -72,10 +69,7 @@ class SetTest extends TestCase
                 [16, 17, 18, 19, 20],
             ]
         );
-        $this->assertNumArrayEquals(
-            $expectedNumArray,
-            $numArray->set([-6, -7, -8, -9, -10], 1)
-        );
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->set(1, [-6, -7, -8, -9, -10]));
     }
 
     /**
@@ -92,10 +86,7 @@ class SetTest extends TestCase
                 [16, 17, 18, 19, 20],
             ]
         );
-        $this->assertNumArrayEquals(
-            $expectedNumArray,
-            $numArray->set(new NumArray([-6, -7, -8, -9, -10]), 1)
-        );
+        $this->assertNumArrayEquals($expectedNumArray, $numArray->set(1, new NumArray([-6, -7, -8, -9, -10])));
     }
 
     /**
@@ -109,7 +100,7 @@ class SetTest extends TestCase
         $expectedNumArray = new NumArray(
             [1, 2, 3, -4, -3, -2, -1, 8, 9, 10]
         );
-        $this->assertNumArrayEquals($expectedNumArray, $vector->set($subVector, '3:7'));
+        $this->assertNumArrayEquals($expectedNumArray, $vector->set('3:7', $subVector));
     }
 
     public function testSetMatrixSlice()
@@ -125,7 +116,20 @@ class SetTest extends TestCase
                 [ -5,  -4,  -3,  -2,  -1]
             ]
         );
-        $this->assertNumArrayEquals($expectedNumArray, $matrix->set($subMatrix, '1:3', '2:5'));
+        $this->assertNumArrayEquals($expectedNumArray, $matrix->set('1:3', '2:5', $subMatrix));
+    }
+
+    /**
+     * Tests if MissingArgumentException will be thrown, when using NumArray::set without argument
+     *
+     * @expectedException        \NumPHP\Core\Exception\MissingArgumentException
+     * @expectedExceptionMessage No arguments given
+     */
+    public function testSetMissingArgument()
+    {
+        $numArray = new NumArray(4);
+
+        $numArray->set();
     }
 
     /**

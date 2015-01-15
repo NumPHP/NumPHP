@@ -101,8 +101,8 @@ abstract class LinearSystem
                 $slice = sprintf('0:%d', $i);
                 $sum = $lMatrix->get($i, $slice)->dot($xVector->get($slice));
                 $xVector->set(
-                    $numArray->get($i)->sub($sum)->getData()/$lMatrix->get($i, $i)->getData(),
-                    $i
+                    $i,
+                    $numArray->get($i)->sub($sum)->getData()/$lMatrix->get($i, $i)->getData()
                 );
             }
 
@@ -112,7 +112,7 @@ abstract class LinearSystem
         $copy = clone $numArray;
 
         for ($i = 0; $i < $shape[1]; $i++) {
-            $copy->set(self::forwardSubstitution($lMatrix, $copy->get(':', $i)), ':', $i);
+            $copy->set(':', $i, self::forwardSubstitution($lMatrix, $copy->get(':', $i)));
         }
 
         return $copy;
@@ -137,8 +137,8 @@ abstract class LinearSystem
                 $slice = sprintf("%d:%d", $i+1, $shape[0]);
                 $sum = $uMatrix->get($i, $slice)->dot($xVector->get($slice));
                 $xVector->set(
-                    $numArray->get($i)->sub($sum)->getData()/$uMatrix->get($i, $i)->getData(),
-                    $i
+                    $i,
+                    $numArray->get($i)->sub($sum)->getData()/$uMatrix->get($i, $i)->getData()
                 );
             }
 
@@ -148,7 +148,7 @@ abstract class LinearSystem
         $copy = clone $numArray;
 
         for ($i = 0; $i < $shape[1]; $i++) {
-            $copy->set(self::backSubstitution($uMatrix, $copy->get(':', $i)), ':', $i);
+            $copy->set(':', $i, self::backSubstitution($uMatrix, $copy->get(':', $i)));
         }
 
         return $copy;

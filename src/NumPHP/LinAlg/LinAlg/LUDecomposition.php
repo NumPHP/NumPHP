@@ -55,11 +55,11 @@ abstract class LUDecomposition
             $maxIndex = self::getPivotIndex($numArray, $i);
             if ($maxIndex !== $i) {
                 $temp = $numArray->get($i);
-                $numArray->set($numArray->get($maxIndex), $i);
-                $numArray->set($temp, $maxIndex);
+                $numArray->set($i, $numArray->get($maxIndex));
+                $numArray->set($maxIndex, $temp);
                 $temp = $lMatrix->get($i);
-                $lMatrix->set($lMatrix->get($maxIndex), $i);
-                $lMatrix->set($temp, $maxIndex);
+                $lMatrix->set($i, $lMatrix->get($maxIndex));
+                $lMatrix->set($maxIndex, $temp);
                 $temp = $pArray[$i];
                 $pArray[$i] = $pArray[$maxIndex];
                 $pArray[$maxIndex] = $temp;
@@ -72,9 +72,9 @@ abstract class LUDecomposition
                 if ($facDenominator) {
                     $fac = $facNumerator/$facDenominator;
                 }
-                $lMatrix->set($fac, $j, $i);
+                $lMatrix->set($j, $i, $fac);
                 $slice = sprintf("%d:", $i+1);
-                $numArray->set($numArray->get($j, $slice)->sub($numArray->get($i, $slice)->dot($fac)), $j, $slice);
+                $numArray->set($j, $slice, $numArray->get($j, $slice)->sub($numArray->get($i, $slice)->dot($fac)));
             }
         }
 
@@ -97,7 +97,7 @@ abstract class LUDecomposition
         $size = count($pArray);
         $pMatrix = NumPHP::zeros($size, $size);
         foreach ($pArray as $key => $value) {
-            $pMatrix->set(1, $value, $key);
+            $pMatrix->set($value, $key, 1);
         }
 
         return $pMatrix;
@@ -119,7 +119,7 @@ abstract class LUDecomposition
         $uMatrix = NumPHP::zeros($size, $nAxis);
         for ($i = 0; $i < $size; $i++) {
             $slice = sprintf("%d:", $i);
-            $uMatrix->set($numArray->get($i, $slice), $i, $slice);
+            $uMatrix->set($i, $slice, $numArray->get($i, $slice));
         }
 
         return $uMatrix;

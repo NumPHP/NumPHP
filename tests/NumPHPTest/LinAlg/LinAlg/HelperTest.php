@@ -91,7 +91,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase
     public function testCheckNotSingularMatrixInvalid()
     {
         $numArray = NumPHP::identity(4);
-        $numArray->set(0, 2, 2);
+        $numArray->set(2, 2, 0);
         $this->assertFalse(Helper::isNotSingularMatrix($numArray));
     }
 }

@@ -182,12 +182,12 @@ class LUDecompositionTest extends TestCase
     public function testLUDecompositionSingularMatrix()
     {
         $matrix = NumPHP::identity(4);
-        $matrix->set(0, 2, 2);
+        $matrix->set(2, 2, 0);
 
         $expectedP = NumPHP::identity(4);
         $expectedL = NumPHP::identity(4);
         $expectedU = NumPHP::identity(4);
-        $expectedU->set(0, 2, 2);
+        $expectedU->set(2, 2, 0);
 
         $result = LinAlg::lud($matrix);
         $this->assertCount(3, $result);

@@ -95,7 +95,7 @@ class LinearSystemTest extends TestCase
     public function testSolveSingular()
     {
         $matrix = NumPHP::identity(4);
-        $matrix->set(0, 1, 1);
+        $matrix->set(1, 1, 0);
         $vector = NumPHP::arange(1, 4);
 
         LinAlg::solve($matrix, $vector);

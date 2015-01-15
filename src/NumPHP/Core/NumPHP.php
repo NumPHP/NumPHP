@@ -22,7 +22,7 @@ use NumPHP\Core\NumPHP\Generate;
  */
 abstract class NumPHP
 {
-    const VERSION = '1.0.0-dev7';
+    const VERSION = '1.0.0';
 
     /**
      * Returns a NumArray filled with `0`
@@ -117,7 +117,7 @@ abstract class NumPHP
         $eye = self::zeros($mAxis, $nAxis);
         $min = min($mAxis, $nAxis);
         for ($i = 0; $i < $min; $i++) {
-            $eye->set(1, $i, $i);
+            $eye->set($i, $i, 1);
         }
 
         return $eye;
