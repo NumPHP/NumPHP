@@ -63,7 +63,6 @@ abstract class LinearSystem
             );
         }
 
-        $lud = LinAlg::lud($squareMatrix);
         /**
          * The result of LinAlg::lud is a array with three NumArrays
          *
@@ -71,12 +70,9 @@ abstract class LinearSystem
          * @var NumArray $lMatrix
          * @var NumArray $uMatrix
          */
-        $pMatrix = $lud['P'];
-        $pMatrix = $pMatrix->getTranspose();
-        $lMatrix = $lud['L'];
-        $uMatrix = $lud['U'];
+        list($pMatrix, $lMatrix, $uMatrix) = LinAlg::lud($squareMatrix);
 
-        $yNumArray = self::forwardSubstitution($lMatrix, $pMatrix->dot($numArray));
+        $yNumArray = self::forwardSubstitution($lMatrix, $pMatrix->getTranspose()->dot($numArray));
         $zNumArray = self::backSubstitution($uMatrix, $yNumArray);
 
         return $zNumArray;

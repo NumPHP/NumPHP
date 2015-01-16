@@ -59,21 +59,20 @@ class LUDecompositionTest extends TestCase
                 [0,    0, 27/22],
             ]
         );
-        $result = LinAlg::lud($numArray);
-        $this->assertCount(3, $result);
+        list($pMatrix, $lMatrix, $uMatrix) = LinAlg::lud($numArray);
         $this->assertNumArrayEquals(
             $expectedP,
-            $result['P'],
+            $pMatrix,
             'Matrix P is not equal'
         );
         $this->assertNumArrayEquals(
             $expectedL,
-            $result['L'],
+            $lMatrix,
             'Matrix L is not equal'
         );
         $this->assertNumArrayEquals(
             $expectedU,
-            $result['U'],
+            $uMatrix,
             'Matrix U is not equal'
         );
     }
@@ -103,21 +102,20 @@ class LUDecompositionTest extends TestCase
                 [0, 2, 9/2, -3],
             ]
         );
-        $result = LinAlg::lud($numArray);
-        $this->assertCount(3, $result);
+        list($pMatrix, $lMatrix, $uMatrix) = LinAlg::lud($numArray);
         $this->assertNumArrayEquals(
             $expectedP,
-            $result['P'],
+            $pMatrix,
             'Matrix P is not equal'
         );
         $this->assertNumArrayEquals(
             $expectedL,
-            $result['L'],
+            $lMatrix,
             'Matrix L is not equal'
         );
         $this->assertNumArrayEquals(
             $expectedU,
-            $result['U'],
+            $uMatrix,
             'Matrix U is not equal'
         );
     }
@@ -157,21 +155,20 @@ class LUDecompositionTest extends TestCase
                 [0,    0, 38/13]
             ]
         );
-        $result = LinAlg::lud($array);
-        $this->assertCount(3, $result);
+        list($pMatrix, $lMatrix, $uMatrix) = LinAlg::lud($array);
         $this->assertNumArrayEquals(
             $expectedP,
-            $result['P'],
+            $pMatrix,
             'Matrix P is not equal'
         );
         $this->assertNumArrayEquals(
             $expectedL,
-            $result['L'],
+            $lMatrix,
             'Matrix L is not equal'
         );
         $this->assertNumArrayEquals(
             $expectedU,
-            $result['U'],
+            $uMatrix,
             'Matrix U is not equal'
         );
     }
@@ -189,21 +186,20 @@ class LUDecompositionTest extends TestCase
         $expectedU = NumPHP::identity(4);
         $expectedU->set(2, 2, 0);
 
-        $result = LinAlg::lud($matrix);
-        $this->assertCount(3, $result);
+        list($pMatrix, $lMatrix, $uMatrix) = LinAlg::lud($matrix);
         $this->assertNumArrayEquals(
             $expectedP,
-            $result['P'],
+            $pMatrix,
             'Matrix P is not equal'
         );
         $this->assertNumArrayEquals(
             $expectedL,
-            $result['L'],
+            $lMatrix,
             'Matrix L is not equal'
         );
         $this->assertNumArrayEquals(
             $expectedU,
-            $result['U'],
+            $uMatrix,
             'Matrix U is not equal'
         );
     }

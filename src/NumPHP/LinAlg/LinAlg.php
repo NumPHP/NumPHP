@@ -61,7 +61,7 @@ abstract class LinAlg
          *
          * @var NumArray $uMatrix
          */
-        $uMatrix = $lud['U'];
+        $uMatrix = $lud[2];
         $det = 1;
         for ($i = 0; $i < $shape[0]; $i++) {
             $det *= $uMatrix->get($i, $i)->getData();

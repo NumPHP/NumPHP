@@ -79,9 +79,9 @@ abstract class LUDecomposition
         }
 
         return [
-            'P' => self::buildPivotMatrix($pArray),
-            'L' => self::buildLMatrix($lMatrix),
-            'U' => self::buildUMatrix($numArray),
+            self::buildPivotMatrix($pArray),
+            self::buildLMatrix($lMatrix),
+            self::buildUMatrix($numArray),
         ];
     }
 
