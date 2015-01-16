@@ -20,22 +20,9 @@ use NumPHPTest\Core\Framework\TestCase;
  * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link      http://numphp.org/
- * @since     1.0.0
  */
 class LinAlgTest extends TestCase
 {
-    /**
-     * Compares the version in README.md with LinAlg::VERSION
-     */
-    public function testREADMEVersion()
-    {
-        $readmeContent = file_get_contents(realpath(__DIR__.'/../../../README.md'));
-        $this->assertNotFalse(
-            strpos($readmeContent, '*NumPHP '.LinAlg::VERSION.'*'),
-            'Version in README.md is not updated'
-        );
-    }
-
     /**
      * Tests LinAlg::det with 3x3 matrix
      */

@@ -29,8 +29,6 @@ use NumPHP\LinAlg\LinAlg\LinearSystem;
  */
 abstract class LinAlg
 {
-    const VERSION = '1.0.2';
-
     const CACHE_KEY_DETERMINANT = 'determinant';
     const CACHE_KEY_INVERSE     = 'inverse';
 

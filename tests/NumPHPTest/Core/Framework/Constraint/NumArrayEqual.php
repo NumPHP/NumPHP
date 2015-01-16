@@ -34,6 +34,8 @@ class NumArrayEqual extends \PHPUnit_Framework_Constraint
      * Creates NumArrayEqual
      *
      * @param \NumPHP\Core\NumArray $value expected NumArray
+     *
+     * @since 1.0.0
      */
     public function __construct(NumArray $value)
     {
@@ -51,10 +53,12 @@ class NumArrayEqual extends \PHPUnit_Framework_Constraint
      * @param string $description  Additional information about the test
      * @param bool   $returnResult Whether to return a result or throw an exception
      *
-     * @see \PHPUnit_Framework_Constraint::evaluate
-     *
      * @return bool
+     *
      * @throws \NumPHP\Core\Exception\CacheKeyException
+     *
+     * @see \PHPUnit_Framework_Constraint::evaluate
+     * @since 1.0.0
      */
     public function evaluate($other, $description = '', $returnResult = false)
     {
@@ -94,6 +98,8 @@ class NumArrayEqual extends \PHPUnit_Framework_Constraint
      * Returns a string representation of the object.
      *
      * @return string
+     *
+     * @since 1.0.0
      */
     public function toString()
     {
