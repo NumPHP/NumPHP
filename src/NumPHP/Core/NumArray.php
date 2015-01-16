@@ -28,6 +28,7 @@ use NumPHP\Core\NumArray\Transpose;
  * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link      http://numphp.org/
+ * @api
  * @since     1.0.0
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
@@ -52,6 +53,9 @@ class NumArray extends Cache
     /**
      * Creates an new NumArray
      *
+     * @api
+     * @since 1.0.0
+     *
      * @param mixed $data given data
      */
     public function __construct($data)
@@ -63,6 +67,9 @@ class NumArray extends Cache
     /**
      * Returns a string representing the NumArray
      *
+     * @api
+     * @since 1.0.0
+     *
      * @return string
      */
     public function __toString()
@@ -73,6 +80,9 @@ class NumArray extends Cache
     /**
      * Returns the dimensions of the NumArray
      *
+     * @api
+     * @since 1.0.0
+     *
      * @return array
      */
     public function getShape()
@@ -82,6 +92,9 @@ class NumArray extends Cache
 
     /**
      * Returns the number of elements the NumArray
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return int
      */
@@ -94,6 +107,9 @@ class NumArray extends Cache
      * Returns a sliced part the NumArray
      *
      * @param string|int|float $slice,... exact indices or slices like `:`, `1:8`, `3:`
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return NumArray
      */
@@ -109,6 +125,9 @@ class NumArray extends Cache
      *
      * @param string|int|float $slice,... exact indices or slices like `:`, `1:8`, `3:`
      * @param mixed            $subArray  given value or NumArray
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return $this
      */
@@ -131,6 +150,9 @@ class NumArray extends Cache
     /**
      * Returns the data of the NumArray
      *
+     * @api
+     * @since 1.0.0
+     *
      * @return mixed
      */
     public function getData()
@@ -140,6 +162,9 @@ class NumArray extends Cache
 
     /**
      * Returns the number of axis (dimensions) the NumArray
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return int
      */
@@ -152,6 +177,9 @@ class NumArray extends Cache
      * Adds an array, NumArray or numeric value to the existing NumArray
      *
      * @param mixed $addend an other int, float, array or NumArray
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return $this
      */
@@ -178,6 +206,9 @@ class NumArray extends Cache
      *
      * @param mixed $subtrahend an other int, float, array or NumArray
      *
+     * @api
+     * @since 1.0.0
+     *
      * @return $this
      */
     public function sub($subtrahend)
@@ -203,6 +234,9 @@ class NumArray extends Cache
      *
      * @param int $axis given axis of sum
      *
+     * @api
+     * @since 1.0.0
+     *
      * @return NumArray
      */
     public function sum($axis = null)
@@ -220,6 +254,9 @@ class NumArray extends Cache
      * Returns the min of the NumArray for the given axis
      *
      * @param int $axis given axis of min
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return NumArray
      */
@@ -239,6 +276,9 @@ class NumArray extends Cache
      *
      * @param int $axis given axis of max
      *
+     * @api
+     * @since 1.0.0
+     *
      * @return NumArray
      */
     public function max($axis = null)
@@ -257,6 +297,9 @@ class NumArray extends Cache
      *
      * @param int $axis given axis of mean
      *
+     * @api
+     * @since 1.0.0
+     *
      * @return NumArray
      */
     public function mean($axis = null)
@@ -270,6 +313,9 @@ class NumArray extends Cache
 
     /**
      * Applies `abs` on every value of the NumArray
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return $this
      */
@@ -290,6 +336,9 @@ class NumArray extends Cache
      * Multiplies an array, NumArray or numeric value to the existing NumArray
      *
      * @param mixed $factor an other int, float, array or NumArray
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return $this
      */
@@ -314,6 +363,9 @@ class NumArray extends Cache
     /**
      * Returns the transposed NumArray
      *
+     * @api
+     * @since 1.0.0
+     *
      * @return NumArray
      */
     public function getTranspose()
@@ -332,8 +384,12 @@ class NumArray extends Cache
     /**
      * Reshapes the NumArray
      *
-     * @return NumArray
      * @throws BadMethodCallException
+     *
+     * @api
+     * @since 1.0.0
+     *
+     * @return NumArray
      */
     public function reshape()
     {

@@ -18,16 +18,20 @@ use NumPHP\Core\NumPHP\Generate;
  * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link      http://numphp.org/
+ * @api
  * @since     1.0.0
  */
 abstract class NumPHP
 {
-    const VERSION = '1.0.1';
+    const VERSION = '1.0.2';
 
     /**
      * Returns a NumArray filled with `0`
      *
      * @param int $axis,... given axis
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return NumArray
      */
@@ -42,6 +46,9 @@ abstract class NumPHP
      *
      * @param NumArray $numArray given NumArray
      *
+     * @api
+     * @since 1.0.0
+     *
      * @return NumArray
      */
     public static function zerosLike(NumArray $numArray)
@@ -53,6 +60,9 @@ abstract class NumPHP
      * Returns a NumArray filled with `1`
      *
      * @param int $axis,... given axis
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return NumArray
      */
@@ -67,6 +77,9 @@ abstract class NumPHP
      *
      * @param NumArray $numArray given NumArray
      *
+     * @api
+     * @since 1.0.0
+     *
      * @return NumArray
      */
     public static function onesLike(NumArray $numArray)
@@ -78,6 +91,9 @@ abstract class NumPHP
      * Returns a NumArray filled with random values
      *
      * @param int $axis,... given axis
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return NumArray
      */
@@ -92,6 +108,9 @@ abstract class NumPHP
      *
      * @param NumArray $numArray given NumArray
      *
+     * @api
+     * @since 1.0.0
+     *
      * @return NumArray
      */
     public static function randLike(NumArray $numArray)
@@ -104,6 +123,9 @@ abstract class NumPHP
      *
      * @param int $mAxis size of the m axis
      * @param int $nAxis size of the n axis, if not given `$nAxis` = `$mAxis`
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return NumArray
      */
@@ -129,6 +151,9 @@ abstract class NumPHP
      *
      * @param int $mAxis size of the m axis and n axis
      *
+     * @api
+     * @since 1.0.0
+     *
      * @return NumArray
      */
     public static function identity($mAxis)
@@ -143,8 +168,12 @@ abstract class NumPHP
      * @param float $high end of the vector
      * @param float $step steps, if not given `$step` = `1.0`
      *
-     * @return NumArray
      * @throws InvalidArgumentException will be thrown if `$step` is negative
+     *
+     * @api
+     * @since 1.0.0
+     *
+     * @return NumArray
      */
     public static function arange($low, $high, $step = 1.0)
     {
@@ -161,8 +190,12 @@ abstract class NumPHP
      * @param float $high   end of the vector
      * @param int   $number size of the vector
      *
-     * @return NumArray
      * @throws InvalidArgumentException will be thrown if `$number` is negative
+     *
+     * @api
+     * @since 1.0.0
+     *
+     * @return NumArray
      */
     public static function linspace($low, $high, $number)
     {

@@ -10,7 +10,7 @@ Develop | [![Build Status](https://img.shields.io/travis/NumPHP/NumPHP/develop.s
 
 ## Release Information
 
-*NumPHP 1.0.1*
+*NumPHP 1.0.2*
 
 ## Requirements
 

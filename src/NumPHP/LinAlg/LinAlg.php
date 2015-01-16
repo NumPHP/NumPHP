@@ -11,6 +11,7 @@ use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
 use NumPHP\LinAlg\Exception\NoSquareMatrixException;
 use NumPHP\LinAlg\Exception\SingularMatrixException;
+use NumPHP\LinAlg\LinAlg\CholeskyDecomposition;
 use NumPHP\LinAlg\LinAlg\Helper;
 use NumPHP\LinAlg\LinAlg\LUDecomposition;
 use NumPHP\LinAlg\LinAlg\LinearSystem;
@@ -23,11 +24,12 @@ use NumPHP\LinAlg\LinAlg\LinearSystem;
  * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link      http://numphp.org/
+ * @api
  * @since     1.0.0
  */
 abstract class LinAlg
 {
-    const VERSION = '1.0.1';
+    const VERSION = '1.0.2';
 
     const CACHE_KEY_DETERMINANT = 'determinant';
     const CACHE_KEY_INVERSE     = 'inverse';
@@ -38,6 +40,9 @@ abstract class LinAlg
      * @param mixed $matrix matrix
      *
      * @throws NoSquareMatrixException will be thrown, if given array is no square matrix
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return float
      */
@@ -79,6 +84,9 @@ abstract class LinAlg
      *
      * @throws \NumPHP\LinAlg\Exception\NoMatrixException will be thrown, if `$array` is no matrix
      *
+     * @api
+     * @since 1.0.0
+     *
      * @return array
      */
     public static function lud($matrix)
@@ -96,12 +104,43 @@ abstract class LinAlg
     }
 
     /**
+     * Calculates lower triangular matrix L of given symmetric positive definite matrix
+     *
+     * @param mixed $squareMatrix
+     *
+     * @throws Exception\InvalidArgumentException will be thrown, when `$squareMatrix` is not symmetric positive
+     * definite
+     * @throws NoSquareMatrixException will be thrown, when `$squareMatrix` is not square
+     *
+     * @api
+     * @since 1.0.2
+     *
+     * @return NumArray
+     */
+    public static function cholesky($squareMatrix)
+    {
+        if (!$squareMatrix instanceof NumArray) {
+            $squareMatrix = new NumArray($squareMatrix);
+        } elseif ($squareMatrix->inCache(CholeskyDecomposition::CACHE_KEY_CHOLESKY)) {
+            return $squareMatrix->getCache(CholeskyDecomposition::CACHE_KEY_CHOLESKY);
+        }
+
+        $lMatrix = CholeskyDecomposition::cholesky($squareMatrix);
+        $squareMatrix->setCache(CholeskyDecomposition::CACHE_KEY_CHOLESKY, $lMatrix);
+
+        return self::cholesky($squareMatrix);
+    }
+
+    /**
      * Solves a linear system of a n*n matrix and a vector of size n
      *
      * @param mixed $squareMatrix matrix of size n*n
      * @param mixed $matrix       vector of size n or matrix of size n*m
      *
      * @throws \NumPHP\LinAlg\Exception\SingularMatrixException will be thrown, if `$squareMatrix` is singular
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return NumArray
      */
@@ -123,6 +162,9 @@ abstract class LinAlg
      * @param mixed $squareMatrix not singular matrix
      *
      * @throws SingularMatrixException will be thrown, when `$squareMatrix` is singular
+     *
+     * @api
+     * @since 1.0.0
      *
      * @return NumArray
      */

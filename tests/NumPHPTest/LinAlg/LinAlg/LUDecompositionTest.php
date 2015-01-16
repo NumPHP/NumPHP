@@ -21,7 +21,6 @@ use NumPHPTest\Core\Framework\TestCase;
  * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link      http://numphp.org/
- * @since     1.0.0
  */
 class LUDecompositionTest extends TestCase
 {
