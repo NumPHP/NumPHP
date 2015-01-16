@@ -33,6 +33,8 @@ abstract class LUDecomposition
      * @throws NoMatrixException will be thrown, if `array` is no matrix
      *
      * @return array
+     *
+     * @since 1.0.0
      */
     public static function lud(NumArray $array)
     {
@@ -91,6 +93,8 @@ abstract class LUDecomposition
      * @param array $pArray pivot vector
      *
      * @return NumArray
+     *
+     * @since 1.0.0
      */
     protected static function buildPivotMatrix(array $pArray)
     {
@@ -109,6 +113,8 @@ abstract class LUDecomposition
      * @param NumArray $numArray given matrix
      *
      * @return NumArray
+     *
+     * @since 1.0.0
      */
     protected static function buildUMatrix(NumArray $numArray)
     {
@@ -131,6 +137,8 @@ abstract class LUDecomposition
      * @param NumArray $numArray given matrix
      *
      * @return NumArray
+     *
+     * @since 1.0.0
      */
     protected static function buildLMatrix(NumArray $numArray)
     {
@@ -147,6 +155,8 @@ abstract class LUDecomposition
      * @param int      $iIndex   index
      *
      * @return int
+     *
+     * @since 1.0.0
      */
     protected static function getPivotIndex(NumArray $numArray, $iIndex)
     {

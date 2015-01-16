@@ -53,10 +53,10 @@ class NumArray extends Cache
     /**
      * Creates an new NumArray
      *
+     * @param mixed $data given data
+     *
      * @api
      * @since 1.0.0
-     *
-     * @param mixed $data given data
      */
     public function __construct($data)
     {
@@ -67,10 +67,10 @@ class NumArray extends Cache
     /**
      * Returns a string representing the NumArray
      *
+     * @return string
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return string
      */
     public function __toString()
     {
@@ -80,10 +80,10 @@ class NumArray extends Cache
     /**
      * Returns the dimensions of the NumArray
      *
+     * @return array
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return array
      */
     public function getShape()
     {
@@ -93,10 +93,10 @@ class NumArray extends Cache
     /**
      * Returns the number of elements the NumArray
      *
+     * @return int
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return int
      */
     public function getSize()
     {
@@ -108,10 +108,10 @@ class NumArray extends Cache
      *
      * @param string|int|float $slice,... exact indices or slices like `:`, `1:8`, `3:`
      *
+     * @return NumArray
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public function get()
     {
@@ -126,10 +126,10 @@ class NumArray extends Cache
      * @param string|int|float $slice,... exact indices or slices like `:`, `1:8`, `3:`
      * @param mixed            $subArray  given value or NumArray
      *
+     * @return $this
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return $this
      */
     public function set()
     {
@@ -150,10 +150,10 @@ class NumArray extends Cache
     /**
      * Returns the data of the NumArray
      *
+     * @return mixed
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return mixed
      */
     public function getData()
     {
@@ -163,10 +163,10 @@ class NumArray extends Cache
     /**
      * Returns the number of axis (dimensions) the NumArray
      *
+     * @return int
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return int
      */
     public function getNDim()
     {
@@ -178,10 +178,10 @@ class NumArray extends Cache
      *
      * @param mixed $addend an other int, float, array or NumArray
      *
+     * @return $this
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return $this
      */
     public function add($addend)
     {
@@ -206,10 +206,10 @@ class NumArray extends Cache
      *
      * @param mixed $subtrahend an other int, float, array or NumArray
      *
+     * @return $this
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return $this
      */
     public function sub($subtrahend)
     {
@@ -234,10 +234,10 @@ class NumArray extends Cache
      *
      * @param int $axis given axis of sum
      *
+     * @return NumArray
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public function sum($axis = null)
     {
@@ -255,10 +255,10 @@ class NumArray extends Cache
      *
      * @param int $axis given axis of min
      *
+     * @return NumArray
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public function min($axis = null)
     {
@@ -276,10 +276,10 @@ class NumArray extends Cache
      *
      * @param int $axis given axis of max
      *
+     * @return NumArray
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public function max($axis = null)
     {
@@ -297,10 +297,10 @@ class NumArray extends Cache
      *
      * @param int $axis given axis of mean
      *
+     * @return NumArray
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public function mean($axis = null)
     {
@@ -314,10 +314,10 @@ class NumArray extends Cache
     /**
      * Applies `abs` on every value of the NumArray
      *
+     * @return $this
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return $this
      */
     public function abs()
     {
@@ -337,10 +337,10 @@ class NumArray extends Cache
      *
      * @param mixed $factor an other int, float, array or NumArray
      *
+     * @return $this
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return $this
      */
     public function dot($factor)
     {
@@ -363,10 +363,10 @@ class NumArray extends Cache
     /**
      * Returns the transposed NumArray
      *
+     * @return NumArray
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public function getTranspose()
     {
@@ -384,12 +384,12 @@ class NumArray extends Cache
     /**
      * Reshapes the NumArray
      *
-     * @throws BadMethodCallException
+     * @return NumArray
+     *
+     * @throws BadMethodCallException will be thrown, if NumArray is only a scalar
      *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public function reshape()
     {

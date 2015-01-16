@@ -26,9 +26,11 @@ abstract class Helper
      *
      * @param array $array given array of floats or integers
      *
+     * @return float
+     *
      * @throws InvalidArgumentException will be thrown, if a value in the array is not numeric
      *
-     * @return float
+     * @since 1.0.0
      */
     public static function multiply(array $array)
     {
@@ -53,7 +55,9 @@ abstract class Helper
      * @param mixed $index given index argument
      * @param array $data  the given data where the indexes work on
      *
-     * @return array|int|void
+     * @return array|int
+     *
+     * @since 1.0.0
      */
     public static function prepareIndexArgument($index, array $data)
     {

@@ -31,7 +31,10 @@ abstract class Reduce
      * @param int      $axis     given axis
      *
      * @return NumArray
+     *
      * @throws InvalidArgumentException will be thrown, if axis is out of bounds
+     *
+     * @since 1.0.0
      */
     public static function reduceArray(NumArray $numArray, $callback, $axis)
     {
@@ -53,6 +56,8 @@ abstract class Reduce
      * @param int      $axis     given axis
      *
      * @return mixed
+     *
+     * @since 1.0.0
      */
     protected static function reduceRecursive($data, $callback, $axis = null)
     {

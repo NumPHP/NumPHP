@@ -27,6 +27,8 @@ abstract class Set
      * @param array $args     array of indices
      *
      * @return mixed
+     *
+     * @since 1.0.0
      */
     public static function setSubArray($origData, $subData, array $args)
     {
@@ -41,6 +43,8 @@ abstract class Set
      * @param array $args  array of indices
      *
      * @return mixed
+     *
+     * @since 1.0.0
      */
     protected static function setRecursive($origData, $subData, array $args)
     {

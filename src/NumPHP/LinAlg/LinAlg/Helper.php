@@ -28,6 +28,8 @@ abstract class Helper
      * @param NumArray $numArray given NumArray
      *
      * @return bool
+     *
+     * @since 1.0.0
      */
     public static function isMatrix(NumArray $numArray)
     {
@@ -40,6 +42,8 @@ abstract class Helper
      * @param NumArray $numArray given NumArray
      *
      * @return bool
+     *
+     * @since 1.0.0
      */
     public static function isVector(NumArray $numArray)
     {
@@ -52,6 +56,8 @@ abstract class Helper
      * @param NumArray $numArray given NumArray
      *
      * @return bool
+     *
+     * @since 1.0.0
      */
     public static function isSquareMatrix(NumArray $numArray)
     {
@@ -67,6 +73,8 @@ abstract class Helper
      * @todo better use matrix_rank to check if a matrix is singular
      *
      * @return bool
+     *
+     * @since 1.0.0
      */
     public static function isNotSingularMatrix(NumArray $numArray)
     {

@@ -30,10 +30,10 @@ abstract class NumPHP
      *
      * @param int $axis,... given axis
      *
+     * @return NumArray
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public static function zeros()
     {
@@ -46,10 +46,10 @@ abstract class NumPHP
      *
      * @param NumArray $numArray given NumArray
      *
+     * @return NumArray
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public static function zerosLike(NumArray $numArray)
     {
@@ -61,10 +61,10 @@ abstract class NumPHP
      *
      * @param int $axis,... given axis
      *
+     * @return NumArray
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public static function ones()
     {
@@ -77,10 +77,10 @@ abstract class NumPHP
      *
      * @param NumArray $numArray given NumArray
      *
+     * @return NumArray
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public static function onesLike(NumArray $numArray)
     {
@@ -92,10 +92,10 @@ abstract class NumPHP
      *
      * @param int $axis,... given axis
      *
+     * @return NumArray
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public static function rand()
     {
@@ -108,10 +108,10 @@ abstract class NumPHP
      *
      * @param NumArray $numArray given NumArray
      *
+     * @return NumArray
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public static function randLike(NumArray $numArray)
     {
@@ -124,10 +124,10 @@ abstract class NumPHP
      * @param int $mAxis size of the m axis
      * @param int $nAxis size of the n axis, if not given `$nAxis` = `$mAxis`
      *
+     * @return NumArray
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public static function eye($mAxis, $nAxis = -1)
     {
@@ -151,10 +151,10 @@ abstract class NumPHP
      *
      * @param int $mAxis size of the m axis and n axis
      *
+     * @return NumArray
+     *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public static function identity($mAxis)
     {
@@ -168,12 +168,12 @@ abstract class NumPHP
      * @param float $high end of the vector
      * @param float $step steps, if not given `$step` = `1.0`
      *
+     * @return NumArray
+     *
      * @throws InvalidArgumentException will be thrown if `$step` is negative
      *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public static function arange($low, $high, $step = 1.0)
     {
@@ -190,12 +190,12 @@ abstract class NumPHP
      * @param float $high   end of the vector
      * @param int   $number size of the vector
      *
+     * @return NumArray
+     *
      * @throws InvalidArgumentException will be thrown if `$number` is negative
      *
      * @api
      * @since 1.0.0
-     *
-     * @return NumArray
      */
     public static function linspace($low, $high, $number)
     {

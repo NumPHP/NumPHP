@@ -36,8 +36,11 @@ abstract class Cache
      * @param mixed  $value the value
      *
      * @return $this
+     *
      * @throws CacheKeyException will be thrown if `$key` is no string
-     * @throws CacheException will be thrown, if `$key` is already in use
+     * @throws CacheException    will be thrown, if `$key` is already in use
+     *
+     * @since 1.0.0
      */
     public function setCache($key, $value)
     {
@@ -58,8 +61,11 @@ abstract class Cache
      * @param string $key the key
      *
      * @return mixed
+     *
      * @throws CacheKeyException will be thrown if `$key` is no string
-     * @throws CacheException will be thrown `$key` does not exist
+     * @throws CacheException    will be thrown `$key` does not exist
+     *
+     * @since 1.0.0
      */
     public function getCache($key)
     {
@@ -79,7 +85,10 @@ abstract class Cache
      * @param string $key the key
      *
      * @return bool
+     *
      * @throws CacheKeyException will be thrown if `$key` is no string
+     *
+     * @since 1.0.0
      */
     public function inCache($key)
     {
@@ -95,7 +104,10 @@ abstract class Cache
      * @param string $key the key
      *
      * @return $this
+     *
      * @throws CacheKeyException will be thrown if `$key` is no string
+     *
+     * @since 1.0.0
      */
     public function flushCache($key = null)
     {
@@ -117,6 +129,8 @@ abstract class Cache
      * @param mixed $entry given cache entry
      *
      * @return array
+     *
+     * @since 1.0.0
      */
     protected static function cloneCacheEntryRecursive($entry)
     {

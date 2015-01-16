@@ -26,6 +26,8 @@ abstract class Get
      * @param array $args array of indices or slices like `:`, `3:`, `1:6`
      *
      * @return mixed
+     *
+     * @since 1.0.0
      */
     public static function getSubArray($data, array $args)
     {
@@ -39,6 +41,8 @@ abstract class Get
      * @param array $args array of indices or slices like `:`, `3:`, `1:6`
      *
      * @return mixed
+     *
+     * @since 1.0.0
      */
     protected static function getRecursive($data, array $args)
     {

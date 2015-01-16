@@ -26,6 +26,8 @@ abstract class Generate
      * @param null  $value value of the array, if not given `$value` will be random
      *
      * @return mixed
+     *
+     * @since 1.0.0
      */
     public static function generateArray(array $shape, $value = null)
     {
@@ -39,6 +41,8 @@ abstract class Generate
      * @param mixed $value value of the array, if not given `$value` will be random
      *
      * @return mixed
+     *
+     * @since 1.0.0
      */
     protected static function generateArrayRecursive(array $shape, $value = null)
     {

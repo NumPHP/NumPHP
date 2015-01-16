@@ -29,7 +29,10 @@ abstract class Map
      * @param callback $callback callback function
      *
      * @return mixed
+     *
      * @throws InvalidArgumentException will be thrown, if the sizes are different
+     *
+     * @since 1.0.0
      */
     public static function mapArray($array1, $array2, $callback)
     {
@@ -44,8 +47,10 @@ abstract class Map
      * @param callback $callback callback function
      *
      * @return array|mixed
+     *
      * @throws InvalidArgumentException will be thrown, if the sizes are different
      *
+     * @since 1.0.0
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     protected static function mapRecursive($data1, $data2, $callback)

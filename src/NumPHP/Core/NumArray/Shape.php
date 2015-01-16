@@ -27,8 +27,10 @@ abstract class Shape
      * @param mixed $data given data
      *
      * @return array
-     * @throws InvalidArgumentException will be thrown, if the dimensions did not
-     * match
+     *
+     * @throws InvalidArgumentException will be thrown, if the dimensions did not match
+     *
+     * @since 1.0.0
      */
     public static function getShape($data)
     {
@@ -44,8 +46,10 @@ abstract class Shape
      * @param array $newShape new shape
      *
      * @return array
-     * @throws InvalidArgumentException will be thrown, if the new shape has other
-     * size than the old one
+     *
+     * @throws InvalidArgumentException will be thrown, if the new shape has other size than the old one
+     *
+     * @since 1.0.0
      */
     public static function reshape(array $data, array $shape, array $newShape)
     {
@@ -70,8 +74,10 @@ abstract class Shape
      * @param int   $level the current level of the data
      *
      * @return array
-     * @throws InvalidArgumentException will be thrown, if the dimensions did not
-     * match
+     *
+     * @throws InvalidArgumentException will be thrown, if the dimensions did not match
+     *
+     * @since 1.0.0
      */
     protected static function getShapeRecursive($data, array $shape, $level = 0)
     {
@@ -95,6 +101,8 @@ abstract class Shape
      * @param array $data given data
      *
      * @return array
+     *
+     * @since 1.0.0
      */
     protected static function reshapeToVectorRecursive(array $data)
     {
@@ -116,6 +124,8 @@ abstract class Shape
      * @param array $shape new shape
      *
      * @return array
+     *
+     * @since 1.0.0
      */
     protected static function reshapeRecursive(array $data, array $shape)
     {

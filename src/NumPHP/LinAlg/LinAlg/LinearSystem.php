@@ -37,6 +37,8 @@ abstract class LinearSystem
      * linear system of `$squareMatrix` and `$numArray` can not be solved
      *
      * @return NumArray
+     *
+     * @since 1.0.0
      */
     public static function solve(NumArray $squareMatrix, NumArray $numArray)
     {
@@ -86,6 +88,8 @@ abstract class LinearSystem
      * @param NumArray $numArray  vector of size n or matrix of size n*m
      *
      * @return NumArray
+     *
+     * @since 1.0.0
      */
     protected static function forwardSubstitution(NumArray $lMatrix, NumArray $numArray)
     {
@@ -122,6 +126,8 @@ abstract class LinearSystem
      * @param NumArray $numArray  vector of size n or matrix of size n*m
      *
      * @return NumArray
+     *
+     * @since 1.0.0
      */
     protected static function backSubstitution(NumArray $uMatrix, NumArray $numArray)
     {

@@ -29,14 +29,14 @@ abstract class CholeskyDecomposition
     /**
      * Calculates lower triangular matrix L of given symmetric positive definite matrix
      *
-     * @param NumArray $squareMatrix symmetric positive definite matrix
+     * @param  NumArray $squareMatrix symmetric positive definite matrix
+     *
+     * @return NumArray
      *
      * @throws InvalidArgumentException will be thrown, when `$squareMatrix` is not symmetric positive definite
      * @throws NoSquareMatrixException  will be thrown, when `$squareMatrix` is not square
      *
-     * @since     1.0.2
-     *
-     * @return NumArray
+     * @since 1.0.2
      */
     public static function cholesky(NumArray $squareMatrix)
     {

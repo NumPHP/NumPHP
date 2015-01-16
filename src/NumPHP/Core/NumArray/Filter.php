@@ -26,6 +26,8 @@ abstract class Filter
      * @param callback $callback callback function
      *
      * @return mixed
+     *
+     * @since 1.0.0
      */
     public static function filterArray($data, $callback)
     {
@@ -39,6 +41,8 @@ abstract class Filter
      * @param callback $callback callback fucntion
      *
      * @return mixed
+     *
+     * @since 1.0.0
      */
     protected static function filterRecursive($data, $callback)
     {

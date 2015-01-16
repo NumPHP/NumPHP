@@ -25,6 +25,8 @@ abstract class String
      * @param mixed $data given data
      *
      * @return string
+     *
+     * @since 1.0.0
      */
     public static function toString($data)
     {
@@ -38,6 +40,8 @@ abstract class String
      * @param int   $level current level
      *
      * @return string
+     *
+     * @since 1.0.0
      */
     protected static function toStringRecursive($data, $level = 0)
     {

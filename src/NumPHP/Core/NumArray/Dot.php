@@ -30,9 +30,11 @@ abstract class Dot
      * @param array $shape2 shape of the second factor
      *
      * @return array
+     *
      * @throws InvalidArgumentException wil be thrown of the two factors can not be
      * multiplied
      *
+     * @since 1.0.0
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public static function dotArray($data1, array $shape1, $data2, array $shape2)
@@ -95,6 +97,8 @@ abstract class Dot
      * @param float $scalar given scalar
      *
      * @return mixed
+     *
+     * @since 1.0.0
      */
     protected static function dotScalarRecursive($data, $scalar)
     {
@@ -116,7 +120,10 @@ abstract class Dot
      * @param array $data2 second vector
      *
      * @return mixed
+     *
      * @throws InvalidArgumentException will be thrown if the vector sizes differ
+     *
+     * @since 1.0.0
      */
     protected static function dotVectorVector(array $data1, array $data2)
     {
@@ -145,8 +152,10 @@ abstract class Dot
      * @param array $data2 matrix
      *
      * @return array
-     * @throws InvalidArgumentException will be thrown if the vector and matrix size
-     * differ
+     *
+     * @throws InvalidArgumentException will be thrown if the vector and matrix size differ
+     *
+     * @since 1.0.0
      */
     protected static function dotVectorMatrix(array $data1, array $data2)
     {
@@ -175,8 +184,10 @@ abstract class Dot
      * @param array $data2 vector
      *
      * @return array|mixed
-     * @throws InvalidArgumentException will be thrown if the vector and matrix size
-     * differ
+     *
+     * @throws InvalidArgumentException will be thrown if the vector and matrix size differ
+     *
+     * @since 1.0.0
      */
     protected static function dotMatrixVector(array $data1, array $data2)
     {
@@ -198,7 +209,10 @@ abstract class Dot
      * @param array $data2 matrix2
      *
      * @return array
+     *
      * @throws InvalidArgumentException will be thrown if the matrix sizes differ
+     *
+     * @since 1.0.0
      */
     protected static function dotMatrixMatrix(array $data1, array $data2)
     {

@@ -28,6 +28,8 @@ abstract class Transpose
      * @param array $shape the shape of the data
      *
      * @return mixed
+     *
+     * @since 1.0.0
      */
     public static function getTranspose($data, array $shape)
     {
@@ -43,6 +45,8 @@ abstract class Transpose
      * @param int   $currentIndex current index
      *
      * @return mixed
+     *
+     * @since 1.0.0
      */
     protected static function getTransposeRecursive(
         $data,
