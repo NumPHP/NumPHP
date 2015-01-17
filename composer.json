@@ -13,6 +13,9 @@
             "role": "developer"
         }
     ],
+    "bin": [
+        "numphp-examples"
+    ],
     "require": {
         "php": ">=5.4"
     },
@@ -21,7 +24,8 @@
         "phpmd/phpmd" : "*",
         "squizlabs/php_codesniffer": "*",
         "sebastian/phpcpd": "*",
-        "satooshi/php-coveralls": "dev-master"
+        "satooshi/php-coveralls": "dev-master",
+        "symfony/console": "~2.2"
     },
     "autoload": {
         "psr-0": {
@@ -30,7 +34,8 @@
     },
     "autoload-dev": {
         "psr-0": {
-            "NumPHPTest\\": "tests/"
+            "NumPHPTest\\": "tests/",
+            "NumPHPExamples\\": "examples/"
         }
     }
 }
