@@ -16,7 +16,7 @@ before_script:
 
 script:
   - php vendor/bin/phpcs --standard=PSR2 src/ tests/ examples/
-  - php vendor/bin/phpmd src/,tests/ examples/ text codesize,controversial,design,naming,unusedcode
+  - php vendor/bin/phpmd src/,tests/,examples/ text codesize,controversial,design,naming,unusedcode
   - php vendor/bin/phpcpd src/ tests/ examples/
   - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
