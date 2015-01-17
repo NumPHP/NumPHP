@@ -108,7 +108,8 @@ abstract class LinAlg
      *
      * @throws Exception\InvalidArgumentException will be thrown, when `$squareMatrix` is not symmetric positive
      * definite
-     * @throws NoSquareMatrixException will be thrown, when `$squareMatrix` is not square
+     * @throws NoSquareMatrixException    will be thrown, when `$squareMatrix` is not square
+     * @throws NoSymmetricMatrixException will be thrown, when `$squareMatrix` is not symmetric
      *
      * @api
      * @since 1.0.2

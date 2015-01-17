@@ -11,6 +11,7 @@ use NumPHP\Core\NumArray;
 use NumPHP\Core\NumPHP;
 use NumPHP\LinAlg\Exception\InvalidArgumentException;
 use NumPHP\LinAlg\Exception\NoSquareMatrixException;
+use NumPHP\LinAlg\Exception\NoSymmetricMatrixException;
 
 /**
  * Class CholeskyDecomposition
@@ -33,8 +34,9 @@ abstract class CholeskyDecomposition
      *
      * @return NumArray
      *
-     * @throws InvalidArgumentException will be thrown, when `$squareMatrix` is not symmetric positive definite
-     * @throws NoSquareMatrixException  will be thrown, when `$squareMatrix` is not square
+     * @throws InvalidArgumentException   will be thrown, when `$squareMatrix` is not positive definite
+     * @throws NoSquareMatrixException    will be thrown, when `$squareMatrix` is not square
+     * @throws NoSymmetricMatrixException will be thrown, when `$squareMatrix` is not symmetric
      *
      * @since 1.0.2
      */
@@ -63,7 +65,7 @@ abstract class CholeskyDecomposition
             $lMatrix->set($k, $k, $diaElem);
             for ($i = $k+1; $i < $size; $i++) {
                 if ($squareMatrix->get($i, $k) != $squareMatrix->get($k, $i)) {
-                    throw new InvalidArgumentException("Matrix is not symmetric");
+                    throw new NoSymmetricMatrixException("Matrix is not symmetric");
                 }
                 $lMatrix->set($i, $k, $aMatrix->get($i, $k)->getData()/$diaElem);
                 for ($j = $k+1; $j <= $i; $j++) {

@@ -97,7 +97,7 @@ class CholeskyDecompositionTest extends TestCase
     /**
      * Tests if InvalidArgumentException will be thrown, when using LinAlg::cholesky with not symmetric matrix
      *
-     * @expectedException        \NumPHP\LinAlg\Exception\InvalidArgumentException
+     * @expectedException        \NumPHP\LinAlg\Exception\NoSymmetricMatrixException
      * @expectedExceptionMessage Matrix is not symmetric
      */
     public function testCholeskyNotSymmetric()

@@ -17,6 +17,6 @@ namespace NumPHP\LinAlg\Exception;
  * @link      http://numphp.org/
  * @since     1.0.0
  */
-class SingularMatrixException extends \Exception
+class SingularMatrixException extends NoSquareMatrixException
 {
 }
