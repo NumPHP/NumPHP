@@ -102,7 +102,7 @@ abstract class LinearSystem
                 $sum = $lMatrix->get($i, $slice)->dot($xVector->get($slice));
                 $xVector->set(
                     $i,
-                    $numArray->get($i)->sub($sum)->getData()/$lMatrix->get($i, $i)->getData()
+                    $numArray->get($i)->sub($sum)->div($lMatrix->get($i, $i))
                 );
             }
 
@@ -140,7 +140,7 @@ abstract class LinearSystem
                 $sum = $uMatrix->get($i, $slice)->dot($xVector->get($slice));
                 $xVector->set(
                     $i,
-                    $numArray->get($i)->sub($sum)->getData()/$uMatrix->get($i, $i)->getData()
+                    $numArray->get($i)->sub($sum)->div($uMatrix->get($i, $i))
                 );
             }
 

@@ -67,7 +67,7 @@ abstract class CholeskyDecomposition
                 if ($squareMatrix->get($i, $k) != $squareMatrix->get($k, $i)) {
                     throw new NoSymmetricMatrixException("Matrix is not symmetric");
                 }
-                $lMatrix->set($i, $k, $aMatrix->get($i, $k)->getData()/$diaElem);
+                $lMatrix->set($i, $k, $aMatrix->get($i, $k)->div($diaElem));
                 for ($j = $k+1; $j <= $i; $j++) {
                     $aMatrix->set(
                         $i,
