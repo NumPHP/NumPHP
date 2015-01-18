@@ -39,4 +39,3 @@ The [documentation](https://github.com/NumPHP/NumPHP-docs) is rendered at [numph
 ## Examples
 
 Some [examples](examples/) as Symfony Commands.
-Some examples are at [NumPHP-examples](https://github.com/NumPHP/NumPHP-examples)
