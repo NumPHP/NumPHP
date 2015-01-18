@@ -114,8 +114,7 @@ class AddTest extends TestCase
     }
 
     /**
-     * Tests if InvalidArgumentException will be thrown, when using NumArray::add
-     * with vectors of different size
+     * Tests if InvalidArgumentException will be thrown, when using NumArray::add with vectors of different size
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
      * @expectedExceptionMessage Size 5 is different from size 4

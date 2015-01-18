@@ -8,6 +8,7 @@
 namespace NumPHP\Core;
 
 use NumPHP\Core\Exception\BadMethodCallException;
+use NumPHP\Core\Exception\DivideByZeroException;
 use NumPHP\Core\Exception\MissingArgumentException;
 use NumPHP\Core\NumArray\Dot;
 use NumPHP\Core\NumArray\Filter;
@@ -264,6 +265,8 @@ class NumArray extends Cache
      *
      * @return $this
      *
+     * @throws DivideByZeroException will be thrown, when dividing by zero
+     *
      * @api
      * @since 1.0.3
      */
@@ -276,7 +279,10 @@ class NumArray extends Cache
             $this->data,
             $divisor,
             function ($data1, $data2) {
-                return $data1 / $data2;
+                if ($data2) {
+                    return $data1 / $data2;
+                }
+                throw new DivideByZeroException("Dividing by zero is forbidden");
             }
         );
         $this->shape = Shape::getShape($this->data);
