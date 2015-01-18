@@ -76,7 +76,7 @@ abstract class LUDecomposition
                 }
                 $lMatrix->set($j, $i, $fac);
                 $slice = sprintf("%d:", $i+1);
-                $numArray->set($j, $slice, $numArray->get($j, $slice)->sub($numArray->get($i, $slice)->dot($fac)));
+                $numArray->set($j, $slice, $numArray->get($j, $slice)->sub($numArray->get($i, $slice)->mult($fac)));
             }
         }
 

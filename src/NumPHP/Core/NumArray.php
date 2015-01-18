@@ -230,6 +230,62 @@ class NumArray extends Cache
     }
 
     /**
+     * Multiplies the NumArray with a factor
+     *
+     * @param mixed $factor factor
+     *
+     * @return $this
+     *
+     * @api
+     * @since 1.0.3
+     */
+    public function mult($factor)
+    {
+        if ($factor instanceof NumArray) {
+            $factor = $factor->getData();
+        }
+        $this->data = Map::mapArray(
+            $this->data,
+            $factor,
+            function ($data1, $data2) {
+                return $data1 * $data2;
+            }
+        );
+        $this->shape = Shape::getShape($this->data);
+        $this->flushCache();
+
+        return $this;
+    }
+
+    /**
+     * Divides the NumArray with a divisor
+     *
+     * @param mixed $divisor divisor
+     *
+     * @return $this
+     *
+     * @api
+     * @since 1.0.3
+     */
+    public function div($divisor)
+    {
+        if ($divisor instanceof NumArray) {
+            $divisor = $divisor->getData();
+        }
+        $this->data = Map::mapArray(
+            $this->data,
+            $divisor,
+            function ($data1, $data2) {
+                return $data1 / $data2;
+            }
+        );
+        $this->shape = Shape::getShape($this->data);
+        $this->flushCache();
+
+        return $this;
+    }
+
+    /**
      * Summed all elements of an NumArray for the given axis
      *
      * @param int $axis given axis of sum

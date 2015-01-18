@@ -72,7 +72,7 @@ abstract class CholeskyDecomposition
                     $aMatrix->set(
                         $i,
                         $j,
-                        $aMatrix->get($i, $j)->sub($lMatrix->get($i, $k)->dot($lMatrix->get($j, $k)))
+                        $aMatrix->get($i, $j)->sub($lMatrix->get($i, $k)->mult($lMatrix->get($j, $k)))
                     );
                 }
             }
