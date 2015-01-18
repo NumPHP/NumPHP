@@ -13,9 +13,6 @@
             "role": "developer"
         }
     ],
-    "bin": [
-        "examples/numphp-examples"
-    ],
     "require": {
         "php": ">=5.4"
     },
