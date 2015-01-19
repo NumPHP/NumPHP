@@ -238,7 +238,7 @@ class NumArray extends Cache
      * @return $this
      *
      * @api
-     * @since 1.0.3
+     * @since 1.0.4
      */
     public function mult($factor)
     {
@@ -268,7 +268,7 @@ class NumArray extends Cache
      * @throws DivideByZeroException will be thrown, when dividing by zero
      *
      * @api
-     * @since 1.0.3
+     * @since 1.0.4
      */
     public function div($divisor)
     {

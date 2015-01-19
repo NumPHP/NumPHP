@@ -19,7 +19,7 @@ use NumPHPTest\Core\Framework\TestCase;
  * @copyright 2014-2015 Gordon Lesti (https://gordonlesti.com/)
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link      http://numphp.org/
- * @since     1.0.3
+ * @since     1.0.4
  */
 class DivTest extends TestCase
 {
