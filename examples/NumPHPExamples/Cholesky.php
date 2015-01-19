@@ -1,6 +1,6 @@
 <?php
 /**
- * NumPHP-examples - Mathematical PHP library for scientific computing
+ * NumPHP - Mathematical PHP library for scientific computing
  *
  * Copyright (c) Gordon Lesti <info@gordonlesti.com>
  */
@@ -26,7 +26,7 @@ class Cholesky extends Command
 {
     protected function configure()
     {
-        $this->setName('example:cholesky')
+        $this->setName('cholesky')
             ->setDescription('Factors a symmetric positive definite matrix in to a lower triangular matrix');
     }
 

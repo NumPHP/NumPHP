@@ -1,6 +1,6 @@
 <?php
 /**
- * NumPHP-examples - Mathematical PHP library for scientific computing
+ * NumPHP - Mathematical PHP library for scientific computing
  *
  * Copyright (c) Gordon Lesti <info@gordonlesti.com>
  */
@@ -25,7 +25,7 @@ class GaussianElimination extends Command
 {
     protected function configure()
     {
-        $this->setName('example:gaussian-elimination')
+        $this->setName('gaussian-elimination')
             ->setDescription('Solves a small system of linear equations with gaussian elimination');
     }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * NumPHP-examples - Mathematical PHP library for scientific computing
+ * NumPHP - Mathematical PHP library for scientific computing
  *
  * Copyright (c) Gordon Lesti <info@gordonlesti.com>
  */
@@ -26,7 +26,7 @@ class LUDecomposition extends Command
 {
     protected function configure()
     {
-        $this->setName('example:lu-decomposition')
+        $this->setName('lu-decomposition')
             ->setDescription('Factors a matrix into a permutation matrix, a lower and a upper triangular matrix');
     }
 

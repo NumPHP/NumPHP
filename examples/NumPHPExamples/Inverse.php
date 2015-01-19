@@ -1,6 +1,6 @@
 <?php
 /**
- * NumPHP-examples - Mathematical PHP library for scientific computing
+ * NumPHP - Mathematical PHP library for scientific computing
  *
  * Copyright (c) Gordon Lesti <info@gordonlesti.com>
  */
@@ -26,7 +26,7 @@ class Inverse extends Command
 {
     protected function configure()
     {
-        $this->setName('example:inverse')
+        $this->setName('inverse')
             ->setDescription('Calculates the inverse of a not singular matrix');
     }
 
