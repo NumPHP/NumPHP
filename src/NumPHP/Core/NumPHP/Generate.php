@@ -55,7 +55,7 @@ abstract class Generate
             return $array;
         }
         if (is_null($value)) {
-            return mt_rand() + mt_rand() / mt_getrandmax();
+            return mt_rand() / mt_getrandmax();
         }
         return $value;
     }
