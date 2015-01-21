@@ -34,8 +34,19 @@ abstract class Shape
      */
     public static function getShape($data)
     {
-        $shape = [];
-        return self::getShapeRecursive($data, $shape);
+        $shape = self::getShapeRecursive($data, []);
+
+        $expectedCount = array_product($shape);
+        $currentProduct = 1;
+        for ($i = 0; $i < count($shape)-1; $i++) {
+            $currentProduct *= $shape[$i];
+            $expectedCount += $currentProduct;
+        }
+        if (count($data, COUNT_RECURSIVE) !== $expectedCount) {
+            throw new InvalidArgumentException("Dimensions did not match");
+        }
+
+        return $shape;
     }
 
     /**
@@ -71,25 +82,18 @@ abstract class Shape
      *
      * @param mixed $data  given data
      * @param array $shape the current shape
-     * @param int   $level the current level of the data
      *
      * @return array
      *
-     * @throws InvalidArgumentException will be thrown, if the dimensions did not match
-     *
      * @since 1.0.0
      */
-    protected static function getShapeRecursive($data, array $shape, $level = 0)
+    protected static function getShapeRecursive($data, array $shape)
     {
         if (is_array($data)) {
             $count = count($data);
-            if (isset($shape[$level]) && $shape[$level] !== $count) {
-                throw new InvalidArgumentException('Dimensions did not match');
-            } else {
-                $shape[$level] = $count;
-            }
-            foreach ($data as $row) {
-                $shape = self::getShapeRecursive($row, $shape, $level+1);
+            $shape[] = $count;
+            if ($count) {
+                $shape = self::getShapeRecursive($data[0], $shape);
             }
         }
         return $shape;
