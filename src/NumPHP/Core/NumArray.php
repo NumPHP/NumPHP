@@ -10,6 +10,7 @@ namespace NumPHP\Core;
 use NumPHP\Core\Exception\BadMethodCallException;
 use NumPHP\Core\Exception\DivideByZeroException;
 use NumPHP\Core\Exception\MissingArgumentException;
+use NumPHP\Core\NumArray\Create;
 use NumPHP\Core\NumArray\Dot;
 use NumPHP\Core\NumArray\Filter;
 use NumPHP\Core\NumArray\Get;
@@ -61,8 +62,9 @@ class NumArray extends Cache
      */
     public function __construct($data)
     {
-        $this->data = $data;
-        $this->shape = Shape::getShape($data);
+        $result = Create::reshapeData($data);
+        $this->data = $result[0];
+        $this->shape = $result[1];
     }
 
     /**
