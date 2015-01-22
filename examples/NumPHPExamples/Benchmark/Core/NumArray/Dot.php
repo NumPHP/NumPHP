@@ -37,15 +37,13 @@ class Dot implements BenchmarkInterface
     public function run()
     {
         $result = [];
-        for ($i = 100; $i <= 500; $i += 100) {
-            $numArray1 = NumPHP::ones($i, $i);
-            $numArray2 = NumPHP::ones($i, $i);
-            $time = microtime(true);
-            $numArray1->dot($numArray2);
-            $timeDiff = microtime(true) - $time;
+        $numArray1 = NumPHP::ones(500, 500);
+        $numArray2 = NumPHP::ones(500, 500);
+        $time = microtime(true);
+        $numArray1->dot($numArray2);
+        $timeDiff = microtime(true) - $time;
 
-            $result[$i] = new TestRun($i, $timeDiff);
-        }
+        $result[] = new TestRun("(500x500)*(500x500)", $timeDiff);
 
         return $result;
     }

@@ -60,7 +60,7 @@ class Benchmark extends Command
             $result = $benchmark->run();
             foreach ($result as $testRun) {
                 /** @var Benchmark\TestRun $testRun */
-                $output->writeln(sprintf("\t%d: <info>%f</info>", $testRun->getComplexity(), $testRun->getTime()));
+                $output->writeln(sprintf("\t%s: <info>%f</info>", $testRun->getDescription(), $testRun->getTime()));
             }
         }
     }

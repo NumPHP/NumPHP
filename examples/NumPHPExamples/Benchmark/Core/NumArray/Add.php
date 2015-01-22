@@ -36,15 +36,13 @@ class Add implements BenchmarkInterface
     public function run()
     {
         $result = [];
-        for ($i = 100; $i <= 1000; $i += 100) {
-            $numArray1 = NumPHP::ones($i, $i);
-            $numArray2 = NumPHP::ones($i, $i);
-            $time = microtime(true);
-            $numArray1->add($numArray2);
-            $timeDiff = microtime(true) - $time;
+        $numArray1 = NumPHP::ones(1000, 1000);
+        $numArray2 = NumPHP::ones(1000, 1000);
+        $time = microtime(true);
+        $numArray1->add($numArray2);
+        $timeDiff = microtime(true) - $time;
 
-            $result[$i] = new TestRun($i, $timeDiff);
-        }
+        $result[] = new TestRun("(1000x1000)+(1000x1000)", $timeDiff);
 
         return $result;
     }

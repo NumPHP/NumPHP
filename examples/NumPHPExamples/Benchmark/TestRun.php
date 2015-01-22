@@ -25,26 +25,26 @@ class TestRun
     protected $time = 0.0;
 
     /**
-     * @var int
+     * @var string
      */
-    protected $complexity = 0;
+    protected $description = '';
 
     /**
-     * @param int   $complexity
-     * @param float $time
+     * @param string $description
+     * @param float  $time
      */
-    public function __construct($complexity, $time)
+    public function __construct($description, $time)
     {
-        $this->complexity = $complexity;
+        $this->description = $description;
         $this->time = $time;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getComplexity()
+    public function getDescription()
     {
-        return $this->complexity;
+        return $this->description;
     }
 
     /**

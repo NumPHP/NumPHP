@@ -39,14 +39,12 @@ class Sum implements BenchmarkInterface
     public function run()
     {
         $result = [];
-        for ($i = 100; $i <= 1000; $i += 100) {
-            $numArray = NumPHP::ones($i, $i);
-            $time = microtime(true);
-            $sum = $numArray->sum();
-            $timeDiff = microtime(true) - $time;
+        $numArray = NumPHP::ones(1000, 1000);
+        $time = microtime(true);
+        $sum = $numArray->sum();
+        $timeDiff = microtime(true) - $time;
 
-            $result[$i] = new TestRun($i, $timeDiff);
-        }
+        $result[] = new TestRun("1000x1000", $timeDiff);
 
         return $result;
     }

@@ -40,14 +40,12 @@ class Create implements BenchmarkInterface
     public function run()
     {
         $result = [];
-        for ($i = 100; $i <= 1000; $i += 100) {
-            $array = NumPHP::ones($i, $i);
-            $time = microtime(true);
-            $numArray = new NumArray($array->getData());
-            $timeDiff = microtime(true) - $time;
+        $array = NumPHP::ones(1000, 1000);
+        $time = microtime(true);
+        $numArray = new NumArray($array->getData());
+        $timeDiff = microtime(true) - $time;
 
-            $result[$i] = new TestRun($i, $timeDiff);
-        }
+        $result[] = new TestRun("1000x1000", $timeDiff);
 
         return $result;
     }
