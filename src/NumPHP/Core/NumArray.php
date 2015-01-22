@@ -9,16 +9,15 @@ namespace NumPHP\Core;
 
 use NumPHP\Core\Exception\BadMethodCallException;
 use NumPHP\Core\Exception\DivideByZeroException;
+use NumPHP\Core\Exception\InvalidArgumentException;
 use NumPHP\Core\Exception\MissingArgumentException;
 use NumPHP\Core\NumArray\Create;
 use NumPHP\Core\NumArray\Dot;
 use NumPHP\Core\NumArray\Filter;
 use NumPHP\Core\NumArray\Get;
-use NumPHP\Core\NumArray\Helper;
 use NumPHP\Core\NumArray\Map;
 use NumPHP\Core\NumArray\Reduce;
 use NumPHP\Core\NumArray\Set;
-use NumPHP\Core\NumArray\Shape;
 use NumPHP\Core\NumArray\String;
 use NumPHP\Core\NumArray\Transpose;
 
@@ -103,7 +102,7 @@ class NumArray extends Cache
      */
     public function getSize()
     {
-        return Helper::multiply($this->getShape());
+        return array_product($this->getShape());
     }
 
     /**
@@ -385,12 +384,16 @@ class NumArray extends Cache
      */
     public function abs()
     {
-        $this->data = Filter::filterArray(
-            $this->data,
-            function ($data) {
-                return abs($data);
-            }
-        );
+        if (is_array($this->data)) {
+            array_walk(
+                $this->data,
+                function (&$value) {
+                    $value = abs($value);
+                }
+            );
+        } else {
+            $this->data = abs($this->data);
+        }
         $this->flushCache();
 
         return $this;
@@ -437,9 +440,10 @@ class NumArray extends Cache
         if ($this->inCache(Transpose::CACHE_KEY_TRANSPOSE)) {
             return $this->getCache(Transpose::CACHE_KEY_TRANSPOSE);
         }
-        $transpose = new NumArray(
-            Transpose::getTranspose($this->data, $this->getShape())
-        );
+        $transpose = new NumArray(5);
+        $transpose->data = Transpose::getTranspose($this->data, $this->shape);
+        $transpose->shape = array_reverse($this->shape);
+
         $this->setCache(Transpose::CACHE_KEY_TRANSPOSE, $transpose);
 
         return $this->getTranspose();
@@ -450,7 +454,8 @@ class NumArray extends Cache
      *
      * @return NumArray
      *
-     * @throws BadMethodCallException will be thrown, if NumArray is only a scalar
+     * @throws BadMethodCallException   will be thrown, if NumArray is only a scalar
+     * @throws InvalidArgumentException will be thrown, if new shape size differs to old size
      *
      * @api
      * @since 1.0.0
@@ -461,9 +466,13 @@ class NumArray extends Cache
             throw new BadMethodCallException('NumArray data is not an array');
         }
         $args = func_get_args();
-        $this->data = Shape::reshape($this->data, $this->getShape(), $args);
-        $this->shape = $args;
-        $this->flushCache();
+        if ($args !== $this->shape) {
+            if (array_product($args) !== $this->getSize()) {
+                throw new InvalidArgumentException("Total size of new array must be unchanged");
+            }
+            $this->shape = $args;
+            $this->flushCache();
+        }
 
         return $this;
     }

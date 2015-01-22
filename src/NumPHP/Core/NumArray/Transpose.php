@@ -33,43 +33,20 @@ abstract class Transpose
      */
     public static function getTranspose($data, array $shape)
     {
-        return self::getTransposeRecursive($data, $shape);
-    }
-
-    /**
-     * Creates a transposed value or array recursive
-     *
-     * @param mixed $data         given data
-     * @param array $shape        the current shape
-     * @param array $indexes      given indexes
-     * @param int   $currentIndex current index
-     *
-     * @return mixed
-     *
-     * @since 1.0.0
-     */
-    protected static function getTransposeRecursive(
-        $data,
-        array $shape,
-        array $indexes = array(),
-        $currentIndex = null
-    ) {
-        if (!is_null($currentIndex)) {
-            $indexes[] = $currentIndex;
-        }
-        if (count($shape)) {
-            $transpose = [];
-            $axis = array_pop($shape);
-            for ($i = 0; $i < $axis; $i++) {
-                $transpose[] = self::getTransposeRecursive(
-                    $data,
-                    $shape,
-                    $indexes,
-                    $i
+        if (is_array($data)) {
+            $transposeData = [];
+            $factors = Helper::getFactorsFromShape(array_reverse($shape));
+            foreach ($data as $position => $entry) {
+                $newPosition = Helper::getPositionFromIndexes(
+                    array_reverse(Helper::getIndexesFromPosition($position, $shape)),
+                    $factors
                 );
+                $transposeData[$newPosition] = $entry;
             }
-            return $transpose;
+
+            return $transposeData;
         }
-        return Get::getSubArray($data, array_reverse($indexes));
+
+        return $data;
     }
 }

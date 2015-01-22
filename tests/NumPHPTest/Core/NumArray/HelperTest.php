@@ -22,30 +22,54 @@ use NumPHP\Core\NumArray\Helper;
 class HelperTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Test if InvalidArgumentException will be thrown when Helper::multiply is
-     * called with not numeric values
-     *
-     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Array contains non numeric values
+     * Tests Helper::prepareIndexArgument
      */
-    public function testMultiplyInvalidArgumentException()
+    public function testPrepareIndexArgument()
     {
-        Helper::multiply([1, 2, 'k']);
+        $this->markTestIncomplete("This test has not been implemented yet.");
     }
 
     /**
-     * Tests Helper::multiply with filled array
+     * Tests Helper::getIndexesFromPosition
      */
-    public function testMultiply()
+    public function testGetIndexesFromPosition()
     {
-        $this->assertSame(840, Helper::multiply([5, 7, '24']));
+        $shape = [3, 5, 7, 9];
+
+        $expectedIndexes = [2, 3, 4, 5];
+        $this->assertSame($expectedIndexes, Helper::getIndexesFromPosition(860, $shape));
     }
 
     /**
-     * Tests Helper::multiply with empty array
+     * Tests Helper::getPositionFromIndexes
      */
-    public function testMultiplyEmpty()
+    public function testGetPositionFromIndexes()
     {
-        $this->assertSame(1, Helper::multiply([]));
+        $indexes = [2, 3, 4, 5];
+        $factors = [315, 63, 9, 1];
+
+        $this->assertSame(860, Helper::getPositionFromIndexes($indexes, $factors));
+    }
+
+    /**
+     * Tests Helper::getFactorsFromShapeEmpty
+     */
+    public function testGetFactorsFromShape()
+    {
+        $shape = [3, 5, 7, 9];
+
+        $expectedFactors = [315, 63, 9, 1];
+        $this->assertSame($expectedFactors, Helper::getFactorsFromShape($shape));
+    }
+
+    /**
+     * Tests Helper::getFactorsFromShapeEmpty with empty shape
+     */
+    public function testGetFactorsFromShapeEmpty()
+    {
+        $shape = [];
+
+        $expectedFactors = [];
+        $this->assertSame($expectedFactors, Helper::getFactorsFromShape($shape));
     }
 }

@@ -12,6 +12,7 @@ use NumPHPExamples\Benchmark\Core\NumArray\Add;
 use NumPHPExamples\Benchmark\Core\NumArray\Create;
 use NumPHPExamples\Benchmark\Core\NumArray\Dot;
 use NumPHPExamples\Benchmark\Core\NumArray\Sum;
+use NumPHPExamples\Benchmark\Core\NumArray\Transpose;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -39,10 +40,11 @@ class Benchmark extends Command
             ->setDescription('Benchmarks basic function');
         $this->benchmarks = [
             new Create(),
-            new Add(),
-            new Sum(),
+            new Transpose(),
+//            new Add(),
+//            new Sum(),
             new Abs(),
-            new Dot(),
+//            new Dot(),
         ];
     }
 

@@ -22,30 +22,66 @@ use NumPHP\Core\Exception\InvalidArgumentException;
 abstract class Helper
 {
     /**
-     * Multiplies all entries of an array
+     * Calculates the indexes of a position with given shape
      *
-     * @param array $array given array of floats or integers
+     * @param int   $position position
+     * @param array $shape    shape
      *
-     * @return float
-     *
-     * @throws InvalidArgumentException will be thrown, if a value in the array is not numeric
-     *
-     * @since 1.0.0
+     * @return array
      */
-    public static function multiply(array $array)
+    public static function getIndexesFromPosition($position, array $shape)
     {
-        return array_reduce(
-            $array,
-            function ($prod, $item) {
-                if (!is_numeric($item)) {
-                    throw new InvalidArgumentException(
-                        'Array contains non numeric values'
-                    );
-                }
-                return $prod * $item;
-            },
-            1
+        $indexes = [];
+        for ($i = count($shape)-1; $i >= 0; $i--) {
+            $axis = $shape[$i];
+            $indexes[] = $position % $axis;
+            $position /= $axis;
+        }
+
+        return array_reverse($indexes);
+    }
+
+    /**
+     * Multiplies the indexes with factors to return the position in an NumArray. Use getFactorsFromShape to calculate
+     * the factors from a shape
+     *
+     * @param array $indexes indexes
+     * @param array $factors factors
+     *
+     * @return int
+     */
+    public static function getPositionFromIndexes(array $indexes, array $factors)
+    {
+        return array_sum(
+            array_map(
+                function ($value1, $value2) {
+                    return $value1 * $value2;
+                },
+                $indexes,
+                $factors
+            )
         );
+    }
+
+    /**
+     * Calculates the factors from a given shape
+     *
+     * @param array $shape shape
+     *
+     * @return array
+     */
+    public static function getFactorsFromShape(array $shape)
+    {
+        $factors = $shape;
+        $factors[] = 1;
+        array_shift($factors);
+        $pre = 1;
+        for ($i = count($factors)-1; $i >= 0; $i--) {
+            $pre *= $factors[$i];
+            $factors[$i] = $pre;
+        }
+
+        return $factors;
     }
 
     /**
