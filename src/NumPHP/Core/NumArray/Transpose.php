@@ -34,19 +34,27 @@ abstract class Transpose
     public static function getTranspose($data, array $shape)
     {
         if (is_array($data)) {
-            $transposeData = [];
-            $factors = Helper::getFactorsFromShape(array_reverse($shape));
-            foreach ($data as $position => $entry) {
-                $newPosition = Helper::getPositionFromIndexes(
-                    array_reverse(Helper::getIndexesFromPosition($position, $shape)),
-                    $factors
-                );
-                $transposeData[$newPosition] = $entry;
-            }
+            $keyArray = [];
+            self::getTransposeIndexes($shape, $keyArray);
 
-            return $transposeData;
+            return array_combine($keyArray, $data);
         }
 
         return $data;
+    }
+
+    protected static function getTransposeIndexes(array $shape, &$indexes, $sum = 0, $fac = 1)
+    {
+        if (count($shape) == 1) {
+            $axis = array_shift($shape);
+            for ($i = 0; $i < $axis; $i++) {
+                $indexes[] = $sum + $fac * $i;
+            }
+        } else {
+            $axis = array_shift($shape);
+            for ($i = 0; $i < $axis; $i++) {
+                self::getTransposeIndexes($shape, $indexes, $sum + $fac * $i, $fac * $axis);
+            }
+        }
     }
 }

@@ -13,7 +13,6 @@ use NumPHP\Core\Exception\InvalidArgumentException;
 use NumPHP\Core\Exception\MissingArgumentException;
 use NumPHP\Core\NumArray\Create;
 use NumPHP\Core\NumArray\Dot;
-use NumPHP\Core\NumArray\Filter;
 use NumPHP\Core\NumArray\Get;
 use NumPHP\Core\NumArray\Map;
 use NumPHP\Core\NumArray\Reduce;
@@ -385,12 +384,7 @@ class NumArray extends Cache
     public function abs()
     {
         if (is_array($this->data)) {
-            array_walk(
-                $this->data,
-                function (&$value) {
-                    $value = abs($value);
-                }
-            );
+            $this->data = array_map('abs', $this->data);
         } else {
             $this->data = abs($this->data);
         }
