@@ -79,13 +79,13 @@ class MultTest extends TestCase
     public function testMultVectorMatrix()
     {
         $numArray1 = NumPHP::arange(1, 12)->reshape(3, 4);
-        $numArray2 = NumPHP::arange(1, 3);
+        $numArray2 = NumPHP::arange(1, 4);
 
         $expectedNumArray = new NumArray(
             [
-                [ 1,  2,  3,  4],
-                [10, 12, 14, 16],
-                [27, 30, 33, 36]
+                [1,  4,  9, 16],
+                [5, 12, 21, 32],
+                [9, 20, 33, 48]
             ]
         );
         $this->assertNumArrayEquals($expectedNumArray, $numArray1->mult($numArray2));
@@ -127,7 +127,7 @@ class MultTest extends TestCase
      * Tests if InvalidArgumentException will be thrown, when using NumArray::mult with vectors of different size
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Size 5 is different from size 4
+     * @expectedExceptionMessage Shape (5) is not align with shape (4)
      */
     public function testMultDifferentShape()
     {
@@ -135,17 +135,5 @@ class MultTest extends TestCase
         $numArray2 = NumPHP::arange(1, 4);
 
         $numArray1->mult($numArray2);
-    }
-
-    /**
-     * Tests if cache will be flushed after use of NumArray::mult
-     */
-    public function testMultCache()
-    {
-        $numArray = new NumArray(5);
-        $numArray->setCache('key', 6);
-
-        $numArray->mult(4);
-        $this->assertFalse($numArray->inCache('key'));
     }
 }

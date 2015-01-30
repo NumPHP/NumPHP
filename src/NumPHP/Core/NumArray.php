@@ -186,20 +186,12 @@ class NumArray extends Cache
      */
     public function add($addend)
     {
-        if ($addend instanceof NumArray) {
-            $addend = $addend->getData();
-        }
-        $this->data = Map::mapArray(
-            $this->data,
+        return $this->map(
             $addend,
-            function ($data1, $data2) {
-                return $data1 + $data2;
+            function ($value1, $value2) {
+                return $value1 + $value2;
             }
         );
-        $this->shape = Shape::getShape($this->data);
-        $this->flushCache();
-
-        return $this;
     }
 
     /**
@@ -214,20 +206,12 @@ class NumArray extends Cache
      */
     public function sub($subtrahend)
     {
-        if ($subtrahend instanceof NumArray) {
-            $subtrahend = $subtrahend->getData();
-        }
-        $this->data = Map::mapArray(
-            $this->data,
+        return $this->map(
             $subtrahend,
             function ($data1, $data2) {
                 return $data1 - $data2;
             }
         );
-        $this->shape = Shape::getShape($this->data);
-        $this->flushCache();
-
-        return $this;
     }
 
     /**
@@ -242,20 +226,12 @@ class NumArray extends Cache
      */
     public function mult($factor)
     {
-        if ($factor instanceof NumArray) {
-            $factor = $factor->getData();
-        }
-        $this->data = Map::mapArray(
-            $this->data,
+        return $this->map(
             $factor,
             function ($data1, $data2) {
                 return $data1 * $data2;
             }
         );
-        $this->shape = Shape::getShape($this->data);
-        $this->flushCache();
-
-        return $this;
     }
 
     /**
@@ -272,11 +248,7 @@ class NumArray extends Cache
      */
     public function div($divisor)
     {
-        if ($divisor instanceof NumArray) {
-            $divisor = $divisor->getData();
-        }
-        $this->data = Map::mapArray(
-            $this->data,
+        return $this->map(
             $divisor,
             function ($data1, $data2) {
                 if ($data2) {
@@ -285,10 +257,6 @@ class NumArray extends Cache
                 throw new DivideByZeroException("Dividing by zero is forbidden");
             }
         );
-        $this->shape = Shape::getShape($this->data);
-        $this->flushCache();
-
-        return $this;
     }
 
     /**
@@ -469,5 +437,86 @@ class NumArray extends Cache
         }
 
         return $this;
+    }
+
+    public function map($array, $callback)
+    {
+        if (!$array instanceof NumArray) {
+            $array = new NumArray($array);
+        }
+        $newShape = [];
+        if (count($this->shape)) {
+            // first NuMArray is an Array
+            if (!count($array->shape)) {
+                // second NumArray is a scalar
+                $data2 = $array->data;
+                $newData = array_map(
+                    function ($value) use ($callback, $data2) {
+                        return $callback($value, $data2);
+                    },
+                    $this->data
+                );
+                $newShape = $this->shape;
+            } elseif ($this->shape === $array->shape) {
+                // both are array and have the same shape
+                $newData = array_map($callback, $this->data, $array->getData());
+                $newShape = $this->shape;
+            } else {
+                $revShape1 = array_reverse($this->shape);
+                $revShape2 = array_reverse($array->shape);
+                if (!count(array_diff_assoc($revShape1, $revShape2))) {
+                    $div = array_product($revShape1);
+                    $chunk = array_chunk($array->data, $div);
+                    $data1 = $this->data;
+                    $chunk = array_map(
+                        function ($value) use ($callback, $data1) {
+                            return array_map($callback, $value, $data1);
+                        },
+                        $chunk
+                    );
+                    $newData = call_user_func_array('array_merge', $chunk);
+                    $newShape = $array->shape;
+                } elseif (!count(array_diff_assoc($revShape2, $revShape1))) {
+                    $div = array_product($revShape2);
+                    $chunk = array_chunk($this->data, $div);
+                    $data2 = $array->data;
+                    $chunk = array_map(
+                        function ($value) use ($callback, $data2) {
+                            return array_map($callback, $value, $data2);
+                        },
+                        $chunk
+                    );
+                    $newData = call_user_func_array('array_merge', $chunk);
+                    $newShape = $this->shape;
+                } else {
+                    throw new InvalidArgumentException(
+                        sprintf(
+                            "Shape (%s) is not align with shape (%s)",
+                            implode(', ', $this->shape),
+                            implode(', ', $array->shape)
+                        )
+                    );
+                }
+            }
+        } elseif (count($array->shape)) {
+            // first NumArray is scalar and second NumArray is an array
+            $data1 = $this->data;
+            $newData = array_map(
+                function ($value) use ($callback, $data1) {
+                    return $callback($data1, $value);
+                },
+                $array->data
+            );
+            $newShape = $array->shape;
+        } else {
+            // both a scalar
+            $newData = $callback($this->data, $array->data);
+        }
+
+        $newNum = new NumArray(0);
+        $newNum->data = $newData;
+        $newNum->shape = $newShape;
+
+        return $newNum;
     }
 }

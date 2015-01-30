@@ -41,7 +41,7 @@ class Benchmark extends Command
         $this->benchmarks = [
             new Create(),
             new Transpose(),
-//            new Add(),
+            new Add(),
 //            new Sum(),
             new Abs(),
 //            new Dot(),
