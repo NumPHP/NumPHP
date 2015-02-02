@@ -39,6 +39,5 @@ $application->add(new \NumPHPExamples\GaussianElimination());
 $application->add(new \NumPHPExamples\LUDecomposition());
 $application->add(new \NumPHPExamples\Inverse());
 $application->add(new \NumPHPExamples\Cholesky());
-$application->add(new \NumPHPExamples\Benchmark());
 
 $application->run();

@@ -24,7 +24,7 @@ Simply add a dependency on `numphp/numphp` to your project's `composer.json` fil
 
     {
         "require": {
-            "numphp/numphp": "dev-master"
+            "numphp/numphp": "*"
         }
     }
     

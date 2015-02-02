@@ -22,69 +22,6 @@ use NumPHP\Core\Exception\InvalidArgumentException;
 abstract class Helper
 {
     /**
-     * Calculates the indexes of a position with given shape
-     *
-     * @param int   $position position
-     * @param array $shape    shape
-     *
-     * @return array
-     */
-    public static function getIndexesFromPosition($position, array $shape)
-    {
-        $indexes = [];
-        for ($i = count($shape)-1; $i >= 0; $i--) {
-            $axis = $shape[$i];
-            $indexes[] = $position % $axis;
-            $position /= $axis;
-        }
-
-        return array_reverse($indexes);
-    }
-
-    /**
-     * Multiplies the indexes with factors to return the position in an NumArray. Use getFactorsFromShape to calculate
-     * the factors from a shape
-     *
-     * @param array $indexes indexes
-     * @param array $factors factors
-     *
-     * @return int
-     */
-    public static function getPositionFromIndexes(array $indexes, array $factors)
-    {
-        return array_sum(
-            array_map(
-                function ($value1, $value2) {
-                    return $value1 * $value2;
-                },
-                $indexes,
-                $factors
-            )
-        );
-    }
-
-    /**
-     * Calculates the factors from a given shape
-     *
-     * @param array $shape shape
-     *
-     * @return array
-     */
-    public static function getFactorsFromShape(array $shape)
-    {
-        $factors = $shape;
-        $factors[] = 1;
-        array_shift($factors);
-        $pre = 1;
-        for ($i = count($factors)-1; $i >= 0; $i--) {
-            $pre *= $factors[$i];
-            $factors[$i] = $pre;
-        }
-
-        return $factors;
-    }
-
-    /**
      * Prepares the argument of an index. If `$index` is an integer it will returned and if `$index` is a string like
      * `1:5`, `:8` or `-4:` it will return an array with the keys `from` and `to`
      *
