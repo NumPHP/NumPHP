@@ -430,15 +430,14 @@ class NumArray extends Cache
             throw new BadMethodCallException('NumArray data is not an array');
         }
         $args = func_get_args();
-        if ($args !== $this->shape) {
-            if (array_product($args) !== $this->getSize()) {
-                throw new InvalidArgumentException("Total size of new array must be unchanged");
-            }
-            $this->shape = $args;
-            $this->flushCache();
+        if (array_product($args) !== $this->getSize()) {
+            throw new InvalidArgumentException("Total size of new array must be unchanged");
         }
+        $newNumArray = new NumArray(0);
+        $newNumArray->data = $this->data;
+        $newNumArray->shape = $args;
 
-        return $this;
+        return $newNumArray;
     }
 
     public function map($array, $callback)
