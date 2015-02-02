@@ -46,5 +46,6 @@ class NumArrayBenchmark extends Benchmark
         $this->benchmark([$numArray, 'sub'], [$numArray2], 'sub 1kx1k+1kx1k');
         $this->benchmark([$numArray, 'div'], [$numArray2], 'div 1kx1k+1kx1k');
         $this->benchmark([$numArray, 'mult'], [$numArray2], 'mult 1kx1k+1kx1k');
+        $this->benchmark([$numArray, 'getTranspose'], [], 'getTranspose 1kx1k');
     }
 }

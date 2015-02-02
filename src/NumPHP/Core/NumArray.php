@@ -158,7 +158,13 @@ class NumArray extends Cache
      */
     public function getData()
     {
-        return $this->data;
+        $chunks = $this->data;
+        $shape = $this->shape;
+        array_shift($shape);
+        while ($axis = array_pop($shape)) {
+            $chunks = array_chunk($chunks, $axis);
+        }
+        return $chunks;
     }
 
     /**
@@ -404,7 +410,7 @@ class NumArray extends Cache
         if ($this->inCache(Transpose::CACHE_KEY_TRANSPOSE)) {
             return $this->getCache(Transpose::CACHE_KEY_TRANSPOSE);
         }
-        $transpose = new NumArray(5);
+        $transpose = new NumArray(0);
         $transpose->data = Transpose::getTranspose($this->data, $this->shape);
         $transpose->shape = array_reverse($this->shape);
 
@@ -440,6 +446,14 @@ class NumArray extends Cache
         return $newNumArray;
     }
 
+    /**
+     * @param $array
+     * @param $callback
+     *
+     * @return NumArray
+     *
+     * @throws InvalidArgumentException
+     */
     public function map($array, $callback)
     {
         if (!$array instanceof NumArray) {
