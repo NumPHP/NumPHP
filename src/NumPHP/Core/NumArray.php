@@ -179,7 +179,7 @@ class NumArray extends Cache
      *
      * @param mixed $addend an other int, float, array or NumArray
      *
-     * @return $this
+     * @return NumArray
      *
      * @api
      * @since 1.0.0
@@ -199,7 +199,7 @@ class NumArray extends Cache
      *
      * @param mixed $subtrahend an other int, float, array or NumArray
      *
-     * @return $this
+     * @return NumArray
      *
      * @api
      * @since 1.0.0
@@ -219,7 +219,7 @@ class NumArray extends Cache
      *
      * @param mixed $factor factor
      *
-     * @return $this
+     * @return NumArray
      *
      * @api
      * @since 1.0.4
@@ -239,7 +239,7 @@ class NumArray extends Cache
      *
      * @param mixed $divisor divisor
      *
-     * @return $this
+     * @return NumArray
      *
      * @throws DivideByZeroException will be thrown, when dividing by zero
      *
@@ -344,7 +344,7 @@ class NumArray extends Cache
     /**
      * Applies `abs` on every value of the NumArray
      *
-     * @return $this
+     * @return numArray
      *
      * @api
      * @since 1.0.0
@@ -352,13 +352,15 @@ class NumArray extends Cache
     public function abs()
     {
         if (is_array($this->data)) {
-            $this->data = array_map('abs', $this->data);
+            $absData = array_map('abs', $this->data);
         } else {
-            $this->data = abs($this->data);
+            $absData = abs($this->data);
         }
-        $this->flushCache();
+        $newNumArray = new NumArray(0);
+        $newNumArray->data = $absData;
+        $newNumArray->shape = $this->shape;
 
-        return $this;
+        return $newNumArray;
     }
 
     /**
