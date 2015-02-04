@@ -47,7 +47,7 @@ class NumArray extends AthleticEvent
         $this->matrix2 = new \NumPHP\Core\NumArray($data);
     }
 
-    public function setUp()
+    public function tearDown()
     {
         $this->matrix1->flushCache();
         $this->matrix2->flushCache();
@@ -58,7 +58,7 @@ class NumArray extends AthleticEvent
      */
     public function construct()
     {
-        $numArray = new \NumPHP\Core\NumArray($this->data);
+        new \NumPHP\Core\NumArray($this->data);
     }
 
     /**
@@ -66,7 +66,7 @@ class NumArray extends AthleticEvent
      */
     public function toString()
     {
-        $toString = $this->matrix1->__toString();
+        $this->matrix1->__toString();
     }
 
     /**
@@ -74,7 +74,7 @@ class NumArray extends AthleticEvent
      */
     public function getShape()
     {
-        $shape = $this->matrix1->getShape();
+        $this->matrix1->getShape();
     }
 
     /**
@@ -82,7 +82,7 @@ class NumArray extends AthleticEvent
      */
     public function getSize()
     {
-        $size = $this->matrix1->getSize();
+        $this->matrix1->getSize();
     }
 
     /**
@@ -90,7 +90,7 @@ class NumArray extends AthleticEvent
      */
     public function getData()
     {
-        $data = $this->matrix1->getData();
+        $this->matrix1->getData();
     }
 
     /**
@@ -98,7 +98,7 @@ class NumArray extends AthleticEvent
      */
     public function getNDim()
     {
-        $nDim = $this->matrix1->getData();
+        $this->matrix1->getData();
     }
 
     /**
@@ -106,7 +106,7 @@ class NumArray extends AthleticEvent
      */
     public function add()
     {
-        $sum = $this->matrix1->add($this->matrix2);
+        $this->matrix1->add($this->matrix2);
     }
 
     /**
@@ -114,7 +114,7 @@ class NumArray extends AthleticEvent
      */
     public function sub()
     {
-        $sub = $this->matrix1->sub($this->matrix2);
+        $this->matrix1->sub($this->matrix2);
     }
 
     /**
@@ -122,7 +122,7 @@ class NumArray extends AthleticEvent
      */
     public function div()
     {
-        $div = $this->matrix1->div($this->matrix2);
+        $this->matrix1->div($this->matrix2);
     }
 
     /**
@@ -130,7 +130,7 @@ class NumArray extends AthleticEvent
      */
     public function mult()
     {
-        $prod = $this->matrix1->mult($this->matrix2);
+        $this->matrix1->mult($this->matrix2);
     }
 
     /**
@@ -138,6 +138,6 @@ class NumArray extends AthleticEvent
      */
     public function getTranspose()
     {
-        $transpose = $this->matrix1->getTranspose();
+        $this->matrix1->getTranspose();
     }
 }

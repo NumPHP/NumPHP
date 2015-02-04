@@ -9,7 +9,6 @@ namespace NumPHP\Core;
 
 use NumPHP\Core\Exception\InvalidArgumentException;
 use NumPHP\Core\Exception\MissingArgumentException;
-use NumPHP\Core\NumPHP\Generate;
 
 /**
  * Class NumPHP
