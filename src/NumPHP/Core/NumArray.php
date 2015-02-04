@@ -75,7 +75,7 @@ class NumArray extends Cache
      */
     public function __toString()
     {
-        return "NumArray(".String::toString($this->data).")\n";
+        return "NumArray(".String::toString($this->getData()).")\n";
     }
 
     /**
@@ -474,7 +474,7 @@ class NumArray extends Cache
                 $newShape = $this->shape;
             } elseif ($this->shape === $array->shape) {
                 // both are array and have the same shape
-                $newData = array_map($callback, $this->data, $array->getData());
+                $newData = array_map($callback, $this->data, $array->data);
                 $newShape = $this->shape;
             } else {
                 $revShape1 = array_reverse($this->shape);
