@@ -100,7 +100,7 @@ class NumArray extends Cache
      */
     public function getSize()
     {
-        return array_product($this->getShape());
+        return array_product($this->shape);
     }
 
     /**

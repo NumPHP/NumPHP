@@ -24,109 +24,63 @@ use NumPHPTest\Core\Framework\TestCase;
 class GenerateTest extends TestCase
 {
     /**
-     * Tests NumPHP::ones without arguments
+     * @expectedException        \NumPHP\Core\Exception\MissingArgumentException
+     * @expectedExceptionMessage Required Argument 'axis' not found
      */
-    public function testOnes()
+    public function testGenerateMissingArgument()
     {
-        $this->assertNumArrayEquals(new NumArray(1), NumPHP::ones());
+        NumPHP::generate(5);
     }
 
     /**
-     * Tests NumPHP::rand
+     * Tests NumArray::generate
      */
-    public function testRand3()
+    public function testGenerate3x4()
     {
-        $rand = NumPHP::rand(3);
-        $this->assertInstanceOf('\NumPHP\Core\NumArray', $rand);
-        $this->assertSame([3], $rand->getShape());
-        $randData = $rand->getData();
-        $this->assertCount(3, $randData);
-        foreach ($randData as $entry) {
-            $this->assertInternalType('float', $entry);
-        }
+        $expectedNumArray = new NumArray(array_fill(0, 3, array_fill(0, 4, 5)));
+
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::generate(5, 3, 4));
     }
 
     /**
-     * Tests NumPHP::ones with arguments 3, 2
+     * Tests NumArray::ones
      */
-    public function testOnes3x2()
+    public function testZeros()
     {
-        $expectedNumArray = new NumArray(
-            [
-                [1, 1],
-                [1, 1],
-                [1, 1],
-            ]
-        );
-        $this->assertNumArrayEquals($expectedNumArray, NumPHP::ones(3, 2));
+        $expectedNumArray = new NumArray(array_fill(0, 2, array_fill(0, 4, 0)));
+
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::zeros(2, 4));
     }
 
     /**
-     * Tests NumPHP::zeros with arguments 2, 3, 5
-     */
-    public function testZeros2x3x5()
-    {
-        $expectedNumArray = new NumArray(
-            [
-                [
-                    [0, 0, 0, 0, 0],
-                    [0, 0, 0, 0, 0],
-                    [0, 0, 0, 0, 0],
-                ],
-                [
-                    [0, 0, 0, 0, 0],
-                    [0, 0, 0, 0, 0],
-                    [0, 0, 0, 0, 0],
-                ],
-            ]
-        );
-        $this->assertNumArrayEquals($expectedNumArray, NumPHP::zeros(2, 3, 5));
-    }
-
-    /**
-     * Tests NumPHP::zerosLike with 2x3 matrix
+     * Tests NumArray::zerosLike
      */
     public function testZerosLike()
     {
-        $numArray = new NumArray(
-            [
-                [1, 2, 3],
-                [4, 5, 6],
-            ]
-        );
-        $expectedNumArray = NumPHP::zeros(2, 3);
+        $numArray = NumPHP::arange(1, 6)->reshape(2, 3);
+
+        $expectedNumArray = new NumArray(array_fill(0, 2, array_fill(0, 3, 0)));
         $this->assertNumArrayEquals($expectedNumArray, NumPHP::zerosLike($numArray));
     }
 
     /**
-     * Tests NumPHP::onesLike with 3x2 matrix
+     * Tests NumArray::ones
      */
-    public function testOnesLike()
+    public function testOnes()
     {
-        $numArray = new NumArray(
-            [
-                [1, 1],
-                [1, 1],
-                [1, 1],
-            ]
-        );
-        $expectedNumArray = NumPHP::ones(3, 2);
-        $this->assertNumArrayEquals($expectedNumArray, NumPHP::onesLike($numArray));
+        $expectedNumArray = new NumArray(array_fill(0, 2, array_fill(0, 4, 1)));
+
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::ones(2, 4));
     }
 
     /**
-     * Tests NumPHP::randLike with vector
+     * Tests NumArray::onesLike
      */
-    public function testRandLike()
+    public function testOnesLike()
     {
-        $numArray = new NumArray([1, 2, 3]);
-        $rand = NumPHP::randLike($numArray);
-        $this->assertInstanceOf('\NumPHP\Core\NumArray', $rand);
-        $this->assertSame([3], $rand->getShape());
-        $randData = $rand->getData();
-        $this->assertCount(3, $randData);
-        foreach ($randData as $entry) {
-            $this->assertInternalType('float', $entry);
-        }
+        $numArray = NumPHP::arange(1, 6)->reshape(2, 3);
+
+        $expectedNumArray = new NumArray(array_fill(0, 2, array_fill(0, 3, 1)));
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::onesLike($numArray));
     }
 }
