@@ -14,7 +14,6 @@ use NumPHP\Core\Exception\MissingArgumentException;
 use NumPHP\Core\NumArray\Create;
 use NumPHP\Core\NumArray\Dot;
 use NumPHP\Core\NumArray\Get;
-use NumPHP\Core\NumArray\Map;
 use NumPHP\Core\NumArray\Reduce;
 use NumPHP\Core\NumArray\Set;
 use NumPHP\Core\NumArray\String;
