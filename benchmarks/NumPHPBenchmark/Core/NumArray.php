@@ -98,7 +98,7 @@ class NumArray extends AthleticEvent
      */
     public function getNDim()
     {
-        $nDim = $this->matrix1->getData();
+        $nDim = $this->matrix1->getNDim();
     }
 
     /**
