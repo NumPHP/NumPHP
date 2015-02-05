@@ -9,7 +9,7 @@ php:
 sudo: false
 
 install:
-  - composer install --dev --prefer-source
+  - composer install --dev --prefer-dist -v
 
 before_script:
   - mkdir -p build/logs
