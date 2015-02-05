@@ -149,7 +149,7 @@ class NumArray extends AthleticEvent
     /**
      * @iterations 1
      */
-    public function dot_1kx1k_1kx1k()
+    public function dot_500x500_500x500()
     {
         $this->matrix3->dot($this->matrix4);
     }
