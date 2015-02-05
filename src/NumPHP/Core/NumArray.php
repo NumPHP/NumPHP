@@ -117,7 +117,7 @@ class NumArray extends Cache
     {
         $args = func_get_args();
 
-        return new NumArray(Get::getSubArray($this->data, $args));
+        return new NumArray(Get::getSubArray($this->getData(), $args));
     }
 
     /**
@@ -141,7 +141,9 @@ class NumArray extends Cache
         if ($subArray instanceof NumArray) {
             $subArray = $subArray->getData();
         }
-        $this->data = Set::setSubArray($this->data, $subArray, $args);
+        $result = Create::reshapeData(Set::setSubArray($this->getData(), $subArray, $args));
+        $this->data = $result[0];
+        $this->shape = $result[1];
         $this->flushCache();
 
         return $this;

@@ -25,15 +25,6 @@ class SizeTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests NumArray::getSize on scalar
      */
-    public function testGetSize()
-    {
-        $numArray = NumPHP::ones();
-        $this->assertSame(1, $numArray->getSize());
-    }
-
-    /**
-     * Tests NumArray::getSize on scalar
-     */
     public function testGetSize1()
     {
         $numArray = NumPHP::zeros(1);
