@@ -18,6 +18,8 @@ use Athletic\AthleticEvent;
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  * @link      http://numphp.org/
  * @since     1.1.0
+ *
+ * @SuppressWarnings(PHPMD.CamelCaseMethodName)
  */
 class NumPHP extends AthleticEvent
 {
