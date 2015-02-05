@@ -34,7 +34,7 @@ class NumPHP extends AthleticEvent
     /**
      * @iterations 10
      */
-    public function generate()
+    public function generate_1kx1k()
     {
         \NumPHP\Core\NumPHP::generate(5, 1000, 1000);
     }
@@ -42,7 +42,7 @@ class NumPHP extends AthleticEvent
     /**
      * @iterations 10
      */
-    public function zeros()
+    public function zeros_1kx1k()
     {
         \NumPHP\Core\NumPHP::zeros(1000, 1000);
     }
@@ -50,7 +50,7 @@ class NumPHP extends AthleticEvent
     /**
      * @iterations 10
      */
-    public function zerosLike()
+    public function zerosLike_1kx1k()
     {
         \NumPHP\Core\NumPHP::zerosLike($this->matrix);
     }
@@ -58,7 +58,7 @@ class NumPHP extends AthleticEvent
     /**
      * @iterations 10
      */
-    public function ones()
+    public function ones_1kx1k()
     {
         \NumPHP\Core\NumPHP::ones(1000, 1000);
     }
@@ -66,7 +66,7 @@ class NumPHP extends AthleticEvent
     /**
      * @iterations 10
      */
-    public function onesLike()
+    public function onesLike_1kx1k()
     {
         \NumPHP\Core\NumPHP::onesLike($this->matrix);
     }
@@ -74,7 +74,7 @@ class NumPHP extends AthleticEvent
     /**
      * @iterations 10
      */
-    public function eye()
+    public function eye_1kx1k()
     {
         \NumPHP\Core\NumPHP::eye(1000, 1000);
     }
@@ -82,7 +82,7 @@ class NumPHP extends AthleticEvent
     /**
      * @iterations 10
      */
-    public function identity()
+    public function identity_1kx1k()
     {
         \NumPHP\Core\NumPHP::identity(1000);
     }
@@ -90,7 +90,7 @@ class NumPHP extends AthleticEvent
     /**
      * @iterations 10
      */
-    public function arange()
+    public function arange_1m()
     {
         \NumPHP\Core\NumPHP::arange(0, 1000000);
     }
@@ -98,7 +98,7 @@ class NumPHP extends AthleticEvent
     /**
      * @iterations 10
      */
-    public function linspace()
+    public function linspace_1m()
     {
         \NumPHP\Core\NumPHP::linspace(0, 999999, 1000000);
     }

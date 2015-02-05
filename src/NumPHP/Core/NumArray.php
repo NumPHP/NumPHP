@@ -373,7 +373,7 @@ class NumArray extends Cache
      *
      * @param mixed $factor an other int, float, array or NumArray
      *
-     * @return $this
+     * @return NumArray
      *
      * @api
      * @since 1.0.0
@@ -386,14 +386,14 @@ class NumArray extends Cache
         $result = Dot::dotArray(
             $this->data,
             $this->shape,
-            $factor->getData(),
-            $factor->getShape()
+            $factor->data,
+            $factor->shape
         );
-        $this->data = $result['data'];
-        $this->shape = $result['shape'];
-        $this->flushCache();
+        $newNumArray = new NumArray(0);
+        $newNumArray->data = $result['data'];
+        $newNumArray->shape = $result['shape'];
 
-        return $this;
+        return $newNumArray;
     }
 
     /**

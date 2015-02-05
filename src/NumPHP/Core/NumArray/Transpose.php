@@ -36,8 +36,10 @@ abstract class Transpose
         if (is_array($data)) {
             $keyArray = [];
             self::getTransposeIndexes($shape, $keyArray);
+            $transposedData = array_combine($keyArray, $data);
+            ksort($transposedData);
 
-            return array_combine($keyArray, $data);
+            return $transposedData;
         }
 
         return $data;
