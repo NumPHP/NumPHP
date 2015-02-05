@@ -9,6 +9,7 @@ php:
 sudo: false
 
 install:
+  - php --info
   - composer install --dev --prefer-dist -v
 
 before_script:
