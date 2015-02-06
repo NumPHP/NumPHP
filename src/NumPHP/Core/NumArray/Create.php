@@ -21,23 +21,34 @@ use NumPHP\Core\Exception\InvalidArgumentException;
  */
 abstract class Create
 {
+    /**
+     * @param $data
+     *
+     * @return array
+     *
+     * @throws InvalidArgumentException
+     */
     public static function reshapeData($data)
     {
-        $collectedVectors = [];
+        $collectedEntries = [];
         $shape = [];
-        self::collectVectors($data, $collectedVectors, $shape);
-        $dataVector = $data;
-        if (count($collectedVectors)) {
-            $dataVector = call_user_func_array('array_merge', $collectedVectors);
-            if (count($dataVector) !== array_product($shape)) {
-                throw new InvalidArgumentException("Dimensions did not match");
-            }
+        self::collectEntries($data, $collectedEntries, $shape);
+        if (count($collectedEntries)) {
+            return [$collectedEntries, $shape];
         }
 
-        return [$dataVector, $shape];
+        return [$data, $shape];
     }
 
-    protected static function collectVectors($data, &$collectedVectors, &$shape, $level = 0)
+    /**
+     * @param $data
+     * @param $collectedEntries
+     * @param $shape
+     * @param int $level
+     *
+     * @throws InvalidArgumentException
+     */
+    protected static function collectEntries($data, &$collectedEntries, &$shape, $level = 0)
     {
         if (is_array($data)) {
             $count = count($data);
@@ -47,10 +58,12 @@ abstract class Create
                 $shape[$level] = $count;
             }
             if ($count && !is_array($data[0])) {
-                $collectedVectors[] = $data;
+                foreach ($data as $value) {
+                    $collectedEntries[] = $value;
+                }
             } else {
                 foreach ($data as $entry) {
-                    self::collectVectors($entry, $collectedVectors, $shape, $level + 1);
+                    self::collectEntries($entry, $collectedEntries, $shape, $level + 1);
                 }
             }
         }

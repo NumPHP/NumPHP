@@ -25,11 +25,6 @@ use NumPHP\Core\NumPHP;
 class NumArray extends AthleticEvent
 {
     /**
-     * @var array
-     */
-    protected $data;
-
-    /**
      * @var \NumPHP\Core\NumArray
      */
     protected $matrix1;
@@ -51,11 +46,6 @@ class NumArray extends AthleticEvent
 
     public function classSetUp()
     {
-        $data = [];
-        for ($i = 0; $i < 1000; $i++) {
-            $data[] = range(1, 1000);
-        }
-        $this->data = $data;
         $this->matrix1 = NumPHP::ones(1000, 1000);
         $this->matrix2 = NumPHP::ones(1000, 1000);
         $this->matrix3 = NumPHP::ones(500, 500);
@@ -66,14 +56,6 @@ class NumArray extends AthleticEvent
     {
         $this->matrix1->flushCache();
         $this->matrix2->flushCache();
-    }
-
-    /**
-     * @iterations 10
-     */
-    public function construct_1kx1k()
-    {
-        new \NumPHP\Core\NumArray($this->data);
     }
 
     /**
