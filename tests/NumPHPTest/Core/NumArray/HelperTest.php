@@ -22,10 +22,30 @@ use NumPHP\Core\NumArray\Helper;
 class HelperTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Tests Helper::prepareIndexArgument
+     * Test if InvalidArgumentException will be thrown when Helper::multiply is
+     * called with not numeric values
+     *
+     * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Array contains non numeric values
      */
-    public function testPrepareIndexArgument()
+    public function testMultiplyInvalidArgumentException()
     {
-        $this->markTestIncomplete("This test has not been implemented yet.");
+        Helper::multiply([1, 2, 'k']);
+    }
+
+    /**
+     * Tests Helper::multiply with filled array
+     */
+    public function testMultiply()
+    {
+        $this->assertSame(840, Helper::multiply([5, 7, '24']));
+    }
+
+    /**
+     * Tests Helper::multiply with empty array
+     */
+    public function testMultiplyEmpty()
+    {
+        $this->assertSame(1, Helper::multiply([]));
     }
 }

@@ -46,4 +46,16 @@ class SubTest extends TestCase
         $expectedNumArray = NumPHP::arange(42, 37);
         $this->assertNumArrayEquals($expectedNumArray, $numArray1->sub($numArray2));
     }
+
+    /**
+     * Tests if cache will be flushed after use of NumArray::sub
+     */
+    public function testSubCache()
+    {
+        $numArray = new NumArray(5);
+        $numArray->setCache('key', 7);
+
+        $numArray->sub(3);
+        $this->assertFalse($numArray->inCache('key'));
+    }
 }

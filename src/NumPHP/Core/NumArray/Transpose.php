@@ -33,30 +33,43 @@ abstract class Transpose
      */
     public static function getTranspose($data, array $shape)
     {
-        if (is_array($data)) {
-            $keyArray = [];
-            self::getTransposeIndexes($shape, $keyArray);
-            $transposedData = array_combine($keyArray, $data);
-            ksort($transposedData);
-
-            return $transposedData;
-        }
-
-        return $data;
+        return self::getTransposeRecursive($data, $shape);
     }
 
-    protected static function getTransposeIndexes(array $shape, &$indexes, $sum = 0, $fac = 1)
-    {
-        if (count($shape) == 1) {
-            $axis = array_shift($shape);
-            for ($i = 0; $i < $axis; $i++) {
-                $indexes[] = $sum + $fac * $i;
-            }
-        } else {
-            $axis = array_shift($shape);
-            for ($i = 0; $i < $axis; $i++) {
-                self::getTransposeIndexes($shape, $indexes, $sum + $fac * $i, $fac * $axis);
-            }
+    /**
+     * Creates a transposed value or array recursive
+     *
+     * @param mixed $data         given data
+     * @param array $shape        the current shape
+     * @param array $indexes      given indexes
+     * @param int   $currentIndex current index
+     *
+     * @return mixed
+     *
+     * @since 1.0.0
+     */
+    protected static function getTransposeRecursive(
+        $data,
+        array $shape,
+        array $indexes = array(),
+        $currentIndex = null
+    ) {
+        if (!is_null($currentIndex)) {
+            $indexes[] = $currentIndex;
         }
+        if (count($shape)) {
+            $transpose = [];
+            $axis = array_pop($shape);
+            for ($i = 0; $i < $axis; $i++) {
+                $transpose[] = self::getTransposeRecursive(
+                    $data,
+                    $shape,
+                    $indexes,
+                    $i
+                );
+            }
+            return $transpose;
+        }
+        return Get::getSubArray($data, array_reverse($indexes));
     }
 }

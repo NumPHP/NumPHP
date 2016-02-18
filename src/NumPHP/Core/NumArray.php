@@ -9,13 +9,15 @@ namespace NumPHP\Core;
 
 use NumPHP\Core\Exception\BadMethodCallException;
 use NumPHP\Core\Exception\DivideByZeroException;
-use NumPHP\Core\Exception\InvalidArgumentException;
 use NumPHP\Core\Exception\MissingArgumentException;
-use NumPHP\Core\NumArray\Create;
 use NumPHP\Core\NumArray\Dot;
+use NumPHP\Core\NumArray\Filter;
 use NumPHP\Core\NumArray\Get;
+use NumPHP\Core\NumArray\Helper;
+use NumPHP\Core\NumArray\Map;
 use NumPHP\Core\NumArray\Reduce;
 use NumPHP\Core\NumArray\Set;
+use NumPHP\Core\NumArray\Shape;
 use NumPHP\Core\NumArray\String;
 use NumPHP\Core\NumArray\Transpose;
 
@@ -59,9 +61,8 @@ class NumArray extends Cache
      */
     public function __construct($data)
     {
-        $result = Create::reshapeData($data);
-        $this->data = $result[0];
-        $this->shape = $result[1];
+        $this->data = $data;
+        $this->shape = Shape::getShape($data);
     }
 
     /**
@@ -74,7 +75,7 @@ class NumArray extends Cache
      */
     public function __toString()
     {
-        return "NumArray(".String::toString($this->getData()).")\n";
+        return "NumArray(".String::toString($this->data).")\n";
     }
 
     /**
@@ -100,7 +101,7 @@ class NumArray extends Cache
      */
     public function getSize()
     {
-        return array_product($this->shape);
+        return Helper::multiply($this->getShape());
     }
 
     /**
@@ -117,7 +118,7 @@ class NumArray extends Cache
     {
         $args = func_get_args();
 
-        return new NumArray(Get::getSubArray($this->getData(), $args));
+        return new NumArray(Get::getSubArray($this->data, $args));
     }
 
     /**
@@ -141,9 +142,7 @@ class NumArray extends Cache
         if ($subArray instanceof NumArray) {
             $subArray = $subArray->getData();
         }
-        $result = Create::reshapeData(Set::setSubArray($this->getData(), $subArray, $args));
-        $this->data = $result[0];
-        $this->shape = $result[1];
+        $this->data = Set::setSubArray($this->data, $subArray, $args);
         $this->flushCache();
 
         return $this;
@@ -159,13 +158,7 @@ class NumArray extends Cache
      */
     public function getData()
     {
-        $chunks = $this->data;
-        $shape = $this->shape;
-        array_shift($shape);
-        while ($axis = array_pop($shape)) {
-            $chunks = array_chunk($chunks, $axis);
-        }
-        return $chunks;
+        return $this->data;
     }
 
     /**
@@ -186,19 +179,27 @@ class NumArray extends Cache
      *
      * @param mixed $addend an other int, float, array or NumArray
      *
-     * @return NumArray
+     * @return $this
      *
      * @api
      * @since 1.0.0
      */
     public function add($addend)
     {
-        return $this->map(
+        if ($addend instanceof NumArray) {
+            $addend = $addend->getData();
+        }
+        $this->data = Map::mapArray(
+            $this->data,
             $addend,
-            function ($value1, $value2) {
-                return $value1 + $value2;
+            function ($data1, $data2) {
+                return $data1 + $data2;
             }
         );
+        $this->shape = Shape::getShape($this->data);
+        $this->flushCache();
+
+        return $this;
     }
 
     /**
@@ -206,19 +207,27 @@ class NumArray extends Cache
      *
      * @param mixed $subtrahend an other int, float, array or NumArray
      *
-     * @return NumArray
+     * @return $this
      *
      * @api
      * @since 1.0.0
      */
     public function sub($subtrahend)
     {
-        return $this->map(
+        if ($subtrahend instanceof NumArray) {
+            $subtrahend = $subtrahend->getData();
+        }
+        $this->data = Map::mapArray(
+            $this->data,
             $subtrahend,
             function ($data1, $data2) {
                 return $data1 - $data2;
             }
         );
+        $this->shape = Shape::getShape($this->data);
+        $this->flushCache();
+
+        return $this;
     }
 
     /**
@@ -226,19 +235,27 @@ class NumArray extends Cache
      *
      * @param mixed $factor factor
      *
-     * @return NumArray
+     * @return $this
      *
      * @api
      * @since 1.0.4
      */
     public function mult($factor)
     {
-        return $this->map(
+        if ($factor instanceof NumArray) {
+            $factor = $factor->getData();
+        }
+        $this->data = Map::mapArray(
+            $this->data,
             $factor,
             function ($data1, $data2) {
                 return $data1 * $data2;
             }
         );
+        $this->shape = Shape::getShape($this->data);
+        $this->flushCache();
+
+        return $this;
     }
 
     /**
@@ -246,7 +263,7 @@ class NumArray extends Cache
      *
      * @param mixed $divisor divisor
      *
-     * @return NumArray
+     * @return $this
      *
      * @throws DivideByZeroException will be thrown, when dividing by zero
      *
@@ -255,7 +272,11 @@ class NumArray extends Cache
      */
     public function div($divisor)
     {
-        return $this->map(
+        if ($divisor instanceof NumArray) {
+            $divisor = $divisor->getData();
+        }
+        $this->data = Map::mapArray(
+            $this->data,
             $divisor,
             function ($data1, $data2) {
                 if ($data2) {
@@ -264,6 +285,10 @@ class NumArray extends Cache
                 throw new DivideByZeroException("Dividing by zero is forbidden");
             }
         );
+        $this->shape = Shape::getShape($this->data);
+        $this->flushCache();
+
+        return $this;
     }
 
     /**
@@ -351,23 +376,22 @@ class NumArray extends Cache
     /**
      * Applies `abs` on every value of the NumArray
      *
-     * @return numArray
+     * @return $this
      *
      * @api
      * @since 1.0.0
      */
     public function abs()
     {
-        if (is_array($this->data)) {
-            $absData = array_map('abs', $this->data);
-        } else {
-            $absData = abs($this->data);
-        }
-        $newNumArray = new NumArray(0);
-        $newNumArray->data = $absData;
-        $newNumArray->shape = $this->shape;
+        $this->data = Filter::filterArray(
+            $this->data,
+            function ($data) {
+                return abs($data);
+            }
+        );
+        $this->flushCache();
 
-        return $newNumArray;
+        return $this;
     }
 
     /**
@@ -375,7 +399,7 @@ class NumArray extends Cache
      *
      * @param mixed $factor an other int, float, array or NumArray
      *
-     * @return NumArray
+     * @return $this
      *
      * @api
      * @since 1.0.0
@@ -388,14 +412,14 @@ class NumArray extends Cache
         $result = Dot::dotArray(
             $this->data,
             $this->shape,
-            $factor->data,
-            $factor->shape
+            $factor->getData(),
+            $factor->getShape()
         );
-        $newNumArray = new NumArray(0);
-        $newNumArray->data = $result['data'];
-        $newNumArray->shape = $result['shape'];
+        $this->data = $result['data'];
+        $this->shape = $result['shape'];
+        $this->flushCache();
 
-        return $newNumArray;
+        return $this;
     }
 
     /**
@@ -411,10 +435,9 @@ class NumArray extends Cache
         if ($this->inCache(Transpose::CACHE_KEY_TRANSPOSE)) {
             return $this->getCache(Transpose::CACHE_KEY_TRANSPOSE);
         }
-        $transpose = new NumArray(0);
-        $transpose->data = Transpose::getTranspose($this->data, $this->shape);
-        $transpose->shape = array_reverse($this->shape);
-
+        $transpose = new NumArray(
+            Transpose::getTranspose($this->data, $this->getShape())
+        );
         $this->setCache(Transpose::CACHE_KEY_TRANSPOSE, $transpose);
 
         return $this->getTranspose();
@@ -425,8 +448,7 @@ class NumArray extends Cache
      *
      * @return NumArray
      *
-     * @throws BadMethodCallException   will be thrown, if NumArray is only a scalar
-     * @throws InvalidArgumentException will be thrown, if new shape size differs to old size
+     * @throws BadMethodCallException will be thrown, if NumArray is only a scalar
      *
      * @api
      * @since 1.0.0
@@ -437,102 +459,10 @@ class NumArray extends Cache
             throw new BadMethodCallException('NumArray data is not an array');
         }
         $args = func_get_args();
-        if (array_product($args) !== $this->getSize()) {
-            throw new InvalidArgumentException("Total size of new array must be unchanged");
-        }
-        $newNumArray = new NumArray(0);
-        $newNumArray->data = $this->data;
-        $newNumArray->shape = $args;
+        $this->data = Shape::reshape($this->data, $this->getShape(), $args);
+        $this->shape = $args;
+        $this->flushCache();
 
-        return $newNumArray;
-    }
-
-    /**
-     * @param $array
-     * @param $callback
-     *
-     * @return NumArray
-     *
-     * @throws InvalidArgumentException
-     */
-    public function map($array, $callback)
-    {
-        if (!$array instanceof NumArray) {
-            $array = new NumArray($array);
-        }
-        $newShape = [];
-        if (count($this->shape)) {
-            // first NuMArray is an Array
-            if (!count($array->shape)) {
-                // second NumArray is a scalar
-                $data2 = $array->data;
-                $newData = array_map(
-                    function ($value) use ($callback, $data2) {
-                        return $callback($value, $data2);
-                    },
-                    $this->data
-                );
-                $newShape = $this->shape;
-            } elseif ($this->shape === $array->shape) {
-                // both are array and have the same shape
-                $newData = array_map($callback, $this->data, $array->data);
-                $newShape = $this->shape;
-            } else {
-                $revShape1 = array_reverse($this->shape);
-                $revShape2 = array_reverse($array->shape);
-                if (!count(array_diff_assoc($revShape1, $revShape2))) {
-                    $div = array_product($revShape1);
-                    $chunk = array_chunk($array->data, $div);
-                    $data1 = $this->data;
-                    $chunk = array_map(
-                        function ($value) use ($callback, $data1) {
-                            return array_map($callback, $value, $data1);
-                        },
-                        $chunk
-                    );
-                    $newData = call_user_func_array('array_merge', $chunk);
-                    $newShape = $array->shape;
-                } elseif (!count(array_diff_assoc($revShape2, $revShape1))) {
-                    $div = array_product($revShape2);
-                    $chunk = array_chunk($this->data, $div);
-                    $data2 = $array->data;
-                    $chunk = array_map(
-                        function ($value) use ($callback, $data2) {
-                            return array_map($callback, $value, $data2);
-                        },
-                        $chunk
-                    );
-                    $newData = call_user_func_array('array_merge', $chunk);
-                    $newShape = $this->shape;
-                } else {
-                    throw new InvalidArgumentException(
-                        sprintf(
-                            "Shape (%s) is not align with shape (%s)",
-                            implode(', ', $this->shape),
-                            implode(', ', $array->shape)
-                        )
-                    );
-                }
-            }
-        } elseif (count($array->shape)) {
-            // first NumArray is scalar and second NumArray is an array
-            $data1 = $this->data;
-            $newData = array_map(
-                function ($value) use ($callback, $data1) {
-                    return $callback($data1, $value);
-                },
-                $array->data
-            );
-            $newShape = $array->shape;
-        } else {
-            // both a scalar
-            $newData = $callback($this->data, $array->data);
-        }
-
-        $newNum = new NumArray(0);
-        $newNum->data = $newData;
-        $newNum->shape = $newShape;
-
-        return $newNum;
+        return $this;
     }
 }

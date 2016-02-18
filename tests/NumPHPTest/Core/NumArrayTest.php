@@ -37,26 +37,11 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests NumArray::getData
      */
-    public function testGetDataVector()
+    public function testGetData()
     {
         $array = [1, 2, 3];
         $numArray = new NumArray($array);
-
         $this->assertSame($array, $numArray->getData());
-    }
-
-    /**
-     * Tests NuMArray::getData with a matrix
-     */
-    public function testGetDataMatrix()
-    {
-        $array = [
-            [1, 2, 3],
-            [4, 5, 6]
-        ];
-        $matrix = new NumArray($array);
-
-        $this->assertSame($array, $matrix->getData());
     }
 
     /**

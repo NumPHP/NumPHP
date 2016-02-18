@@ -10,7 +10,7 @@ Develop | [![Build Status](https://img.shields.io/travis/NumPHP/NumPHP/develop.s
 
 ## Release Information
 
-*NumPHP 1.1.0*
+*NumPHP 1.0.5*
 
 ## Requirements
 
@@ -24,7 +24,7 @@ Simply add a dependency on `numphp/numphp` to your project's `composer.json` fil
 
     {
         "require": {
-            "numphp/numphp": "*"
+            "numphp/numphp": "dev-master"
         }
     }
     

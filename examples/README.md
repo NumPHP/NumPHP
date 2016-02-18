@@ -1,12 +1,13 @@
-# NumPHP-examples
+NumPHP-examples
+===============
 
-These are some examples as php scripts. Run for example
+These are some examples as Symfony Commands. Run the example command
 
 ```
- php NumPHPExamples/LinAlg/ludecomposition.php
+ php numphp-examples
 ```
-## LinAlg
 
-* [LU Decomposition](NumPHPExamples/LinAlg/ludecomposition.php)
-* [Inverse](NumPHPExamples/LinAlg/inverse.php)
-* [Cholesky](NumPHPExamples/LinAlg/cholesky.php)
+* [Gaussian Elimination](NumPHPExamples/GaussianElimination.php)
+* [LU Decomposition](NumPHPExamples/LUDecomposition.php)
+* [Inverse](NumPHPExamples/Inverse.php)
+* [Cholesky](NumPHPExamples/Cholesky.php)

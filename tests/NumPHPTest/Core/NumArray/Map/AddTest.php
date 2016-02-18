@@ -77,13 +77,13 @@ class AddTest extends TestCase
     public function testAddVectorMatrix()
     {
         $numArray1 = NumPHP::arange(1, 12)->reshape(3, 4);
-        $numArray2 = NumPHP::arange(1, 4);
+        $numArray2 = NumPHP::arange(1, 3);
 
         $expectedNumArray = new NumArray(
             [
-                [ 2,  4,  6,  8],
-                [ 6,  8, 10, 12],
-                [10, 12, 14, 16],
+                [2, 3, 4, 5],
+                [7, 8, 9, 10],
+                [12, 13, 14, 15],
             ]
         );
         $this->assertNumArrayEquals($expectedNumArray, $numArray1->add($numArray2));
@@ -117,7 +117,7 @@ class AddTest extends TestCase
      * Tests if InvalidArgumentException will be thrown, when using NumArray::add with vectors of different size
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Shape (5) is not align with shape (4)
+     * @expectedExceptionMessage Size 5 is different from size 4
      */
     public function testAddDifferentShape()
     {
@@ -125,5 +125,17 @@ class AddTest extends TestCase
         $numArray2 = NumPHP::arange(1, 4);
 
         $numArray1->add($numArray2);
+    }
+
+    /**
+     * Tests if cache will be flushed after use of NumArray::add
+     */
+    public function testAddCache()
+    {
+        $numArray = new NumArray(5);
+        $numArray->setCache('key', 6);
+
+        $numArray->add(4);
+        $this->assertFalse($numArray->inCache('key'));
     }
 }

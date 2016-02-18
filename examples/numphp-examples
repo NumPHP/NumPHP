@@ -1,0 +1,44 @@
+#!/usr/bin/env php
+<?php
+/**
+ * NumPHP (http://numphp.org/)
+ *
+ * @link http://github.com/GordonLesti/NumPHP for the canonical source repository
+ * @copyright Copyright (c) 2014 Gordon Lesti (http://gordonlesti.com/)
+ * @license http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+$possibleComposerAutoloads = [
+    __DIR__ . '/../../autoload.php',
+    __DIR__ . '/../vendor/autoload.php',
+    __DIR__ . '/vendor/autoload.php'
+];
+
+$composerAutoLoad = null;
+
+foreach ($possibleComposerAutoloads as $file) {
+    if (file_exists($file)) {
+        $composerAutoLoad = $file;
+        break;
+    }
+}
+
+if (is_null($composerAutoLoad)) {
+    fwrite(STDERR,
+        'You need to set up the project dependencies using the following commands:' . PHP_EOL .
+        'wget http://getcomposer.org/composer.phar' . PHP_EOL .
+        'php composer.phar install' . PHP_EOL
+    );
+    die(1);
+}
+
+require $composerAutoLoad;
+
+$application = new \Symfony\Component\Console\Application();
+$application->add(new \NumPHPExamples\GaussianElimination());
+$application->add(new \NumPHPExamples\LUDecomposition());
+$application->add(new \NumPHPExamples\Inverse());
+$application->add(new \NumPHPExamples\Cholesky());
+$application->add(new \NumPHPExamples\Benchmark());
+
+$application->run();

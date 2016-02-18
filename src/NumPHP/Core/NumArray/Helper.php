@@ -22,6 +22,33 @@ use NumPHP\Core\Exception\InvalidArgumentException;
 abstract class Helper
 {
     /**
+     * Multiplies all entries of an array
+     *
+     * @param array $array given array of floats or integers
+     *
+     * @return float
+     *
+     * @throws InvalidArgumentException will be thrown, if a value in the array is not numeric
+     *
+     * @since 1.0.0
+     */
+    public static function multiply(array $array)
+    {
+        return array_reduce(
+            $array,
+            function ($prod, $item) {
+                if (!is_numeric($item)) {
+                    throw new InvalidArgumentException(
+                        'Array contains non numeric values'
+                    );
+                }
+                return $prod * $item;
+            },
+            1
+        );
+    }
+
+    /**
      * Prepares the argument of an index. If `$index` is an integer it will returned and if `$index` is a string like
      * `1:5`, `:8` or `-4:` it will return an array with the keys `from` and `to`
      *

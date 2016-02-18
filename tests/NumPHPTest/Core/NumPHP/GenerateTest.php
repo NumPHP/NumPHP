@@ -24,63 +24,109 @@ use NumPHPTest\Core\Framework\TestCase;
 class GenerateTest extends TestCase
 {
     /**
-     * @expectedException        \NumPHP\Core\Exception\MissingArgumentException
-     * @expectedExceptionMessage Required Argument 'axis' not found
+     * Tests NumPHP::ones without arguments
      */
-    public function testGenerateMissingArgument()
+    public function testOnes()
     {
-        NumPHP::generate(5);
+        $this->assertNumArrayEquals(new NumArray(1), NumPHP::ones());
     }
 
     /**
-     * Tests NumArray::generate
+     * Tests NumPHP::rand
      */
-    public function testGenerate3x4()
+    public function testRand3()
     {
-        $expectedNumArray = new NumArray(array_fill(0, 3, array_fill(0, 4, 5)));
-
-        $this->assertNumArrayEquals($expectedNumArray, NumPHP::generate(5, 3, 4));
+        $rand = NumPHP::rand(3);
+        $this->assertInstanceOf('\NumPHP\Core\NumArray', $rand);
+        $this->assertSame([3], $rand->getShape());
+        $randData = $rand->getData();
+        $this->assertCount(3, $randData);
+        foreach ($randData as $entry) {
+            $this->assertInternalType('float', $entry);
+        }
     }
 
     /**
-     * Tests NumArray::ones
+     * Tests NumPHP::ones with arguments 3, 2
      */
-    public function testZeros()
+    public function testOnes3x2()
     {
-        $expectedNumArray = new NumArray(array_fill(0, 2, array_fill(0, 4, 0)));
-
-        $this->assertNumArrayEquals($expectedNumArray, NumPHP::zeros(2, 4));
+        $expectedNumArray = new NumArray(
+            [
+                [1, 1],
+                [1, 1],
+                [1, 1],
+            ]
+        );
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::ones(3, 2));
     }
 
     /**
-     * Tests NumArray::zerosLike
+     * Tests NumPHP::zeros with arguments 2, 3, 5
+     */
+    public function testZeros2x3x5()
+    {
+        $expectedNumArray = new NumArray(
+            [
+                [
+                    [0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0],
+                ],
+                [
+                    [0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0],
+                ],
+            ]
+        );
+        $this->assertNumArrayEquals($expectedNumArray, NumPHP::zeros(2, 3, 5));
+    }
+
+    /**
+     * Tests NumPHP::zerosLike with 2x3 matrix
      */
     public function testZerosLike()
     {
-        $numArray = NumPHP::arange(1, 6)->reshape(2, 3);
-
-        $expectedNumArray = new NumArray(array_fill(0, 2, array_fill(0, 3, 0)));
+        $numArray = new NumArray(
+            [
+                [1, 2, 3],
+                [4, 5, 6],
+            ]
+        );
+        $expectedNumArray = NumPHP::zeros(2, 3);
         $this->assertNumArrayEquals($expectedNumArray, NumPHP::zerosLike($numArray));
     }
 
     /**
-     * Tests NumArray::ones
-     */
-    public function testOnes()
-    {
-        $expectedNumArray = new NumArray(array_fill(0, 2, array_fill(0, 4, 1)));
-
-        $this->assertNumArrayEquals($expectedNumArray, NumPHP::ones(2, 4));
-    }
-
-    /**
-     * Tests NumArray::onesLike
+     * Tests NumPHP::onesLike with 3x2 matrix
      */
     public function testOnesLike()
     {
-        $numArray = NumPHP::arange(1, 6)->reshape(2, 3);
-
-        $expectedNumArray = new NumArray(array_fill(0, 2, array_fill(0, 3, 1)));
+        $numArray = new NumArray(
+            [
+                [1, 1],
+                [1, 1],
+                [1, 1],
+            ]
+        );
+        $expectedNumArray = NumPHP::ones(3, 2);
         $this->assertNumArrayEquals($expectedNumArray, NumPHP::onesLike($numArray));
+    }
+
+    /**
+     * Tests NumPHP::randLike with vector
+     */
+    public function testRandLike()
+    {
+        $numArray = new NumArray([1, 2, 3]);
+        $rand = NumPHP::randLike($numArray);
+        $this->assertInstanceOf('\NumPHP\Core\NumArray', $rand);
+        $this->assertSame([3], $rand->getShape());
+        $randData = $rand->getData();
+        $this->assertCount(3, $randData);
+        foreach ($randData as $entry) {
+            $this->assertInternalType('float', $entry);
+        }
     }
 }

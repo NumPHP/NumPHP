@@ -86,6 +86,18 @@ class DotTest extends TestCase
     }
 
     /**
+     * Tests NumArray::dot with empty vectors
+     */
+    public function testDotEmptyVectorVector()
+    {
+        $vector1 = NumPHP::zeros(0);
+        $vector2 = NumPHP::zeros(0);
+
+        $expectedNumArray = new NumArray(0);
+        $this->assertNumArrayEquals($expectedNumArray, $vector1->dot($vector2));
+    }
+
+    /**
      * Tests if InvalidArgumentException will be thrown, when using NumArray::dot
      * with two vectors of different size
      *
@@ -132,10 +144,10 @@ class DotTest extends TestCase
     public function testDotVectorMatrix()
     {
         $numArray1 = NumPHP::arange(1, 3);
-        $numArray2 = NumPHP::arange(2, 7)->reshape(3, 2);
+        $numArray2 = NumPHP::arange(2, 4)->reshape(3, 1);
 
         $expectedNumArray = new NumArray(
-            [28, 34]
+            [20]
         );
         $this->assertNumArrayEquals($expectedNumArray, $numArray1->dot($numArray2));
     }
@@ -184,6 +196,18 @@ class DotTest extends TestCase
     }
 
     /**
+     * Tests NumArray::dot with 2x3x4 matrix and vector
+     */
+    public function testDot3dMatrixVector()
+    {
+        $numArray1 = NumPHP::arange(1, 24)->reshape(2, 3, 4);
+        $numArray2 = NumPHP::arange(1, 4);
+
+        $expectedNumArray = NumPHP::arange(30, 230, 40)->reshape(2, 3);
+        $this->assertNumArrayEquals($expectedNumArray, $numArray1->dot($numArray2));
+    }
+
+    /**
      * Tests NumArray::dot with two matrices
      */
     public function testDotMatrixMatrix()
@@ -214,5 +238,17 @@ class DotTest extends TestCase
         $numArray2 = NumPHP::arange(1, 9)->reshape(3, 3);
 
         $numArray1->dot($numArray2);
+    }
+
+    /**
+     * Tests if cache will be flushed after using NumArray::dot
+     */
+    public function testDotCache()
+    {
+        $numArray = new NumArray(5);
+        $numArray->setCache('key', 7);
+
+        $numArray->dot(5);
+        $this->assertFalse($numArray->inCache('key'));
     }
 }

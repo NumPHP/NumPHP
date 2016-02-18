@@ -143,7 +143,9 @@ abstract class LUDecomposition
     protected static function buildLMatrix(NumArray $numArray)
     {
         $shape = $numArray->getShape();
-        return $numArray->add(NumPHP::eye($shape[0], $shape[1]));
+        $numArray->add(NumPHP::eye($shape[0], $shape[1]));
+
+        return $numArray;
     }
 
     /**

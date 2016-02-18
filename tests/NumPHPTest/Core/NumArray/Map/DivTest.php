@@ -85,13 +85,13 @@ class DivTest extends TestCase
     public function testDivVectorMatrix()
     {
         $numArray1 = NumPHP::arange(1, 12)->reshape(3, 4);
-        $numArray2 = NumPHP::arange(1, 4);
+        $numArray2 = NumPHP::arange(1, 3);
 
         $expectedNumArray = new NumArray(
             [
-                [1/1,  2/2,  3/3,  4/4],
-                [5/1,  6/2,  7/3,  8/4],
-                [9/1, 10/2, 11/3, 12/4],
+                [1/1,  2/1,  3/1,  4/1],
+                [5/2,  6/2,  7/2,  8/2],
+                [9/3, 10/3, 11/3, 12/3],
             ]
         );
         $this->assertNumArrayEquals($expectedNumArray, $numArray1->div($numArray2));
@@ -133,7 +133,7 @@ class DivTest extends TestCase
      * Tests if InvalidArgumentException will be thrown, when using NumArray::div with vectors of different size
      *
      * @expectedException        \NumPHP\Core\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Shape (5) is not align with shape (4)
+     * @expectedExceptionMessage Size 5 is different from size 4
      */
     public function testDivDifferentShape()
     {
@@ -155,5 +155,17 @@ class DivTest extends TestCase
         $numArray2 = NumPHP::arange(-2, 2);
 
         $numArray1->div($numArray2);
+    }
+
+    /**
+     * Tests if cache will be flushed after use of NumArray::div
+     */
+    public function testDivCache()
+    {
+        $numArray = new NumArray(5);
+        $numArray->setCache('key', 6);
+
+        $numArray->div(4);
+        $this->assertFalse($numArray->inCache('key'));
     }
 }

@@ -8,7 +8,7 @@
 namespace NumPHP\Core;
 
 use NumPHP\Core\Exception\InvalidArgumentException;
-use NumPHP\Core\Exception\MissingArgumentException;
+use NumPHP\Core\NumPHP\Generate;
 
 /**
  * Class NumPHP
@@ -23,34 +23,7 @@ use NumPHP\Core\Exception\MissingArgumentException;
  */
 abstract class NumPHP
 {
-    const VERSION = '1.1.0';
-
-    /**
-     * Generates a NumArray filled with `$value`
-     *
-     * @param mixed $value    value
-     * @param int   $axis,... axis
-     *
-     * @return NumArray
-     *
-     * @throws MissingArgumentException
-     *
-     * @api
-     * @since 1.0.1
-     */
-    public static function generate($value)
-    {
-        $shape = func_get_args();
-        array_shift($shape);
-        if (!count($shape)) {
-            throw new MissingArgumentException("Required Argument 'axis' not found");
-        }
-        $size = array_product($shape);
-        $data = array_fill(0, $size, $value);
-        $newNumArray = new NumArray($data);
-
-        return call_user_func_array([$newNumArray, 'reshape'], $shape);
-    }
+    const VERSION = '1.0.5';
 
     /**
      * Returns a NumArray filled with `0`
@@ -65,8 +38,7 @@ abstract class NumPHP
     public static function zeros()
     {
         $args = func_get_args();
-        array_unshift($args, 0);
-        return call_user_func_array('self::generate', $args);
+        return new NumArray(Generate::generateArray($args, 0));
     }
 
     /**
@@ -81,7 +53,7 @@ abstract class NumPHP
      */
     public static function zerosLike(NumArray $numArray)
     {
-        return call_user_func_array('self::zeros', $numArray->getShape());
+        return new NumArray(Generate::generateArray($numArray->getShape(), 0));
     }
 
     /**
@@ -97,8 +69,7 @@ abstract class NumPHP
     public static function ones()
     {
         $args = func_get_args();
-        array_unshift($args, 1);
-        return call_user_func_array('self::generate', $args);
+        return new NumArray(Generate::generateArray($args, 1));
     }
 
     /**
@@ -113,7 +84,38 @@ abstract class NumPHP
      */
     public static function onesLike(NumArray $numArray)
     {
-        return call_user_func_array('self::ones', $numArray->getShape());
+        return new NumArray(Generate::generateArray($numArray->getShape(), 1));
+    }
+
+    /**
+     * Returns a NumArray filled with random values
+     *
+     * @param int $axis,... given axis
+     *
+     * @return NumArray
+     *
+     * @api
+     * @since 1.0.0
+     */
+    public static function rand()
+    {
+        $args = func_get_args();
+        return new NumArray(Generate::generateArray($args));
+    }
+
+    /**
+     * Returns a NumArray with the same size, but filled with random values
+     *
+     * @param NumArray $numArray given NumArray
+     *
+     * @return NumArray
+     *
+     * @api
+     * @since 1.0.0
+     */
+    public static function randLike(NumArray $numArray)
+    {
+        return new NumArray(Generate::generateArray($numArray->getShape()));
     }
 
     /**
@@ -134,16 +136,13 @@ abstract class NumPHP
         if ($nAxis < 0) {
             $nAxis = $mAxis;
         }
-        $size = $mAxis * $nAxis;
-        $data = array_fill(0, $size, 0);
-        $onesPosition = 0;
-        for ($i = 0; $i < min($mAxis, $nAxis); $i++) {
-            $data[$onesPosition] = 1;
-            $onesPosition += $nAxis + 1;
+        $eye = self::zeros($mAxis, $nAxis);
+        $min = min($mAxis, $nAxis);
+        for ($i = 0; $i < $min; $i++) {
+            $eye->set($i, $i, 1);
         }
-        $newNumArray = new NumArray($data);
 
-        return $newNumArray->reshape($mAxis, $nAxis);
+        return $eye;
     }
 
     /**
