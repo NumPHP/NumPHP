@@ -32,7 +32,7 @@ use NumPHP\Core\NumArray\Transpose;
  * @api
  * @since     1.0.0
  *
- * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class NumArray extends Cache

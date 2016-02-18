@@ -21,8 +21,8 @@ use NumPHPTest\Core\Framework\TestCase;
  * @link      http://numphp.org/
  * @since     1.0.0
  *
- * @SuppressWarnings(PHPMD.TooManyMethods)
-  */
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class SumTest extends TestCase
 {
     /**
