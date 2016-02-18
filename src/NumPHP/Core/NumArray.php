@@ -18,7 +18,7 @@ use NumPHP\Core\NumArray\Map;
 use NumPHP\Core\NumArray\Reduce;
 use NumPHP\Core\NumArray\Set;
 use NumPHP\Core\NumArray\Shape;
-use NumPHP\Core\NumArray\String;
+use NumPHP\Core\NumArray\StringHelper;
 use NumPHP\Core\NumArray\Transpose;
 
 /**
@@ -75,7 +75,7 @@ class NumArray extends Cache
      */
     public function __toString()
     {
-        return "NumArray(".String::toString($this->data).")\n";
+        return "NumArray(".StringHelper::toString($this->data).")\n";
     }
 
     /**

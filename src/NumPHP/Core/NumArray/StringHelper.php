@@ -8,7 +8,7 @@
 namespace NumPHP\Core\NumArray;
 
 /**
- * Class String
+ * Class StringHelper
  *
  * @package   NumPHP\Core\NumArray
  * @author    Gordon Lesti <info@gordonlesti.com>
@@ -17,7 +17,7 @@ namespace NumPHP\Core\NumArray;
  * @link      http://numphp.org/
  * @since     1.0.0
  */
-abstract class String
+abstract class StringHelper
 {
     /**
      * Returns a string representing an array
