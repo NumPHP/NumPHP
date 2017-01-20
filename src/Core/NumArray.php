@@ -11,6 +11,8 @@ class NumArray
 
     private $size;
 
+    private $nDim;
+
     public function __construct(array $data)
     {
         $this->data = $data;
@@ -47,5 +49,13 @@ class NumArray
             );
         }
         return $this->size;
+    }
+
+    public function getNDim(): int
+    {
+        if (is_null($this->nDim)) {
+            $this->nDim = count($this->getShape());
+        }
+        return $this->nDim;
     }
 }
