@@ -9,9 +9,24 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
 {
     public function testData()
     {
-        $data = [1, 2, 3, 4];
-        $numArray = new NumArray($data);
+        $numArray = new NumArray([2, 0, 5, 6]);
+        $this->assertSame([2, 0, 5, 6], $numArray->getData());
+    }
 
-        $this->assertSame($data, $numArray->getData());
+    public function testGetShape4()
+    {
+        $numArray = new NumArray([7, 4, 3, 4]);
+        $this->assertSame([4], $numArray->getShape());
+    }
+
+    public function testGetShape2x3()
+    {
+        $numArray = new NumArray(
+            [
+                [5, 4, 0],
+                [2, 3, 7],
+            ]
+        );
+        $this->assertSame([2, 3], $numArray->getShape());
     }
 }

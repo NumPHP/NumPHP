@@ -7,4 +7,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ## NEXT - 2017-01-20
 
 ### Added
-- `NumPHP\Core\NumArray::getData`
+- Add class `NumPHP\Core\NumArray`
+- Add function `NumPHP\Core\NumArray::getData`
+- Add function `NumPHP\Core\NumArray::getShape`
