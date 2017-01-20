@@ -1,41 +1,61 @@
 # NumPHP
 
-NumPHP is a mathematical PHP library for scientific computing. The main object is the `NumArray`, it can represent a scalar, a vector
-or a matrix. Advanced matrix arithmetic for PHP. More information under [numphp.org](http://numphp.org/)
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![Build Status][ico-travis]][link-travis]
+[![Coverage Status][ico-coveralls]][link-coveralls]
+[![Total Downloads][ico-downloads]][link-downloads]
 
-Branch | Build Status | Coverage
---- | --- | ---
-Master | [![Build Status](https://img.shields.io/travis/NumPHP/NumPHP/master.svg?style=flat-square)](https://travis-ci.org/NumPHP/NumPHP) | [![Coverage Status](https://img.shields.io/coveralls/NumPHP/NumPHP/master.svg?style=flat-square)](https://coveralls.io/r/NumPHP/NumPHP?branch=master)
-Develop | [![Build Status](https://img.shields.io/travis/NumPHP/NumPHP/develop.svg?style=flat-square)](https://travis-ci.org/NumPHP/NumPHP) | [![Coverage Status](https://img.shields.io/coveralls/NumPHP/NumPHP/develop.svg?style=flat-square)](https://coveralls.io/r/NumPHP/NumPHP?branch=develop)
+**Note:** The development of NumPHP 2 has started completely from scratch. NumPHP 1.1 can be found at branch
+[1.1](https://github.com/NumPHP/NumPHP/tree/1.1).
 
-## Release Information
+NumPHP is a mathematical PHP library for scientific computing. Advanced matrix arithmetic for PHP. More information
+under [numphp.org](https://numphp.org/).
 
-*NumPHP 1.1.0*
+## Install
 
-## Requirements
+Via Composer
 
-- PHP 5.4 or higher
+``` bash
+$ composer require numphp/numphp
+```
 
-## Installation
+## Change log
 
-### Composer
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-Simply add a dependency on `numphp/numphp` to your project's `composer.json` file if you use [Composer](http://getcomposer.org/) to manage the dependencies of your project.
+## Testing
 
-    {
-        "require": {
-            "numphp/numphp": "dev-master"
-        }
-    }
+``` bash
+$ composer test
+```
 
-### Manual
+## Contributing
 
-Download the latest [package](https://github.com/NumPHP/NumPHP/releases) manually. Extract it and include the file `vendor/autoload.php` in your project.
+Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
 
-## Documentation
+## Security
 
-The [documentation](https://github.com/NumPHP/NumPHP-docs) is rendered at [numphp.readthedocs.org](http://numphp.readthedocs.org)
+If you discover any security related issues, please email info@numphp.org instead of using the issue tracker.
 
-## Examples
+## Credits
 
-Some [examples](examples/) as Symfony Commands.
+- [Gordon Lesti][link-author]
+- [All Contributors][link-contributors]
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+[ico-version]: https://img.shields.io/packagist/v/NumPHP/NumPHP.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/NumPHP/NumPHP/master.svg?style=flat-square
+[ico-coveralls]: https://img.shields.io/coveralls/NumPHP/NumPHP/master.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/NumPHP/NumPHP.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/NumPHP/NumPHP
+[link-travis]: https://travis-ci.org/NumPHP/NumPHP
+[link-coveralls]: https://coveralls.io/r/NumPHP/NumPHP?branch=master
+[link-downloads]: https://packagist.org/packages/NumPHP/NumPHP
+[link-author]: https://gordonlesti.com
+[link-contributors]: ../../contributors
