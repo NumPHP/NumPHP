@@ -1,0 +1,20 @@
+language: php
+
+php:
+    - '7.0'
+    - '7.1'
+
+install:
+    - composer install
+
+before_script:
+    - mkdir -p build/logs
+
+script:
+    - composer phpcs
+    - composer phpmd
+    - composer phpcpd
+    - composer test
+
+after_script:
+    - php vendor/bin/coveralls -v
