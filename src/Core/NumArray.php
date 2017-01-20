@@ -9,6 +9,8 @@ class NumArray
 
     private $shape;
 
+    private $size;
+
     public function __construct(array $data)
     {
         $this->data = $data;
@@ -31,5 +33,19 @@ class NumArray
             $this->shape = $shape;
         }
         return $this->shape;
+    }
+
+    public function getSize(): int
+    {
+        if (is_null($this->size)) {
+            $this->size = array_reduce(
+                $this->getShape(),
+                function($carry, $item) {
+                    return $carry * $item;
+                },
+                1
+            );
+        }
+        return $this->size;
     }
 }

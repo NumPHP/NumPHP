@@ -29,4 +29,21 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertSame([2, 3], $numArray->getShape());
     }
+
+    public function testGetSize4()
+    {
+        $numArray = new NumArray([6, 9, 3, 4]);
+        $this->assertSame(4, $numArray->getSize());
+    }
+
+    public function testGetSize2x3()
+    {
+        $numArray = new NumArray(
+            [
+                [6, 0, 2],
+                [2, 3, 9]
+            ]
+        );
+        $this->assertSame(6, $numArray->getSize());
+    }
 }
