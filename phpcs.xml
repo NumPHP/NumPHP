@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<ruleset name="Levenshtein">
+    <description>The coding standard for NumPHP.</description>
+    <file>src/</file>
+    <file>tests/</file>
+    <arg name="extensions" value="php"/>
+    <rule ref="PSR2"/>
+</ruleset>

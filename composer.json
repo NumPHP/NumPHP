@@ -1,0 +1,38 @@
+{
+    "name": "numphp/numphp",
+    "description": "Mathematical PHP library for scientific computing",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gordon Lesti",
+            "email": "info@gordonlesti.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "NumPHP\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NumPHPTest\\": "tests"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7",
+        "squizlabs/php_codesniffer": "^2.7",
+        "phpmd/phpmd": "^2.6",
+        "sebastian/phpcpd": "^2.0",
+        "satooshi/php-coveralls": "^1.0"
+    },
+    "scripts": {
+        "test": "php vendor/bin/phpunit",
+        "phpcs": "php vendor/bin/phpcs",
+        "phpmd": "php vendor/bin/phpmd src/,tests/ text cleancode,codesize,controversial,design,naming,unusedcode",
+        "phpcpd": "php vendor/bin/phpcpd src/ tests/"
+    }
+}
