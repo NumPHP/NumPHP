@@ -42,7 +42,7 @@ class NumArray
         if (is_null($this->size)) {
             $this->size = array_reduce(
                 $this->getShape(),
-                function($carry, $item) {
+                function ($carry, $item) {
                     return $carry * $item;
                 },
                 1
