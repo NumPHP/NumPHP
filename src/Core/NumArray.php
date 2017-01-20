@@ -14,6 +14,11 @@ class NumArray
         $this->data = $data;
     }
 
+    public function getData(): array
+    {
+        return $this->data;
+    }
+
     public function getShape(): array
     {
         if (is_null($this->shape)) {
@@ -26,10 +31,5 @@ class NumArray
             $this->shape = $shape;
         }
         return $this->shape;
-    }
-
-    public function getData(): array
-    {
-        return $this->data;
     }
 }
