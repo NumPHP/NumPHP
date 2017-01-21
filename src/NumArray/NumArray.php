@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NumPHP\Core;
+namespace NumPHP\NumArray;
 
 class NumArray
 {

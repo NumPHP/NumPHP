@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace NumPHPTest\Core;
+namespace NumPHPTest\NumArray;
 
-use NumPHP\Core\NumArray;
+use NumPHP\NumArray\NumArray;
 
 class NumArrayTest extends \PHPUnit_Framework_TestCase
 {
