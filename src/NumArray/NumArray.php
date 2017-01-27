@@ -3,19 +3,23 @@ declare(strict_types=1);
 
 namespace NumPHP\NumArray;
 
+use NumPHP\NumArray\String\FormatterInterface;
+
 class NumArray
 {
     private $data;
 
-    private $shape;
+    private $stringFormatter;
 
-    private $size;
-
-    private $nDim;
-
-    public function __construct(array $data)
+    public function __construct(array $data, FormatterInterface $stringFormatter)
     {
         $this->data = $data;
+        $this->stringFormatter = $stringFormatter;
+    }
+
+    public function __toString(): string
+    {
+        return $this->stringFormatter->numArrayToString($this);
     }
 
     public function getData(): array
@@ -25,37 +29,28 @@ class NumArray
 
     public function getShape(): array
     {
-        if (is_null($this->shape)) {
-            $shape = [];
-            $currentDataDim = $this->data;
-            while (is_array($currentDataDim)) {
-                $shape[] = count($currentDataDim);
-                $currentDataDim = $currentDataDim[0];
-            }
-            $this->shape = $shape;
+        $shape = [];
+        $currentDataDim = $this->data;
+        while (is_array($currentDataDim)) {
+            $shape[] = count($currentDataDim);
+            $currentDataDim = $currentDataDim[0];
         }
-        return $this->shape;
+        return $shape;
     }
 
     public function getSize(): int
     {
-        if (is_null($this->size)) {
-            $this->size = array_reduce(
-                $this->getShape(),
-                function ($carry, $item) {
-                    return $carry * $item;
-                },
-                1
-            );
-        }
-        return $this->size;
+        return array_reduce(
+            $this->getShape(),
+            function ($carry, $item) {
+                return $carry * $item;
+            },
+            1
+        );
     }
 
     public function getNDim(): int
     {
-        if (is_null($this->nDim)) {
-            $this->nDim = count($this->getShape());
-        }
-        return $this->nDim;
+        return count($this->getShape());
     }
 }
