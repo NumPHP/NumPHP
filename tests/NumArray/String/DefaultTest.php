@@ -32,11 +32,11 @@ class DefaultTest extends \PHPUnit_Framework_TestCase
     public function testNumArrayToString2x3()
     {
         $numArray = $this->factory->createFromData(
-                 [
-                     [3, 4, 2],
-                     [9, 7, 0]
-                 ]
-             );
+            [
+                [3, 4, 2],
+                [9, 7, 0]
+            ]
+        );
         $this->assertSame("[\n  [3,4,2],\n  [9,7,0]\n]", $this->stringFormater->numArrayToString($numArray));
     }
 }

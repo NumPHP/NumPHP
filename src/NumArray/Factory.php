@@ -7,7 +7,7 @@ use NumPHP\NumArray\String\DefaultFormatter;
 
 class Factory
 {
-    private $formatter;
+    private $stringFormatter;
 
     public function __construct()
     {

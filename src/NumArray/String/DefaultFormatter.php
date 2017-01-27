@@ -39,7 +39,7 @@ class DefaultFormatter implements FormatterInterface
     {
         if (isset($data[0]) && is_array($data[0])) {
             $nextLevel = $level + 1;
-            $result = array_map(function($entry) use ($nextLevel) {
+            $result = array_map(function ($entry) use ($nextLevel) {
                 return $this->recursiveArrayToString($entry, $nextLevel);
             }, $data);
             $multiIndent = str_repeat($this->indent, $level);
