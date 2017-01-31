@@ -10,4 +10,8 @@ interface FactoryInterface
     public function createZeros(int ...$axis): NumArrayInterface;
 
     public function createZerosLike(NumArrayInterface $numArray): NumArrayInterface;
+
+    public function createOnes(int ...$axis): NumArrayInterface;
+
+    public function createOnesLike(NumArrayInterface $numArray): NumArrayInterface;
 }

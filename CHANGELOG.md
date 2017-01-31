@@ -16,10 +16,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
  - Add function `createFromData`
  - Add function `createZeros`
  - Add function `createZerosLike`
+ - Add function `createOnes`
+ - Add function `createOnesLike`
 - Add interface `NumPHP\NumArray\FactoryInterface`
  - Add function `createFromData`
  - Add function `createZeros`
  - Add function `createZerosLike`
+ - Add function `createOnes`
+ - Add function `createOnesLike`
 - Add class `NumPHP\NumArray\NumArray`
  - Add function `__toString`
  - Add function `getData`

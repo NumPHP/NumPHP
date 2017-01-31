@@ -33,6 +33,19 @@ class Factory implements FactoryInterface
         return call_user_func_array([$this, 'createZeros'], $numArray->getShape());
     }
 
+    public function createOnes(int ...$axis): NumArrayInterface
+    {
+        if (count($axis) === 0) {
+            throw new MissingArgumentException('Required argument $axis not found');
+        }
+        return new NumArray($this->fillRecursiveArray($axis, 1), $this->stringFormatter);
+    }
+
+    public function createOnesLike(NumArrayInterface $numArray): NumArrayInterface
+    {
+        return call_user_func_array([$this, 'createOnes'], $numArray->getShape());
+    }
+
     private function fillRecursiveArray(array $shape, $value): array
     {
         if (count($shape) === 1) {

@@ -47,4 +47,30 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             $this->factory->createZerosLike($this->factory->createZeros(2, 3))->getData()
         );
     }
+
+    public function testCreateOnesEmpty()
+    {
+        $this->expectException(MissingArgumentException::class);
+        $this->expectExceptionMessage('Required argument $axis not found');
+        $this->assertSame([], $this->factory->createOnes()->getData());
+    }
+
+    public function testCreateOnes2x3()
+    {
+        $this->assertSame(
+            [
+                [1, 1, 1],
+                [1, 1, 1]
+            ],
+            $this->factory->createOnes(2, 3)->getData()
+        );
+    }
+
+    public function testCreateOnesLike3x2()
+    {
+        $this->assertSame(
+            $this->factory->createZeros(3, 2)->getData(),
+            $this->factory->createZerosLike($this->factory->createOnes(3, 2))->getData()
+        );
+    }
 }
