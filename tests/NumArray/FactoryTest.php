@@ -69,8 +69,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateOnesLike3x2()
     {
         $this->assertSame(
-            $this->factory->createZeros(3, 2)->getData(),
-            $this->factory->createZerosLike($this->factory->createOnes(3, 2))->getData()
+            $this->factory->createOnes(3, 2)->getData(),
+            $this->factory->createOnesLike($this->factory->createZeros(3, 2))->getData()
         );
     }
 }
