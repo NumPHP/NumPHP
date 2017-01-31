@@ -7,7 +7,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ## NEXT - 2017-01-31
 
 ### Added
-- Add class `NumPHP\Exception\IllegalArgumentException`
 - Add class `NumPHP\Exception\MissingArgumentException`
 - Add class `NumPHP\NumArray\String\DefaultFormatter`
  - Add function `numArrayToString`

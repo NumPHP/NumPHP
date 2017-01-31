@@ -30,10 +30,7 @@ class Factory implements FactoryInterface
 
     private function fillRecursiveArray(array $shape, $value): array
     {
-        $count = count($shape);
-        if ($count === 0) {
-            throw new IllegalArgumentException('Empty argument $shape is not allowed');
-        } elseif (count($shape) === 1) {
+        if (count($shape) === 1) {
             return array_fill(0, array_shift($shape), $value);
         }
         return array_fill(0, array_shift($shape), $this->fillRecursiveArray($shape, $value));
