@@ -15,6 +15,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Add class `NumPHP\NumArray\Factory`
  - Add function `createFromData`
  - Add function `createZeros`
+ - Add function `createZerosLike`
 - Add interface `NumPHP\NumArray\FactoryInterface`
  - Add function `createFromData`
  - Add function `createZeros`

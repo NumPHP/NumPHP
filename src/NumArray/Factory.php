@@ -2,7 +2,6 @@
 
 namespace NumPHP\NumArray;
 
-use NumPHP\Exception\IllegalArgumentException;
 use NumPHP\Exception\MissingArgumentException;
 use NumPHP\NumArray\String\DefaultFormatter;
 
@@ -26,6 +25,11 @@ class Factory implements FactoryInterface
             throw new MissingArgumentException('Required argument $axis not found');
         }
         return new NumArray($this->fillRecursiveArray($axis, 0), $this->stringFormatter);
+    }
+
+    public function createZerosLike(NumArray $numArray): NumArray
+    {
+        return call_user_func_array([$this, 'createZeros'], $numArray->getShape());
     }
 
     private function fillRecursiveArray(array $shape, $value): array

@@ -38,4 +38,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             $this->factory->createZeros(3, 2)->getData()
         );
     }
+
+    public function testCreateZerosLike2x3()
+    {
+        $this->assertSame(
+            $this->factory->createZeros(2, 3)->getData(),
+            $this->factory->createZerosLike($this->factory->createZeros(2, 3))->getData()
+        );
+    }
 }
