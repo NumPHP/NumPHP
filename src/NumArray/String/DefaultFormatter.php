@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace NumPHP\NumArray\String;
 
-use NumPHP\NumArray\NumArray;
+use NumPHP\NumArray\NumArrayInterface;
 
 class DefaultFormatter implements FormatterInterface
 {
@@ -30,7 +31,7 @@ class DefaultFormatter implements FormatterInterface
         $this->enclosureEnd = $enclosureEnd;
     }
 
-    public function numArrayToString(NumArray $numArray): string
+    public function numArrayToString(NumArrayInterface $numArray): string
     {
         return $this->recursiveArrayToString($numArray->getData());
     }

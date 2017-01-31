@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace NumPHP\NumArray;
 
@@ -14,12 +15,12 @@ class Factory implements FactoryInterface
         $this->stringFormatter = new DefaultFormatter();
     }
 
-    public function createFromData(array $data): NumArray
+    public function createFromData(array $data): NumArrayInterface
     {
         return new NumArray($data, $this->stringFormatter);
     }
 
-    public function createZeros(int ...$axis): NumArray
+    public function createZeros(int ...$axis): NumArrayInterface
     {
         if (count($axis) === 0) {
             throw new MissingArgumentException('Required argument $axis not found');
@@ -27,7 +28,7 @@ class Factory implements FactoryInterface
         return new NumArray($this->fillRecursiveArray($axis, 0), $this->stringFormatter);
     }
 
-    public function createZerosLike(NumArray $numArray): NumArray
+    public function createZerosLike(NumArrayInterface $numArray): NumArrayInterface
     {
         return call_user_func_array([$this, 'createZeros'], $numArray->getShape());
     }

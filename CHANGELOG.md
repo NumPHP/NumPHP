@@ -19,7 +19,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Add interface `NumPHP\NumArray\FactoryInterface`
  - Add function `createFromData`
  - Add function `createZeros`
+ - Add function `createZerosLike`
 - Add class `NumPHP\NumArray\NumArray`
+ - Add function `__toString`
+ - Add function `getData`
+ - Add function `getShape`
+ - Add function `getSize`
+ - Add function `getNDim`
+- Add interface `NumPHP\NumArray\NumArrayInterface`
  - Add function `__toString`
  - Add function `getData`
  - Add function `getShape`

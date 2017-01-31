@@ -5,7 +5,7 @@ namespace NumPHP\NumArray;
 
 use NumPHP\NumArray\String\FormatterInterface;
 
-class NumArray
+class NumArray implements NumArrayInterface
 {
     private $data;
 

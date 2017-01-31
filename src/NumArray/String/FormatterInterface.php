@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace NumPHP\NumArray\String;
 
-use NumPHP\NumArray\NumArray;
+use NumPHP\NumArray\NumArrayInterface;
 
 interface FormatterInterface
 {
-    public function numArrayToString(NumArray $numArray): string;
+    public function numArrayToString(NumArrayInterface $numArray): string;
 }
