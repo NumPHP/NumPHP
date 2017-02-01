@@ -3,8 +3,13 @@ declare(strict_types=1);
 
 namespace NumPHPTest;
 
+use NumPHP\Exception\MissingArgumentException;
 use NumPHP\NumArray;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class NumArrayTest extends \PHPUnit_Framework_TestCase
 {
     public function testToStringEmpty()
@@ -30,7 +35,21 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertSame("[\n  [-2, 3, 9],\n  [-7, 8, -8]\n]", $numArray->__toString());
     }
 
-    public function testData()
+    public function testIsEqual()
+    {
+        $numArray = new NumArray([3, -1]);
+        $this->assertFalse($numArray->isEqual(new NumArray([])));
+        $this->assertFalse($numArray->isEqual(new NumArray([0, 5])));
+        $this->assertFalse($numArray->isEqual(new NumArray(
+            [
+                [1, 2, 1],
+                [-4, 2, -5]
+            ]
+        )));
+        $this->assertTrue($numArray->isEqual(new NumArray([3, -1])));
+    }
+
+    public function testGetData()
     {
         $numArray = new NumArray([2, 0, 5, 6]);
         $this->assertSame([2, 0, 5, 6], $numArray->getData());
@@ -85,5 +104,87 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
             ]
         );
         $this->assertSame(2, $numArray->getNDim());
+    }
+
+    public function testOnesEmpty()
+    {
+        $this->expectException(MissingArgumentException::class);
+        $this->expectExceptionMessage('No $axis given');
+        NumArray::ones();
+    }
+
+    public function testOnes4()
+    {
+        $numArray = new NumArray([1, 1, 1, 1]);
+        $this->assertTrue($numArray->isEqual(NumArray::ones(4)));
+    }
+
+    public function testOnes2x3()
+    {
+        $numArray = new NumArray(
+            [
+                [1, 1, 1],
+                [1, 1, 1]
+            ]
+        );
+        $this->assertTrue($numArray->isEqual(NumArray::ones(2, 3)));
+    }
+
+    public function testOnesLike4()
+    {
+        $numArray = new NumArray([6, -6, -1, -7]);
+        $this->assertTrue(NumArray::ones(4)->isEqual(NumArray::onesLike($numArray)));
+    }
+
+    public function testOnesLike2x3()
+    {
+        $numArray = new NumArray(
+            [
+                [0, 5, -8],
+                [4, 8, 1]
+            ]
+        );
+        $this->assertTrue(NumArray::ones(2, 3)->isEqual(NumArray::onesLike($numArray)));
+    }
+
+    public function testZerosEmpty()
+    {
+        $this->expectException(MissingArgumentException::class);
+        $this->expectExceptionMessage('No $axis given');
+        NumArray::zeros();
+    }
+
+    public function testZeros4()
+    {
+        $numArray = new NumArray([0, 0, 0, 0]);
+        $this->assertTrue($numArray->isEqual(NumArray::zeros(4)));
+    }
+
+    public function testZeros2x3()
+    {
+        $numArray = new NumArray(
+            [
+                [0, 0, 0],
+                [0, 0, 0]
+            ]
+        );
+        $this->assertTrue($numArray->isEqual(NumArray::zeros(2, 3)));
+    }
+
+    public function testZerosLike4()
+    {
+        $numArray = new NumArray([8, 6, 1, 1]);
+        $this->assertTrue(NumArray::zeros(4)->isEqual(NumArray::zerosLike($numArray)));
+    }
+
+    public function testZerosLike2x3()
+    {
+        $numArray = new NumArray(
+            [
+                [1, -1, 0],
+                [4, -6, 6]
+            ]
+        );
+        $this->assertTrue(NumArray::zeros(2, 3)->isEqual(NumArray::zerosLike($numArray)));
     }
 }
