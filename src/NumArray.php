@@ -86,7 +86,8 @@ class NumArray
 
     public static function onesLike(NumArray $numArray): NumArray
     {
-        return call_user_func_array([self, 'ones'], $numArray->getShape());
+        $shape = $numArray->getShape();
+        return self::ones(...$shape);
     }
 
     public static function zeros(int ...$axis): NumArray
@@ -99,7 +100,8 @@ class NumArray
 
     public static function zerosLike(NumArray $numArray): NumArray
     {
-        return call_user_func_array([self, 'zeros'], $numArray->getShape());
+        $shape = $numArray->getShape();
+        return self::zeros(...$shape);
     }
 
     private static function recursiveToString(array $data, int $level = 0): string
