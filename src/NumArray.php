@@ -1,0 +1,84 @@
+<?php
+declare(strict_types=1);
+
+namespace NumPHP;
+
+class NumArray
+{
+    private $data;
+
+    private $string;
+
+    private $shape;
+
+    private $size;
+
+    private $nDim;
+
+    public function __construct(array $data)
+    {
+        $this->data = $data;
+    }
+
+    public function __toString(): string
+    {
+        if (is_null($this->string)) {
+            $this->string = self::recursiveToString($this->data);
+        }
+        return $this->string;
+    }
+
+    public function getData(): array
+    {
+        return $this->data;
+    }
+
+    public function getShape(): array
+    {
+        if (is_null($this->shape)) {
+            $shape = [];
+            $currentDataDim = $this->data;
+            while (is_array($currentDataDim)) {
+                $shape[] = count($currentDataDim);
+                $currentDataDim = $currentDataDim[0];
+            }
+            $this->shape = $shape;
+        }
+        return $this->shape;
+    }
+
+    public function getSize(): int
+    {
+        if (is_null($this->size)) {
+            $this->size = array_reduce(
+                $this->getShape(),
+                function ($carry, $item) {
+                    return $carry * $item;
+                },
+                1
+            );
+        }
+        return $this->size;
+    }
+
+    public function getNDim(): int
+    {
+        if (is_null($this->nDim)) {
+            $this->nDim = count($this->getShape());
+        }
+        return $this->nDim;
+    }
+
+    private static function recursiveToString(array $data, int $level = 0): string
+    {
+        $indent = str_repeat("  ", $level);
+        if (isset($data[0]) && is_array($data[0])) {
+            $nextLevel = $level + 1;
+            $result = array_map(function ($entry) use ($nextLevel) {
+                return self::recursiveToString($entry, $nextLevel);
+            }, $data);
+            return sprintf("%s[\n%s\n%s]", $indent, implode(",\n", $result), $indent);
+        }
+        return sprintf("%s[%s]", $indent, implode(", ", $data));
+    }
+}
