@@ -6,6 +6,9 @@ namespace NumPHP;
 use NumPHP\Exception\IllegalArgumentException;
 use NumPHP\Exception\MissingArgumentException;
 
+/**
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class NumArray
 {
     private $data;
@@ -100,6 +103,20 @@ class NumArray
     {
         return $this->combine($numArray, function ($val1, $val2) {
             return $val1 - $val2;
+        });
+    }
+
+    public function mult(NumArray $numArray): NumArray
+    {
+        return $this->combine($numArray, function ($val1, $val2) {
+            return $val1 * $val2;
+        });
+    }
+
+    public function div(NumArray $numArray): NumArray
+    {
+        return $this->combine($numArray, function ($val1, $val2) {
+            return $val1 / $val2;
         });
     }
 

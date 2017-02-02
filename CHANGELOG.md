@@ -17,6 +17,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
  - Add function `combine`
  - Add function `add`
  - Add function `sub`
+ - Add function `mult`
+ - Add function `div`
  - Add fucntion `ones`
  - Add function `onesLike`
  - Add function `zeros`

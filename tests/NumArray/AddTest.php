@@ -8,13 +8,13 @@ use NumPHP\NumArray;
 
 class AddTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function test2x3Add4()
     {
-        $numArray1 = new NumArray([
-            [-4, 8, 1],
-            [-8, -6, 2]
-        ]);
-        $numArray2 = new NumArray([8, -8, 1, -3]);
+        $numArray1 = NumArray::ones(2, 3);
+        $numArray2 = NumArray::ones(4);
         $this->expectException(IllegalArgumentException::class);
         $this->expectExceptionMessage('Shape [2, 3] and [4] are different');
         $numArray1->add($numArray2);

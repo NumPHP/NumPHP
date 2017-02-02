@@ -8,13 +8,13 @@ use NumPHP\NumArray;
 
 class SubTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function test2x3Sub4()
     {
-        $numArray1 = new NumArray([
-            [-3, -1, 5],
-            [-8, 9, 8]
-        ]);
-        $numArray2 = new NumArray([8, 7, -4, -5]);
+        $numArray1 = NumArray::ones(2, 3);
+        $numArray2 = NumArray::ones(4);
         $this->expectException(IllegalArgumentException::class);
         $this->expectExceptionMessage('Shape [2, 3] and [4] are different');
         $numArray1->sub($numArray2);
