@@ -6,8 +6,8 @@
 [![Coverage Status][ico-coveralls]][link-coveralls]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-**Note:** The development of NumPHP 2 has started completely from scratch. NumPHP 1.1 can be found at branch
-[1.1](https://github.com/NumPHP/NumPHP/tree/1.1).
+> **Note:** The development of NumPHP 2 has started completely from scratch. NumPHP 1.1 can be found at branch
+> [1.1](https://github.com/NumPHP/NumPHP/tree/1.1).
 
 NumPHP is a mathematical PHP library for scientific computing. Advanced matrix arithmetic for PHP. More information
 under [numphp.org](https://numphp.org/).
