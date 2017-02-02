@@ -61,13 +61,7 @@ class NumArray
     public function getSize(): int
     {
         if (is_null($this->size)) {
-            $this->size = array_reduce(
-                $this->getShape(),
-                function ($carry, $item) {
-                    return $carry * $item;
-                },
-                1
-            );
+            $this->size = array_product($this->getShape());
         }
         return $this->size;
     }
@@ -118,6 +112,25 @@ class NumArray
         return $this->combine($numArray, function ($val1, $val2) {
             return $val1 / $val2;
         });
+    }
+
+    public function reshape(int ...$axis): NumArray
+    {
+        $oldSize = $this->getSize();
+        $newSize = array_product($axis);
+        if ($oldSize !== $newSize) {
+            throw new IllegalArgumentException(sprintf(
+                'Size of new shape %d is different to size %d',
+                $newSize,
+                $oldSize
+            ));
+        }
+        $data = $this->getData();
+        $nDim = $this->getNDim() - 1;
+        for ($i = 0; $i < $nDim; $i++) {
+            $data = array_merge(...$data);
+        }
+        return new NumArray(self::recursiveArrayChunk($data, $axis));
     }
 
     public static function ones(int ...$axis): NumArray
@@ -204,5 +217,17 @@ class NumArray
             }, $arr1, $arr2);
         }
         return array_map($func, $arr1, $arr2);
+    }
+
+    private static function recursiveArrayChunk(array $array, array $shape): array
+    {
+        if (count($shape) === 1) {
+            return $array;
+        }
+        array_shift($shape);
+        $chunks = array_chunk($array, array_product($shape));
+        return array_map(function ($val) use ($shape) {
+            return self::recursiveArrayChunk($val, $shape);
+        }, $chunks);
     }
 }

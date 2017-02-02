@@ -7,6 +7,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ## NEXT - 2017-02-02
 
 ### Added
+- Add class `NumPHP\Exception\IllegalArgumentException`
 - Add class `NumPHP\Exception\MissingArgumentException`
 - Add class `NumPHP\NumArray`
  - Add function `__toString`
@@ -19,6 +20,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
  - Add function `sub`
  - Add function `mult`
  - Add function `div`
+ - Add function `reshape`
  - Add fucntion `ones`
  - Add function `onesLike`
  - Add function `zeros`
