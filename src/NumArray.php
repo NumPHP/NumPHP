@@ -91,14 +91,14 @@ class NumArray
 
     public function add(NumArray $numArray): NumArray
     {
-        return $this->combine($numArray, function($val1, $val2) {
+        return $this->combine($numArray, function ($val1, $val2) {
             return $val1 + $val2;
         });
     }
 
     public function sub(NumArray $numArray): NumArray
     {
-        return $this->combine($numArray, function($val1, $val2) {
+        return $this->combine($numArray, function ($val1, $val2) {
             return $val1 - $val2;
         });
     }
@@ -155,7 +155,7 @@ class NumArray
     private static function recursiveArrayCombine(callable $func, array $arr1, array $arr2): array
     {
         if (isset($arr1[0]) && is_array($arr1[0])) {
-            return array_map(function($val1, $val2) use ($func){
+            return array_map(function ($val1, $val2) use ($func) {
                 return self::recursiveArrayCombine($func, $val1, $val2);
             }, $arr1, $arr2);
         }

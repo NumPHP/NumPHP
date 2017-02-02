@@ -12,7 +12,7 @@ class CombineTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->callback = function($val1, $val2) {
+        $this->callback = function ($val1, $val2) {
             return abs($val1 - $val2);
         };
     }
