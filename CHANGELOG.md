@@ -24,6 +24,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
  - Add function `zeros`
  - Add function `zerosLike`
  - Add function `eye`
+ - Add function `identity`
 - Add class `NumPHP\ComplexNum`
  - Add function `__toString`
  - Add function `isEqual`

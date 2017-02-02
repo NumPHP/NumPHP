@@ -167,6 +167,14 @@ class NumArray
         return new NumArray($data);
     }
 
+    public static function identity(int $axis): NumArray
+    {
+        if ($axis < 0) {
+            throw new IllegalArgumentException(sprintf('$axis %d is smaller than 0', $axis));
+        }
+        return self::eye($axis);
+    }
+
     private static function recursiveToString(array $data, int $level = 0): string
     {
         $indent = str_repeat("  ", $level);
