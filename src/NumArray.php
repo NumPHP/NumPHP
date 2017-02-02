@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace NumPHP;
 
+use NumPHP\Exception\IllegalArgumentException;
 use NumPHP\Exception\MissingArgumentException;
 
 class NumArray
@@ -76,6 +77,32 @@ class NumArray
         return $this->nDim;
     }
 
+    public function combine(NumArray $numArray, callable $func): NumArray
+    {
+        if ($this->getShape() !== $numArray->getShape()) {
+            throw new IllegalArgumentException(sprintf(
+                "Shape [%s] and [%s] are different",
+                implode(', ', $this->getShape()),
+                implode(', ', $numArray->getShape())
+            ));
+        }
+        return new NumArray(self::recursiveArrayCombine($func, $this->getData(), $numArray->getData()));
+    }
+
+    public function add(NumArray $numArray): NumArray
+    {
+        return $this->combine($numArray, function($val1, $val2) {
+            return $val1 + $val2;
+        });
+    }
+
+    public function sub(NumArray $numArray): NumArray
+    {
+        return $this->combine($numArray, function($val1, $val2) {
+            return $val1 - $val2;
+        });
+    }
+
     public static function ones(int ...$axis): NumArray
     {
         if (empty($axis)) {
@@ -123,5 +150,15 @@ class NumArray
             return array_fill(0, array_shift($shape), $value);
         }
         return array_fill(0, array_shift($shape), self::recursiveFillArray($shape, $value));
+    }
+
+    private static function recursiveArrayCombine(callable $func, array $arr1, array $arr2): array
+    {
+        if (isset($arr1[0]) && is_array($arr1[0])) {
+            return array_map(function($val1, $val2) use ($func){
+                return self::recursiveArrayCombine($func, $val1, $val2);
+            }, $arr1, $arr2);
+        }
+        return array_map($func, $arr1, $arr2);
     }
 }

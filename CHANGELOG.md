@@ -4,7 +4,7 @@ All Notable changes to `NumPHP` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## NEXT - 2017-02-01
+## NEXT - 2017-02-02
 
 ### Added
 - Add class `NumPHP\Exception\MissingArgumentException`
@@ -14,6 +14,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
  - Add function `getShape`
  - Add function `getSize`
  - Add function `getNDim`
+ - Add function `combine`
+ - Add function `add`
+ - Add function `sub`
  - Add fucntion `ones`
  - Add function `onesLike`
  - Add function `zeros`
