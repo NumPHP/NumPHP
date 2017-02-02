@@ -148,6 +148,25 @@ class NumArray
         return self::zeros(...$shape);
     }
 
+    public static function eye(int $mAxis, int $nAxis = null): NumArray
+    {
+        if (is_null($nAxis)) {
+            $nAxis = $mAxis;
+        }
+        if ($mAxis < 0) {
+            throw new IllegalArgumentException(sprintf('$mAxis %d is smaller than 0', $mAxis));
+        }
+        if ($nAxis < 0) {
+            throw new IllegalArgumentException(sprintf('$nAxis %d is smaller than 0', $nAxis));
+        }
+        $data = array_fill(0, $mAxis, array_fill(0, $nAxis, 0));
+        $min = min($mAxis, $nAxis);
+        for ($i = 0; $i < $min; $i++) {
+            $data[$i][$i] = 1;
+        }
+        return new NumArray($data);
+    }
+
     private static function recursiveToString(array $data, int $level = 0): string
     {
         $indent = str_repeat("  ", $level);

@@ -23,6 +23,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
  - Add function `onesLike`
  - Add function `zeros`
  - Add function `zerosLike`
+ - Add function `eye`
 - Add class `NumPHP\ComplexNum`
  - Add function `__toString`
  - Add function `isEqual`
