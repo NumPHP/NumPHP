@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace NumPHPTest\NumArray;
 
 use NumPHP\NumArray;
+use PHPUnit\Framework\TestCase;
 
-class GetNDimTest extends \PHPUnit_Framework_TestCase
+class GetNDimTest extends TestCase
 {
     public function testGetNDim4()
     {

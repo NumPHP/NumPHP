@@ -5,11 +5,12 @@ namespace NumPHPTest\NumArray;
 
 use NumPHP\Exception\MissingArgumentException;
 use NumPHP\NumArray;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @SuppressWarnings(PHPMD.StaticAccess)
  */
-class OnesTest extends \PHPUnit_Framework_TestCase
+class OnesTest extends TestCase
 {
     public function testOnesEmpty()
     {

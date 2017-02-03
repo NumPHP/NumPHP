@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace NumPHPTest;
 
 use NumPHP\ComplexNum;
+use PHPUnit\Framework\TestCase;
 
-class ComplexNumTest extends \PHPUnit_Framework_TestCase
+class ComplexNumTest extends TestCase
 {
     public function testToString()
     {

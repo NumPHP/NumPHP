@@ -5,11 +5,12 @@ namespace NumPHPTest\NumArray;
 
 use NumPHP\Exception\IllegalArgumentException;
 use NumPHP\NumArray;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @SuppressWarnings(PHPMD.StaticAccess)
  */
-class IdentityTest extends \PHPUnit_Framework_TestCase
+class IdentityTest extends TestCase
 {
     public function testIdentityNegativeAxis()
     {

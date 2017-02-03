@@ -5,8 +5,9 @@ namespace NumPHPTest\NumArray;
 
 use NumPHP\Exception\IllegalArgumentException;
 use NumPHP\NumArray;
+use PHPUnit\Framework\TestCase;
 
-class SubTest extends \PHPUnit_Framework_TestCase
+class SubTest extends TestCase
 {
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)

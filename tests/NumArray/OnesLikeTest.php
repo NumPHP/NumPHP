@@ -4,11 +4,12 @@ declare(strict_types=1);
 namespace NumPHPTest\NumArray;
 
 use NumPHP\NumArray;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @SuppressWarnings(PHPMD.StaticAccess)
  */
-class OnesLikeTest extends \PHPUnit_Framework_TestCase
+class OnesLikeTest extends TestCase
 {
     public function testOnesLike4()
     {

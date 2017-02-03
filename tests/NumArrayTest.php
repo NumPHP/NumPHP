@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace NumPHPTest;
 
 use NumPHP\NumArray;
+use PHPUnit\Framework\TestCase;
 
-class NumArrayTest extends \PHPUnit_Framework_TestCase
+class NumArrayTest extends TestCase
 {
     public function testIsEqual()
     {

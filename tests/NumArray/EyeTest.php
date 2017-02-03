@@ -5,11 +5,12 @@ namespace NumPHPTest\NumArray;
 
 use NumPHP\Exception\IllegalArgumentException;
 use NumPHP\NumArray;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @SuppressWarnings(PHPMD.StaticAccess)
  */
-class EyeTest extends \PHPUnit_Framework_Testcase
+class EyeTest extends TestCase
 {
     public function testEyeNegativeMAxis()
     {

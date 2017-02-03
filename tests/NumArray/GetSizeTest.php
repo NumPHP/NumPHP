@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace NumPHPTest\NumArray;
 
 use NumPHP\NumArray;
+use PHPUnit\Framework\TestCase;
 
-class GetSizeTest extends \PHPUnit_Framework_TestCase
+class GetSizeTest extends TestCase
 {
     public function testGetSize4()
     {

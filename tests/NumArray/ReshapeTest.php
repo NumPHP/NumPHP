@@ -5,8 +5,9 @@ namespace NumPHPTest\NumArray;
 
 use NumPHP\Exception\IllegalArgumentException;
 use NumPHP\NumArray;
+use PHPUnit\Framework\TestCase;
 
-class ReshapeTest extends \PHPUnit_Framework_TestCase
+class ReshapeTest extends TestCase
 {
     public function test2x3Reshape5()
     {
