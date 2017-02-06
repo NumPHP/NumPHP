@@ -4,7 +4,7 @@ All Notable changes to `NumPHP` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## NEXT - 2017-02-02
+## NEXT - 2017-02-06
 
 ### Added
 - Add class `NumPHP\Exception\IllegalArgumentException`
@@ -27,6 +27,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
  - Add function `zerosLike`
  - Add function `eye`
  - Add function `identity`
+ - Add function `arange`
 - Add class `NumPHP\ComplexNum`
  - Add function `__toString`
  - Add function `isEqual`
