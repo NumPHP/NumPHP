@@ -75,6 +75,22 @@ class NumArray
         return $this->nDim;
     }
 
+    public function get(string ...$axis)
+    {
+        $axisCount = count($axis);
+        $usedSlice = false;
+        for ($i = 0; $i < $axisCount; $i++) {
+            if (strpos($axis[$i], ':') !== false) {
+                $usedSlice = true;
+            }
+        }
+        $data = self::recursiveGet($this->getData(), $axis);
+        if ($usedSlice || $axisCount < $this->getNDim()) {
+            return new NumArray($data);
+        }
+        return $data;
+    }
+
     public function combine(NumArray $numArray, callable $func): NumArray
     {
         if ($this->getShape() !== $numArray->getShape()) {
@@ -244,5 +260,28 @@ class NumArray
         return array_map(function ($val) use ($shape) {
             return self::recursiveArrayChunk($val, $shape);
         }, $chunks);
+    }
+
+    private static function recursiveGet(array $data, array $axis)
+    {
+        $indexExplode = explode(':', array_shift($axis));
+        $axisCount = count($axis);
+        if (count($indexExplode) === 1) {
+            $index = (int) $indexExplode[0];
+            $extractedData = $data[$index];
+            if ($axisCount === 0) {
+                return $extractedData;
+            }
+            return self::recursiveGet($extractedData, $axis);
+        }
+        $start = $indexExplode[0] === "" ? 0 : (int) $indexExplode[0];
+        $end = $indexExplode[1] === "" ? count($data) : (int) $indexExplode[1];
+        $extractedData = array_slice($data, $start, $end - $start);
+        if ($axisCount === 0) {
+            return $extractedData;
+        }
+        return array_map(function ($row) use ($axis) {
+            return self::recursiveGet($row, $axis);
+        }, $extractedData);
     }
 }
