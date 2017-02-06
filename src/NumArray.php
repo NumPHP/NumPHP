@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace NumPHP;
 
 use NumPHP\Exception\IllegalArgumentException;
+use NumPHP\Exception\IndexOutOfBoundsException;
 use NumPHP\Exception\MissingArgumentException;
 
 /**
@@ -266,22 +267,35 @@ class NumArray
     {
         $indexExplode = explode(':', array_shift($axis));
         $axisCount = count($axis);
+        $dataLength = count($data);
         if (count($indexExplode) === 1) {
             $index = (int) $indexExplode[0];
-            $extractedData = $data[$index];
-            if ($axisCount === 0) {
-                return $extractedData;
+            if ($index >= $dataLength || $index < -$dataLength) {
+                throw new IndexOutOfBoundsException(sprintf("Index %d out of bounds", $index));
             }
-            return self::recursiveGet($extractedData, $axis);
+            if ($index < 0) {
+                $index += $dataLength;
+            }
+            $extractedData = $data[$index];
+            return $axisCount === 0 ? $extractedData : self::recursiveGet($extractedData, $axis);
         }
-        $start = $indexExplode[0] === "" ? 0 : (int) $indexExplode[0];
-        $end = $indexExplode[1] === "" ? count($data) : (int) $indexExplode[1];
-        $extractedData = array_slice($data, $start, $end - $start);
+        $start = $indexExplode[0] === "" ? 0 : self::pruneIndex($indexExplode[0], $dataLength);
+        $end = $indexExplode[1] === "" ? $dataLength : self::pruneIndex($indexExplode[1], $dataLength);
+        $extractedData = array_slice($data, $start, max(0, $end - $start));
         if ($axisCount === 0) {
             return $extractedData;
         }
         return array_map(function ($row) use ($axis) {
             return self::recursiveGet($row, $axis);
         }, $extractedData);
+    }
+
+    private static function pruneIndex(string $indexInput, int $maxLength): int
+    {
+        $index = (int) $indexInput;
+        if ($index < 0) {
+            $index += $maxLength;
+        }
+        return  min($maxLength, max(0, $index));
     }
 }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace NumPHPTest\NumArray;
 
+use NumPHP\Exception\IndexOutOfBoundsException;
 use NumPHP\NumArray;
 use PHPUnit\Framework\TestCase;
 
@@ -20,10 +21,27 @@ class GetTest extends TestCase
     public function get3IntResultProvider(): array
     {
         return [
+            ['-3', -8],
+            ['-2', -3],
+            ['-1', 6],
             ['0', -8],
             ['1', -3],
             ['2', 6],
         ];
+    }
+
+    public function testGet3IndexMinus4()
+    {
+        $this->expectException(IndexOutOfBoundsException::class);
+        $this->expectExceptionMessage('Index -4 out of bounds');
+        NumArray::arange(0, 3)->get('-4');
+    }
+
+    public function testGet3Index3()
+    {
+        $this->expectException(IndexOutOfBoundsException::class);
+        $this->expectExceptionMessage('Index 3 out of bounds');
+        NumArray::arange(0, 3)->get('3');
     }
 
     /**
@@ -31,22 +49,36 @@ class GetTest extends TestCase
      */
     public function testGet3NumArrayResult(string $arg, array $result)
     {
-        $numArray = new NumArray([-6, -9, 2]);
-        $this->assertTrue($numArray->get($arg)->isEqual(new NumArray($result)));
+        $numArray = (new NumArray([-6, -9, 2]))->get($arg);
+        $expected = new NumArray($result);
+        $this->assertTrue(
+            $numArray->isEqual($expected),
+            sprintf("Failed asserting that \n%s\nequals\n%s.", $numArray->__toString(), $expected->__toString())
+        );
     }
 
     public function get3NumArrayResultProvider(): array
     {
         return [
             [':', [-6, -9, 2]],
+            ['-4:', [-6, -9, 2]],
+            ['-3:', [-6, -9, 2]],
+            ['-2:', [-9, 2]],
+            ['-1:', [2]],
             ['0:', [-6, -9, 2]],
             ['1:', [-9, 2]],
             ['2:', [2]],
             ['3:', []],
+            ['4:', []],
+            [':-4', []],
+            [':-3', []],
+            [':-2', [-6]],
+            [':-1', [-6, -9]],
             [':0', []],
             [':1', [-6]],
             [':2', [-6, -9]],
             [':3', [-6, -9, 2]],
+            [':4', [-6, -9, 2]],
             ['0:0', []],
             ['0:1', [-6]],
             ['0:2', [-6, -9]],
