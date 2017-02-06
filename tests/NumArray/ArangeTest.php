@@ -6,6 +6,9 @@ namespace NumPHPTest\NumArray;
 use NumPHP\NumArray;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class ArangeTest extends TestCase
 {
     /**

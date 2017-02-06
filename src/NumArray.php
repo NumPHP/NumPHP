@@ -8,6 +8,7 @@ use NumPHP\Exception\MissingArgumentException;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class NumArray
 {
@@ -193,7 +194,7 @@ class NumArray
         if (($start > $stop && $step > 0) || ($start < $stop && $step < 0)) {
             return new NumArray([]);
         }
-        $range = $step === 1.0 ? range($start, $stop) : range($start, $stop, $step);
+        $range = range($start, $stop, $step);
         $end = end($range);
         if (($step > 0 && $end >= $stop) || ($step < 0 && $end <= $stop)) {
             array_pop($range);
