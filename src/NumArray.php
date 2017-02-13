@@ -83,6 +83,7 @@ class NumArray
         for ($i = 0; $i < $axisCount; $i++) {
             if (strpos($axis[$i], ':') !== false) {
                 $usedSlice = true;
+                break;
             }
         }
         $data = self::recursiveGet($this->getData(), $axis);
