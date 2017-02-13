@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace NumPHP;
 
 use NumPHP\Exception\IllegalArgumentException;
-use NumPHP\Exception\IndexOutOfBoundsException;
+use NumPHP\Exception\OutOfBoundsException;
 use NumPHP\Exception\MissingArgumentException;
 
 /**
@@ -272,7 +272,7 @@ class NumArray
         if (count($indexExplode) === 1) {
             $index = (int) $indexExplode[0];
             if ($index >= $dataLength || $index < -$dataLength) {
-                throw new IndexOutOfBoundsException(sprintf("Index %d out of bounds", $index));
+                throw new OutOfBoundsException(sprintf("Index %d out of bounds", $index));
             }
             if ($index < 0) {
                 $index += $dataLength;

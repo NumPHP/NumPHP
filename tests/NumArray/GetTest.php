@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NumPHPTest\NumArray;
 
-use NumPHP\Exception\IndexOutOfBoundsException;
+use NumPHP\Exception\OutOfBoundsException;
 use NumPHP\NumArray;
 use PHPUnit\Framework\TestCase;
 
@@ -32,14 +32,14 @@ class GetTest extends TestCase
 
     public function testGet3IndexMinus4()
     {
-        $this->expectException(IndexOutOfBoundsException::class);
+        $this->expectException(OutOfBoundsException::class);
         $this->expectExceptionMessage('Index -4 out of bounds');
         NumArray::arange(0, 3)->get('-4');
     }
 
     public function testGet3Index3()
     {
-        $this->expectException(IndexOutOfBoundsException::class);
+        $this->expectException(OutOfBoundsException::class);
         $this->expectExceptionMessage('Index 3 out of bounds');
         NumArray::arange(0, 3)->get('3');
     }
