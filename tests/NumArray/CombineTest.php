@@ -47,7 +47,8 @@ class CombineTest extends TestCase
             [8, -1, 7],
             [9, 1, -5]
         ]);
-        $this->assertNumArrayEquals(new NumArray([
+        $this->assertNumArrayEquals(
+            new NumArray([
                 [7, 7, 11],
                 [4, 5, 13]
             ]),

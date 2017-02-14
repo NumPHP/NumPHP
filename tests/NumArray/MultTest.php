@@ -38,7 +38,8 @@ class MultTest extends TestCase
             [-3, 7, -7],
             [0, 9, 6]
         ]);
-        $this->assertNumArrayEquals(new NumArray([
+        $this->assertNumArrayEquals(
+            new NumArray([
                 [-27, -7, 28],
                 [0, -9, 0]
             ]),

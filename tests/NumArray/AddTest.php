@@ -38,7 +38,8 @@ class AddTest extends TestCase
             [6, -8, 7],
             [-6, -7, -5]
         ]);
-        $this->assertNumArrayEquals(new NumArray([
+        $this->assertNumArrayEquals(
+            new NumArray([
                 [6, -7, 12],
                 [-10, -8, -5]
             ]),

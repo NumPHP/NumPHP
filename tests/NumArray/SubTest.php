@@ -38,7 +38,8 @@ class SubTest extends TestCase
             [3, -9, 4],
             [7, -9, 4]
         ]);
-        $this->assertNumArrayEquals(new NumArray([
+        $this->assertNumArrayEquals(
+            new NumArray([
                 [-2, 4, 1],
                 [-7, 4, -5]
             ]),

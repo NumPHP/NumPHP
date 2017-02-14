@@ -38,7 +38,8 @@ class DivTest extends TestCase
             [1, -5, -2],
             [2, 6, 5]
         ]);
-        $this->assertNumArrayEquals(new NumArray([
+        $this->assertNumArrayEquals(
+            new NumArray([
                 [-7, -9 / 5, 4],
                 [1 / 2, -5 / 6, -1 / 5]
             ]),

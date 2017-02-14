@@ -28,7 +28,8 @@ class ReshapeTest extends TestCase
     public function test6Reshape2x3()
     {
         $numArray = new NumArray([7, 9, -4, 0, 0, -2]);
-        $this->assertNumArrayEquals(new NumArray([
+        $this->assertNumArrayEquals(
+            new NumArray([
                 [7, 9, -4],
                 [0, 0, -2]
             ]),
@@ -42,7 +43,8 @@ class ReshapeTest extends TestCase
             [-1, 9, -5],
             [-1, -9, 1]
         ]);
-        $this->assertNumArrayEquals(new Numarray([
+        $this->assertNumArrayEquals(
+            new Numarray([
                 [-1, 9],
                 [-5, -1],
                 [-9, 1]
