@@ -5,7 +5,7 @@ namespace NumPHPTest\NumArray;
 
 use NumPHP\Exception\OutOfBoundsException;
 use NumPHP\NumArray;
-use PHPUnit\Framework\TestCase;
+use NumPHPTest\Framework\TestCase;
 
 class GetTest extends TestCase
 {
@@ -50,11 +50,7 @@ class GetTest extends TestCase
     public function testGet3NumArrayResult(string $arg, array $result)
     {
         $numArray = (new NumArray([-6, -9, 2]))->get($arg);
-        $expected = new NumArray($result);
-        $this->assertTrue(
-            $numArray->isEqual($expected),
-            sprintf("Failed asserting that \n%s\nequals\n%s.", $numArray->__toString(), $expected->__toString())
-        );
+        $this->assertNumArrayEquals(new NumArray($result), $numArray);
     }
 
     public function get3NumArrayResultProvider(): array
@@ -122,11 +118,7 @@ class GetTest extends TestCase
     public function testGet4x5NumArrayResult(array $args, array $result)
     {
         $numArray = NumArray::arange(0, 20)->reshape(4, 5)->get(...$args);
-        $expected = new NumArray($result);
-        $this->assertTrue(
-            $numArray->isEqual($expected),
-            sprintf("Failed asserting that \n%s\nequals\n%s.", $numArray->__toString(), $expected->__toString())
-        );
+        $this->assertNumArrayEquals(new NumArray($result), $numArray);
     }
 
     public function get4x5NumArrayResultProvider(): array

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace NumPHPTest\NumArray;
 
 use NumPHP\NumArray;
-use PHPUnit\Framework\TestCase;
+use NumPHPTest\Framework\TestCase;
 
 /**
  * @SuppressWarnings(PHPMD.StaticAccess)
@@ -14,7 +14,7 @@ class OnesLikeTest extends TestCase
     public function testOnesLike4()
     {
         $numArray = new NumArray([6, -6, -1, -7]);
-        $this->assertTrue(NumArray::ones(4)->isEqual(NumArray::onesLike($numArray)));
+        $this->assertNumArrayEquals(NumArray::ones(4), NumArray::onesLike($numArray));
     }
 
     public function testOnesLike2x3()
@@ -23,6 +23,6 @@ class OnesLikeTest extends TestCase
             [0, 5, -8],
             [4, 8, 1]
         ]);
-        $this->assertTrue(NumArray::ones(2, 3)->isEqual(NumArray::onesLike($numArray)));
+        $this->assertNumArrayEquals(NumArray::onesLike($numArray), NumArray::ones(2, 3));
     }
 }

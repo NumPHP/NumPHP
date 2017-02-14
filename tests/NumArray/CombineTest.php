@@ -5,7 +5,7 @@ namespace NumPHPTest\NumArray;
 
 use NumPHP\Exception\IllegalArgumentException;
 use NumPHP\NumArray;
-use PHPUnit\Framework\TestCase;
+use NumPHPTest\Framework\TestCase;
 
 class CombineTest extends TestCase
 {
@@ -34,7 +34,7 @@ class CombineTest extends TestCase
     {
         $numArray1 = new NumArray([-2, 5, -7, 0]);
         $numArray2 = new NumArray([-5, 5, -8, -2]);
-        $this->assertTrue($numArray1->combine($numArray2, $this->callback)->isEqual(new NumArray([3, 0, 1, 2])));
+        $this->assertNumArrayEquals(new NumArray([3, 0, 1, 2]), $numArray1->combine($numArray2, $this->callback));
     }
 
     public function test2x3Combine2x3()
@@ -47,9 +47,11 @@ class CombineTest extends TestCase
             [8, -1, 7],
             [9, 1, -5]
         ]);
-        $this->assertTrue($numArray1->combine($numArray2, $this->callback)->isEqual(new NumArray([
-            [7, 7, 11],
-            [4, 5, 13]
-        ])));
+        $this->assertNumArrayEquals(new NumArray([
+                [7, 7, 11],
+                [4, 5, 13]
+            ]),
+            $numArray1->combine($numArray2, $this->callback)
+        );
     }
 }

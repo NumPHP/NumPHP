@@ -5,7 +5,7 @@ namespace NumPHPTest\NumArray;
 
 use NumPHP\Exception\MissingArgumentException;
 use NumPHP\NumArray;
-use PHPUnit\Framework\TestCase;
+use NumPHPTest\Framework\TestCase;
 
 /**
  * @SuppressWarnings(PHPMD.StaticAccess)
@@ -22,7 +22,7 @@ class ZerosTest extends TestCase
     public function testZeros4()
     {
         $numArray = new NumArray([0, 0, 0, 0]);
-        $this->assertTrue($numArray->isEqual(NumArray::zeros(4)));
+        $this->assertNumArrayEquals($numArray, NumArray::zeros(4));
     }
 
     public function testZeros2x3()
@@ -31,6 +31,6 @@ class ZerosTest extends TestCase
             [0, 0, 0],
             [0, 0, 0]
         ]);
-        $this->assertTrue($numArray->isEqual(NumArray::zeros(2, 3)));
+        $this->assertNumArrayEquals($numArray, NumArray::zeros(2, 3));
     }
 }

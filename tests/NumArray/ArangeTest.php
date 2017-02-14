@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace NumPHPTest\NumArray;
 
 use NumPHP\NumArray;
-use PHPUnit\Framework\TestCase;
+use NumPHPTest\Framework\TestCase;
 
 /**
  * @SuppressWarnings(PHPMD.StaticAccess)
@@ -16,12 +16,7 @@ class ArangeTest extends TestCase
      */
     public function testArange($arg, $result)
     {
-        $numArray = NumArray::arange(...$arg);
-        $expected = new NumArray($result);
-        $this->assertTrue(
-            $numArray->isEqual($expected),
-            sprintf("Failed asserting that \n%s\nequals\n%s.", $numArray->__toString(), $expected->__toString())
-        );
+        $this->assertNumArrayEquals(new NumArray($result), NumArray::arange(...$arg));
     }
 
     public function arangeProvider(): array

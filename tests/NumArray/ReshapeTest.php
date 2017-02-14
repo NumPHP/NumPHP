@@ -5,7 +5,7 @@ namespace NumPHPTest\NumArray;
 
 use NumPHP\Exception\IllegalArgumentException;
 use NumPHP\NumArray;
-use PHPUnit\Framework\TestCase;
+use NumPHPTest\Framework\TestCase;
 
 class ReshapeTest extends TestCase
 {
@@ -22,16 +22,18 @@ class ReshapeTest extends TestCase
             [7, 8, 7],
             [4, 1, -7]
         ]);
-        $this->assertTrue($numArray->reshape(6)->isEqual(new NumArray([7, 8, 7, 4, 1, -7])));
+        $this->assertNumArrayEquals(new NumArray([7, 8, 7, 4, 1, -7]), $numArray->reshape(6));
     }
 
     public function test6Reshape2x3()
     {
         $numArray = new NumArray([7, 9, -4, 0, 0, -2]);
-        $this->assertTrue($numArray->reshape(2, 3)->isEqual(new NumArray([
-            [7, 9, -4],
-            [0, 0, -2]
-        ])));
+        $this->assertNumArrayEquals(new NumArray([
+                [7, 9, -4],
+                [0, 0, -2]
+            ]),
+            $numArray->reshape(2, 3)
+        );
     }
 
     public function test2x3Reshape3x2()
@@ -40,10 +42,12 @@ class ReshapeTest extends TestCase
             [-1, 9, -5],
             [-1, -9, 1]
         ]);
-        $this->assertTrue($numArray->reshape(3, 2)->isEqual(new Numarray([
-            [-1, 9],
-            [-5, -1],
-            [-9, 1]
-        ])));
+        $this->assertNumArrayEquals(new Numarray([
+                [-1, 9],
+                [-5, -1],
+                [-9, 1]
+            ]),
+            $numArray->reshape(3, 2)
+        );
     }
 }

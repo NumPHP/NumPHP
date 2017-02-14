@@ -5,7 +5,7 @@ namespace NumPHPTest\NumArray;
 
 use NumPHP\Exception\IllegalArgumentException;
 use NumPHP\NumArray;
-use PHPUnit\Framework\TestCase;
+use NumPHPTest\Framework\TestCase;
 
 /**
  * @SuppressWarnings(PHPMD.StaticAccess)
@@ -21,11 +21,11 @@ class IdentityTest extends TestCase
 
     public function testIdentity0()
     {
-        $this->assertTrue(NumArray::identity(0)->isEqual(NumArray::zeros(0)));
+        $this->assertNumArrayEquals(NumArray::zeros(0), NumArray::identity(0));
     }
 
     public function testIdentity3()
     {
-        $this->assertTrue(NumArray::identity(3)->isEqual(NumArray::eye(3)));
+        $this->assertNumArrayEquals(NumArray::eye(3), NumArray::identity(3));
     }
 }

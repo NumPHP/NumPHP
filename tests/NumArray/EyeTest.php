@@ -5,7 +5,7 @@ namespace NumPHPTest\NumArray;
 
 use NumPHP\Exception\IllegalArgumentException;
 use NumPHP\NumArray;
-use PHPUnit\Framework\TestCase;
+use NumPHPTest\Framework\TestCase;
 
 /**
  * @SuppressWarnings(PHPMD.StaticAccess)
@@ -28,7 +28,7 @@ class EyeTest extends TestCase
 
     public function testEye0()
     {
-        $this->assertTrue(NumArray::eye(0)->isEqual(NumArray::zeros(0, 0)));
+        $this->assertNumArrayEquals(NumArray::zeros(0, 0), NumArray::eye(0));
     }
 
     public function testEye3()
@@ -38,7 +38,7 @@ class EyeTest extends TestCase
             [0, 1, 0],
             [0, 0, 1]
         ]);
-        $this->assertTrue(NumArray::eye(3)->isEqual($numArray));
+        $this->assertNumArrayEquals($numArray, NumArray::eye(3));
     }
 
     public function testEye2x3()
@@ -47,7 +47,7 @@ class EyeTest extends TestCase
             [1, 0, 0],
             [0, 1, 0]
         ]);
-        $this->assertTrue(NumArray::eye(2, 3)->isEqual($numArray));
+        $this->assertNumArrayEquals($numArray, NumArray::eye(2, 3));
     }
 
     public function testEye3x2()
@@ -57,6 +57,6 @@ class EyeTest extends TestCase
             [0, 1],
             [0, 0]
         ]);
-        $this->assertTrue(NumArray::eye(3, 2)->isEqual($numArray));
+        $this->assertNumArrayEquals($numArray, NumArray::eye(3, 2));
     }
 }
