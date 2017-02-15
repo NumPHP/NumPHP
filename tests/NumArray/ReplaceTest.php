@@ -8,6 +8,9 @@ use NumPHP\Exception\OutOfBoundsException;
 use NumPHP\NumArray;
 use NumPHPTest\Framework\TestCase;
 
+/**
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class ReplaceTest extends TestCase
 {
     /**
