@@ -5,6 +5,7 @@
 [![Build Status][ico-travis]][link-travis]
 [![Coverage Status][ico-coveralls]][link-coveralls]
 [![Total Downloads][ico-downloads]][link-downloads]
+[![Dependencies][ico-dependencies]][link-dependencies]
 
 > **Note:** The development of NumPHP 2 has started completely from scratch. NumPHP 1.1 can be found at branch
 > [1.1](https://github.com/NumPHP/NumPHP/tree/1.1).
@@ -52,6 +53,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-travis]: https://img.shields.io/travis/NumPHP/NumPHP/master.svg?style=flat-square
 [ico-coveralls]: https://img.shields.io/coveralls/NumPHP/NumPHP/master.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/NumPHP/NumPHP.svg?style=flat-square
+[ico-dependencies]: https://img.shields.io/librariesio/github/NumPHP/NumPHP.svg=flat-square
 
 [link-packagist]: https://packagist.org/packages/NumPHP/NumPHP
 [link-travis]: https://travis-ci.org/NumPHP/NumPHP
@@ -59,3 +61,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-downloads]: https://packagist.org/packages/NumPHP/NumPHP
 [link-author]: https://gordonlesti.com
 [link-contributors]: ../../contributors
+[link-dependencies]: https://libraries.io/packagist/numphp%2Fnumphp
