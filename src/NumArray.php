@@ -38,7 +38,7 @@ class NumArray
 
     public function isEqual(NumArray $numArray): bool
     {
-        return get_class($this) === get_class($numArray) && $this->getData() === $numArray->getData();
+        return $this->getData() === $numArray->getData();
     }
 
     public function getData(): array
@@ -91,6 +91,25 @@ class NumArray
             return new NumArray($data);
         }
         return $data;
+    }
+
+    public function replace($data, string ...$axis): NumArray
+    {
+        $axisCount = count($axis);
+        $usedSlice = false;
+        for ($i = 0; $i < $axisCount; $i++) {
+            if (strpos($axis[$i], ':') !== false) {
+                $usedSlice = true;
+                break;
+            }
+        }
+        if ($usedSlice || ($axisCount < $this->getNDim())) {
+            if ($data instanceof NumArray) {
+                return new NumArray(self::recursiveReplace($this->getData(), $data->getData(), $axis));
+            }
+            throw new InvalidArgumentException('Argument $data is not type of NumArray');
+        }
+        return new NumArray(self::recursiveReplace($this->getData(), $data, $axis));
     }
 
     public function combine(NumArray $numArray, callable $func): NumArray
@@ -289,6 +308,45 @@ class NumArray
         return array_map(function ($row) use ($axis) {
             return self::recursiveGet($row, $axis);
         }, $extractedData);
+    }
+
+    private static function recursiveReplace(array $origData, $newData, array $axis): array
+    {
+        $indexExplode = explode(':', array_shift($axis));
+        $axisCount = count($axis);
+        $dataLength = count($origData);
+        if (count($indexExplode) === 1) {
+            $index = (int) $indexExplode[0];
+            if ($index >= $dataLength || $index < -$dataLength) {
+                throw new OutOfBoundsException(sprintf("Index %d out of bounds", $index));
+            }
+            if ($index < 0) {
+                $index += $dataLength;
+            }
+            $origData[$index] = $axisCount === 0 ?
+                $newData : self::recursiveReplace($origData[$index], $newData, $axis);
+            return $origData;
+        }
+        $start = $indexExplode[0] === "" ? 0 : self::pruneIndex($indexExplode[0], $dataLength);
+        $end = $indexExplode[1] === "" ? $dataLength : self::pruneIndex($indexExplode[1], $dataLength);
+        if ($axisCount === 0) {
+            array_splice($origData, $start, max(0, $end - $start), $newData);
+            return $origData;
+        }
+        $length = max(0, $end - $start);
+        array_splice(
+            $origData,
+            $start,
+            $length,
+            array_map(
+                function ($origRow, $newRow) use ($axis) {
+                    return self::recursiveReplace($origRow, $newRow, $axis);
+                },
+                array_slice($origData, $start, $length),
+                $newData
+            )
+        );
+        return $origData;
     }
 
     private static function pruneIndex(string $indexInput, int $maxLength): int

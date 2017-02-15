@@ -16,6 +16,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
  - Add function `getSize`
  - Add function `getNDim`
  - Add function `get`
+ - Add function `replace`
  - Add function `combine`
  - Add function `add`
  - Add function `sub`

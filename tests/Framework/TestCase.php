@@ -5,6 +5,9 @@ namespace NumPHPTest\Framework;
 
 use NumPHP\NumArray;
 
+/**
+ * @SuppressWarnings(PHPMD.NumberOfChildren)
+ */
 class TestCase extends \PHPUnit\Framework\TestCase
 {
     public static function assertNumArrayEquals(NumArray $expected, NumArray $actual, string $message = '')
