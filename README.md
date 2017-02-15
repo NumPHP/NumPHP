@@ -53,7 +53,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-travis]: https://img.shields.io/travis/NumPHP/NumPHP/master.svg?style=flat-square
 [ico-coveralls]: https://img.shields.io/coveralls/NumPHP/NumPHP/master.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/NumPHP/NumPHP.svg?style=flat-square
-[ico-dependencies]: https://img.shields.io/librariesio/github/NumPHP/NumPHP.svg=flat-square
+[ico-dependencies]: https://img.shields.io/librariesio/github/NumPHP/NumPHP.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/NumPHP/NumPHP
 [link-travis]: https://travis-ci.org/NumPHP/NumPHP
