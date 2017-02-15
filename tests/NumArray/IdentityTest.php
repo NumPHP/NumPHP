@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NumPHPTest\NumArray;
 
-use NumPHP\Exception\IllegalArgumentException;
+use NumPHP\Exception\InvalidArgumentException;
 use NumPHP\NumArray;
 use NumPHPTest\Framework\TestCase;
 
@@ -14,7 +14,7 @@ class IdentityTest extends TestCase
 {
     public function testIdentityNegativeAxis()
     {
-        $this->expectException(IllegalArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('$axis -2 is smaller than 0');
         NumArray::identity(-2);
     }

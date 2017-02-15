@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace NumPHPTest\NumArray;
 
+use NumPHP\Exception\InvalidArgumentException;
 use NumPHP\Exception\OutOfBoundsException;
 use NumPHP\NumArray;
 use NumPHPTest\Framework\TestCase;
@@ -42,6 +43,13 @@ class ReplaceTest extends TestCase
         $this->expectException(OutOfBoundsException::class);
         $this->expectExceptionMessage('Index 3 out of bounds');
         NumArray::arange(0, 3)->replace(5, '3');
+    }
+
+    public function testReplaceNoIndex()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Argument $data is not type of NumArray');
+        NumArray::arange(0, 3)->replace(5);
     }
 
     /**

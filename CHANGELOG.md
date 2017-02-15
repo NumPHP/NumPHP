@@ -4,11 +4,12 @@ All Notable changes to `NumPHP` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## NEXT - 2017-02-06
+## NEXT - 2017-02-15
 
 ### Added
-- Add class `NumPHP\Exception\IllegalArgumentException`
+- Add class `NumPHP\Exception\InvalidArgumentException`
 - Add class `NumPHP\Exception\MissingArgumentException`
+- Add class `NumPHP\Exception\OutOfBoundsException`
 - Add class `NumPHP\NumArray`
  - Add function `__toString`
  - Add function `getData`

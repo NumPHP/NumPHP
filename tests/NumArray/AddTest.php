@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NumPHPTest\NumArray;
 
-use NumPHP\Exception\IllegalArgumentException;
+use NumPHP\Exception\InvalidArgumentException;
 use NumPHP\NumArray;
 use NumPHPTest\Framework\TestCase;
 
@@ -16,7 +16,7 @@ class AddTest extends TestCase
     {
         $numArray1 = NumArray::ones(2, 3);
         $numArray2 = NumArray::ones(4);
-        $this->expectException(IllegalArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Shape [2, 3] and [4] are different');
         $numArray1->add($numArray2);
     }

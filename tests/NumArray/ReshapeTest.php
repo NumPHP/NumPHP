@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NumPHPTest\NumArray;
 
-use NumPHP\Exception\IllegalArgumentException;
+use NumPHP\Exception\InvalidArgumentException;
 use NumPHP\NumArray;
 use NumPHPTest\Framework\TestCase;
 
@@ -11,7 +11,7 @@ class ReshapeTest extends TestCase
 {
     public function test2x3Reshape5()
     {
-        $this->expectException(IllegalArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Size of new shape 5 is different to size 6');
         NumArray::ones(2, 3)->reshape(5);
     }

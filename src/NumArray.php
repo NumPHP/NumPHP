@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NumPHP;
 
-use NumPHP\Exception\IllegalArgumentException;
+use NumPHP\Exception\InvalidArgumentException;
 use NumPHP\Exception\OutOfBoundsException;
 use NumPHP\Exception\MissingArgumentException;
 
@@ -115,7 +115,7 @@ class NumArray
     public function combine(NumArray $numArray, callable $func): NumArray
     {
         if ($this->getShape() !== $numArray->getShape()) {
-            throw new IllegalArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                 "Shape [%s] and [%s] are different",
                 implode(', ', $this->getShape()),
                 implode(', ', $numArray->getShape())
@@ -157,7 +157,7 @@ class NumArray
         $oldSize = $this->getSize();
         $newSize = array_product($axis);
         if ($oldSize !== $newSize) {
-            throw new IllegalArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'Size of new shape %d is different to size %d',
                 $newSize,
                 $oldSize
@@ -205,10 +205,10 @@ class NumArray
             $nAxis = $mAxis;
         }
         if ($mAxis < 0) {
-            throw new IllegalArgumentException(sprintf('$mAxis %d is smaller than 0', $mAxis));
+            throw new InvalidArgumentException(sprintf('$mAxis %d is smaller than 0', $mAxis));
         }
         if ($nAxis < 0) {
-            throw new IllegalArgumentException(sprintf('$nAxis %d is smaller than 0', $nAxis));
+            throw new InvalidArgumentException(sprintf('$nAxis %d is smaller than 0', $nAxis));
         }
         $data = array_fill(0, $mAxis, array_fill(0, $nAxis, 0));
         $min = min($mAxis, $nAxis);
@@ -221,7 +221,7 @@ class NumArray
     public static function identity(int $axis): NumArray
     {
         if ($axis < 0) {
-            throw new IllegalArgumentException(sprintf('$axis %d is smaller than 0', $axis));
+            throw new InvalidArgumentException(sprintf('$axis %d is smaller than 0', $axis));
         }
         return self::eye($axis);
     }

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NumPHPTest\NumArray;
 
-use NumPHP\Exception\IllegalArgumentException;
+use NumPHP\Exception\InvalidArgumentException;
 use NumPHP\NumArray;
 use NumPHPTest\Framework\TestCase;
 
@@ -14,14 +14,14 @@ class EyeTest extends TestCase
 {
     public function testEyeNegativeMAxis()
     {
-        $this->expectException(IllegalArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('$mAxis -2 is smaller than 0');
         NumArray::eye(-2);
     }
 
     public function testEyeNegativeNAxis()
     {
-        $this->expectException(IllegalArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('$nAxis -1 is smaller than 0');
         NumArray::eye(0, -1);
     }
