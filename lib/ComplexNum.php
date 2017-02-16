@@ -20,7 +20,7 @@ class ComplexNum
         return sprintf("%d%s%di", $this->real, $this->imag < 0 ? "" : "+", $this->imag);
     }
 
-    public function isEqual(ComplexNum $obj): bool
+    public function isEqual(self $obj): bool
     {
         return get_class($this) === get_class($obj) &&
             $this->getReal() === $obj->getReal() &&
@@ -37,17 +37,17 @@ class ComplexNum
         return $this->imag;
     }
 
-    public function add(ComplexNum $com): ComplexNum
+    public function add(self $com): self
     {
         return new static($this->getReal() + $com->getReal(), $this->getImag() + $com->getImag());
     }
 
-    public function sub(ComplexNum $com): ComplexNum
+    public function sub(self $com): self
     {
         return new static($this->getReal() - $com->getReal(), $this->getImag() - $com->getImag());
     }
 
-    public function mult(ComplexNum $com): ComplexNum
+    public function mult(self $com): self
     {
         $real1 = $this->getReal();
         $real2 = $com->getReal();
@@ -56,7 +56,7 @@ class ComplexNum
         return new static($real1 * $real2 - $imag1 * $imag2, $real1 * $imag2 + $imag1 * $real2);
     }
 
-    public function div(ComplexNum $com): ComplexNum
+    public function div(self $com): self
     {
         $real1 = $this->getReal();
         $real2 = $com->getReal();

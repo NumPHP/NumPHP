@@ -36,7 +36,7 @@ class NumArray
         return $this->string;
     }
 
-    public function isEqual(NumArray $numArray): bool
+    public function isEqual(self $numArray): bool
     {
         return $this->getData() === $numArray->getData();
     }
@@ -93,7 +93,7 @@ class NumArray
         return $data;
     }
 
-    public function replace($data, string ...$axis): NumArray
+    public function replace($data, string ...$axis): self
     {
         $axisCount = count($axis);
         $usedSlice = false;
@@ -104,7 +104,7 @@ class NumArray
             }
         }
         if ($usedSlice || ($axisCount < $this->getNDim())) {
-            if ($data instanceof NumArray) {
+            if ($data instanceof self) {
                 return new static(self::recursiveReplace($this->getData(), $data->getData(), $axis));
             }
             throw new InvalidArgumentException('Argument $data is not type of NumArray');
@@ -112,7 +112,7 @@ class NumArray
         return new static(self::recursiveReplace($this->getData(), $data, $axis));
     }
 
-    public function combine(NumArray $numArray, callable $func): NumArray
+    public function combine(self $numArray, callable $func): self
     {
         if ($this->getShape() !== $numArray->getShape()) {
             throw new InvalidArgumentException(sprintf(
@@ -124,35 +124,35 @@ class NumArray
         return new static(self::recursiveArrayCombine($func, $this->getData(), $numArray->getData()));
     }
 
-    public function add(NumArray $numArray): NumArray
+    public function add(self $numArray): self
     {
         return $this->combine($numArray, function ($val1, $val2) {
             return $val1 + $val2;
         });
     }
 
-    public function sub(NumArray $numArray): NumArray
+    public function sub(self $numArray): self
     {
         return $this->combine($numArray, function ($val1, $val2) {
             return $val1 - $val2;
         });
     }
 
-    public function mult(NumArray $numArray): NumArray
+    public function mult(self $numArray): self
     {
         return $this->combine($numArray, function ($val1, $val2) {
             return $val1 * $val2;
         });
     }
 
-    public function div(NumArray $numArray): NumArray
+    public function div(self $numArray): self
     {
         return $this->combine($numArray, function ($val1, $val2) {
             return $val1 / $val2;
         });
     }
 
-    public function reshape(int ...$axis): NumArray
+    public function reshape(int ...$axis): self
     {
         $oldSize = $this->getSize();
         $newSize = array_product($axis);
@@ -171,7 +171,7 @@ class NumArray
         return new static(self::recursiveArrayChunk($data, $axis));
     }
 
-    public static function ones(int ...$axis): NumArray
+    public static function ones(int ...$axis): self
     {
         if (empty($axis)) {
             throw new MissingArgumentException('No $axis given');
@@ -179,13 +179,13 @@ class NumArray
         return new static(self::recursiveFillArray($axis, 1));
     }
 
-    public static function onesLike(NumArray $numArray): NumArray
+    public static function onesLike(self $numArray): self
     {
         $shape = $numArray->getShape();
         return self::ones(...$shape);
     }
 
-    public static function zeros(int ...$axis): NumArray
+    public static function zeros(int ...$axis): self
     {
         if (empty($axis)) {
             throw new MissingArgumentException('No $axis given');
@@ -193,13 +193,13 @@ class NumArray
         return new static(self::recursiveFillArray($axis, 0));
     }
 
-    public static function zerosLike(NumArray $numArray): NumArray
+    public static function zerosLike(self $numArray): self
     {
         $shape = $numArray->getShape();
         return self::zeros(...$shape);
     }
 
-    public static function eye(int $mAxis, int $nAxis = null): NumArray
+    public static function eye(int $mAxis, int $nAxis = null): self
     {
         if (is_null($nAxis)) {
             $nAxis = $mAxis;
@@ -218,7 +218,7 @@ class NumArray
         return new static($data);
     }
 
-    public static function identity(int $axis): NumArray
+    public static function identity(int $axis): self
     {
         if ($axis < 0) {
             throw new InvalidArgumentException(sprintf('$axis %d is smaller than 0', $axis));
@@ -226,7 +226,7 @@ class NumArray
         return self::eye($axis);
     }
 
-    public static function arange(float $start, float $stop, float $step = 1.0): NumArray
+    public static function arange(float $start, float $stop, float $step = 1.0): self
     {
         if (($start > $stop && $step > 0) || ($start < $stop && $step < 0)) {
             return new static([]);
