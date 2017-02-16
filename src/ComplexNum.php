@@ -39,12 +39,12 @@ class ComplexNum
 
     public function add(ComplexNum $com): ComplexNum
     {
-        return new ComplexNum($this->getReal() + $com->getReal(), $this->getImag() + $com->getImag());
+        return new static($this->getReal() + $com->getReal(), $this->getImag() + $com->getImag());
     }
 
     public function sub(ComplexNum $com): ComplexNum
     {
-        return new ComplexNum($this->getReal() - $com->getReal(), $this->getImag() - $com->getImag());
+        return new static($this->getReal() - $com->getReal(), $this->getImag() - $com->getImag());
     }
 
     public function mult(ComplexNum $com): ComplexNum
@@ -53,7 +53,7 @@ class ComplexNum
         $real2 = $com->getReal();
         $imag1 = $this->getImag();
         $imag2 = $com->getImag();
-        return new ComplexNum($real1 * $real2 - $imag1 * $imag2, $real1 * $imag2 + $imag1 * $real2);
+        return new static($real1 * $real2 - $imag1 * $imag2, $real1 * $imag2 + $imag1 * $real2);
     }
 
     public function div(ComplexNum $com): ComplexNum
@@ -63,7 +63,7 @@ class ComplexNum
         $imag1 = $this->getImag();
         $imag2 = $com->getImag();
         $denominator = $imag1 * $imag1 + $imag2 * $imag2;
-        return new ComplexNum(
+        return new static(
             ($real1 * $real2 + $imag1 * $imag2) / $denominator,
             ($imag1 * $real2 - $real1 * $imag2) / $denominator
         );

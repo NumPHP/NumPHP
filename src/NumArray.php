@@ -88,7 +88,7 @@ class NumArray
         }
         $data = self::recursiveGet($this->getData(), $axis);
         if ($usedSlice || $axisCount < $this->getNDim()) {
-            return new NumArray($data);
+            return new static($data);
         }
         return $data;
     }
@@ -105,11 +105,11 @@ class NumArray
         }
         if ($usedSlice || ($axisCount < $this->getNDim())) {
             if ($data instanceof NumArray) {
-                return new NumArray(self::recursiveReplace($this->getData(), $data->getData(), $axis));
+                return new static(self::recursiveReplace($this->getData(), $data->getData(), $axis));
             }
             throw new InvalidArgumentException('Argument $data is not type of NumArray');
         }
-        return new NumArray(self::recursiveReplace($this->getData(), $data, $axis));
+        return new static(self::recursiveReplace($this->getData(), $data, $axis));
     }
 
     public function combine(NumArray $numArray, callable $func): NumArray
@@ -121,7 +121,7 @@ class NumArray
                 implode(', ', $numArray->getShape())
             ));
         }
-        return new NumArray(self::recursiveArrayCombine($func, $this->getData(), $numArray->getData()));
+        return new static(self::recursiveArrayCombine($func, $this->getData(), $numArray->getData()));
     }
 
     public function add(NumArray $numArray): NumArray
@@ -168,7 +168,7 @@ class NumArray
         for ($i = 0; $i < $nDim; $i++) {
             $data = array_merge(...$data);
         }
-        return new NumArray(self::recursiveArrayChunk($data, $axis));
+        return new static(self::recursiveArrayChunk($data, $axis));
     }
 
     public static function ones(int ...$axis): NumArray
@@ -176,7 +176,7 @@ class NumArray
         if (empty($axis)) {
             throw new MissingArgumentException('No $axis given');
         }
-        return new NumArray(self::recursiveFillArray($axis, 1));
+        return new static(self::recursiveFillArray($axis, 1));
     }
 
     public static function onesLike(NumArray $numArray): NumArray
@@ -190,7 +190,7 @@ class NumArray
         if (empty($axis)) {
             throw new MissingArgumentException('No $axis given');
         }
-        return new NumArray(self::recursiveFillArray($axis, 0));
+        return new static(self::recursiveFillArray($axis, 0));
     }
 
     public static function zerosLike(NumArray $numArray): NumArray
@@ -215,7 +215,7 @@ class NumArray
         for ($i = 0; $i < $min; $i++) {
             $data[$i][$i] = 1;
         }
-        return new NumArray($data);
+        return new static($data);
     }
 
     public static function identity(int $axis): NumArray
@@ -229,7 +229,7 @@ class NumArray
     public static function arange(float $start, float $stop, float $step = 1.0): NumArray
     {
         if (($start > $stop && $step > 0) || ($start < $stop && $step < 0)) {
-            return new NumArray([]);
+            return new static([]);
         }
         $range = range($start, $stop, $step);
         $end = end($range);
@@ -237,7 +237,7 @@ class NumArray
             array_pop($range);
         }
         reset($range);
-        return new NumArray($range);
+        return new static($range);
     }
 
     private static function recursiveToString(array $data, int $level = 0): string
