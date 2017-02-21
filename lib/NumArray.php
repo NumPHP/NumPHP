@@ -277,8 +277,6 @@ class NumArray
             }, ...$arrays);
         }
         return array_map($func, ...$arrays);
-        }
-        return array_map($func, $arr1, $arr2);
     }
 
     private static function recursiveArrayChunk(array $array, array $shape): array
