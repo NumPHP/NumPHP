@@ -112,44 +112,45 @@ class NumArray
         return new static(self::recursiveReplace($this->getData(), $data, $axis));
     }
 
-    public function combine(self $numArray, callable $func): self
+    public function map(callable $func, self ...$numArrays): self
     {
-        if ($this->getShape() !== $numArray->getShape()) {
-            throw new InvalidArgumentException(sprintf(
-                "Shape [%s] and [%s] are different",
-                implode(', ', $this->getShape()),
-                implode(', ', $numArray->getShape())
-            ));
-        }
-        return new static(self::recursiveArrayCombine($func, $this->getData(), $numArray->getData()));
+        $numArrayData = array_map(function ($numArray) {
+            if ($this->getShape() !== $numArray->getShape()) {
+                throw new InvalidArgumentException(sprintf(
+                    "Shape [%s] and [%s] are different",
+                    implode(', ', $this->getShape()),
+                    implode(', ', $numArray->getShape())
+                ));
+            }
+            return $numArray->getData();
+        }, $numArrays);
+        return new static(self::recursiveArrayMap($func, $this->getData(), ...$numArrayData));
     }
 
     public function add(self $numArray): self
     {
-        return $this->combine($numArray, function ($val1, $val2) {
-            return $val1 + $val2;
-        });
+        return $this->map(self::getAddFunction(), $numArray);
     }
 
     public function sub(self $numArray): self
     {
-        return $this->combine($numArray, function ($val1, $val2) {
+        return $this->map(function ($val1, $val2) {
             return $val1 - $val2;
-        });
+        }, $numArray);
     }
 
     public function mult(self $numArray): self
     {
-        return $this->combine($numArray, function ($val1, $val2) {
+        return $this->map(function ($val1, $val2) {
             return $val1 * $val2;
-        });
+        }, $numArray);
     }
 
     public function div(self $numArray): self
     {
-        return $this->combine($numArray, function ($val1, $val2) {
+        return $this->map(function ($val1, $val2) {
             return $val1 / $val2;
-        });
+        }, $numArray);
     }
 
     public function reshape(int ...$axis): self
@@ -240,6 +241,13 @@ class NumArray
         return new static($range);
     }
 
+    private static function getAddFunction(): callable
+    {
+        return function ($val1, $val2) {
+            return $val1 + $val2;
+        };
+    }
+
     private static function recursiveToString(array $data, int $level = 0): string
     {
         $indent = str_repeat("  ", $level);
@@ -261,12 +269,14 @@ class NumArray
         return array_fill(0, array_shift($shape), self::recursiveFillArray($shape, $value));
     }
 
-    private static function recursiveArrayCombine(callable $func, array $arr1, array $arr2): array
+    private static function recursiveArrayMap(callable $func, array ...$arrays): array
     {
-        if (isset($arr1[0]) && is_array($arr1[0])) {
-            return array_map(function ($val1, $val2) use ($func) {
-                return self::recursiveArrayCombine($func, $val1, $val2);
-            }, $arr1, $arr2);
+        if (isset($arrays[0][0]) && is_array($arrays[0][0])) {
+            return array_map(function (array ...$values) use ($func) {
+                return self::recursiveArrayMap($func, ...$values);
+            }, ...$arrays);
+        }
+        return array_map($func, ...$arrays);
         }
         return array_map($func, $arr1, $arr2);
     }

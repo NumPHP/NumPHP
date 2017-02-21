@@ -4,7 +4,7 @@ All Notable changes to `NumPHP` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## NEXT - 2017-02-15
+## NEXT - 2017-02-21
 
 ### Added
 - Add class `NumPHP\Exception\InvalidArgumentException`
@@ -18,7 +18,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
  - Add function `getNDim`
  - Add function `get`
  - Add function `replace`
- - Add function `combine`
+ - Add function `map`
  - Add function `add`
  - Add function `sub`
  - Add function `mult`
