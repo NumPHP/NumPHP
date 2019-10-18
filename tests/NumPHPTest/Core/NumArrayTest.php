@@ -58,4 +58,15 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
         $numArray = NumPHP::arange(1, 6)->reshape(2, 3);
         $this->assertSame(2, $numArray->getNDim());
     }
+
+    /**
+     * Tests NumArray::map
+     */
+    public function testmap()
+    {
+        $numArray = new NumArray(1);
+        $this->assertSame(2, $numArray->map(function(&$value){
+            $value *= 2;
+        }));
+    }
 }
