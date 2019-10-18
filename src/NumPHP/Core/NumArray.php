@@ -379,7 +379,7 @@ class NumArray extends Cache
      * @return $this
      *
      * @api
-     * @since 1.0.0
+     * @since 1.2.0
      */
     public function abs()
     {
@@ -388,6 +388,25 @@ class NumArray extends Cache
             function ($data) {
                 return abs($data);
             }
+        );
+        $this->flushCache();
+
+        return $this;
+    }
+
+    /**
+     * Applies a callable on every value of the NumArray
+     *
+     * @return $this
+     *
+     * @api
+     * @since 1.2.0
+     */
+    public function map($callable)
+    {
+        $this->data = Filter::filterArray(
+            $this->data,
+            $callable
         );
         $this->flushCache();
 
