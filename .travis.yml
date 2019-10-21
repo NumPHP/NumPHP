@@ -16,9 +16,9 @@ before_script:
   - mkdir -p build/logs
 
 script:
-  - php vendor/bin/phpcs --standard=PSR2 src/ tests/ examples/
-  - php vendor/bin/phpmd src/,tests/,examples/ text codesize,controversial,design,naming,unusedcode
-  - php vendor/bin/phpcpd src/ tests/ examples/
+  - php vendor/bin/phpcs --standard=PSR2 src/ tests/
+  - php vendor/bin/phpmd src/,tests/ text codesize,controversial,design,naming,unusedcode
+  - php vendor/bin/phpcpd src/ tests/
   - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
