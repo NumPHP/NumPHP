@@ -48,7 +48,8 @@ abstract class StringHelper
         $repeat = str_repeat("  ", $level);
         if (is_array($data) && isset($data[0]) && is_array($data[0])) {
             $string = $repeat."[\n";
-            for ($i = 0; $i < count($data)-1; $i++) {
+            $limit = count($data)-1;
+            for ($i = 0; $i < $limit; $i++) {
                 $string .= self::toStringRecursive($data[$i], $level+1).",\n";
             }
             if (count($data)) {
