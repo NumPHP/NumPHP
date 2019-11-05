@@ -32,5 +32,11 @@
         "psr-0": {
             "NumPHPTest\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "php vendor/bin/phpunit",
+        "phpcs": "php vendor/bin/phpcs --standard=PSR2 src/ tests/",
+        "phpmd": "php vendor/bin/phpmd src/,tests/ text codesize,controversial,design,naming,unusedcode",
+        "phpcpd": "php vendor/bin/phpcpd src/ tests/"
     }
 }

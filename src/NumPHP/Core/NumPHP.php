@@ -23,7 +23,7 @@ use NumPHP\Core\NumPHP\Generate;
  */
 abstract class NumPHP
 {
-    const VERSION = '1.1.0';
+    const VERSION = '1.2.0';
 
     /**
      * Returns a NumArray filled with `0`

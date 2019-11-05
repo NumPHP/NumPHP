@@ -379,19 +379,11 @@ class NumArray extends Cache
      * @return $this
      *
      * @api
-     * @since 1.2.0
+     * @since 1.0.0
      */
     public function abs()
     {
-        $this->data = Filter::filterArray(
-            $this->data,
-            function ($data) {
-                return abs($data);
-            }
-        );
-        $this->flushCache();
-
-        return $this;
+        return $this->map('abs');
     }
 
     /**

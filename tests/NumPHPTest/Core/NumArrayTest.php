@@ -62,16 +62,30 @@ class NumArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests NumArray::map
      */
-    public function testmap()
+    public function testMap()
     {
         $numArray = new NumArray(1);
-        $this->assertSame(2, $numArray->map(static function ($value) {
-            return $value * 2;
-        })->getData());
+        $this->assertEquals(
+            new NumArray(2),
+            $numArray->map(function ($value) {
+                return $value * 2;
+            })
+        );
 
         $numArray = new NumArray([[3]]);
-        $this->assertSame([[6]], $numArray->map(static function ($value) {
-            return $value * 2;
-        })->getData());
+        $this->assertEquals(
+            new NumArray([[-240]]),
+            $numArray->map(function ($value) {
+                return $value * -80;
+            })
+        );
+
+        $numArray = NumPHP::arange(1, 6)->reshape(2, 3);
+        $this->assertEquals(
+            NumPHP::arange(54, 324, 54)->reshape(2, 3),
+            $numArray->map(function ($value) {
+                return $value * 54;
+            })
+        );
     }
 }
